@@ -3,7 +3,9 @@ import React from "react";
 import "./styles.css";
 // Used the Font-Awesome library for facebook and gmail fonts.
 // https://fontawesome.com/
-import "/Users/kartiksangwan/Desktop/summer/team07/node_modules/font-awesome/css/font-awesome.min.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons";
 
 class Footer extends React.Component {
   state = {};
@@ -16,10 +18,11 @@ class Footer extends React.Component {
           <span className="element">Contact Us</span>
           <span className="social-media-icons">
             <a href="#">
-              <i className="fa fa-facebook-square"></i>
+              <FontAwesomeIcon icon={faFacebookSquare} />
             </a>
+
             <a href="#">
-              <i className="fa fa-google"></i>
+              <FontAwesomeIcon icon={faGoogle} />
             </a>
           </span>
         </div>
