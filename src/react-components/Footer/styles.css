@@ -1,0 +1,47 @@
+.element {
+  display: inline-block;
+  font-size: large;
+  font-weight: 400;
+  font-style: italic;
+  margin: 10px;
+}
+
+.footer {
+  margin-top: 50px;
+  background-color: lightgrey;
+  padding: 20px;
+}
+
+.about {
+  margin: 20px;
+}
+
+.social-media-icons a {
+  font-size: 40px;
+  padding: 5px;
+  margin: 20px;
+}
+
+.social-media-icons {
+  float: right;
+}
+
+.fa-google {
+  color: #dd4b39;
+}
+
+.fa-facebook-square {
+  color: #3b5998;
+}
+
+.fa-google:hover {
+  color: orangered;
+}
+
+.fa-facebook-square:hover {
+  color: lightskyblue;
+}
+
+h5 {
+  text-align: center;
+}
