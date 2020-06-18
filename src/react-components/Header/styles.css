@@ -1,0 +1,37 @@
+#header {
+    position: relative;
+    text-align: center;
+    color: #154360 ;
+}
+
+.banner-img {
+    width: 100%;
+    height: 400px;
+    opacity: 0.15;
+}
+
+.description{
+    position: absolute;
+    top: 30px;
+}
+
+.description h1 {
+    font-size: 45px;
+}
+
+.description h3 {
+    margin-top: 40px;
+    margin-left: 400px;
+    margin-right: 400px;
+    margin-bottom: 30px;
+}
+
+.description a {
+    color: #154360 ;
+    text-decoration: none;
+    border-style: solid;
+    border-width: thin;
+    padding: 5px;
+    font-size: 17px;
+    font-weight: 500;
+}

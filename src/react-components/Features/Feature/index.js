@@ -8,7 +8,7 @@ class Feature extends React.Component {
   render() {
     return (
       <div className="feature-box">
-        <img class="feature-img" src={this.props.img_src} alt="image.png" />
+        <img className="feature-img" src={this.props.img_src} alt="image.png" />
 
         <h3>{this.props.name}</h3>
         <p>{this.props.body}</p>
