@@ -23,7 +23,7 @@ class Signup extends React.Component{
     render(){
         return(
             <div>
-                <img src={require("./box.jpg")} className="img"/>
+                <img src={require("./background.jpg")} className="img"/>
                 <form className = "box">
                     <p className = "head"> SIGN UP </p>
                     <input type="text" placeholder="    Username" className="input" name="username" onChange={this.handleInputchange}/>
