@@ -1,4 +1,4 @@
-.box{
+.box1{
     position: absolute;
     top: 60px;
     left:550px;
@@ -12,7 +12,7 @@
 }
 
 
-.input{
+.input1{
     display: block;
     margin-left: 80px;
     margin-bottom: 60px;
@@ -26,7 +26,7 @@
     border-radius: 0%;
 }
 
-.head{
+.head1{
     font-style: italic;
     font-size: xx-large;
     margin-top: 80px;
@@ -36,7 +36,7 @@
     color: black;
 }
 
-.submit{
+.submit1{
     display: block;
     margin-left: 150px;
     margin-bottom: 60px;
@@ -52,7 +52,7 @@
 }
 
 
-.img{
+.img1{
     height:718px;
     width: 100%;
 }

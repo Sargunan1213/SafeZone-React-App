@@ -20,11 +20,11 @@ class Login extends React.Component{
     render(){
         return(
             <div>
-                <form className = "box">
-                    <p className = "head"> Welcome BACK! </p>
-                    <input type="text" placeholder="    Username" className="input" name="username" onChange={this.handleInputchange}/>
-                    <input type="text" placeholder="    Password" className="input" name="password" onChange={this.handleInputchange}/>                   
- 		            <button className="submit"> Login </button>
+                <form className = "box1">
+                    <p className = "head1"> Welcome BACK! </p>
+                    <input type="text" placeholder="    Username" className="input1" name="username" onChange={this.handleInputchange}/>
+                    <input type="text" placeholder="    Password" className="input1" name="password" onChange={this.handleInputchange}/>                   
+ 		            <button className="submit1"> Login </button>
                 </form>
             </div>
 
