@@ -1,7 +1,9 @@
 .box1{
-    position: absolute;
+    /* position: absolute;
     top: 60px;
-    left:550px;
+    left:550px; */
+    margin-top: 40px;
+    margin-left: 600px;
     background-color: lightyellow;
     /* background-image: linear-gradient(to bottom right, black, deepskyblue);  */
     border:5px solid gold;
