@@ -28,7 +28,7 @@ class Signup extends React.Component{
                     <p className = "head"> SIGN UP </p>
                     <input type="text" placeholder="    Username" className="input" name="username" onChange={this.handleInputchange}/>
                     {/* <input type="text" placeholder="    User Type" className="input" name="usertype" onChange={this.handleInputchange}/> */}
-                    <select className="input">
+                    <select name="usertype" className="input">
                         <option value="Homeowner">Homeowner</option>
                         <option value="Admin">Admin</option>
                         <option selected value="Customer">Customer</option>

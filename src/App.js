@@ -5,6 +5,7 @@ import "./App.css";
 
 import Home from "./react-components/Home";
 import Signup from "./react-components/Signup";
+import Login from "./react-components/Login";
 import { signIn } from "./actions/nav";
 import blankImg from "./react-components/Home/static/blank.png";
 import NavBar from "./react-components/NavBar";
@@ -60,6 +61,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" render={() => <Home />} />
             <Route exact path="/Signup" render={() => <Signup />} />
+            <Route exact path="/Login" render={() => <Login />} />
             <Route exact path="/Posts" render={() => <Posts homes={this.state.homes} owners={this.state.homeowners}/>} />
           </Switch>
           <Footer />
