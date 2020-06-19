@@ -18,7 +18,7 @@ class Header extends React.Component {
                         Since frontline workers come in contact with the virus, they may not want to live in close proximity to members 
                         who are vulnerable or at risk. It may also benefit the workers by reducing travelling distances to and from work.
                     </h3>
-                    <Link to='/'>Checkout avaliable homes</Link>
+                    <Link to='/Posts'>Checkout avaliable homes</Link>
                 </div>
             </div>
         );

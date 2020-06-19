@@ -1,0 +1,8 @@
+.posts{
+    min-height: 650px;
+    overflow: auto;
+}
+
+.posts h1{
+    margin-left: 5%;
+}

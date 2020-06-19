@@ -16,8 +16,8 @@ class NavBar extends React.Component {
                 <h1 className='title'>TITLE</h1>
                 <img className="profile-img" src={profileImg} alt="profile.png" />
                 <div id='navOptions'>
-                    {navOptions.map (opt => (
-                        <Link key={uid(opt)} to={'/'}>{opt}</Link>
+                    {Object.keys(navOptions).map (opt => (
+                        <Link key={uid(opt)} to={'/'+navOptions[opt]}>{opt}</Link>
                     ))}
                 </div>
                 <button onClick={signIn}> temp signin </button>

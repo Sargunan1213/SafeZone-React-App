@@ -1,0 +1,40 @@
+.post {
+    margin-left: 5%;
+    margin-top: 1%;
+    border: 2px solid rgb(109, 122, 116);
+    background-color: rgba(238, 238, 238, 0.466);
+    color: rgb(77, 74, 74);
+    overflow: auto;
+    min-height: 330px;
+    width: 40%;
+    float:left;
+    padding: 1%;
+}
+
+.pic{
+    height: 200px;
+    border: solid gray;
+    float: left;
+    margin-bottom: 1%;
+    margin-right: 1%;
+    margin-top: 1%;
+}
+
+.desc{
+    margin: 0px;
+    display: inline-block;
+    word-wrap: break-word;
+
+}
+
+.post h3, h2 {
+    margin-bottom: 5px;
+}
+
+.desc h3, p {
+    margin: 0px;
+}
+
+.bold{
+    font-weight: 600;
+}

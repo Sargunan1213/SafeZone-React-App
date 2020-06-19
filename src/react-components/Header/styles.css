@@ -13,6 +13,8 @@
 .description{
     position: absolute;
     top: 30px;
+    overflow: hidden;
+    height: 350px;
 }
 
 .description h1 {

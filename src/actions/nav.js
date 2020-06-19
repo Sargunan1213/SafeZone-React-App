@@ -2,16 +2,16 @@
 // temp sign in to test nav bar changes
 import profileImg1 from '../react-components/NavBar/static/profile.png';
 
-export const signIn = (home) => {
+export const signIn = (app) => {
 
-    const navOptions = home.state.navOptions;
+    const navOptions = app.state.navOptions;
     const currentUser = "user1";
 
-    navOptions.pop();
-    navOptions.pop();
-    navOptions.push(currentUser);
+    delete navOptions["Sign In"];
+    delete navOptions["Sign Up"];
+    navOptions[currentUser] = "";
 
-    home.setState({
+    app.setState({
         navOptions: navOptions,
         currentUser: currentUser,
         profileImg: profileImg1
