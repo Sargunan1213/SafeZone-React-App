@@ -1,10 +1,9 @@
 .post {
     margin-left: 5%;
     margin-top: 1%;
-    border: 2px solid rgb(109, 122, 116);
-    background-color: rgba(238, 238, 238, 0.466);
-    color: rgb(77, 74, 74);
-    overflow: auto;
+    border: 2px solid rgb(186, 206, 196);
+    background-color: rgba(238, 238, 238, 0.233);
+    color: rgb(78, 70, 70);
     min-height: 330px;
     width: 40%;
     float:left;
@@ -15,16 +14,11 @@
     height: 200px;
     border: solid gray;
     float: left;
-    margin-bottom: 1%;
-    margin-right: 1%;
-    margin-top: 1%;
+    margin: 1%;
 }
 
 .desc{
     margin: 0px;
-    display: inline-block;
-    word-wrap: break-word;
-
 }
 
 .post h3, h2 {

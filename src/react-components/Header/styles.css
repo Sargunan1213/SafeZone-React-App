@@ -12,9 +12,9 @@
 
 .description{
     position: absolute;
-    top: 30px;
+    top: 6%;
     overflow: hidden;
-    height: 350px;
+    height: 80%;
 }
 
 .description h1 {
@@ -22,10 +22,10 @@
 }
 
 .description h3 {
-    margin-top: 40px;
-    margin-left: 400px;
-    margin-right: 400px;
-    margin-bottom: 30px;
+    margin-top: 2%;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 2%;
 }
 
 .description a {
