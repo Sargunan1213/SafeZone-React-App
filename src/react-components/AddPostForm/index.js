@@ -12,14 +12,11 @@ class AddPostForm extends React.Component {
       phone,
       email,
       img,
-      handleInput,
     } = this.props;
-
-    console.log(handleInput);
 
     return (
       <div className="form">
-        <form action="">
+        <form action="" onSubmit={this.props.submit}>
           <label className="lab" htmlFor="address">
             Enter your address with postal code:
           </label>
@@ -29,7 +26,7 @@ class AddPostForm extends React.Component {
             name="address"
             value={address}
             label="address"
-            onChange={handleInput}
+            onChange={this.props.handle}
           />
           <br />
           <label className="lab" htmlFor="description">
@@ -41,7 +38,7 @@ class AddPostForm extends React.Component {
             name="description"
             value={description}
             label="description"
-            onChange={handleInput}
+            onChange={this.props.handle}
           />
           <br />
           <label className="lab" htmlFor="price">
@@ -53,7 +50,7 @@ class AddPostForm extends React.Component {
             name="address"
             value={price}
             label="price"
-            onChange={handleInput}
+            onChange={this.props.handle}
           />
           <br />
           <label className="lab" htmlFor="username">
@@ -65,7 +62,7 @@ class AddPostForm extends React.Component {
             name="username"
             value={username}
             label="username"
-            onChange={handleInput}
+            onChange={this.props.handle}
           />
           <br />
           <label className="lab" htmlFor="phone">
@@ -77,7 +74,7 @@ class AddPostForm extends React.Component {
             name="phone"
             value={phone}
             label="phone"
-            onChange={handleInput}
+            onChange={this.props.handle}
           />
           <br />
           <label className="lab" htmlFor="email">
@@ -89,7 +86,7 @@ class AddPostForm extends React.Component {
             name="email"
             value={email}
             label="email"
-            onChange={handleInput}
+            onChange={this.props.handle}
           />
           <br />
           <label className="lab" htmlFor="img">
@@ -101,7 +98,7 @@ class AddPostForm extends React.Component {
             name="img"
             value={img}
             label="img"
-            onChange={handleInput}
+            onChange={this.props.handle}
           />
           <br />
           <button type="submit" className="btn">
