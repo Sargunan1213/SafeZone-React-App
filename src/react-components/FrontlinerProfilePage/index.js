@@ -22,7 +22,7 @@ class FrontlinerProfilePage extends React.Component {
             return (
                 <div className="frontlinerBasicInfo">
 
-                    <img className="frontlinerProfilePicture" src="favicon.ico"></img>
+                    <img className="frontlinerProfilePicture" src="favicon.ico" alt="frontlinerProfilePicture.jpg" ></img>
                     <button>Change profile picture</button>
 
                     <p>Name: {frontlineOwner["fronlinerName"]}</p>
