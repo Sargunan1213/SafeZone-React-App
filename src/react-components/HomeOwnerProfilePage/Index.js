@@ -1,6 +1,6 @@
 import React from 'react';
-import React, { Component } from 'react';
-import './styles.css';
+// import React, { Component } from 'react';
+// import './styles.css';
 
 
 /*Name, email, age, profile pic
@@ -10,29 +10,27 @@ View own posts
 
 
 
-class HomeOwnerProfilePage extends Component {
+class HomeOwnerProfilePage extends React.Component {
     state = {
         
     };
   
     render() {
-        {
-        const {home, owners} = this.props;
-        const homeowner = home.homeowner;
-        }
+        
+        const {owner} = this.props;
+        
 
 
             return (
                 <div className="homeOwnerBasicInfo">
 
-                    <img className="homeOwnerProfilePicture" src="favicon.jpg"></img>
+                    <img className="homeOwnerProfilePicture" src="favicon.ico"></img>
                     <button>Change profile picture</button>
 
-                    <p>Name: {owners[homeowner]["name"]}</p>
-                    <p>Age: {owners[homeowner]["age"]}</p>
-                    <p>Contact: {owners[homeowner]["tel"]}</p>                   
-                    <p>Email: {owners[homeowner]["email"]}</p>
-                    {/* need to add age and name in the app.js */}
+                    <p>Name: {owner["name"]}</p>
+                    <p>Age: {owner["age"]}</p>
+                    <p>Contact: {owner["tel"]}</p>                   
+                    <p>Email: {owner["email"]}</p>
                     <button className="homeOwnerViewOwnPost">View your own posts</button>
                      
                 </div>

@@ -11,12 +11,12 @@ class Posts extends React.Component {
     };
   
     render() {
-        const {homes, owners} = this.props;
+        const {homes, owners, edit} = this.props;
 
         return (
             <div className="posts">
                 <h1>Avaliable Homes</h1>
-                { homes.map(home => (<Post key={uid(home)} home={home} owners={owners}/>)) }
+                { homes.map(home => (<Post key={uid(home)} homes={homes} home={home} owners={owners} edit={edit}/>)) }
             </div>
         );
     }
