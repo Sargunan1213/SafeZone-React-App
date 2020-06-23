@@ -37,7 +37,19 @@ class App extends React.Component {
         email: "user@user.com",
       },
     },
-    frontliners: { user2: { password: "user2" } },
+
+
+    frontliners: { 
+      user2: {
+        name: "user2",
+        age: 49, 
+        password: "user2",
+        tel: "514-123-9030",
+        email: "user2@user.com",      
+      }, 
+    },
+
+
     admins: { admin: { password: "admin" } },
     homes: [
       {
