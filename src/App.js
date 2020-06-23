@@ -41,22 +41,22 @@ class App extends React.Component {
 
     frontliners: { 
       user2: {
-        name: "user2",
-        age: 49, 
+        fronlinerName: "user2",
+        frontlinerAge: 49, 
         password: "user2",
-        tel: "514-123-9030",
-        email: "user2@user.com",      
+        frontLinerTel: "514-123-9030",
+        frontLinerEmail: "user2@user.com",      
       }, 
     },
 
 
     admins: {
       admin: {
-       name: "admin",
-       age: "25", 
+       adminName: "admin",
+       adminAge: "25", 
        password: "admin",
-       tel: "416-432-0000",
-       email: "admin@user.com"      
+       adminTel: "416-432-0000",
+       adminEmail: "admin@user.com"      
      },
     },
 
