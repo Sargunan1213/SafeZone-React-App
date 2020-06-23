@@ -6,7 +6,7 @@
     background-image: linear-gradient(to bottom right, black, deepskyblue); 
     border:5px solid lightgreen;
     border-radius: 20px;
-    height: 600px;
+    height: 960px;
     width: 400px;
     box-shadow: 10px 10px 5px grey;
 }
@@ -49,6 +49,6 @@
 
 
 .img{
-    height:718px;
-    width: 100%;
+    height:1100px;
+    width: 100%;    
 }
