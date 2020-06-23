@@ -14,6 +14,7 @@ import Footer from "./react-components/Footer";
 import AddPost from "./react-components/AddPost";
 import AdminPanel from "./react-components/AdminPanel";
 import HomeOwnerProfilePage from "./react-components/HomeOwnerProfilePage";
+import Feeback from "./react-components/Feedback";
 
 class App extends React.Component {
   state = {
@@ -21,20 +22,20 @@ class App extends React.Component {
       Home: "",
       Posts: "Posts",
       "Sign Up": "Signup",
-      "Sign In": "Login"
+      "Sign In": "Login",
     },
     currentUser: "",
     profileImg: blankImg,
     // May move later
     homeowners: {
       user: {
-      name: "user",
-      age: 34,
-      password: "user",
-      postId: [0, 1],
-      tel: "416-432-1431",
-      email: "user@user.com"
-      }
+        name: "user",
+        age: 34,
+        password: "user",
+        postId: [0, 1],
+        tel: "416-432-1431",
+        email: "user@user.com",
+      },
     },
     frontliners: { user2: { password: "user2" } },
     admins: { admin: { password: "admin" } },
@@ -64,8 +65,8 @@ class App extends React.Component {
           "10 min walk to subway, fully furnished, no pets, no smoking",
         price: "$1300 per month",
         homeowner: "user",
-      }
-    ]
+      },
+    ],
   };
 
   render() {
@@ -94,15 +95,26 @@ class App extends React.Component {
               )}
             />
             <Route exact path="/AddPost" render={() => <AddPost />} />
-            <Route exact path="/AdminPanel" render={() => 
-              <AdminPanel 
-                homes={this.state.homes} 
-                homeowners={this.state.homeowners} 
-                frontliners={this.state.frontliners}
-                app={this}
-              />} 
+            <Route exact path="/Feedback" render={() => <Feeback />} />
+            <Route
+              exact
+              path="/AdminPanel"
+              render={() => (
+                <AdminPanel
+                  homes={this.state.homes}
+                  homeowners={this.state.homeowners}
+                  frontliners={this.state.frontliners}
+                  app={this}
+                />
+              )}
             />
-            <Route exact path="/HomeOwnerProfilePage" render={() => <HomeOwnerProfilePage owner={this.state.homeowners['user']} />} />
+            <Route
+              exact
+              path="/HomeOwnerProfilePage"
+              render={() => (
+                <HomeOwnerProfilePage owner={this.state.homeowners["user"]} />
+              )}
+            />
           </Switch>
           <Footer />
         </BrowserRouter>
