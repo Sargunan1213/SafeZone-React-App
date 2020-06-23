@@ -50,7 +50,17 @@ class App extends React.Component {
     },
 
 
-    admins: { admin: { password: "admin" } },
+    admins: {
+      admin: {
+       name: "admin",
+       age: "25", 
+       password: "admin",
+       tel: "416-432-0000",
+       email: "admin@user.com"      
+     },
+    },
+
+
     homes: [
       {
         id: 0,
