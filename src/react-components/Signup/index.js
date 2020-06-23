@@ -48,6 +48,37 @@ class Signup extends React.Component {
             name="email"
             onChange={this.handleInputchange}
           />
+          <input
+            type="password"
+            placeholder="   Password"
+            className="input"
+            name="password"
+            onChange={this.handleInputchange}
+            ></input>
+          <input
+            type="name"
+            placeholder="    Name"
+            className="input"
+            name="name"
+            onChange={this.handleInputchange}
+          ></input>
+
+          <input
+            type="number"
+            placeholder="    Age"
+            className="input"
+            name="age"
+            onChange={this.handleInputchange}
+          ></input>
+
+          <input
+            type="tel"
+            placeholder="    Telephone Number"
+            className="input"
+            name="contactNumber"
+            onChange={this.handleInputchange}
+          ></input>
+
           <button className="submit"> SIGN UP </button>
         </form>
       </div>
