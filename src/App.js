@@ -15,7 +15,7 @@ import AddPost from "./react-components/AddPost";
 import AdminPanel from "./react-components/AdminPanel";
 import HomeOwnerProfilePage from "./react-components/HomeOwnerProfilePage";
 import Feeback from "./react-components/Feedback";
-import Live from "./react-components/Live cases";
+import Live from "./react-components/LiveCases";
 
 class App extends React.Component {
   state = {
