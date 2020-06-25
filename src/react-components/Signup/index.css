@@ -1,54 +1,53 @@
-.box{
-    position: absolute;
-    top: 150px;
-    left:550px;
-    /* background-color: transparent; */
-    background-image: linear-gradient(to bottom right, black, deepskyblue); 
-    border:5px solid lightgreen;
-    border-radius: 20px;
-    height: 960px;
-    width: 400px;
-    box-shadow: 10px 10px 5px grey;
+.box {
+  margin: auto;
+  margin-top: 2%;
+  /* background-color: transparent; */
+  background-image: linear-gradient(to bottom right, black, deepskyblue);
+  border: 5px solid lightgreen;
+  border-radius: 20px;
+  height: 960px;
+  width: 400px;
+  box-shadow: 10px 10px 5px grey;
 }
 
-.input{
-    display: block;
-    margin-left: 80px;
-    margin-bottom: 60px;
-    height: 40px;
-    width: 250px;
-    background-color: thistle;
-    border: thin solid white;
-    border-radius: 30px;
+.input {
+  display: block;
+  margin-left: 80px;
+  margin-bottom: 60px;
+  height: 40px;
+  width: 250px;
+  background-color: thistle;
+  border: thin solid white;
+  border-radius: 30px;
 }
 
-.head{
-    font-style: italic;
-    font-size: xx-large;
-    margin-left: 140px;
-    margin-top: 80px;
-    margin-bottom: 50px;
-    font-weight: bolder;
-    color: lightgreen;
+.head {
+  font-style: italic;
+  font-size: xx-large;
+  margin-left: 140px;
+  margin-top: 80px;
+  margin-bottom: 50px;
+  font-weight: bolder;
+  color: lightgreen;
 }
 
-.submit{
-    display: block;
-    margin-left: 150px;
-    margin-bottom: 60px;
-    background-color: black;
-    border: transparent;
-    border-radius: 20px;
-    height: 40px;
-    width: 120px;
-    color: darkorange;
-    font-style: oblique;
-    font-weight: bolder;
-    font-size: large;
+.submit {
+  display: block;
+  margin-left: 150px;
+  margin-bottom: 60px;
+  background-color: black;
+  border: transparent;
+  border-radius: 20px;
+  height: 40px;
+  width: 120px;
+  color: darkorange;
+  font-style: oblique;
+  font-weight: bolder;
+  font-size: large;
 }
 
-
-.img{
-    height:1100px;
-    width: 100%;    
+.img {
+  height: 1100px;
+  width: 100%;
+  z-index: -1;
 }
