@@ -32,7 +32,7 @@ class Features extends React.Component {
           img_src={feature3}
           name="Live Cases"
           body="Check out number of patients effected by covid!"
-          link=""
+          link="/Live"
         />
         <Feature
           img_src={feature4}
