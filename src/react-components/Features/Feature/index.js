@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import "./style.css";
 
 class Feature extends React.Component {
@@ -12,7 +12,9 @@ class Feature extends React.Component {
 
         <h3>{this.props.name}</h3>
         <p>{this.props.body}</p>
-        <button className="btn">Check Out!</button>
+        <button className="btn">
+          <Link to={this.props.link}>Check Out!</Link>
+        </button>
       </div>
     );
   }
