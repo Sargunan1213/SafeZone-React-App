@@ -24,8 +24,7 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <div>
-        {/* <img src={require("./background.jpg")} className="img" /> */}
+      <div class="back">
         <form className="box">
           <p className="head"> SIGN UP </p>
           <input
