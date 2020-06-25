@@ -15,6 +15,7 @@ import AddPost from "./react-components/AddPost";
 import AdminPanel from "./react-components/AdminPanel";
 import HomeOwnerProfilePage from "./react-components/HomeOwnerProfilePage";
 import Feeback from "./react-components/Feedback";
+import Live from "./react-components/Live cases";
 
 class App extends React.Component {
   state = {
@@ -38,28 +39,25 @@ class App extends React.Component {
       },
     },
 
-
-    frontliners: { 
+    frontliners: {
       user2: {
         fronlinerName: "user2",
-        frontlinerAge: 49, 
+        frontlinerAge: 49,
         password: "user2",
         frontLinerTel: "514-123-9030",
-        frontLinerEmail: "user2@user.com",      
-      }, 
+        frontLinerEmail: "user2@user.com",
+      },
     },
-
 
     admins: {
       admin: {
-       adminName: "admin",
-       adminAge: "25", 
-       password: "admin",
-       adminTel: "416-432-0000",
-       adminEmail: "admin@user.com"      
-     },
+        adminName: "admin",
+        adminAge: "25",
+        password: "admin",
+        adminTel: "416-432-0000",
+        adminEmail: "admin@user.com",
+      },
     },
-
 
     homes: [
       {
@@ -105,6 +103,7 @@ class App extends React.Component {
             <Route exact path="/" render={() => <Home />} />
             <Route exact path="/Signup" render={() => <Signup />} />
             <Route exact path="/Login" render={() => <Login />} />
+            <Route exact path="/Live" render={() => <Live />} />
             <Route
               exact
               path="/Posts"
