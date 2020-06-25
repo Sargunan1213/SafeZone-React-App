@@ -6,14 +6,16 @@ class Signup extends React.Component {
     username: "",
     usertype: "",
     email: "",
+    contactNumber: "",
+    password: "",
+    name: "",
+    age: "",
   };
 
   handleInputchange = (event) => {
     const target = event.target;
     const name = target.name;
     const value = target.value;
-    console.log(name);
-    console.log(value);
     this.setState({
       [name]: value,
     });
