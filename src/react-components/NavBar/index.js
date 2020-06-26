@@ -1,9 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { uid } from "react-uid";
-
+import logo from "./static/safeZoneLogo.png";
 import "./styles.css";
-
 
 class NavBar extends React.Component {
   state = {};
@@ -14,22 +13,28 @@ class NavBar extends React.Component {
     let button = "";
     let img = "";
     let profile = "/";
-    if (type === "frontliner"){
+
+    if (type === "frontliner") {
       profile = "FrontlinerProfilePage";
-    }
-    else if (type === "homeowner"){
+    } else if (type === "homeowner") {
       profile = "HomeOwnerProfilePage";
     }
-    if (!("Sign In" in navOptions)){
-      button = <button className="signout" onClick={signout}>Sign out</button>
-      img = <Link to={profile}>
-              <img className="profile-img" src={profileImg} alt="profile.png" />
-            </Link>
+    if (!("Sign In" in navOptions)) {
+      button = (
+        <button className="signout" onClick={signout}>
+          Sign out
+        </button>
+      );
+      img = (
+        <Link to={profile}>
+          <img className="profile-img" src={profileImg} alt="profile.png" />
+        </Link>
+      );
     }
-
     return (
       <div id="bar">
-        <h1 className="title">TITLE</h1>
+        <img class="logo" src={logo} alt="Logo.png" />
+
         {button}
         {img}
         <div id="navOptions">
@@ -38,7 +43,6 @@ class NavBar extends React.Component {
               {opt}
             </Link>
           ))}
-          
         </div>
       </div>
     );
