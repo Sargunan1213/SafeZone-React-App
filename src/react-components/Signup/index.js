@@ -38,7 +38,7 @@ class Signup extends React.Component {
           <select name="usertype" className="input">
             <option value="Homeowner">Homeowner</option>
             <option value="Admin">Admin</option>
-            <option selected value="Customer">
+            <option defaultValue="Customer">
               Customer
             </option>
           </select>
