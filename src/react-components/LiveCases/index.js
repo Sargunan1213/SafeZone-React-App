@@ -4,7 +4,7 @@ class Live extends React.Component {
   render() {
     return (
       <div>
-        <img src="covid.png" />
+        <img src={require("./covid.png")} />
         {/* <iframe
           src="https://public.domo.com/cards/aKg4r"
           width="100%"
