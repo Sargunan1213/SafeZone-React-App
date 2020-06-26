@@ -6,7 +6,6 @@ import "./App.css";
 import Home from "./react-components/Home";
 import Signup from "./react-components/Signup";
 import Login from "./react-components/Login";
-import { signIn } from "./actions/nav";
 import blankImg from "./react-components/Home/static/blank.png";
 import NavBar from "./react-components/NavBar";
 import Posts from "./react-components/Posts";

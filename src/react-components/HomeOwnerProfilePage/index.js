@@ -24,7 +24,7 @@ class HomeOwnerProfilePage extends React.Component {
             return (
                 <div className="homeOwnerBasicInfo">
 
-                    <img className="homeOwnerProfilePicture" src="favicon.ico"></img>
+                    <img className="homeOwnerProfilePicture" src="favicon.ico" alt="profile.jpg"></img>
                     <button>Change profile picture</button>
 
                     <p>Name: {owner["name"]}</p>

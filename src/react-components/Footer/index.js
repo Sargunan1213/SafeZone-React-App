@@ -17,11 +17,11 @@ class Footer extends React.Component {
           <span className="element">About Us</span>
           <span className="element">Contact Us</span>
           <span className="social-media-icons">
-            <a href="#">
+            <a href="/">
               <FontAwesomeIcon icon={faFacebookSquare} />
             </a>
 
-            <a href="#">
+            <a href="/">
               <FontAwesomeIcon icon={faGoogle} />
             </a>
           </span>
