@@ -1,12 +1,10 @@
 .post {
-    margin-left: 5%;
-    margin-top: 1%;
+    margin: 1% 2% 5% 10%;
     border: 2px solid rgb(186, 206, 196);
     background-color: rgba(238, 238, 238, 0.233);
     color: rgb(78, 70, 70);
     min-height: 330px;
-    width: 40%;
-    float:left;
+    min-width: 70%;
     padding: 1%;
 }
 
@@ -31,4 +29,28 @@
 
 .bold{
     font-weight: 600;
+}
+
+.del {
+    float: right;
+    color: white;
+    background-color: red;
+    font-size: 20px;
+    border-radius: 25%;
+    border: 1px white;
+    padding: 5px;
+    margin-top: 5%;
+    margin-right: 2%;
+}
+
+.select {
+    float: right;
+    color: white;
+    background-color: skyblue;
+    font-size: 20px;
+    border-radius: 25%;
+    border: 1px white;
+    padding: 5px;
+    margin-top: 5%;
+    margin-right: 2%;
 }

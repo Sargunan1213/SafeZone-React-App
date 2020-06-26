@@ -16,12 +16,17 @@ class AdminPanel extends React.Component {
         return (
             <div className="AdminPanel">
                 <h1>Users</h1>
-                <h2>Homeowners</h2>
-                { Object.keys(homeowners).map((homeowner, index)=> (<HomeOwnerProfilePage key={uid(homeowner)} owner={homeowners[homeowner]}/>))}
-                <h2>Frontliners</h2>
-                { Object.keys(frontliners).map((frontliner, index)=> (<FrontlinerProfilePage key={uid(frontliner)} frontlineOwner={frontliners[frontliner]}/>))}
+                <div class="Users">
+                    <h2>Homeowners</h2>
+                    { Object.keys(homeowners).map((homeowner, index)=> (<HomeOwnerProfilePage key={uid(homeowner)} owner={homeowners[homeowner]}/>))}
+                    <br></br>
+                    <h2>Frontliners</h2>
+                    { Object.keys(frontliners).map((frontliner, index)=> (<FrontlinerProfilePage key={uid(frontliner)} frontlineOwner={frontliners[frontliner]}/>))}
+                </div>
                 <h1>Post</h1>
+                <div class="homePost">
                 { homes.map(home => (<Post key={uid(home)} homes={homes} home={home} owners={homeowners} edit={true} app={app}/>)) }
+                </div>
             </div>
         );
     }

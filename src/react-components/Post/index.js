@@ -10,20 +10,20 @@ class Post extends React.Component {
         const {homes, home, owners, edit, app, type} = this.props;
         const homeowner = home.homeowner;
 
-        let button = <div></div>;
+        let button = "";
         if (edit){
             button=<button className='del' onClick={() => removeHome(app, homes, home)}>Delete</button>;
         }
         else if(type === "frontliner"){
-            button=<button className='del' onClick={() => addInterestedHome(app, home["id"])}>Select</button>;
+            button=<button className='select' onClick={() => addInterestedHome(app, home["id"])}>Select</button>;
         }
 
         return (
             <div className="post">
-                {button}
+                
                 <h2>{home.address}, {home.city}, {home.province} </h2>
-                <h3>{home.zip}</h3>
 
+                <h3>{home.zip}</h3>
                 <img className="pic" src={require("./static/" + home.pic)} alt="house.jpg" />
                 <div className="desc">
                     <h3>Description:</h3>
@@ -35,7 +35,7 @@ class Post extends React.Component {
                     <p><span className="bold">Email: </span>{owners[homeowner]["email"]}</p>
                     
                 </div>
-                
+                {button}
             </div>
         );
     }

@@ -21,7 +21,7 @@ class NavBar extends React.Component {
       profile = "HomeOwnerProfilePage";
     }
     if (!("Sign In" in navOptions)){
-      button = <button onClick={signout}>Sign out</button>
+      button = <button class="signout" onClick={signout}>Sign out</button>
       img = <Link to={profile}>
               <img className="profile-img" src={profileImg} alt="profile.png" />
             </Link>
@@ -30,6 +30,7 @@ class NavBar extends React.Component {
     return (
       <div id="bar">
         <h1 className="title">TITLE</h1>
+        {button}
         {img}
         <div id="navOptions">
           {Object.keys(navOptions).map((opt) => (
@@ -37,7 +38,7 @@ class NavBar extends React.Component {
               {opt}
             </Link>
           ))}
-          {button}
+          
         </div>
       </div>
     );

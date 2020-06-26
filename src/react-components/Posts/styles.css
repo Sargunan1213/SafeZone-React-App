@@ -1,7 +1,20 @@
-.posts{
-    min-height: 650px;
+#homes {
+    overflow: auto;
 }
 
-.posts h1{
+.posts{
+    /* min-height: 650px; */
+    min-width: 50%;
+    float: left;
+}
+
+#homes h1{
     margin-left: 5%;
+    border-bottom: 3px dotted grey;
+    width: 30%;
+}
+
+.standinMap {
+    width: 48%;
+    border: solid gray;
 }
