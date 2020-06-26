@@ -14,18 +14,22 @@ import Footer from "./react-components/Footer";
 import AddPost from "./react-components/AddPost";
 import AdminPanel from "./react-components/AdminPanel";
 import HomeOwnerProfilePage from "./react-components/HomeOwnerProfilePage";
-import Feeback from "./react-components/Feedback";
+import Feedback from "./react-components/Feedback";
 import Live from "./react-components/LiveCases";
+import FrontlinerProfilePage from "./react-components/FrontlinerProfilePage";
+import { signout } from "./actions/nav";
 
 class App extends React.Component {
   state = {
     navOptions: {
       Home: "",
       Posts: "Posts",
+      "Live Cases": "Live",
       "Sign Up": "Signup",
       "Sign In": "Login",
     },
     currentUser: "",
+    type: "",
     profileImg: blankImg,
     // May move later
     homeowners: {
@@ -44,8 +48,9 @@ class App extends React.Component {
         fronlinerName: "user2",
         frontlinerAge: 49,
         password: "user2",
-        frontLinerTel: "514-123-9030",
-        frontLinerEmail: "user2@user.com",
+        frontlinerTel: "514-123-9030",
+        frontlinerEmail: "user2@user.com",
+        interest: []
       },
     },
 
@@ -95,14 +100,15 @@ class App extends React.Component {
         <BrowserRouter>
           <NavBar
             navOptions={this.state.navOptions}
-            signIn={() => signIn(this)}
             profileImg={this.state.profileImg}
+            signout={() => {signout(this)}}
+            type={this.state.type}
           />
 
           <Switch>
             <Route exact path="/" render={() => <Home />} />
             <Route exact path="/Signup" render={() => <Signup />} />
-            <Route exact path="/Login" render={() => <Login />} />
+            <Route exact path="/Login" render={() => <Login main={this} />} />
             <Route exact path="/Live" render={() => <Live />} />
             <Route
               exact
@@ -112,11 +118,13 @@ class App extends React.Component {
                   homes={this.state.homes}
                   owners={this.state.homeowners}
                   edit={false}
+                  app={this}
+                  type={this.state.type}
                 />
               )}
             />
             <Route exact path="/AddPost" render={() => <AddPost />} />
-            <Route exact path="/Feedback" render={() => <Feeback />} />
+            <Route exact path="/Feedback" render={() => <Feedback />} />
             <Route
               exact
               path="/AdminPanel"
@@ -133,7 +141,14 @@ class App extends React.Component {
               exact
               path="/HomeOwnerProfilePage"
               render={() => (
-                <HomeOwnerProfilePage owner={this.state.homeowners["user"]} />
+                <HomeOwnerProfilePage owner={this.state.homeowners[this.state.currentUser]} />
+              )}
+            />
+            <Route
+              exact
+              path="/FrontlinerProfilePage"
+              render={() => (
+                <FrontlinerProfilePage frontlineOwner={this.state.frontliners[this.state.currentUser]} />
               )}
             />
           </Switch>

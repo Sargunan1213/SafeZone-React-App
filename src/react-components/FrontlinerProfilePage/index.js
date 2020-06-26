@@ -17,7 +17,7 @@ class FrontlinerProfilePage extends React.Component {
   
     render() {
         
-        const {frontlineOwner} = this.props;        
+        const {frontlineOwner} = this.props;     
 
             return (
                 <div className="frontlinerBasicInfo">
@@ -26,9 +26,10 @@ class FrontlinerProfilePage extends React.Component {
                     <button>Change profile picture</button>
 
                     <p>Name: {frontlineOwner["fronlinerName"]}</p>
-                    <p>Age: {frontlineOwner["fronlinerAge"]}</p>
-                    <p>Contact: {frontlineOwner["fronlinerTel"]}</p>                   
-                    <p>Email: {frontlineOwner["fronlinerEmail"]}</p>                    
+                    <p>Age: {frontlineOwner["frontlinerAge"]}</p>
+                    <p>Contact: {frontlineOwner["frontlinerTel"]}</p>                   
+                    <p>Email: {frontlineOwner["frontlinerEmail"]}</p> 
+                    <p>Interested homes ids: {frontlineOwner["interest"]}</p>                   
                      
                 </div>
 

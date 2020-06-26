@@ -1,25 +1,21 @@
 import React from 'react';
 
 import './styles.css';
+import { removeHome, addInterestedHome } from "../../actions/nav";
 
 class Post extends React.Component {
     state = {};
-
-    removeHome = (homes, home) => {
-        delete homes[homes.indexOf(home)];
-    
-        this.props.app.setState({
-            homes: homes
-        })
-    }
   
     render() {
-        const {homes, home, owners, edit, app} = this.props;
+        const {homes, home, owners, edit, app, type} = this.props;
         const homeowner = home.homeowner;
 
         let button = <div></div>;
         if (edit){
-            button=<button className='del' onClick={() => this.removeHome(homes, home)}>Delete</button>;
+            button=<button className='del' onClick={() => removeHome(app, homes, home)}>Delete</button>;
+        }
+        else if(type === "frontliner"){
+            button=<button className='del' onClick={() => addInterestedHome(app, home["id"])}>Select</button>;
         }
 
         return (

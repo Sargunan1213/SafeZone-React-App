@@ -1,6 +1,8 @@
 import React from "react";
 import "./index.css";
 
+import { signIn } from "../../actions/nav";
+
 class Login extends React.Component {
   state = {
     username: "",
@@ -26,6 +28,9 @@ class Login extends React.Component {
   };
 
   render() {
+
+    const { main } = this.props;
+
     return (
       <div>
         <form className="box1">
@@ -44,7 +49,7 @@ class Login extends React.Component {
             name="password"
             onChange={this.handleInputchange}
           />
-          <button className="submit1" onClick={this.check}>
+          <button type="button" className="submit1" onClick={signIn.bind(this, main, this.state.username, this.state.password)}>
             {" "}
             Login{" "}
           </button>
