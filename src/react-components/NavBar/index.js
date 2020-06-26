@@ -21,7 +21,7 @@ class NavBar extends React.Component {
       profile = "HomeOwnerProfilePage";
     }
     if (!("Sign In" in navOptions)){
-      button = <button class="signout" onClick={signout}>Sign out</button>
+      button = <button className="signout" onClick={signout}>Sign out</button>
       img = <Link to={profile}>
               <img className="profile-img" src={profileImg} alt="profile.png" />
             </Link>

@@ -24,7 +24,7 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <div class="back">
+      <div className="back">
         <form className="box">
           <p className="head"> SIGN UP </p>
           <input
