@@ -1,10 +1,13 @@
 import React from "react";
 
+import "./styles.css";
+
 class Live extends React.Component {
   render() {
     return (
       <div>
-        <img src={require("./covid.png")} />
+        {/* Retrieve live data of covid-19 cases from external server. Requires server call. */}
+        <img className="tracker" src={require("./standin-tracker.png")} />
         {/* <iframe
           src="https://public.domo.com/cards/aKg4r"
           width="100%"

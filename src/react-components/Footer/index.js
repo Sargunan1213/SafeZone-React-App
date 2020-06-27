@@ -29,7 +29,7 @@ class Footer extends React.Component {
 
         <div className="copy-right">
           <hr />
-          <h5>&copy; TITLE HERE</h5>
+          <h5>&copy; SafeZone</h5>
         </div>
       </footer>
     );

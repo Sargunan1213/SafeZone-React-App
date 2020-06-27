@@ -6,10 +6,6 @@ import { uid } from 'react-uid';
 import './styles.css';
 
 class Posts extends React.Component {
-    state = {
-
-    };
-  
     render() {
         const {homes, owners, edit, app, type} = this.props;
 
@@ -19,6 +15,7 @@ class Posts extends React.Component {
                 <div className="posts">
                     { homes.map(home => (<Post key={uid(home)} homes={homes} home={home} owners={owners} edit={edit} app={app} type={type}/>)) }
                 </div>
+                {/* Retrieve map data of addresses. Requires external server call. */}
                 <img className="standinMap" src={require("./static/standinMap.png")} alt="map.png" />
             </div>
 

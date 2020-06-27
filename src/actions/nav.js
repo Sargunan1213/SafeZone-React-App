@@ -8,7 +8,6 @@ export const signIn = (app, username, pwd) => {
     let type = "";
     const navOptions = app.state.navOptions;
 
-
     // Get names and password from server
     // Requires server call
     if (username === "user"  && pwd === "user"){
@@ -32,10 +31,8 @@ export const signIn = (app, username, pwd) => {
         return
     }
 
-
     delete navOptions["Sign In"];
     delete navOptions["Sign Up"];
-    
 
     app.setState({
         navOptions: navOptions,

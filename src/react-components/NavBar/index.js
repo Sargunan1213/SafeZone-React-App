@@ -33,7 +33,7 @@ class NavBar extends React.Component {
     }
     return (
       <div id="bar">
-        <img class="logo" src={logo} alt="Logo.png" />
+        <img className="logo" src={logo} alt="Logo.png" />
 
         {button}
         {img}

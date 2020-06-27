@@ -1,0 +1,75 @@
+.donation {
+    /* background-color: rgba(159, 169, 173, 0.062); */
+    padding-top: 0%;
+    padding-bottom: 5%;
+    color: rgb(70, 67, 67);
+}
+.donation h1{
+    text-align: center;
+    padding-left: 30%;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    background-color: white;
+    padding: 5px;
+}
+
+.donation h2{
+    text-align: center;
+    border-bottom: 3px solid gray;
+    margin-right: 20px;
+    
+}
+
+.donationForm {
+    margin: 2% 10% 0% 10%;
+    min-width: 60%;
+    border: 2px solid gray;
+    padding: 10px;
+    /* border-radius: 25px; */
+    background-color: white;
+    box-shadow: 10px 10px 5px rgba(128, 128, 128, 0.384);
+}
+
+.donationType {
+    min-width: 48%;
+    height: 80%;
+    float: left;
+}
+
+.payment {
+    border-left: 3px dotted gray;;
+    display: inline-block;
+    min-width: 49%;
+    max-width: 50%;
+    padding-left: 20px;
+    margin-bottom: 2%;
+}
+
+.submitBtn {
+    float: right;
+    font-weight: 100;
+    background-color: rgba(128, 128, 128, 0.418);
+    font-size: 20px;
+    border-radius: 15px;
+    border: 1px white;
+    padding: 7px;
+    margin-top: 2%;
+    margin-right: 2%;
+}
+
+.radio {
+    text-align: center;
+    padding-bottom: 5px;
+    font-size: 18px;
+}
+
+.drop {
+    width: 60%;
+    font-size: 18px;
+}
+
+.inputBox {
+    width: 70%;
+    font-size: 18px;
+    margin-top: 5px;
+}

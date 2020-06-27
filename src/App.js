@@ -17,6 +17,7 @@ import Feedback from "./react-components/Feedback";
 import Live from "./react-components/LiveCases";
 import FrontlinerProfilePage from "./react-components/FrontlinerProfilePage";
 import { signout } from "./actions/nav";
+import DonationPage from "./react-components/DonationPage";
 
 class App extends React.Component {
   state = {
@@ -30,7 +31,9 @@ class App extends React.Component {
     currentUser: "",
     type: "",
     profileImg: blankImg,
-    // May move later
+    // Declare hardcoded data here because these data are used to multiple pages/components, 
+    // redeclaring them in each component is bad practice.
+    // Data will be obtained from server.
     homeowners: {
       user: {
         name: "user",
@@ -75,7 +78,7 @@ class App extends React.Component {
         description:
           "1 bedroom, all inclusive (hear, hydro, water), renovated, pets ok",
         price: "$1570 per month",
-        homeowner: "user", // Get info about homeowner in homeowner list
+        homeowner: "user", 
       },
       {
         id: 1,
@@ -109,6 +112,7 @@ class App extends React.Component {
             <Route exact path="/Signup" render={() => <Signup />} />
             <Route exact path="/Login" render={() => <Login main={this} />} />
             <Route exact path="/Live" render={() => <Live />} />
+            <Route exact path="/Donation" render={() => <DonationPage />} />
             <Route
               exact
               path="/Posts"

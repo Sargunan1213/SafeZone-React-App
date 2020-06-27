@@ -10,15 +10,6 @@ class Login extends React.Component {
     password: "",
   };
 
-  check = () => {
-    if (this.state.username === "user" && this.state.password === "user") {
-      alert(" User Sucessfull");
-    }
-    if (this.state.username === "admin" && this.state.password === "admin") {
-      alert(" Admin Sucessfull");
-    }
-  };
-
   handleInputchange = (event) => {
     const target = event.target;
     const name = target.name;

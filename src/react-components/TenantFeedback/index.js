@@ -15,7 +15,7 @@ class TenantFeedback extends React.Component {
   };
 
   submitForm = (event) => {
-    // Server call to enter this form data into the database.
+    // Server call to enter this form data into the server.
     alert("Tenant review was submitted!");
     event.preventDefault();
   };

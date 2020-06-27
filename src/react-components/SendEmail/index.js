@@ -4,7 +4,7 @@ import "./styles.css";
 
 class SendEmail extends React.Component {
   submitForm = (event) => {
-    // Server call to enter this form data into the database.
+    // Server call to enter this form data about feedback into the server.
     alert("Email sent! ");
     event.preventDefault();
   };

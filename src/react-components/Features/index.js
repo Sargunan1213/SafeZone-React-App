@@ -19,14 +19,14 @@ class Features extends React.Component {
         <Feature
           img_src={feature1}
           name="Available Rooms"
-          body="Check out rooms to rent near you!"
-          link=""
+          body="Check out avaliable rooms to rent near you!"
+          link="/Posts"
         />
         <Feature
           img_src={feature2}
           name="Make A Donation"
-          body="Help frontline workers afford rooms!"
-          link=""
+          body="Help frontline workers afford rooms by donating!"
+          link="/Donation"
         />
         <Feature
           img_src={feature3}
