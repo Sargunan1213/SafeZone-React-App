@@ -1,6 +1,5 @@
 import React from "react";
 import "./index.css";
-import { FaRegUser, FaUserTie } from "react-icons/fa";
 
 class Signup extends React.Component {
   state = {
@@ -81,7 +80,9 @@ class Signup extends React.Component {
               ></input>
             </div>
           </div>
-          <button className="submit"> SIGN UP </button>
+          <button className="submit">
+            <p class="word">SIGN UP</p>
+          </button>
         </form>
       </div>
     );

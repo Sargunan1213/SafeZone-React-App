@@ -3,10 +3,12 @@
   padding: 0%;
 }
 
-.icon {
-  margin-right: 5%;
-  padding-top: 4%;
-  padding-right: 1%;
+.word {
+  font-size: 200%;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 1px;
+  color: papayawhip;
 }
 
 .item1,
@@ -18,19 +20,21 @@
 .item1 {
   border-right: 1px solid black;
 }
+
 .box {
   margin: auto;
   background: white;
   border-radius: 10px;
   height: 90vh;
   width: 75%;
-  box-shadow: 10px 10px 5px grey;
+  padding-top: 3%;
+  /* box-shadow: 10px 10px 5px grey; */
   text-align: center;
 }
 
 .box2 {
   margin-top: 3%;
-  height: 70%;
+  height: 60%;
   width: 100%;
 }
 
@@ -58,7 +62,20 @@
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   margin-left: auto;
-  padding-top: 4%;
   font-weight: 800;
   font-size: 400%;
+  background: linear-gradient(45deg, #f12711, #f5af19);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline;
+}
+
+.submit {
+  margin-top: 3%;
+  background: linear-gradient(45deg, #fdc830, #f37335);
+  outline: transparent;
+  height: 10%;
+  width: 90%;
+  border-radius: 3%;
+  border: thin;
 }
