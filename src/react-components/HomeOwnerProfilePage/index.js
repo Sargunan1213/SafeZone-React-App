@@ -1,40 +1,31 @@
 import React from 'react';
-// import React, { Component } from 'react';
-// import './styles.css';
-
-
-/*Name, email, age, profile pic
-Homeowner, Contact info
-View own posts
-*/
+import './styles.css';
 
 
 
 class HomeOwnerProfilePage extends React.Component {
-    state = {
-        
+    state = {        
     };
   
-    render() {
-        
-        const {owner} = this.props;
-        
-
+    render() {        
+        const {owner} = this.props;        
 
             return (
                 <div className="homeOwnerBasicInfo">
 
                     <img className="homeOwnerProfilePicture" src="favicon.ico" alt="profile.jpg"></img>
-                    <button>Change profile picture</button>
+                    <button className="homeOwnerProfile-btn">Change profile picture</button>
+                    
+                    <div className="general_info">
+                        <h2>Name: {owner["name"]}</h2>
+                        <h2>Age: {owner["age"]}</h2>
+                        <h2>Contact: {owner["tel"]}</h2>                   
+                        <h2>Email: {owner["email"]}</h2>
+                    </div>
 
-                    <p>Name: {owner["name"]}</p>
-                    <p>Age: {owner["age"]}</p>
-                    <p>Contact: {owner["tel"]}</p>                   
-                    <p>Email: {owner["email"]}</p>
-                    <button className="homeOwnerViewOwnPost">View your own posts</button>
-                     
+                    <button className="homeOwnerViewOwnPost-btn">View your own posts</button>
+
                 </div>
-
         );
     }
   }

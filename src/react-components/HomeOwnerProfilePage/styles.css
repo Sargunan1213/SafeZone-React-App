@@ -1,0 +1,64 @@
+.homeOwnerBasicInfo{        
+    background: #0f0c29;  
+    background: -webkit-linear-gradient(to left, #24243e, #302b63, #0f0c29);
+    background: linear-gradient(to left, #24243e, #302b63, #0f0c29); 
+    padding-bottom: 35px;
+    padding-top: 35px;
+}
+
+
+.homeOwnerProfilePicture{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 22%;
+}
+
+
+.homeOwnerProfile-btn{
+    display: block;
+    margin-top: 25px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 0;
+    background: #34495e;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+
+.homeOwnerProfile-btn:hover{
+    background: #2980b9;
+}
+
+
+.general_info{
+    text-align: center;
+    font-family: sans-serif;    
+    line-height: 45px;
+    color: #fff;
+}
+
+
+.homeOwnerViewOwnPost-btn{
+    display: block;
+    margin-top: 35px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 0;
+    background: #34495e;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+
+.homeOwnerViewOwnPost-btn:hover{
+    background: #2980b9;
+}
