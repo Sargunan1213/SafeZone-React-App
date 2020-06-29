@@ -31,7 +31,7 @@ class Login extends React.Component {
             {/* <FaUserSecret className="icon1" size="90%" color="midnightblue" /> */}
             <img className="signin-img" src={logo} alt="logo.png" />
           </div>
-          <div class="details">
+          <div className="details">
             <input
               type="text"
               placeholder="Username"

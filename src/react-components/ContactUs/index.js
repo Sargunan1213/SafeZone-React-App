@@ -8,19 +8,18 @@ class ContactUs extends React.Component {
     render() {
                 
         return (
-            <body>
-              <div class="contact-section">
+              <div className="contact-section">
                 <h1>Contact Us</h1>
-                <form class="contact-form">
-                  <input type="text" class="contact-form-text" placeholder="Your name"></input>
-                  <input type="email" class="contact-form-text" placeholder="Your email"></input>
-                  <input type="text" class="contact-form-text" placeholder="Your phone"></input>
-                  <input type="text" class="contact-form-text" placeholder="subject"></input>
-                  <textarea type = "text" class="contact-form-text" placeholder="Your message"></textarea>
-                  <input type="submit" class="contact-form-text" value="Send"></input>
+                <form className="contact-form">
+                  <input type="text" className="contact-form-text" placeholder="Your name"></input>
+                  <input type="email" className="contact-form-text" placeholder="Your email"></input>
+                  <input type="text" className="contact-form-text" placeholder="Your phone"></input>
+                  <input type="text" className="contact-form-text" placeholder="subject"></input>
+                  <textarea type = "text" className="contact-form-text" placeholder="Your message"></textarea>
+                  <input type="submit" className="contact-form-text" value="Send"></input>
                 </form>
 
-                <div class="address">
+                <div className="address">
                   <h1>General Support:</h1>
                   <h1>user@user.com</h1>
                   <hr></hr>
@@ -31,9 +30,6 @@ class ContactUs extends React.Component {
                   <h1>224 Richmond St W, Toronto, ON M5V 1V6</h1>
                 </div>
               </div>  
-              
-                
-            </body>
         );
     }
   }

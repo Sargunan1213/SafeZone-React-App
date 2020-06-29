@@ -82,7 +82,7 @@ class Signup extends React.Component {
           </div>
           {/* Send new user data to server. */}
           <button className="submit">
-            <p class="word">SIGN UP</p>
+            <p className="word">SIGN UP</p>
           </button>
         </form>
       </div>

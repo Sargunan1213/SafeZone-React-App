@@ -7,7 +7,7 @@ class Live extends React.Component {
     return (
       <div>
         {/* Retrieve live data of covid-19 cases from external server. Requires server call. */}
-        <img className="tracker" src={require("./standin-tracker.png")} />
+        <img className="tracker" src={require("./standin-tracker.png")} alt="standin-tracker"/>
         {/* <iframe
           src="https://public.domo.com/cards/aKg4r"
           width="100%"

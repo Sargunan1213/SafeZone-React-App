@@ -4,7 +4,7 @@ import { Route, Switch, BrowserRouter } from "react-router-dom";
 import "./App.css";
 
 import AboutUs from "./react-components/AboutUs";
-
+import ContactUs from "./react-components/ContactUs";
 import Home from "./react-components/Home";
 import Signup from "./react-components/Signup";
 import Login from "./react-components/Login";
@@ -133,6 +133,8 @@ class App extends React.Component {
             <Route exact path="/AddPost" render={() => <AddPost />} />
             <Route exact path="/Feedback" render={() => <Feedback />} />
             <Route exact path="/AboutUs" render={() => <AboutUs />} />
+            <Route exact path="/ContactUs" render={() => <ContactUs />} />
+
             <Route
               exact
               path="/AdminPanel"
