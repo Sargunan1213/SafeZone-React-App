@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import "./styles.css";
 // Used the Font-Awesome library for facebook and gmail fonts.
 // https://fontawesome.com/
@@ -14,8 +14,13 @@ class Footer extends React.Component {
     return (
       <footer className="footer">
         <div>
-          <span className="element">About Us</span>
-          <span className="element">Contact Us</span>
+          <span className="element">
+            <Link to="/AboutUs">About Us</Link>
+          </span>
+          <span className="element">
+            {" "}
+            <Link to="/ContactUs">Contact Us</Link>
+          </span>
           <span className="social-media-icons">
             <a href="/">
               <FontAwesomeIcon icon={faFacebookSquare} />
