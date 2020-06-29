@@ -1,14 +1,13 @@
 import React from "react";
-
 import "./styles.css";
 
-class SendEmail extends React.Component {
+class AdminSendMsg extends React.Component {
   state = {
-    review: "",
+    msg: "",
   };
   submitForm = (event) => {
-    // Server call to enter this form data about feedback into the server.
-    alert("Email sent! ");
+    // Server call to broadcast this data to all the users that are using this platform.
+    alert("Messge sent to all users!");
     event.preventDefault();
   };
   handleInputChange = (event) => {
@@ -19,27 +18,26 @@ class SendEmail extends React.Component {
     this.setState({
       [name]: value,
     });
-    console.log("typing");
+    console.log(this.state.msg);
   };
   render() {
     return (
-      <div className="email">
-        <h1>Send our team an email: </h1>
+      <div className="msg">
+        <h1>Send a message to all the users:</h1>
         <form action="" onSubmit={this.submitForm}>
           <textarea
-            name="review"
+            name="msg"
             id=""
             cols="50"
             rows="10"
-            placeholder="Enter review here."
+            placeholder="Enter msg to send."
             onChange={this.handleInputChange}
           ></textarea>
           <br />
-          <a href="mailto:temp@gmail.com">
-            <button type="submit" className="btn">
-              Send Email
-            </button>
-          </a>
+
+          <button type="submit" className="btn">
+            Broadcast Message!
+          </button>
 
           <br />
         </form>
@@ -48,4 +46,4 @@ class SendEmail extends React.Component {
   }
 }
 
-export default SendEmail;
+export default AdminSendMsg;

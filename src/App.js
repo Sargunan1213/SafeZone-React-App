@@ -3,6 +3,8 @@ import React from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import "./App.css";
 
+import AboutUs from "./react-components/AboutUs";
+
 import Home from "./react-components/Home";
 import Signup from "./react-components/Signup";
 import Login from "./react-components/Login";
@@ -31,7 +33,7 @@ class App extends React.Component {
     currentUser: "",
     type: "",
     profileImg: blankImg,
-    // Declare hardcoded data here because these data are used to multiple pages/components, 
+    // Declare hardcoded data here because these data are used to multiple pages/components,
     // redeclaring them in each component is bad practice.
     // Data will be obtained from server.
     homeowners: {
@@ -52,7 +54,7 @@ class App extends React.Component {
         password: "user2",
         frontlinerTel: "514-123-9030",
         frontlinerEmail: "user2@user.com",
-        interest: []
+        interest: [],
       },
     },
 
@@ -78,7 +80,7 @@ class App extends React.Component {
         description:
           "1 bedroom, all inclusive (hear, hydro, water), renovated, pets ok",
         price: "$1570 per month",
-        homeowner: "user", 
+        homeowner: "user",
       },
       {
         id: 1,
@@ -103,7 +105,9 @@ class App extends React.Component {
           <NavBar
             navOptions={this.state.navOptions}
             profileImg={this.state.profileImg}
-            signout={() => {signout(this)}}
+            signout={() => {
+              signout(this);
+            }}
             type={this.state.type}
           />
 
@@ -128,6 +132,7 @@ class App extends React.Component {
             />
             <Route exact path="/AddPost" render={() => <AddPost />} />
             <Route exact path="/Feedback" render={() => <Feedback />} />
+            <Route exact path="/AboutUs" render={() => <AboutUs />} />
             <Route
               exact
               path="/AdminPanel"
@@ -144,14 +149,20 @@ class App extends React.Component {
               exact
               path="/HomeOwnerProfilePage"
               render={() => (
-                <HomeOwnerProfilePage owner={this.state.homeowners[this.state.currentUser]} />
+                <HomeOwnerProfilePage
+                  owner={this.state.homeowners[this.state.currentUser]}
+                />
               )}
             />
             <Route
               exact
               path="/FrontlinerProfilePage"
               render={() => (
-                <FrontlinerProfilePage frontlineOwner={this.state.frontliners[this.state.currentUser]} />
+                <FrontlinerProfilePage
+                  frontlineOwner={
+                    this.state.frontliners[this.state.currentUser]
+                  }
+                />
               )}
             />
           </Switch>
