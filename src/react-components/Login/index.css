@@ -7,11 +7,12 @@
   margin: auto;
   margin-top: 2%;
   margin-bottom: 2%;
-  background-color: white;
+  border: 4px solid grey;
+
   width: 60%;
   height: 80vh;
   border-radius: 3%;
-  box-shadow: 0px 0px 36px white;
+  box-shadow: 10px 10px 5px grey;
 }
 
 .details {
@@ -20,7 +21,7 @@
 }
 
 .back1 {
-  background-color: rgb(41, 42, 73);
+  /* background-color: rgb(41, 42, 73); */
   padding: 1%;
 }
 
@@ -29,7 +30,7 @@
   font-size: xx-large;
   margin: auto;
   font-weight: bolder;
-  background: linear-gradient(90deg, #0f0c29, #302b63, #ff0080);
+  /* background: linear-gradient(90deg, #0f0c29, #302b63, #ff0080); */
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   display: inline-block;
@@ -53,21 +54,27 @@
 .input1 {
   display: block;
   padding-left: 5%;
-  margin-left: 20%;
-  width: 40vh;
+  margin-left: 15%;
+  width: 42vh;
   height: 5vh;
   margin-top: 20%;
+  border-radius: 7px;
 }
 
 .submit1 {
   outline: none;
-  background: linear-gradient(#ff00cc, #333399);
-  width: 40vh;
-  height: 5vh;
+  background: #0f1e73;
+  width: 20vh;
+  height: 6vh;
   margin-top: 20%;
-  margin-left: 22%;
+  margin-left: 42%;
   border-radius: 2vh;
   color: white;
   font-size: 3vh;
   font-style: italic;
+}
+
+.signin-img {
+  margin-left: 70px;
+  margin-top: 30px;
 }

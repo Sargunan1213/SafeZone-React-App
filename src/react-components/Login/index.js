@@ -2,7 +2,8 @@ import React from "react";
 import "./index.css";
 
 import { signIn } from "../../actions/nav";
-import { FaUserSecret } from "react-icons/fa";
+// import { FaUserSecret } from "react-icons/fa";
+import logo from "./safeZoneLogo.png";
 
 class Login extends React.Component {
   state = {
@@ -27,7 +28,8 @@ class Login extends React.Component {
         <form className="box1">
           <p className="head1"> Welcome BACK! </p>
           <div className="icondiv">
-            <FaUserSecret className="icon1" size="90%" color="midnightblue" />
+            {/* <FaUserSecret className="icon1" size="90%" color="midnightblue" /> */}
+            <img className="signin-img" src={logo} alt="logo.png" />
           </div>
           <div class="details">
             <input
