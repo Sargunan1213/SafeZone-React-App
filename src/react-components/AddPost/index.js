@@ -19,8 +19,6 @@ class AddPost extends React.Component {
     img: "",
   };
 
-
-
   render() {
     return (
       <div className="addPost">

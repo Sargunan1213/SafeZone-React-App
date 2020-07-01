@@ -35,74 +35,6 @@ class App extends React.Component {
     currentUser: "",
     type: "",
     profileImg: blankImg,
-    // Declare hardcoded data here because these data are used to multiple pages/components,
-    // redeclaring them in each component is bad practice.
-    // Data will be obtained from server.
-    homeowners: {
-      user: {
-        name: "user",
-        age: 34,
-        password: "user",
-        postId: [0, 1],
-        tel: "416-432-1431",
-        email: "user@user.com",
-      },
-    },
-
-    frontliners: {
-      user2: {
-        fronlinerName: "user2",
-        frontlinerAge: 49,
-        password: "user2",
-        frontlinerTel: "514-123-9030",
-        frontlinerEmail: "user2@user.com",
-        interest: [],
-      },
-    },
-
-    admins: {
-      admin: {
-        adminName: "admin",
-        adminAge: "25",
-        password: "admin",
-        adminTel: "416-432-0000",
-        adminEmail: "admin@user.com",
-      },
-    },
-
-    homes: [
-      {
-        id: 0,
-        address: "4130 George Street",
-        city: "Peterborough",
-        province: "Ontario",
-        country: "Canada",
-        zip: "K9H 2L1",
-        pic: "home1.jpg",
-        description:
-          "1 bedroom, all inclusive (hear, hydro, water), renovated, pets ok",
-        price: "$1570 per month",
-        homeowner: "user",
-      },
-      {
-        id: 1,
-        address: "2350 Bridgeport Rd",
-        city: "Milton",
-        province: "Ontario",
-        country: "Canada",
-        zip: "L9T 2Y1",
-        pic: "home2.jpg",
-        description:
-          "10 min walk to subway, fully furnished, no pets, no smoking",
-        price: "$1300 per month",
-        homeowner: "user",
-      },
-    ],
-
-    twitterMsgs: [
-      "We had a great time building the front-end of this application. Learnt a lot of new things.",
-      "Admin will post message to all the users abbout updates on the platform and new feature these will be reflected here.",
-    ],
   };
 
   render() {
@@ -129,10 +61,6 @@ class App extends React.Component {
               path="/Posts"
               render={() => (
                 <Posts
-                  homes={this.state.homes}
-                  owners={this.state.homeowners}
-                  edit={false}
-                  app={this}
                   type={this.state.type}
                 />
               )}
@@ -142,44 +70,10 @@ class App extends React.Component {
             <Route exact path="/Feedback" render={() => <Feedback />} />
             <Route exact path="/AboutUs" render={() => <AboutUs />} />
             <Route exact path="/ContactUs" render={() => <ContactUs />} />
-            <Route
-              exact
-              path="/userTwitterFeed"
-              render={() => <UserTwitterFeed msgs={this.state.twitterMsgs} />}
-            />
-
-            <Route
-              exact
-              path="/AdminPanel"
-              render={() => (
-                <AdminPanel
-                  homes={this.state.homes}
-                  homeowners={this.state.homeowners}
-                  frontliners={this.state.frontliners}
-                  app={this}
-                />
-              )}
-            />
-            <Route
-              exact
-              path="/HomeOwnerProfilePage"
-              render={() => (
-                <HomeOwnerProfilePage
-                  owner={this.state.homeowners[this.state.currentUser]}
-                />
-              )}
-            />
-            <Route
-              exact
-              path="/FrontlinerProfilePage"
-              render={() => (
-                <FrontlinerProfilePage
-                  frontlineOwner={
-                    this.state.frontliners[this.state.currentUser]
-                  }
-                />
-              )}
-            />
+            <Route exact path="/userTwitterFeed" render={() => <UserTwitterFeed />}/>
+            <Route exact path="/AdminPanel" render={() => (  <AdminPanel /> )}  />
+            <Route exact path="/HomeOwnerProfilePage" render={() => (<HomeOwnerProfilePage />)} />
+            <Route exact path="/FrontlinerProfilePage" render={() => (<FrontlinerProfilePage />)}/>
           </Switch>
           <Footer />
         </BrowserRouter>

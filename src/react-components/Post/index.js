@@ -8,15 +8,15 @@ class Post extends React.Component {
     state = {};
   
     render() {
-        const {homes, home, owners, app, type} = this.props;
+        const {homes, home, owners, comp, type} = this.props;
         const homeowner = home.homeowner;
 
         let button = "";
         if (type === "admin"){
-            button=<button className='del' onClick={() => removeHome(app, homes, home)}>Delete</button>;
+            button=<button className='del' onClick={() => removeHome(comp, homes, home)}>Delete</button>;
         }
         else if(type === "frontliner"){
-            button=<button className='select' onClick={() => addInterestedHome(app, home["id"])}>Select</button>;
+            button=<button className='select' onClick={() => addInterestedHome(comp, home["id"])}>Select</button>;
         }
         else if(type === "homeowner"){
             button=<Link className='select' to={{pathname: "/EditPostPage"}}>Edit</Link>;

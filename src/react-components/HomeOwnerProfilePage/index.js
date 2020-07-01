@@ -4,7 +4,14 @@ import { Link } from "react-router-dom";
 
 class HomeOwnerProfilePage extends React.Component {
   state = {
-    msgs: ["This is msg1", "This is msg2"],
+    owner: {
+      name: "user",
+      age: 34,
+      password: "user",
+      postId: [0, 1],
+      tel: "416-432-1431",
+      email: "user@user.com",
+    },
     profilepic:
       "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
   };
@@ -22,7 +29,6 @@ class HomeOwnerProfilePage extends React.Component {
   };
 
   render() {
-    const { owner } = this.props;
     const feed = "/userTwitterFeed";
     return (
       <div name="pic" className="homeOwnerBasicInfo">
@@ -39,10 +45,10 @@ class HomeOwnerProfilePage extends React.Component {
         {/* <button className="homeOwnerProfile-btn">Change profile picture</button> */}
 
         <div className="general_info">
-          <h2>Name: {owner["name"]}</h2>
-          <h2>Age: {owner["age"]}</h2>
-          <h2>Contact: {owner["tel"]}</h2>
-          <h2>Email: {owner["email"]}</h2>
+          <h2>Name: {this.state.owner["name"]}</h2>
+          <h2>Age: {this.state.owner["age"]}</h2>
+          <h2>Contact: {this.state.owner["tel"]}</h2>
+          <h2>Email: {this.state.owner["email"]}</h2>
         </div>
 
         <button className="homeOwnerViewOwnPost-btn">

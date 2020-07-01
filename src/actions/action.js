@@ -45,24 +45,24 @@ export const signIn = (app, username, pwd) => {
     });
 };
 
-export const removeHome = (app, homes, home) => {
+export const removeHome = (comp, homes, home) => {
     // delete home information from server
     // requires server call
     delete homes[homes.indexOf(home)];
 
-    app.setState({
+    comp.setState({
         homes: homes
     })
 }
 
-export const addInterestedHome = (app, homeId) => {
-    const frontliners = app.state.frontliners;
+export const addInterestedHome = (comp, homeId) => {
+    const frontliners = comp.state.frontliners;
 
      // add interested home under user to server
      // requires server call
-    frontliners[app.state.currentUser].interest.push(homeId);
+    frontliners[comp.state.currentUser].interest.push(homeId);
 
-    app.setState({
+    comp.setState({
         frontliners: frontliners
     })
 }

@@ -7,9 +7,13 @@ import safeZone from "./static/safeZoneLogo.png";
 import tweet_img from "./static/tweet_img.png";
 
 class UserTwitterFeed extends React.Component {
+  state = {
+    twitterMsgs: [
+      "We had a great time building the front-end of this application. Learnt a lot of new things.",
+      "Admin will post message to all the users abbout updates on the platform and new feature these will be reflected here.",
+    ],
+  }
   render() {
-    const msgs = this.props.msgs;
-
     return (
       <div id="timeline">
         <div class="timelineHeader">
@@ -32,7 +36,7 @@ class UserTwitterFeed extends React.Component {
             <span class="hashtag">#SF #GreatDay</span>
           </div>
         </div>
-        {msgs.map((msg) => (
+        {this.state.twitterMsgs.map((msg) => (
           <div class="tweet">
             <div class="tweetIconContainer">
               <img class="tweetIcon" src={safeZone} alt="logo" />
