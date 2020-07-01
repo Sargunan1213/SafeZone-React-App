@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.css";
 
-import { signIn } from "../../actions/nav";
+import { signIn } from "../../actions/action";
 // import { FaUserSecret } from "react-icons/fa";
 import logo from "./safeZoneLogo.png";
 

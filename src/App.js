@@ -18,7 +18,7 @@ import HomeOwnerProfilePage from "./react-components/HomeOwnerProfilePage";
 import Feedback from "./react-components/Feedback";
 import Live from "./react-components/LiveCases";
 import FrontlinerProfilePage from "./react-components/FrontlinerProfilePage";
-import { signout } from "./actions/nav";
+import { signout } from "./actions/action";
 import DonationPage from "./react-components/DonationPage";
 import EditPostPage from "./react-components/EditPostPage";
 

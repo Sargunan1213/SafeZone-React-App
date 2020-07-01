@@ -3,7 +3,7 @@ import React from "react";
 // import "./styles.css";
 
 import AddPostForm from "../AddPostForm";
-import {editPost} from "../../actions/nav"
+import {editPost} from "../../actions/action"
 
 class AddPost extends React.Component {
   state = {
