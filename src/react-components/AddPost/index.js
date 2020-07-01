@@ -18,13 +18,13 @@ class AddPost extends React.Component {
     phone: "",
     email: "",
     img: "",
-    type: "homeowner"
+    type: "homeowner",
   };
 
   render() {
     return (
       <div className="addPost">
-        <NavBar type={this.state.type}/>
+        <NavBar type={this.state.type} />
         <h1>Add a new home Post:</h1>
         <AddPostForm
           address={this.state.address}

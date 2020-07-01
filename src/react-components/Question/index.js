@@ -8,8 +8,8 @@ class Question extends React.Component {
   };
 
   handleInputChange = (event) => {
-    this.setState(({ isChecked }) => {
-      this.state.checked = !isChecked;
+    this.setState({
+      checked: !this.state.checked,
     });
   };
   render() {

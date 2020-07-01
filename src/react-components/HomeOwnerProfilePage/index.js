@@ -15,7 +15,7 @@ class HomeOwnerProfilePage extends React.Component {
     },
     profilepic:
       "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
-    type: "homeowner"
+    type: "homeowner",
   };
 
   update = (event) => {
@@ -39,6 +39,7 @@ class HomeOwnerProfilePage extends React.Component {
           <img
             className="homeOwnerProfilePicture"
             src={this.state.profilepic}
+            alt="profilePic"
           ></img>
           <input
             type="file"
@@ -57,7 +58,7 @@ class HomeOwnerProfilePage extends React.Component {
 
           <button className="homeOwnerViewOwnPost-btn">
             View your own posts
-        </button>
+          </button>
 
           <button className="homeOwnerViewOwnPost-btn">
             <Link to={feed}>Check Your Twitter Feed</Link>

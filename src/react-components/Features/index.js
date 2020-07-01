@@ -8,7 +8,6 @@ import feature2 from "./static/feature2.jpg";
 import feature3 from "./static/feature3.png";
 import feature4 from "./static/feature4.jpg";
 import feature5 from "./static/feature5.png";
-import feature6 from "./static/feature6.png";
 
 class Features extends React.Component {
   state = {};
@@ -38,19 +37,13 @@ class Features extends React.Component {
           img_src={feature4}
           name="Twitter Feed"
           body="View News Of patients and success stories of many recovered!"
-          link=""
+          link="/userTwitterFeed"
         />
         <Feature
           img_src={feature5}
           name="Give Feedback"
           body="Give your thoughts on improving our website"
           link="/Feedback"
-        />
-        <Feature
-          img_src={feature6}
-          name="Community Chat"
-          body="Chat with community members!"
-          link=""
         />
       </div>
     );
