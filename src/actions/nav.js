@@ -12,6 +12,8 @@ export const signIn = (app, username, pwd) => {
     // Requires server call
     if (username === "user"  && pwd === "user"){
         currentUser = username;
+        delete navOptions["Posts"];
+        navOptions["My Posts"] = "Posts";
         navOptions["Add Post"] = "AddPost";
         navOptions[currentUser] = "HomeOwnerProfilePage";
         type = "homeowner";
@@ -25,6 +27,7 @@ export const signIn = (app, username, pwd) => {
     else if (username === "admin"  && pwd === "admin"){
         currentUser = username;
         navOptions["Admin Panel"] = "AdminPanel";
+        type = "admin";
     }
     
     if (!currentUser){
@@ -76,4 +79,11 @@ export const signout = (app) => {
     app.setState({
         navOptions: navOptions
     })
+}
+
+export const editPost = (event) => {
+    // edit home post details
+    // requires server call to manipulate original data to updated data
+    alert("Details of the house were changed: ");
+    event.preventDefault();
 }

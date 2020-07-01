@@ -39,7 +39,7 @@ class AdminPanel extends React.Component {
               homes={homes}
               home={home}
               owners={homeowners}
-              edit={true}
+              type={"admin"}
               app={app}
             />
           ))}

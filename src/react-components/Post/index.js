@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 import './styles.css';
 import { removeHome, addInterestedHome } from "../../actions/nav";
@@ -7,15 +8,18 @@ class Post extends React.Component {
     state = {};
   
     render() {
-        const {homes, home, owners, edit, app, type} = this.props;
+        const {homes, home, owners, app, type} = this.props;
         const homeowner = home.homeowner;
 
         let button = "";
-        if (edit){
+        if (type === "admin"){
             button=<button className='del' onClick={() => removeHome(app, homes, home)}>Delete</button>;
         }
         else if(type === "frontliner"){
             button=<button className='select' onClick={() => addInterestedHome(app, home["id"])}>Select</button>;
+        }
+        else if(type === "homeowner"){
+            button=<Link className='select' to={{pathname: "/EditPostPage"}}>Edit</Link>;
         }
 
         return (

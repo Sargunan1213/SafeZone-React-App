@@ -20,6 +20,7 @@ import Live from "./react-components/LiveCases";
 import FrontlinerProfilePage from "./react-components/FrontlinerProfilePage";
 import { signout } from "./actions/nav";
 import DonationPage from "./react-components/DonationPage";
+import EditPostPage from "./react-components/EditPostPage";
 
 class App extends React.Component {
   state = {
@@ -131,6 +132,7 @@ class App extends React.Component {
               )}
             />
             <Route exact path="/AddPost" render={() => <AddPost />} />
+            <Route exact path="/EditPostPage" render={() => <EditPostPage />} />
             <Route exact path="/Feedback" render={() => <Feedback />} />
             <Route exact path="/AboutUs" render={() => <AboutUs />} />
             <Route exact path="/ContactUs" render={() => <ContactUs />} />
