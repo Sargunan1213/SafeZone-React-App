@@ -4,6 +4,9 @@ import "./styles.css";
 
 import AddPostForm from "../AddPostForm";
 
+// import { handleInputChange } from "../../actions/action";
+// import { submitForm } from "../../actions/action";
+
 // will link it up with signed in user later
 class AddPost extends React.Component {
   state = {
@@ -16,22 +19,6 @@ class AddPost extends React.Component {
     img: "",
   };
 
-  handleInputChange = (event) => {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value,
-    });
-    console.log("typing");
-  };
-
-  submitForm = (event) => {
-    // Server call to enter this form data into the database.
-    alert("Details of the house were submitted: ");
-    event.preventDefault();
-  };
   render() {
     return (
       <div className="addPost">
@@ -44,8 +31,8 @@ class AddPost extends React.Component {
           phone={this.state.phone}
           email={this.state.email}
           img={this.state.img}
-          handle={this.handleInputChange}
-          submit={this.submitForm}
+          handle={handleInputChange}
+          submit={submitForm}
         />
       </div>
     );
