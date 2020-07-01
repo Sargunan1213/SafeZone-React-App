@@ -35,7 +35,7 @@ class HomeOwnerProfilePage extends React.Component {
           type="file"
           className="homeOwnerProfile-btn"
           onChange={this.update}
-          accept="image/png, image/jpeg"
+          accept="image/*"
         />
         {/* <button className="homeOwnerProfile-btn">Change profile picture</button> */}
 
