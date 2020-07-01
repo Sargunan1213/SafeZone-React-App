@@ -21,6 +21,7 @@ import FrontlinerProfilePage from "./react-components/FrontlinerProfilePage";
 import { signout } from "./actions/action";
 import DonationPage from "./react-components/DonationPage";
 import EditPostPage from "./react-components/EditPostPage";
+import UserTwitterFeed from "./react-components/userTwitterFeed";
 
 class App extends React.Component {
   state = {
@@ -97,6 +98,11 @@ class App extends React.Component {
         homeowner: "user",
       },
     ],
+
+    twitterMsgs: [
+      "We had a great time building the front-end of this application. Learnt a lot of new things.",
+      "Admin will post message to all the users abbout updates on the platform and new feature these will be reflected here.",
+    ],
   };
 
   render() {
@@ -136,6 +142,11 @@ class App extends React.Component {
             <Route exact path="/Feedback" render={() => <Feedback />} />
             <Route exact path="/AboutUs" render={() => <AboutUs />} />
             <Route exact path="/ContactUs" render={() => <ContactUs />} />
+            <Route
+              exact
+              path="/userTwitterFeed"
+              render={() => <UserTwitterFeed msgs={this.state.twitterMsgs} />}
+            />
 
             <Route
               exact

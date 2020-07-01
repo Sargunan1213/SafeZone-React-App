@@ -1,7 +1,6 @@
 import React from "react";
 import "./styles.css";
-
-import UserTwitterFeed from "../userTwitterFeed";
+import { Link } from "react-router-dom";
 
 class HomeOwnerProfilePage extends React.Component {
   state = {
@@ -10,7 +9,7 @@ class HomeOwnerProfilePage extends React.Component {
 
   render() {
     const { owner } = this.props;
-
+    const feed = "/userTwitterFeed";
     return (
       <div className="homeOwnerBasicInfo">
         <img
@@ -31,7 +30,9 @@ class HomeOwnerProfilePage extends React.Component {
           View your own posts
         </button>
 
-        <UserTwitterFeed msgs={this.state.msgs} />
+        <button className="homeOwnerViewOwnPost-btn">
+          <Link to={feed}>Check Your Twitter Feed</Link>
+        </button>
       </div>
     );
   }
