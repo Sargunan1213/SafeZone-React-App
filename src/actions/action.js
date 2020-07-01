@@ -76,3 +76,17 @@ export const submitForm = (event) => {
     alert("Details of the house were changed: ");
     event.preventDefault();
 }
+
+export const removeUser = (comp, users, user) => {
+    // delete user information from server
+    // requires server call
+    if (user === "user"){
+        alert("This user has posts, don't delete")
+        return
+    }
+    delete users[user];
+
+    comp.setState({
+        [users]: users
+    })
+}

@@ -24,3 +24,23 @@
 .homePost {
     margin-right: 30%;
 }
+
+.profile{
+    border: 2px solid grey;
+    padding: 5px;
+    width: 50%;
+    overflow: auto;
+}
+
+.delete {
+
+        float: right;
+        color: white;
+        background-color: red;
+        font-size: 20px;
+        border-radius: 10px;
+        border: 1px white;
+        padding: 5px;
+
+
+}
