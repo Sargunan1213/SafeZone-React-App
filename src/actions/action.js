@@ -87,3 +87,21 @@ export const editPost = (event) => {
     alert("Details of the house were changed: ");
     event.preventDefault();
 }
+
+export const handleInputChange = (event, component) => {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    component.setState({
+      [name]: value,
+    });
+    console.log("typing");
+  }
+
+export const submitForm = (event) => {
+    // add home post details
+    // requires server call to add original data to updated data
+    alert("Details of the house were changed: ");
+    event.preventDefault();
+}

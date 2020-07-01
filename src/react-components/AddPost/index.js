@@ -4,8 +4,8 @@ import "./styles.css";
 
 import AddPostForm from "../AddPostForm";
 
-// import { handleInputChange } from "../../actions/action";
-// import { submitForm } from "../../actions/action";
+import { handleInputChange } from "../../actions/action";
+import { submitForm } from "../../actions/action";
 
 // will link it up with signed in user later
 class AddPost extends React.Component {
@@ -19,6 +19,8 @@ class AddPost extends React.Component {
     img: "",
   };
 
+
+
   render() {
     return (
       <div className="addPost">
@@ -31,7 +33,7 @@ class AddPost extends React.Component {
           phone={this.state.phone}
           email={this.state.email}
           img={this.state.img}
-          handle={handleInputChange}
+          handle={(e) => handleInputChange(e, this)}
           submit={submitForm}
         />
       </div>
