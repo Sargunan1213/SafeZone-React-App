@@ -1,6 +1,7 @@
 import React from "react";
 
 import './styles.css';
+import NavBar from "../NavBar";
 
 class DonationPage extends React.Component {
     state = {
@@ -31,6 +32,7 @@ class DonationPage extends React.Component {
     render() {
         return (
             <div className="donation">
+                <NavBar />
                 <h1>Donate to help support frontline workers to afford a safe home</h1>
 
                 <form className="donationForm" onSubmit={this.submitForm}>

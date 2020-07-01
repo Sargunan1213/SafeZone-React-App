@@ -4,6 +4,7 @@ import React from "react";
 
 import AddPostForm from "../AddPostForm";
 import {editPost} from "../../actions/action"
+import NavBar from "../NavBar";
 
 class AddPost extends React.Component {
   state = {
@@ -32,6 +33,7 @@ class AddPost extends React.Component {
   render() {
     return (
       <div className="addPost">
+        <NavBar type="homeowner" />
         <h1>Edit your home Post:</h1>
         <AddPostForm
           address={this.state.address}

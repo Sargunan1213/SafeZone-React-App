@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles.css";
 import { Link } from "react-router-dom";
+import NavBar from "../NavBar";
 
 class HomeOwnerProfilePage extends React.Component {
   state = {
@@ -14,6 +15,7 @@ class HomeOwnerProfilePage extends React.Component {
     },
     profilepic:
       "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
+    type: "homeowner"
   };
 
   update = (event) => {
@@ -31,33 +33,36 @@ class HomeOwnerProfilePage extends React.Component {
   render() {
     const feed = "/userTwitterFeed";
     return (
-      <div name="pic" className="homeOwnerBasicInfo">
-        <img
-          className="homeOwnerProfilePicture"
-          src={this.state.profilepic}
-        ></img>
-        <input
-          type="file"
-          className="homeOwnerProfile-btn"
-          onChange={this.update}
-          accept="image/*"
-        />
-        {/* <button className="homeOwnerProfile-btn">Change profile picture</button> */}
+      <div>
+        <NavBar type={this.state.type} />
+        <div name="pic" className="homeOwnerBasicInfo">
+          <img
+            className="homeOwnerProfilePicture"
+            src={this.state.profilepic}
+          ></img>
+          <input
+            type="file"
+            className="homeOwnerProfile-btn"
+            onChange={this.update}
+            accept="image/*"
+          />
+          {/* <button className="homeOwnerProfile-btn">Change profile picture</button> */}
 
-        <div className="general_info">
-          <h2>Name: {this.state.owner["name"]}</h2>
-          <h2>Age: {this.state.owner["age"]}</h2>
-          <h2>Contact: {this.state.owner["tel"]}</h2>
-          <h2>Email: {this.state.owner["email"]}</h2>
+          <div className="general_info">
+            <h2>Name: {this.state.owner["name"]}</h2>
+            <h2>Age: {this.state.owner["age"]}</h2>
+            <h2>Contact: {this.state.owner["tel"]}</h2>
+            <h2>Email: {this.state.owner["email"]}</h2>
+          </div>
+
+          <button className="homeOwnerViewOwnPost-btn">
+            View your own posts
+        </button>
+
+          <button className="homeOwnerViewOwnPost-btn">
+            <Link to={feed}>Check Your Twitter Feed</Link>
+          </button>
         </div>
-
-        <button className="homeOwnerViewOwnPost-btn">
-          View your own posts
-        </button>
-
-        <button className="homeOwnerViewOwnPost-btn">
-          <Link to={feed}>Check Your Twitter Feed</Link>
-        </button>
       </div>
     );
   }

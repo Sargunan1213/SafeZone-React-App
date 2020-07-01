@@ -6,6 +6,7 @@ import AddPostForm from "../AddPostForm";
 
 import { handleInputChange } from "../../actions/action";
 import { submitForm } from "../../actions/action";
+import NavBar from "../NavBar";
 
 // will link it up with signed in user later
 class AddPost extends React.Component {
@@ -17,11 +18,13 @@ class AddPost extends React.Component {
     phone: "",
     email: "",
     img: "",
+    type: "homeowner"
   };
 
   render() {
     return (
       <div className="addPost">
+        <NavBar type={this.state.type}/>
         <h1>Add a new home Post:</h1>
         <AddPostForm
           address={this.state.address}

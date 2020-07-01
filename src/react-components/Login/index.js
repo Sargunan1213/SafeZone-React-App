@@ -4,9 +4,11 @@ import "./index.css";
 import { signIn } from "../../actions/action";
 // import { FaUserSecret } from "react-icons/fa";
 import logo from "./safeZoneLogo.png";
+import NavBar from "../NavBar";
 
 class Login extends React.Component {
   state = {
+    type: "",
     username: "",
     password: "",
   };
@@ -21,10 +23,9 @@ class Login extends React.Component {
   };
 
   render() {
-    const { main } = this.props;
-
     return (
       <div className="back1">
+        <NavBar type={this.state.type}/>
         <form className="box1">
           <p className="head1"> Welcome BACK! </p>
           <div className="icondiv">
@@ -49,9 +50,8 @@ class Login extends React.Component {
             <button
               type="button"
               className="submit1"
-              onClick={signIn.bind(
+              onClick={() => signIn(
                 this,
-                main,
                 this.state.username,
                 this.state.password
               )}

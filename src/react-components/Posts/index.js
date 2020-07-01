@@ -2,10 +2,12 @@ import React from 'react';
 
 import Post from "../Post";
 import { uid } from 'react-uid';
+import NavBar from "../NavBar";
 
 import './styles.css';
 
 class Posts extends React.Component {
+    
     state = {
         owners: {
             user: {
@@ -58,10 +60,16 @@ class Posts extends React.Component {
     }
     render() {
         const { type } = this.props;
+        let title = <h1>Avaliable Homes</h1>
+
+        if (type === "homeowner") {
+              title = <h1>Your Posts</h1>
+        }
 
         return (
             <div id="homes">
-                <h1>Avaliable Homes</h1>
+                <NavBar type={type}/>
+                {title}
                 <div className="posts">
                     { this.state.homes.map(home => (<Post key={uid(home)} homes={this.state.homes} home={home} owners={this.state.owners} comp={this} type={type}/>)) }
                 </div>

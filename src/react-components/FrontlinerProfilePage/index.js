@@ -1,5 +1,6 @@
 import React from 'react';
 import './styles.css';
+import NavBar from "../NavBar";
 
 
 class FrontlinerProfilePage extends React.Component {
@@ -12,23 +13,25 @@ class FrontlinerProfilePage extends React.Component {
             frontlinerEmail: "user2@user.com",
             interest: [],
         },
+        type: "frontliner"
     };
 
     render() {
         return (
-            <div className="frontlinerBasicInfo">
+            <div>
+                <div className="frontlinerBasicInfo">
+                    <NavBar type={this.state.type} />
+                    <img className="frontlinerProfilePicture" src="favicon.ico" alt="frontlinerProfilePicture.jpg" ></img>
+                    <button className="frontlinerProfile-btn">Change profile picture</button>
 
-                <img className="frontlinerProfilePicture" src="favicon.ico" alt="frontlinerProfilePicture.jpg" ></img>
-                <button className="frontlinerProfile-btn">Change profile picture</button>
-
-                <div className="frontline_general_info">
-                    <h2>Name: {this.state.frontlineOwner["fronlinerName"]}</h2>
-                    <h2>Age: {this.state.frontlineOwner["frontlinerAge"]}</h2>
-                    <h2>Contact: {this.state.frontlineOwner["frontlinerTel"]}</h2>
-                    <h2>Email: {this.state.frontlineOwner["frontlinerEmail"]}</h2>
-                    <h2>Interested homes ids: {this.state.frontlineOwner["interest"]}</h2>
+                    <div className="frontline_general_info">
+                        <h2>Name: {this.state.frontlineOwner["fronlinerName"]}</h2>
+                        <h2>Age: {this.state.frontlineOwner["frontlinerAge"]}</h2>
+                        <h2>Contact: {this.state.frontlineOwner["frontlinerTel"]}</h2>
+                        <h2>Email: {this.state.frontlineOwner["frontlinerEmail"]}</h2>
+                        <h2>Interested homes ids: {this.state.frontlineOwner["interest"]}</h2>
+                    </div>
                 </div>
-
             </div>
 
         );

@@ -8,8 +8,6 @@ import ContactUs from "./react-components/ContactUs";
 import Home from "./react-components/Home";
 import Signup from "./react-components/Signup";
 import Login from "./react-components/Login";
-import blankImg from "./react-components/Home/static/blank.png";
-import NavBar from "./react-components/NavBar";
 import Posts from "./react-components/Posts";
 import Footer from "./react-components/Footer";
 import AddPost from "./react-components/AddPost";
@@ -18,53 +16,22 @@ import HomeOwnerProfilePage from "./react-components/HomeOwnerProfilePage";
 import Feedback from "./react-components/Feedback";
 import Live from "./react-components/LiveCases";
 import FrontlinerProfilePage from "./react-components/FrontlinerProfilePage";
-import { signout } from "./actions/action";
 import DonationPage from "./react-components/DonationPage";
 import EditPostPage from "./react-components/EditPostPage";
 import UserTwitterFeed from "./react-components/userTwitterFeed";
 
 class App extends React.Component {
-  state = {
-    navOptions: {
-      Home: "",
-      Posts: "Posts",
-      "Live Cases": "Live",
-      "Sign Up": "Signup",
-      "Sign In": "Login",
-    },
-    currentUser: "",
-    type: "",
-    profileImg: blankImg,
-  };
-
   render() {
     return (
       <div>
         <BrowserRouter>
-          <NavBar
-            navOptions={this.state.navOptions}
-            profileImg={this.state.profileImg}
-            signout={() => {
-              signout(this);
-            }}
-            type={this.state.type}
-          />
-
           <Switch>
             <Route exact path="/" render={() => <Home />} />
             <Route exact path="/Signup" render={() => <Signup />} />
             <Route exact path="/Login" render={() => <Login main={this} />} />
             <Route exact path="/Live" render={() => <Live />} />
             <Route exact path="/Donation" render={() => <DonationPage />} />
-            <Route
-              exact
-              path="/Posts"
-              render={() => (
-                <Posts
-                  type={this.state.type}
-                />
-              )}
-            />
+            <Route exact path="/Posts" render={() => (<Posts />)}/>
             <Route exact path="/AddPost" render={() => <AddPost />} />
             <Route exact path="/EditPostPage" render={() => <EditPostPage />} />
             <Route exact path="/Feedback" render={() => <Feedback />} />
@@ -74,6 +41,8 @@ class App extends React.Component {
             <Route exact path="/AdminPanel" render={() => (  <AdminPanel /> )}  />
             <Route exact path="/HomeOwnerProfilePage" render={() => (<HomeOwnerProfilePage />)} />
             <Route exact path="/FrontlinerProfilePage" render={() => (<FrontlinerProfilePage />)}/>
+            <Route exact path="/HomeOwnerPosts" render={() => (<Posts type="homeowner" />)}/>
+            <Route exact path="/SelectPosts" render={() => (<Posts type="frontliner" />)}/>
           </Switch>
           <Footer />
         </BrowserRouter>

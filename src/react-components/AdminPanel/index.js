@@ -6,6 +6,8 @@ import FrontlinerProfilePage from "../FrontlinerProfilePage";
 import { uid } from "react-uid";
 import AdminSendMsg from "../AdminSendMsg";
 import "./styles.css";
+import NavBar from "../NavBar";
+
 
 class AdminPanel extends React.Component {
   state = {
@@ -57,10 +59,13 @@ class AdminPanel extends React.Component {
           homeowner: "user",
         },
       ],
+      type: "admin"
 }
   render() {
     return (
-      <div className="AdminPanel">
+      <div>
+        <NavBar type={this.state.type}/>
+        <div className="AdminPanel">
         <h1>Users</h1>
         <div className="Users">
           <h2>Homeowners</h2>
@@ -94,6 +99,7 @@ class AdminPanel extends React.Component {
         </div>
 
         <AdminSendMsg />
+        </div>
       </div>
     );
   }
