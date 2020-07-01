@@ -14,6 +14,12 @@
   text-decoration: none;
   padding-right: 15px;
   color: grey;
+  transition: 3s ease;
+}
+
+#navOptions a:hover {
+  color: blue;
+  letter-spacing: 2px;
 }
 
 .title {

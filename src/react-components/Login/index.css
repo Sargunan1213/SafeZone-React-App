@@ -55,19 +55,20 @@
   display: block;
   padding-left: 5%;
   margin-left: 15%;
-  width: 42vh;
+  width: 150%;
   height: 5vh;
   margin-top: 20%;
+  margin-left: 25%;
   border-radius: 7px;
 }
 
 .submit1 {
   outline: none;
   background: #0f1e73;
-  width: 20vh;
+  width: 150%;
   height: 6vh;
   margin-top: 20%;
-  margin-left: 42%;
+  margin-left: 25%;
   border-radius: 2vh;
   color: white;
   font-size: 3vh;
