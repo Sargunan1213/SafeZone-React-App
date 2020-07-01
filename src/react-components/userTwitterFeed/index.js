@@ -5,6 +5,7 @@ import "./styles.css";
 
 import safeZone from "./static/safeZoneLogo.png";
 import tweet_img from "./static/tweet_img.png";
+import NavBar from "../NavBar";
 
 class UserTwitterFeed extends React.Component {
   state = {
@@ -15,28 +16,14 @@ class UserTwitterFeed extends React.Component {
   }
   render() {
     return (
-      <div id="timeline">
-        <div class="timelineHeader">
-          <ul>
-            <li>Tweets</li>
-          </ul>
-        </div>
-        <div class="tweet">
-          <div class="tweetIconContainer">
-            <img class="tweetIcon" src={safeZone} alt="logo" />
+      <div>
+        <NavBar type="homeowner" />
+        <div id="timeline">
+          <div class="timelineHeader">
+            <ul>
+              <li>Tweets</li>
+            </ul>
           </div>
-
-          <div class="tweetContent">
-            <h3>
-              <span>SAFEZONE</span>
-              <span class="grey"> @SF</span>
-            </h3>
-
-            <span>Hope you have great day at SF!</span>
-            <span class="hashtag">#SF #GreatDay</span>
-          </div>
-        </div>
-        {this.state.twitterMsgs.map((msg) => (
           <div class="tweet">
             <div class="tweetIconContainer">
               <img class="tweetIcon" src={safeZone} alt="logo" />
@@ -48,12 +35,29 @@ class UserTwitterFeed extends React.Component {
                 <span class="grey"> @SF</span>
               </h3>
 
-              <Msg key={uid(msg)} msg={msg} />
-
-              <img class="tweetContentPicture" src={tweet_img} alt="robarts" />
+              <span>Hope you have great day at SF!</span>
+              <span class="hashtag">#SF #GreatDay</span>
             </div>
           </div>
-        ))}
+          {this.state.twitterMsgs.map((msg) => (
+            <div class="tweet">
+              <div class="tweetIconContainer">
+                <img class="tweetIcon" src={safeZone} alt="logo" />
+              </div>
+
+              <div class="tweetContent">
+                <h3>
+                  <span>SAFEZONE</span>
+                  <span class="grey"> @SF</span>
+                </h3>
+
+                <Msg key={uid(msg)} msg={msg} />
+
+                <img class="tweetContentPicture" src={tweet_img} alt="robarts" />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
