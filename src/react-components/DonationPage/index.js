@@ -3,6 +3,8 @@ import React from "react";
 import './styles.css';
 import NavBar from "../NavBar";
 
+import { handleInputChange, submitDonationForm } from "../../actions/action";
+
 class DonationPage extends React.Component {
     state = {
         donationAmount: 0,
@@ -13,29 +15,14 @@ class DonationPage extends React.Component {
         donateTo: "General"
     }
 
-    submitForm = (event) => {
-        // Server call to send this donation data from form into the database.
-        alert("Thanks you for your donation of $" + this.state.donationAmount);
-        event.preventDefault();
-    };
-
-    handleInputChange = event => {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        })
-    }
 
     render() {
         return (
-            <div className="donation">
+            <div id="donation">
                 <NavBar />
                 <h1>Donate to help support frontline workers to afford a safe home</h1>
 
-                <form className="donationForm" onSubmit={this.submitForm}>
+                <form className="donationForm" onSubmit={(e) => submitDonationForm(e, this)}>
                     <div className="donationType">
                         <h2>Donation Type</h2>
                         <div className="radio">
@@ -45,7 +32,7 @@ class DonationPage extends React.Component {
                                     name="donationType"
                                     value="oneTime"
                                     checked={this.state.donationType === "oneTime"}
-                                    onChange={this.handleInputChange}
+                                    onChange={(e) => handleInputChange(e, this)}
                                 />
                     One Time
                 </label>
@@ -55,13 +42,13 @@ class DonationPage extends React.Component {
                                     name="donationType"
                                     value="monthly"
                                     checked={this.state.donationType === "monthly"}
-                                    onChange={this.handleInputChange}
+                                    onChange={(e) => handleInputChange(e, this)}
                                 />
                     Monthy
                 </label>
                         </div>
                         <h3>Donate To:</h3>
-                        <select className="drop" name="donateTo" onChange={this.handleInputChange}>
+                        <select className="drop" name="donateTo" onChange={(e) => handleInputChange(e, this)}>
                             <option value="General">General</option>
                             <option value="user2">user2</option>
                         </select>
@@ -75,7 +62,7 @@ class DonationPage extends React.Component {
                             className="inputBox"
                             name="donationAmount"
                             value={this.state.donationAmount}
-                            onChange={this.handleInputChange}
+                            onChange={(e) => handleInputChange(e, this)}
                             label="Amount"
                         />
 
@@ -84,16 +71,16 @@ class DonationPage extends React.Component {
                             className="inputBox"
                             name="cardNumber"
                             value={this.state.cardNumber}
-                            onChange={this.handleInputChange}
+                            onChange={(e) => handleInputChange(e, this)}
                             label="Card Number"
                         />
 
-                        <h3>cardExpiry</h3>
+                        <h3>Card Expiry</h3>
                         <input
                             className="inputBox"
                             name="cardExpiry"
                             value={this.state.cardExpiry}
-                            onChange={this.handleInputChange}
+                            onChange={(e) => handleInputChange(e, this)}
                             label="Card Expiry"
                         />
 
@@ -102,7 +89,7 @@ class DonationPage extends React.Component {
                             className="inputBox"
                             name="cvc"
                             value={this.state.cvc}
-                            onChange={this.handleInputChange}
+                            onChange={(e) => handleInputChange(e, this)}
                             label="CVC"
                         />
                     </div>

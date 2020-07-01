@@ -1,5 +1,3 @@
-
-
 export const signIn = (comp, username, pwd) => {
 
     let currentUser = "";
@@ -7,21 +5,21 @@ export const signIn = (comp, username, pwd) => {
 
     // Get names and password from server
     // Requires server call
-    if (username === "user"  && pwd === "user"){
+    if (username === "user" && pwd === "user") {
         currentUser = username;
         type = "homeowner";
     }
-    else if (username === "user2"  && pwd === "user2"){
+    else if (username === "user2" && pwd === "user2") {
         currentUser = username;
         type = "frontliner";
     }
 
-    else if (username === "admin"  && pwd === "admin"){
+    else if (username === "admin" && pwd === "admin") {
         currentUser = username;
         type = "admin";
     }
-    
-    if (!currentUser){
+
+    if (!currentUser) {
         return
     }
 
@@ -43,8 +41,9 @@ export const removeHome = (comp, homes, home) => {
 export const addInterestedHome = (comp, homeId) => {
     const frontliners = comp.state.frontliners;
 
-     // add interested home under user to server
-     // requires server call
+    // add interested home under user to server
+    // requires server call
+    alert("Interest noted")
     frontliners["user2"].interest.push(homeId);
 
     comp.setState({
@@ -65,10 +64,10 @@ export const handleInputChange = (event, component) => {
     const name = target.name;
 
     component.setState({
-      [name]: value,
+        [name]: value,
     });
     console.log("typing");
-  }
+}
 
 export const submitForm = (event) => {
     // add home post details
@@ -80,7 +79,7 @@ export const submitForm = (event) => {
 export const removeUser = (comp, users, user) => {
     // delete user information from server
     // requires server call
-    if (user === "user"){
+    if (user === "user") {
         alert("This user has posts, don't delete")
         return
     }
@@ -89,4 +88,10 @@ export const removeUser = (comp, users, user) => {
     comp.setState({
         [users]: users
     })
+}
+
+export const submitDonationForm = (event, comp) => {
+    // Server call to send this donation data from form into the database.
+    alert("Thanks you for your donation of $" + comp.state.donationAmount);
+    event.preventDefault();
 }

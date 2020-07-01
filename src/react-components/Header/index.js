@@ -16,7 +16,7 @@ class Header extends React.Component {
                     <h3>
                         SafeZone provides a platform for COVID-19 frontline workers to access/rent quarantined rooms during the pandemic. 
                         Since frontline workers come in contact with the virus, they may not want to live in close proximity to members 
-                        who are vulnerable or at risk. It may also benefit the workers by reducing travelling distances to and from work.
+                        who are vulnerable or at risk. SafeZone also benefits the workers by reducing travelling distances to and from work.
                     </h3>
                     <Link to='/Posts'>Checkout avaliable homes</Link>
                 </div>

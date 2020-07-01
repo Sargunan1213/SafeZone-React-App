@@ -19,8 +19,9 @@ class FrontlinerProfilePage extends React.Component {
     render() {
         return (
             <div>
-                <div className="frontlinerBasicInfo">
+                <div>
                     <NavBar type={this.state.type} />
+                    <div className="frontlinerBasicInfo">
                     <img className="frontlinerProfilePicture" src="favicon.ico" alt="frontlinerProfilePicture.jpg" ></img>
                     <button className="frontlinerProfile-btn">Change profile picture</button>
 
@@ -32,6 +33,7 @@ class FrontlinerProfilePage extends React.Component {
                         <h2>Interested homes ids: {this.state.frontlineOwner["interest"]}</h2>
                     </div>
                 </div>
+            </div>
             </div>
 
         );

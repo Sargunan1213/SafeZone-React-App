@@ -1,10 +1,10 @@
 import React from "react";
 
-// import "./styles.css";
-
 import AddPostForm from "../AddPostForm";
 import {editPost} from "../../actions/action"
 import NavBar from "../NavBar";
+
+import { handleInputChange} from "../../actions/action";
 
 class AddPost extends React.Component {
   state = {
@@ -19,17 +19,6 @@ class AddPost extends React.Component {
 
   };
 
-  handleInputChange = (event) => {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value,
-    });
-    console.log("typing");
-  }
-
   render() {
     return (
       <div className="addPost">
@@ -43,7 +32,7 @@ class AddPost extends React.Component {
           phone={this.state.phone}
           email={this.state.email}
           img={this.state.img}
-          handle={this.handleInputChange}
+          handle={(e) => handleInputChange(e, this)}
           submit={editPost}
         />
       </div>
