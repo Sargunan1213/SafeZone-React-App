@@ -5,19 +5,38 @@ import { Link } from "react-router-dom";
 class HomeOwnerProfilePage extends React.Component {
   state = {
     msgs: ["This is msg1", "This is msg2"],
+    profilepic:
+      "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
+  };
+
+  update = (event) => {
+    const read = new FileReader();
+    read.onload = () => {
+      if (read.readyState === 2) {
+        this.setState({
+          profilepic: read.result,
+        });
+      }
+    };
+    read.readAsDataURL(event.target.files[0]);
   };
 
   render() {
     const { owner } = this.props;
     const feed = "/userTwitterFeed";
     return (
-      <div className="homeOwnerBasicInfo">
+      <div name="pic" className="homeOwnerBasicInfo">
         <img
           className="homeOwnerProfilePicture"
-          src="favicon.ico"
-          alt="profile.jpg"
+          src={this.state.profilepic}
         ></img>
-        <button className="homeOwnerProfile-btn">Change profile picture</button>
+        <input
+          type="file"
+          className="homeOwnerProfile-btn"
+          onChange={this.update}
+          accept="image/png, image/jpeg"
+        />
+        {/* <button className="homeOwnerProfile-btn">Change profile picture</button> */}
 
         <div className="general_info">
           <h2>Name: {owner["name"]}</h2>
