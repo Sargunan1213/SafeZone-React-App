@@ -47,7 +47,7 @@ class AddPostForm extends React.Component {
           <input
             className="inp"
             type="text"
-            name="address"
+            name="price"
             value={price}
             label="price"
             onChange={this.props.handle}
