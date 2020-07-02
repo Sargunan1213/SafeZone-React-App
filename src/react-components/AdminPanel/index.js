@@ -10,6 +10,7 @@ import { removeUser } from "../../actions/action";
 
 class AdminPanel extends React.Component {
   state = {
+    // Information about users and home details will get obtained from server
     homeowners: {
       user: {
         name: "user",

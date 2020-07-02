@@ -9,6 +9,7 @@ import './styles.css';
 class Posts extends React.Component {
     
     state = {
+      // Information about users and home details will be obtained from server
         owners: {
             user: {
               name: "user",
@@ -58,6 +59,7 @@ class Posts extends React.Component {
             },
           ],
     }
+    
     render() {
         const { type } = this.props;
         let title = <h1>Avaliable Homes</h1>
@@ -73,7 +75,7 @@ class Posts extends React.Component {
                 <div className="posts">
                     { this.state.homes.map(home => (<Post key={uid(home)} homes={this.state.homes} home={home} owners={this.state.owners} comp={this} type={type}/>)) }
                 </div>
-                {/* Retrieve map data of addresses. Requires external server call. */}
+                {/* Retrieve google map data of addresses. Requires external server call. */}
                 <img className="standinMap" src={require("./static/standinMap.png")} alt="map.png" />
             </div>
 

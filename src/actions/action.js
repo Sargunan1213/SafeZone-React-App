@@ -67,7 +67,7 @@ export const handleInputChange = (event, component) => {
 
 export const submitForm = (event) => {
   // add home post details
-  // requires server call to add original data to updated data
+  // requires server call to add original house data to updated data
   alert("Details of the house were changed: ");
   event.preventDefault();
 };
@@ -94,6 +94,6 @@ export const submitDonationForm = (event, comp) => {
 
 export const profileChange = (event, comp) => {
   // Server call to send changed profile info into the database.
-  alert("Profile information change");
+  alert("Profile information change for " + comp.state.name);
   event.preventDefault();
 };

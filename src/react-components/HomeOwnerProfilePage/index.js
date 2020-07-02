@@ -5,6 +5,7 @@ import NavBar from "../NavBar";
 
 class HomeOwnerProfilePage extends React.Component {
   state = {
+    // Information about particular user will be obtained from server
     owner: {
       name: "user",
       age: 34,

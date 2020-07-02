@@ -9,6 +9,7 @@ import NavBar from "../NavBar";
 
 class UserTwitterFeed extends React.Component {
   state = {
+    // Messages will be obtained from server
     twitterMsgs: [
       "We had a great time building the front-end of this application. Learnt a lot of new things.",
       "Admin will post message to all the users abbout updates on the platform and new feature these will be reflected here.",

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 class FrontlinerProfilePage extends React.Component {
     state = {
+        // Information about particular user will be obtained from server
         frontlineOwner: {
             fronlinerName: "user2",
             frontlinerAge: 49,

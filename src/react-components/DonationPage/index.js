@@ -15,7 +15,6 @@ class DonationPage extends React.Component {
         donateTo: "General"
     }
 
-
     render() {
         return (
             <div id="donation">

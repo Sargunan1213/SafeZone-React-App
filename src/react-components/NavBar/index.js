@@ -10,7 +10,6 @@ class NavBar extends React.Component {
     state = {
       type: this.props.type
     };
-  
 
    opts = (type) => {
     let nav = {
