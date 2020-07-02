@@ -13,8 +13,7 @@ class HomeOwnerProfilePage extends React.Component {
       tel: "416-432-1431",
       email: "user@user.com",
     },
-    profilepic:
-      "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
+    profilepic: "favicon.ico",
     type: "homeowner",
   };
 
