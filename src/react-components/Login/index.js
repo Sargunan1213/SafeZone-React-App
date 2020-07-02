@@ -3,7 +3,7 @@ import "./index.css";
 
 import { signIn } from "../../actions/action";
 // import { FaUserSecret } from "react-icons/fa";
-import logo from "./safeZoneLogo.png";
+import logo from "./static/safeZoneLogo.png";
 import NavBar from "../NavBar";
 
 class Login extends React.Component {
@@ -30,7 +30,7 @@ class Login extends React.Component {
           <p className="head1"> Welcome BACK! </p>
           <div className="icondiv">
             {/* <FaUserSecret className="icon1" size="90%" color="midnightblue" /> */}
-            <img className="signin-img" src={logo} alt="logo.png" />
+            <img className="signin-img" src={logo} alt="./static/logo.png" />
           </div>
           <div className="details">
             <input
