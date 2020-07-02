@@ -18,7 +18,7 @@ class ContactUs extends React.Component {
             <input type="text" className="contact-form-text" placeholder="Your name"></input>
             <input type="email" className="contact-form-text" placeholder="Your email"></input>
             <input type="text" className="contact-form-text" placeholder="Your phone"></input>
-            <input type="text" className="contact-form-text" placeholder="subject"></input>
+            <input type="text" className="contact-form-text" placeholder="Subject"></input>
             <textarea type="text" className="contact-form-text" placeholder="Your message"></textarea>
             <input type="submit" className="contact-form-btn" value="Send"></input>
           </form>
