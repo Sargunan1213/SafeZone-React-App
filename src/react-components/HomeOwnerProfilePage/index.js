@@ -2,6 +2,7 @@ import React from "react";
 import "./styles.css";
 import { Link } from "react-router-dom";
 import NavBar from "../NavBar";
+import profileImg from './static/favicon.ico'
 
 class HomeOwnerProfilePage extends React.Component {
   state = {
@@ -14,7 +15,7 @@ class HomeOwnerProfilePage extends React.Component {
       tel: "416-432-1431",
       email: "user@user.com",
     },
-    profilepic: "favicon.ico",
+    profilepic: profileImg,
     type: "homeowner",
   };
 
@@ -56,7 +57,7 @@ class HomeOwnerProfilePage extends React.Component {
             <h2>Email: {this.state.owner["email"]}</h2>
           </div>
 
-          <Link to="/Posts">
+          <Link to="/HomeOwnerPosts">
             <button className="homeOwnerViewOwnPost-btn">
               View your own posts
             </button>

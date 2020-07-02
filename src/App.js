@@ -34,7 +34,8 @@ class App extends React.Component {
             <Route exact path="/Donation" render={() => <DonationPage />} />
             <Route exact path="/Posts" render={() => (<Posts />)}/>
             <Route exact path="/AddPost" render={() => <AddPost />} />
-            <Route exact path="/EditPostPage" render={() => <EditPostPage />} />
+            <Route exact path="/EditPostPage0" render={() => <EditPostPage id={0}/>} />
+            <Route exact path="/EditPostPage1" render={() => <EditPostPage id={1}/>} />
             <Route exact path="/Feedback" render={() => <Feedback />} />
             <Route exact path="/AboutUs" render={() => <AboutUs />} />
             <Route exact path="/ContactUs" render={() => <ContactUs />} />

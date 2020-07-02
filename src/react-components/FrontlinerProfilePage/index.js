@@ -23,7 +23,7 @@ class FrontlinerProfilePage extends React.Component {
                 <div>
                     <NavBar type={this.state.type} />
                     <div className="frontlinerBasicInfo">
-                        <img className="frontlinerProfilePicture" src="favicon.ico" alt="frontlinerProfilePicture.jpg" ></img>
+                        <img className="frontlinerProfilePicture" src={require("./static/favicon.ico")} alt="frontlinerProfilePicture.jpg" ></img>
                         <button className="frontlinerProfile-btn">Change profile picture</button>
 
                         <div className="frontline_general_info">

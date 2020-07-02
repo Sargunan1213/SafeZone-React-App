@@ -47,16 +47,10 @@ class NavBar extends React.Component {
         "admin": ""
       }
     }
-    return nav
-  }
 
-  render() {
     let link = "";
     let img = "";
-    let profile = "/";
     
-    const nav = this.opts(this.props.type);
-
     if (!("Sign In" in nav)) {
       link = (
         <Link className="signout" to={'/'}>
@@ -64,11 +58,17 @@ class NavBar extends React.Component {
         </Link>
       );
       img = (
-        <Link to={profile}>
+        <Link to={((this.props.type === "frontliner") ? "frontlinerProfilePage" : "/HomeOwnerProfilePage")}>
           <img className="profile-img" src={profileImg1} alt="profile.png" />
         </Link>
       );
     }
+
+    return [nav, link, img]
+  }
+
+  render() {
+    const [nav, link, img] = this.opts(this.props.type);
 
     return (
       <div id="bar">

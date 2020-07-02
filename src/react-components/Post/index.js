@@ -19,7 +19,7 @@ class Post extends React.Component {
             button=<button className='select' onClick={() => addInterestedHome(comp, home["id"])}>Select</button>;
         }
         else if(type === "homeowner"){
-            button=<Link className='select' to={{pathname: "/EditPostPage"}}>Edit</Link>;
+            button=<Link className='select' to={{pathname: "/EditPostPage" + homes.indexOf(home)}}>Edit</Link>;
         }
 
         return (
