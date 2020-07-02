@@ -55,9 +55,11 @@ class HomeOwnerProfilePage extends React.Component {
             <h2>Email: {this.state.owner["email"]}</h2>
           </div>
 
-          <button className="homeOwnerViewOwnPost-btn">
-            View your own posts
-          </button>
+          <Link to="/Posts">
+            <button className="homeOwnerViewOwnPost-btn">
+              View your own posts
+            </button>
+          </Link>
 
           <button className="homeOwnerViewOwnPost-btn">
             <Link to={feed}>Check Your Twitter Feed</Link>
