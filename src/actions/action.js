@@ -91,3 +91,9 @@ export const submitDonationForm = (event, comp) => {
   alert("Thanks you for your donation of $" + comp.state.donationAmount);
   event.preventDefault();
 };
+
+export const profileChange = (event, comp) => {
+  // Server call to send changed profile info into the database.
+  alert("Profile information change");
+  event.preventDefault();
+};

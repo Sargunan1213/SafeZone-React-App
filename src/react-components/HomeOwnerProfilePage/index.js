@@ -64,6 +64,9 @@ class HomeOwnerProfilePage extends React.Component {
           <button className="homeOwnerViewOwnPost-btn">
             <Link to={feed}>Check Your Twitter Feed</Link>
           </button>
+          <button className="homeOwnerViewOwnPost-btn">
+            <Link to="/EditProfileHomeowner">Edit Profile</Link>
+          </button>
         </div>
       </div>
     );

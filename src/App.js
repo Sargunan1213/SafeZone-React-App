@@ -19,6 +19,7 @@ import FrontlinerProfilePage from "./react-components/FrontlinerProfilePage";
 import DonationPage from "./react-components/DonationPage";
 import EditPostPage from "./react-components/EditPostPage";
 import UserTwitterFeed from "./react-components/userTwitterFeed";
+import EditProfile from "./react-components/EditProfile";
 
 class App extends React.Component {
   render() {
@@ -43,6 +44,8 @@ class App extends React.Component {
             <Route exact path="/FrontlinerProfilePage" render={() => (<FrontlinerProfilePage />)}/>
             <Route exact path="/HomeOwnerPosts" render={() => (<Posts type="homeowner" />)}/>
             <Route exact path="/SelectPosts" render={() => (<Posts type="frontliner" />)}/>
+            <Route exact path="/EditProfileHomeowner" render={() => (<EditProfile type="homeowner"/>)}/>
+            <Route exact path="/EditProfileFrontliner" render={() => (<EditProfile type="frontliner"/>)}/>
           </Switch>
           <Footer />
         </BrowserRouter>

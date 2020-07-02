@@ -6,7 +6,7 @@ import NavBar from "../NavBar";
 
 import { handleInputChange} from "../../actions/action";
 
-class AddPost extends React.Component {
+class EditPostPage extends React.Component {
   state = {
     
         address: "4130 George Street, Peterborough, Ontario K9H 2L1",
@@ -40,4 +40,4 @@ class AddPost extends React.Component {
   }
 }
 
-export default AddPost;
+export default EditPostPage;
