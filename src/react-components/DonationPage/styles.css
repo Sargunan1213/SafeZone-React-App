@@ -2,6 +2,7 @@
     padding-top: 0%;
     padding-bottom: 5%;
     color: rgb(70, 67, 67);
+    word-wrap: break-word;
 }
 #donation h1{
     text-align: center;

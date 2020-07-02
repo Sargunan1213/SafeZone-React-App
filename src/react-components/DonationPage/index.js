@@ -50,7 +50,10 @@ class DonationPage extends React.Component {
                         <select className="drop" name="donateTo" onChange={(e) => handleInputChange(e, this)}>
                             <option value="General">General</option>
                             <option value="user2">user2</option>
+                            <option value="user2">Home 1 - by user</option>
+                            <option value="user2">Home 2 - by user</option>
                         </select>
+                        <p>Donate to a specific user or home posting, or donate to the general fund.</p>
 
                     </div>
                     <div className="payment">
