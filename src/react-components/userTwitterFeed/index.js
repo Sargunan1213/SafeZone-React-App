@@ -19,46 +19,37 @@ class UserTwitterFeed extends React.Component {
     return (
       <div>
         <NavBar type="homeowner" />
-        <div className="timelineHeader">
-          <ul>
-            <li>Tweets</li>
-          </ul>
+        <div className="userTwitterFeed">
+         Tweets
         </div>
         <div id="timeline">
           <div className="tweets">
             <div className="tweet">
-              <div className="tweetIconContainer">
-                <img className="tweetIcon" src={safeZone} alt="logo" />
+              <div className="iconContainer">
+                <img className="icon" src={safeZone} alt="logo" />
               </div>
 
-              <div className="tweetContent">
-                <h3>
-                  <span>SAFEZONE</span>
-                  <span className="grey"> @SF</span>
-                </h3>
-
+              <div className="content">
+                <h3>SAFEZONE @SF</h3>
                 <span>Hope you have great day at SF!</span>
-                <span className="hashtag">#SF #GreatDay</span>
+                <span>#SF #GreatDay</span>
               </div>
             </div>
             {this.state.twitterMsgs.map((msg, i) => (
               <div key={i} className="tweet">
-                <div className="tweetIconContainer">
-                  <img className="tweetIcon" src={safeZone} alt="logo" />
+                <div className="iconContainer">
+                  <img className="icon" src={safeZone} alt="logo" />
                 </div>
 
-                <div className="tweetContent">
-                  <h3>
-                    <span>SAFEZONE</span>
-                    <span className="grey"> @SF</span>
-                  </h3>
+                <div className="content">
+                  <h3>SAFEZONE @SF</h3>
 
                   <Msg key={uid(msg)} msg={msg} />
 
                   <img
-                    className="tweetContentPicture"
+                    className="contentPicture"
                     src={tweet_img}
-                    alt="robarts"
+                    alt="house"
                   />
                 </div>
               </div>
