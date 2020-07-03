@@ -1,12 +1,14 @@
 #timeline {
   border-radius: 10px;
   background-color: white;
-
-  /* Add properties below */
-  margin-top: 20px;
-  margin-left: 390px;
-  width: 600px;
-  border: 2px solid grey;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  height: 90vh;
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 .timelineHeader {
@@ -15,32 +17,53 @@
 
 .timelineHeader ul {
   margin: 0px;
+  text-align: center;
 }
 
 .timelineHeader ul li {
   padding: 10px;
   margin-right: 20px;
-  font-size: 150%;
+  font-size: 250%;
   font-weight: bold;
-
-  /* Add properties below */
   display: inline-block;
+  background: linear-gradient(#4ecdc4, #556270);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   list-style: None;
 }
 
-/*** Tweet styles below ***/
+.tweets {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+}
+
+#timeline::-webkit-scrollbar {
+  width: 1%;
+}
+#timeline::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, transparent, darkcyan);
+  border-radius: 10px;
+  scroll-behavior: auto;
+}
+
+#timeline::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, transparent, mediumslateblue);
+}
 
 .tweet {
   background-color: white;
-
-  /* Add properties below */
-  overflow: auto;
-  min-height: 100px;
+  min-height: 50vh;
+  max-height: 74vh;
+  min-width: 600px;
+  border: 2px solid black;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-left: 20px;
+  border-radius: 20px;
 }
 
-/* For the div that holds the tweet icon */
 .tweetIconContainer {
-  /* Add properties below */
   width: 80px;
   float: left;
 }
@@ -49,7 +72,6 @@
   /* Add properties below */
   width: 60px;
   height: 60px;
-  border-radius: 50%;
   margin-top: 10px;
   margin-left: 10px;
   margin-right: 10px;
@@ -58,18 +80,19 @@
 }
 
 .tweetContent {
-  margin: 0px;
-
+  justify-content: center;
+  align-items: center;
   /* Add properties below */
   padding: 20px;
-  border-bottom: 1px solid grey;
+  /* border-bottom: 1px solid grey; */
 }
 
 /* For pictures inside tweets (like the Robarts pic) */
 .tweetContentPicture {
-  /* Add properties below */
-  max-width: 500px;
-  margin-left: 80px;
+  width: 500px;
+  height: 400px;
+  margin-left: 5%;
+  /* margin-left: 5%;
   margin-top: 10px;
-  margin-right: 80px;
+  margin-right: 5%; */
 }
