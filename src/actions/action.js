@@ -97,3 +97,15 @@ export const profileChange = (event, comp) => {
   alert("Profile information change for " + comp.state.name);
   event.preventDefault();
 };
+
+export const update = (event, comp) => {
+  const read = new FileReader();
+  read.onload = () => {
+    if (read.readyState === 2) {
+      comp.setState({
+        profilepic: read.result,
+      });
+    }
+  };
+  read.readAsDataURL(event.target.files[0]);
+};

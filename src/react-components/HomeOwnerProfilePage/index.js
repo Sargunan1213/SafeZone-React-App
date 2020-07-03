@@ -2,33 +2,22 @@ import React from "react";
 import "./styles.css";
 import { Link } from "react-router-dom";
 import NavBar from "../NavBar";
-import profileImg from './static/favicon.ico'
+import profileImg from "./static/favicon.ico";
+import { update } from "../../actions/action";
 
 class HomeOwnerProfilePage extends React.Component {
   state = {
     // Information about particular user will be obtained from server
-    owner: {
-      name: "user",
-      age: 34,
-      password: "user",
-      postId: [0, 1],
-      tel: "416-432-1431",
-      email: "user@user.com",
-    },
+
+    name: "user",
+    age: 34,
+    password: "user",
+    postId: [0, 1],
+    tel: "416-432-1431",
+    email: "user@user.com",
+
     profilepic: profileImg,
     type: "homeowner",
-  };
-
-  update = (event) => {
-    const read = new FileReader();
-    read.onload = () => {
-      if (read.readyState === 2) {
-        this.setState({
-          profilepic: read.result,
-        });
-      }
-    };
-    read.readAsDataURL(event.target.files[0]);
   };
 
   render() {
@@ -45,16 +34,15 @@ class HomeOwnerProfilePage extends React.Component {
           <input
             type="file"
             className="homeOwnerProfile-btn"
-            onChange={this.update}
+            onChange={(e) => update(e, this)}
             accept="image/*"
           />
-          {/* <button className="homeOwnerProfile-btn">Change profile picture</button> */}
 
           <div className="general_info">
-            <h2>Name: {this.state.owner["name"]}</h2>
-            <h2>Age: {this.state.owner["age"]}</h2>
-            <h2>Contact: {this.state.owner["tel"]}</h2>
-            <h2>Email: {this.state.owner["email"]}</h2>
+            <h2>Name: {this.state.name}</h2>
+            <h2>Age: {this.state.age}</h2>
+            <h2>Contact: {this.state.tel}</h2>
+            <h2>Email: {this.state.email}</h2>
           </div>
 
           <Link to="/HomeOwnerPosts">
@@ -63,12 +51,17 @@ class HomeOwnerProfilePage extends React.Component {
             </button>
           </Link>
 
-          <button className="homeOwnerViewOwnPost-btn">
-            <Link to={feed}>Check Your Twitter Feed</Link>
-          </button>
-          <button className="homeOwnerViewOwnPost-btn">
-            <Link to="/EditProfileHomeowner">Edit Profile</Link>
-          </button>
+          <Link to={feed}>
+            {" "}
+            <button className="homeOwnerViewOwnPost-btn">
+              Check Your twitter Feed
+            </button>
+          </Link>
+
+          <Link to="/EditProfileHomeowner">
+            {" "}
+            <button className="homeOwnerViewOwnPost-btn">Edit Profile</button>
+          </Link>
         </div>
       </div>
     );
