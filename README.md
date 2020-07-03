@@ -11,7 +11,7 @@ Our application can be easily installed by following the succeeding steps.  We h
   #### username: user
   #### Password: user
   
-### Login credentials for regular user 2:
+### Login credentials for front-line worker:
  #### username: user2
   #### Password: user2
   
@@ -21,6 +21,7 @@ Our application can be easily installed by following the succeeding steps.  We h
 
 ## USE:
 Once logged in, the user can add a post for renting out his place by clicking on the Add Post button from the navbar. He can also see his posts by clicking on the My posts button from the navbar. Clicking on the user button will enable him to see his profile info and select a profile photo.
+A front line user will be able to view current postings and update his profile page but will not be able to add posts or delete posts.
 The admin will be provided with an admin panel which provides him the ability to delete posts, users and also a platform to message all users.
 
 
