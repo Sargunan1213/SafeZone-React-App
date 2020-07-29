@@ -24,7 +24,7 @@ app.post('/homeowner', (req, res) => {
 	if (mongoose.connection.readyState != 1) {
 		log('Issue with mongoose connection')
 		res.status(500).send('Internal server error')
-		return;
+		return
 	}  
 
 	const homeowner = new Homeowner({
@@ -33,16 +33,16 @@ app.post('/homeowner', (req, res) => {
         password: req.body.password,
         tel: req.body.tel,
         email: req.body.email,
-        profilePic: ''
+        profilePic: './static/favicon.ico'
 	})
 
 	homeowner.save().then((result) => {
 		res.send(result)
-	}).catch((error) => {
-		if (typeof error === 'object' && error !== null && error.name === "MongoNetworkError") { 
+	}).catch((err) => {
+		if (typeof err === 'object' && err !== null && err.name === "MongoNetworkError") { 
 			res.status(500).send('Internal server error')
 		} else {
-			log(error)
+			log(err)
 			res.status(400).send('Bad Request') 
 		}
 	})
@@ -52,19 +52,19 @@ app.get('/homeowner', (req, res) => {
 	if (mongoose.connection.readyState != 1) {
 		log('Issue with mongoose connection')
 		res.status(500).send('Internal server error')
-		return;
+		return
 	} 
 
 	Homeowner.find().then((homeowners) => {
 		res.send({homeowners})
 	})
-	.catch((error) => {
-		log(error)
+	.catch((err) => {
+		log(err)
 		res.status(500).send("Internal Server Error")
 	})
 })
 
 const port = process.env.PORT || 5000
 app.listen(port, () => {
-	log(`Listening on port ${port}...`)
+	log(`Listening on port ${port}`)
 });
