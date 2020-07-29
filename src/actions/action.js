@@ -1,4 +1,17 @@
 export const signIn = (comp, username, pwd) => {
+  const url = 'http://localhost:5000/homeowner'
+
+  fetch(url).then(res => {
+    if (res.status === 200) {
+      return res.json()
+    } else {
+      alert('Could not get homeowners')
+    }
+  }).then(json => {
+      console.log(json)
+  }).catch((err) => {
+      console.log(err)
+    })
   let currentUser = "";
   let type = comp.state.type;
 

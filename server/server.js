@@ -5,6 +5,8 @@ const path = require('path')
 const express = require('express')
 const app = express()
 
+const cors = require('cors')
+
 const { mongoose } = require('../database/mongoose')
 mongoose.set('bufferCommands', false);
 
@@ -14,6 +16,7 @@ const { ObjectID } = require('mongodb')
 
 const bodyParser = require('body-parser') 
 app.use(bodyParser.json())
+app.use(cors())
 
 app.use("/js", express.static(path.join(__dirname, '/pub/js')))
 
@@ -45,6 +48,21 @@ app.post('/homeowner', (req, res) => {
 	})
 })
 
+app.get('/homeowner', (req, res) => {
+	if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	} 
+
+	Homeowner.find().then((homeowners) => {
+		res.send({homeowners})
+	})
+	.catch((error) => {
+		log(error)
+		res.status(500).send("Internal Server Error")
+	})
+})
 
 const port = process.env.PORT || 5000
 app.listen(port, () => {
