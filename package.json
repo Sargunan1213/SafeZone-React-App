@@ -14,7 +14,11 @@
     "react-icons": "^3.10.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "react-uid": "^2.3.0"
+    "react-uid": "^2.3.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.9",
+    "mongoose": "^5.9.25"
   },
   "scripts": {
     "start": "react-scripts start",
