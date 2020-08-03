@@ -122,11 +122,6 @@ export const submitDonationForm = (event, comp) => {
         return res.json();
       }
     })
-    // .then((json) => {
-    //   if (json.currentUser !== undefined) {
-    //     // app.setState({ currentUser: json.currentUser });
-    //   }
-    // })
     .catch((error) => {
       console.log(error);
     });
@@ -136,6 +131,25 @@ export const profileChange = (event, comp) => {
   // Server call to send changed profile info into the database.
   alert("Profile information change for " + comp.state.name);
   event.preventDefault();
+  const request = new Request("/changeprofilepic", {
+    method: "post",
+    body: JSON.stringify(comp.state),
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+    },
+  });
+
+  // Send the request with fetch()
+  fetch(request)
+    .then((res) => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 export const update = (event, comp) => {

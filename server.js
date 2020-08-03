@@ -7,11 +7,11 @@ const app = express();
 
 const cors = require("cors");
 
-const { mongoose } = require("../database/mongoose");
+const { mongoose } = require("./database/mongoose");
 mongoose.set("bufferCommands", false);
 
-const { Homeowner } = require("../database/models/safezone");
-const { Donation } = require("../database/models/donation");
+const { Homeowner } = require("./database/models/safezone");
+const { Donation } = require("./database/models/donation");
 
 const { ObjectID } = require("mongodb");
 
@@ -20,6 +20,34 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use("/js", express.static(path.join(__dirname, "/pub/js")));
+app.use(express.static(__dirname + "/build"));
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/build/index.html");
+});
+
+app.patch("/changeprofilepic", (req, res) => {
+  if (mongoose.connection.readyState != 1) {
+    log("Issue with mongoose connection");
+    res.status(500).send("Internal server error");
+    return;
+  }
+
+  Homeowner.findOneAndUpdate(
+    { name: req.body.name },
+    { $set: req.body },
+    { new: false }
+  )
+    .then((student) => {
+      if (!student) {
+        res.status(404).send();
+      } else {
+        res.send(student);
+      }
+    })
+    .catch((error) => {
+      res.status(400).send(); // bad request for changing the student.
+    });
+});
 
 app.post("/donation", (req, res) => {
   if (mongoose.connection.readyState != 1) {
