@@ -1,17 +1,20 @@
 export const signIn = (comp, username, pwd) => {
-  const url = 'http://localhost:5000/homeowner'
+  const url = "http://localhost:5000/homeowner";
 
-  fetch(url).then(res => {
-    if (res.status === 200) {
-      return res.json()
-    } else {
-      alert('Could not get homeowners')
-    }
-  }).then(json => {
-      console.log(json)
-  }).catch((err) => {
-      console.log(err)
+  fetch(url)
+    .then((res) => {
+      if (res.status === 200) {
+        return res.json();
+      } else {
+        alert("Could not get homeowners");
+      }
     })
+    .then((json) => {
+      console.log(json);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   let currentUser = "";
   let type = comp.state.type;
 
@@ -103,6 +106,30 @@ export const submitDonationForm = (event, comp) => {
   // Server call to send this donation data from form into the database.
   alert("Thanks you for your donation of $" + comp.state.donationAmount);
   event.preventDefault();
+  const request = new Request("/donation", {
+    method: "post",
+    body: JSON.stringify(comp.state),
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+    },
+  });
+
+  // Send the request with fetch()
+  fetch(request)
+    .then((res) => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    // .then((json) => {
+    //   if (json.currentUser !== undefined) {
+    //     // app.setState({ currentUser: json.currentUser });
+    //   }
+    // })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 export const profileChange = (event, comp) => {
