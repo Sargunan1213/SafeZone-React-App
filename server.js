@@ -10,8 +10,8 @@ const cors = require("cors");
 const { mongoose } = require("./database/mongoose");
 mongoose.set("bufferCommands", false);
 
-const { Homeowner } = require("./database/models/safezone");
-const { Donation } = require("./database/models/donation");
+const { User } = require("./models/safezone");
+const { Donation } = require("./models/donation");
 
 const { ObjectID } = require("mongodb");
 
@@ -25,6 +25,19 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/build/index.html");
 });
 
+function isError(err, res) {
+  if (
+    typeof err === "object" &&
+    err !== null &&
+    err.name === "MongoNetworkError"
+  ) {
+    res.status(500).send("Internal server error");
+  } else {
+    log(err);
+    res.status(400).send("Bad Request");
+  }
+}
+
 app.patch("/changeprofilepic", (req, res) => {
   if (mongoose.connection.readyState != 1) {
     log("Issue with mongoose connection");
@@ -32,7 +45,7 @@ app.patch("/changeprofilepic", (req, res) => {
     return;
   }
 
-  Homeowner.findOneAndUpdate(
+  User.findOneAndUpdate(
     { name: req.body.name },
     { $set: req.body },
     { new: false }
@@ -83,14 +96,14 @@ app.post("/donation", (req, res) => {
     });
 });
 
-app.post("/homeowner", (req, res) => {
+app.post("/users", (req, res) => {
   if (mongoose.connection.readyState != 1) {
     log("Issue with mongoose connection");
     res.status(500).send("Internal server error");
     return;
   }
 
-  const homeowner = new Homeowner({
+  const user = new User({
     name: req.body.name,
     age: req.body.age,
     password: req.body.password,
@@ -99,7 +112,7 @@ app.post("/homeowner", (req, res) => {
     profilePic: "./static/favicon.ico",
   });
 
-  homeowner
+  user
     .save()
     .then((result) => {
       res.send(result);
@@ -118,22 +131,102 @@ app.post("/homeowner", (req, res) => {
     });
 });
 
-app.get("/homeowner", (req, res) => {
+app.get("/users", (req, res) => {
   if (mongoose.connection.readyState != 1) {
     log("Issue with mongoose connection");
     res.status(500).send("Internal server error");
     return;
   }
 
-  Homeowner.find()
-    .then((homeowners) => {
-      res.send({ homeowners });
+  User.find()
+    .then((user) => {
+      res.send(user);
     })
     .catch((err) => {
       log(err);
       res.status(500).send("Internal Server Error");
     });
 });
+
+// Add home to user
+app.post("/users/:id", (req, res) => {
+  const id = req.params.id
+
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send()
+    return
+  }
+
+  if (mongoose.connection.readyState != 1) {
+    log("Issue with mongoose connection");
+    res.status(500).send("Internal server error");
+    return;
+  }
+
+  const home = {
+    "homes": {
+      address: req.body.address,
+      city: req.body.city,
+      province: req.body.province,
+      country: req.body.country,
+      zip: req.body.zip,
+      pic: req.body.pic,
+      description: req.body.description,
+      price: req.body.price
+    }
+  }
+
+  User.findByIdAndUpdate(id, { $push: home }, { new: true, useFindAndModify: false }).then((user) => {
+    if (!user) {
+      res.status(404).send("Resource not found")
+    }
+    else {
+      res.send(user)
+    }
+  }).catch((err) => {
+    isError(err, res)
+  });
+});
+
+app.delete("/users/:id/:homeid", (req, res) => {
+  const id = req.params.id
+  const homeid = req.params.homeid
+
+  if (!ObjectID.isValid(id) || !ObjectID.isValid(homeid)) {
+    res.status(404).send()
+    return
+  }
+
+  if (mongoose.connection.readyState != 1) {
+    log("Issue with mongoose connection");
+    res.status(500).send("Internal server error");
+    return;
+  }
+
+  User.findById(id).then(user => {
+    if (!user) {
+      res.status(404).send("Resource not found")
+    }
+    else {
+      const home = user.homes.id(homeid)
+      if (!home) {
+        res.status(404).send("Resource not found")
+      }
+      else {
+        user.homes.pull(homeid)
+        user.save().then(user => {
+          res.send(user)
+        }).catch((err) => {
+          isError(err, res)
+        })
+      }
+    }
+  }).catch((err) => {
+    isError(err, res)
+  });
+
+});
+
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {

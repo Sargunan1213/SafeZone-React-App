@@ -1,0 +1,32 @@
+.AboutUsBody {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: top;
+  background-image: url("./static/photo-1477346611705-65d1883cee1e.jpg");
+  height: 90vh;
+  padding: 100px;
+  margin: 0px auto;
+}
+
+
+.container {
+  margin-bottom: 20px;
+  font-family: sans-serif;
+}
+
+.container-h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+}
+
+.aboutUs-para {
+  border-left: 5px solid #bdc3c7;
+  padding-left: 5px;
+  font-family: sans-serif;
+  color: white;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  line-height: 23px;
+}
