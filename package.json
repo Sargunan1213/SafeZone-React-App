@@ -11,10 +11,7 @@
     "mongoose": "^5.9.25",
     "body-parser": "^1.19.0",
     "validator": "^13.1.1",
-    "bcryptjs": "^2.4.3",
-    "react-icons": "^3.10.0",
-    "react-router-dom": "^5.2.0",
-    "react-uid": "^2.3.0"
+    "bcryptjs": "^2.4.3"
   },
   "devDependencies": {},
   "scripts": {
