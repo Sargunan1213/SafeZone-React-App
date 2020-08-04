@@ -19,6 +19,9 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(cors());
 
+const session = require("express-session");
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use("/js", express.static(path.join(__dirname, "/pub/js")));
 app.use(express.static(__dirname + "/build"));
 app.get("/", (req, res) => {
@@ -74,7 +77,7 @@ app.post("/donation", (req, res) => {
     cardExpiry: req.body.cardExpiry,
     cvc: req.body.cvc,
     donationType: req.body.cardNumber,
-    donateTo,
+    donateTo: req.body.donateTo,
   });
 
   donation
@@ -150,11 +153,11 @@ app.get("/users", (req, res) => {
 
 // Add home to user
 app.post("/users/:id", (req, res) => {
-  const id = req.params.id
+  const id = req.params.id;
 
   if (!ObjectID.isValid(id)) {
-    res.status(404).send()
-    return
+    res.status(404).send();
+    return;
   }
 
   if (mongoose.connection.readyState != 1) {
@@ -164,7 +167,7 @@ app.post("/users/:id", (req, res) => {
   }
 
   const home = {
-    "homes": {
+    homes: {
       address: req.body.address,
       city: req.body.city,
       province: req.body.province,
@@ -172,29 +175,34 @@ app.post("/users/:id", (req, res) => {
       zip: req.body.zip,
       pic: req.body.pic,
       description: req.body.description,
-      price: req.body.price
-    }
-  }
+      price: req.body.price,
+    },
+  };
 
-  User.findByIdAndUpdate(id, { $push: home }, { new: true, useFindAndModify: false }).then((user) => {
-    if (!user) {
-      res.status(404).send("Resource not found")
-    }
-    else {
-      res.send(user)
-    }
-  }).catch((err) => {
-    isError(err, res)
-  });
+  User.findByIdAndUpdate(
+    id,
+    { $push: home },
+    { new: true, useFindAndModify: false }
+  )
+    .then((user) => {
+      if (!user) {
+        res.status(404).send("Resource not found");
+      } else {
+        res.send(user);
+      }
+    })
+    .catch((err) => {
+      isError(err, res);
+    });
 });
 
 app.delete("/users/:id/:homeid", (req, res) => {
-  const id = req.params.id
-  const homeid = req.params.homeid
+  const id = req.params.id;
+  const homeid = req.params.homeid;
 
   if (!ObjectID.isValid(id) || !ObjectID.isValid(homeid)) {
-    res.status(404).send()
-    return
+    res.status(404).send();
+    return;
   }
 
   if (mongoose.connection.readyState != 1) {
@@ -203,30 +211,31 @@ app.delete("/users/:id/:homeid", (req, res) => {
     return;
   }
 
-  User.findById(id).then(user => {
-    if (!user) {
-      res.status(404).send("Resource not found")
-    }
-    else {
-      const home = user.homes.id(homeid)
-      if (!home) {
-        res.status(404).send("Resource not found")
+  User.findById(id)
+    .then((user) => {
+      if (!user) {
+        res.status(404).send("Resource not found");
+      } else {
+        const home = user.homes.id(homeid);
+        if (!home) {
+          res.status(404).send("Resource not found");
+        } else {
+          user.homes.pull(homeid);
+          user
+            .save()
+            .then((user) => {
+              res.send(user);
+            })
+            .catch((err) => {
+              isError(err, res);
+            });
+        }
       }
-      else {
-        user.homes.pull(homeid)
-        user.save().then(user => {
-          res.send(user)
-        }).catch((err) => {
-          isError(err, res)
-        })
-      }
-    }
-  }).catch((err) => {
-    isError(err, res)
-  });
-
+    })
+    .catch((err) => {
+      isError(err, res);
+    });
 });
-
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
