@@ -78,21 +78,17 @@ app.post("/users", (req, res) => {
 /** User routes below **/
 // Set up a POST route to *create* a user of your web app (*not* a student).
 
-app.get("/Signup", (req, res) => {
-  res.send();
-});
-
 app.post("/signUpUser", (req, res) => {
-  log(req.body);
-
   // Create a new user
+  console.log("request in sign up", req.body);
   const user = new User({
     name: req.body.name,
     age: req.body.age,
-    tel: req.body.tel,
+    tel: req.body.contactNumber,
     homes: [],
     email: req.body.email,
     password: req.body.password,
+    type: req.body.usertype,
   });
 
   // Save the user
@@ -101,6 +97,7 @@ app.post("/signUpUser", (req, res) => {
       res.send(user);
     },
     (error) => {
+      log(error);
       res.status(400).send(error); // 400 for bad request
     }
   );
@@ -108,33 +105,43 @@ app.post("/signUpUser", (req, res) => {
 
 // A route to login and create a session
 app.post("/login", (req, res) => {
-  const email = req.body.email;
+  const email = req.body.username;
   const password = req.body.password;
 
   log(email, password);
   // Use the static method on the User model to find a user
   // by their email and password
-  // User.findByEmailPassword(email, password)
-  //   .then((user) => {
-  //     // Add the user's id to the session cookie.
-  //     // We can check later if this exists to ensure we are logged in.
-  //     req.session.user = user._id;
-  //     req.session.email = user.email;
-  //     res.send({ currentUser: user.email });
-  //   })
-  //   .catch((error) => {
-  //     res.status(400).send();
-  //   });
-
-  User.findOne({ email: email }, (err, user) => {
-    if (err) {
-      return;
-    }
-    // test a matching password
-    user.comparePassword({ password: password }, (err, isMatch) => {
-      if (err) throw err;
-      console.log("Password123:", isMatch); // -> Password123: true
+  User.findByEmailPassword(email, password)
+    .then((user) => {
+      // Add the user's id to the session cookie.
+      // We can check later if this exists to ensure we are logged in.
+      req.session.user = user._id;
+      req.session.email = user.email;
+      console.log(user);
+      res.send({ currentUser: user });
+    })
+    .catch((error) => {
+      res.status(400).send(error);
     });
+});
+
+app.get("/users/check-session", (req, res) => {
+  if (req.session.user) {
+    res.send({ currentUser: req.session.user });
+  } else {
+    res.status(401).send();
+  }
+});
+
+// A route to logout a user
+app.get("/users/logout", (req, res) => {
+  // Remove the session
+  req.session.destroy((error) => {
+    if (error) {
+      res.status(500).send(error);
+    } else {
+      res.send();
+    }
   });
 });
 

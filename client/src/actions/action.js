@@ -31,8 +31,7 @@ export const updateLoginForm = (loginComp, field) => {
 // Sign up a user
 
 export const signUpUser = (comp) => {
-  console.log("hererre");
-  const request = new Request("/signUpUser", {
+  const request = new Request("http://localhost:5000/signUpUser", {
     method: "post",
     body: JSON.stringify(comp.state),
     headers: {
@@ -41,14 +40,10 @@ export const signUpUser = (comp) => {
     },
   });
 
-  console.log("REQUEST HERERRERERE", request);
-
   fetch(request)
     .then((res) => {
       if (res.status === 200) {
         return res.json();
-      } else {
-        return res.send("Internal server error.");
       }
     })
     .catch((error) => {
@@ -59,7 +54,7 @@ export const signUpUser = (comp) => {
 // A function to send a POST request with the user to be logged in
 export const signIn = (comp, app) => {
   // Create our request constructor with all the parameters we need
-  const request = new Request("/login", {
+  const request = new Request("http://localhost:5000/login", {
     method: "post",
     body: JSON.stringify(comp.state),
     headers: {
@@ -67,6 +62,8 @@ export const signIn = (comp, app) => {
       "Content-Type": "application/json",
     },
   });
+
+  console.log(request);
 
   // Send the request with fetch()
   fetch(request)
@@ -77,6 +74,7 @@ export const signIn = (comp, app) => {
     })
     .then((json) => {
       if (json.currentUser !== undefined) {
+        console.log(json.currentUser);
         app.setState({ currentUser: json.currentUser });
       }
     })

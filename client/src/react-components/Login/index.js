@@ -5,7 +5,7 @@ import { signIn } from "../../actions/action";
 // import { FaUserSecret } from "react-icons/fa";
 import logo from "./static/safeZoneLogo.png";
 import NavBar from "../NavBar";
-import { withRouter } from 'react-router';
+import { withRouter } from "react-router";
 
 class Login extends React.Component {
   constructor(props) {
@@ -28,7 +28,8 @@ class Login extends React.Component {
   };
 
   render() {
-    const { app } = this.props.main;
+    const { app } = this.props.app;
+
     return (
       <div className="back1">
         <NavBar type={this.state.type} />

@@ -20,8 +20,16 @@ import DonationPage from "./react-components/DonationPage";
 import EditPostPage from "./react-components/EditPostPage";
 import UserTwitterFeed from "./react-components/userTwitterFeed";
 import EditProfile from "./react-components/EditProfile";
+import { readCookie } from "../src/actions/action.js";
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    readCookie(this); // sees if a user is logged in.
+  }
+  state = {
+    currentUser: null,
+  };
   render() {
     return (
       <div>
@@ -29,7 +37,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" render={() => <Home />} />
             <Route exact path="/Signup" render={() => <Signup />} />
-            <Route exact path="/Login" render={() => <Login main={this} />} />
+            <Route exact path="/Login" render={() => <Login app={this} />} />
             <Route exact path="/Live" render={() => <Live />} />
             <Route exact path="/Donation" render={() => <DonationPage />} />
             <Route exact path="/Posts" render={() => <Posts />} />

@@ -21,7 +21,6 @@ class Signup extends React.Component {
     this.setState({
       [name]: value,
     });
-    console.log(this.username);
   };
 
   render() {
@@ -47,10 +46,15 @@ class Signup extends React.Component {
                   name="password"
                   onChange={this.handleInputchange}
                 ></input>
-                <select name="usertype" className="input">
+                <select
+                  name="usertype"
+                  className="input"
+                  onChange={this.handleInputchange}
+                >
+                  <option value=""></option>
                   <option value="Homeowner">Homeowner</option>
                   <option value="Admin">Admin</option>
-                  <option defaultValue="Customer">Customer</option>
+                  <option value="Customer">Customer</option>
                 </select>
                 <input
                   type="tel"
