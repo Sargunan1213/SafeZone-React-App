@@ -5,6 +5,7 @@ import { signIn } from "../../actions/action";
 // import { FaUserSecret } from "react-icons/fa";
 import logo from "./static/safeZoneLogo.png";
 import NavBar from "../NavBar";
+import { withRouter } from 'react-router';
 
 class Login extends React.Component {
   constructor(props) {
@@ -67,4 +68,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);

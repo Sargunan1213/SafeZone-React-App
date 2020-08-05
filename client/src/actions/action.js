@@ -90,47 +90,47 @@ export const signIn = (comp, app) => {
   });
 };
 
-export const signIn = (comp, username, pwd) => {
-  const url = "http://localhost:5000/homeowner";
+// export const signIn = (comp, username, pwd) => {
+//   const url = "http://localhost:5000/homeowner";
 
-  fetch(url)
-    .then((res) => {
-      if (res.status === 200) {
-        return res.json();
-      } else {
-        alert("Could not get homeowners");
-      }
-    })
-    .then((json) => {
-      console.log(json);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  let currentUser = "";
-  let type = comp.state.type;
+//   fetch(url)
+//     .then((res) => {
+//       if (res.status === 200) {
+//         return res.json();
+//       } else {
+//         alert("Could not get homeowners");
+//       }
+//     })
+//     .then((json) => {
+//       console.log(json);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+//   let currentUser = "";
+//   let type = comp.state.type;
 
-  // Get names and password from server
-  // Requires server call
-  if (username === "user" && pwd === "user") {
-    currentUser = username;
-    type = "homeowner";
-  } else if (username === "user2" && pwd === "user2") {
-    currentUser = username;
-    type = "frontliner";
-  } else if (username === "admin" && pwd === "admin") {
-    currentUser = username;
-    type = "admin";
-  }
+//   // Get names and password from server
+//   // Requires server call
+//   if (username === "user" && pwd === "user") {
+//     currentUser = username;
+//     type = "homeowner";
+//   } else if (username === "user2" && pwd === "user2") {
+//     currentUser = username;
+//     type = "frontliner";
+//   } else if (username === "admin" && pwd === "admin") {
+//     currentUser = username;
+//     type = "admin";
+//   }
 
-  if (!currentUser) {
-    return;
-  }
+//   if (!currentUser) {
+//     return;
+//   }
 
-  comp.setState({
-    type: type,
-  });
-};
+//   comp.setState({
+//     type: type,
+//   });
+// };
 
 // A function to send a GET request to logout the current user
 export const logout = (app) => {
