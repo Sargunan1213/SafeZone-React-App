@@ -1,6 +1,7 @@
 import React from "react";
 import "./index.css";
 import NavBar from "../NavBar";
+import { signUpUser } from "../../actions/action";
 
 class Signup extends React.Component {
   state = {
@@ -84,8 +85,13 @@ class Signup extends React.Component {
               </div>
             </div>
             {/* Send new user data to server. */}
-            <button className="submit">
-              <p className="word">SIGN UP</p>
+            <button
+              type="button"
+              className="submit1"
+              onClick={() => signUpUser(this)}
+            >
+              {" "}
+              Sign Up{" "}
             </button>
           </form>
         </div>

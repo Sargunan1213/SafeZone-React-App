@@ -1,3 +1,95 @@
+// A function to check if a user is logged in on the session cookie
+export const readCookie = (app) => {
+  const url = "/users/check-session";
+
+  fetch(url)
+    .then((res) => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .then((json) => {
+      if (json && json.currentUser) {
+        app.setState({ currentUser: json.currentUser });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+// A functon to update the login form state
+export const updateLoginForm = (loginComp, field) => {
+  const value = field.value;
+  const name = field.name;
+
+  loginComp.setState({
+    [name]: value,
+  });
+};
+
+// Sign up a user
+
+export const signUpUser = (comp) => {
+  console.log("hererre");
+  const request = new Request("/signUpUser", {
+    method: "post",
+    body: JSON.stringify(comp.state),
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+    },
+  });
+
+  console.log("REQUEST HERERRERERE", request);
+
+  fetch(request)
+    .then((res) => {
+      if (res.status === 200) {
+        return res.json();
+      } else {
+        return res.send("Internal server error.");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+// A function to send a POST request with the user to be logged in
+export const signIn = (comp, app) => {
+  // Create our request constructor with all the parameters we need
+  const request = new Request("/login", {
+    method: "post",
+    body: JSON.stringify(comp.state),
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+    },
+  });
+
+  // Send the request with fetch()
+  fetch(request)
+    .then((res) => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .then((json) => {
+      if (json.currentUser !== undefined) {
+        app.setState({ currentUser: json.currentUser });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  let type = comp.state.type;
+  comp.setState({
+    type: type,
+  });
+};
+
 export const signIn = (comp, username, pwd) => {
   const url = "http://localhost:5000/homeowner";
 
@@ -38,6 +130,22 @@ export const signIn = (comp, username, pwd) => {
   comp.setState({
     type: type,
   });
+};
+
+// A function to send a GET request to logout the current user
+export const logout = (app) => {
+  const url = "/users/logout";
+
+  fetch(url)
+    .then((res) => {
+      app.setState({
+        currentUser: null,
+        message: { type: "", body: "" },
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 export const removeHome = (comp, homes, home) => {

@@ -7,6 +7,10 @@ import logo from "./static/safeZoneLogo.png";
 import NavBar from "../NavBar";
 
 class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props.history.push("/login");
+  }
   state = {
     type: "",
     username: "",
@@ -23,9 +27,10 @@ class Login extends React.Component {
   };
 
   render() {
+    const { app } = this.props.main;
     return (
       <div className="back1">
-        <NavBar type={this.state.type}/>
+        <NavBar type={this.state.type} />
         <form className="box1">
           <p className="head1"> Welcome BACK! </p>
           <div className="icondiv">
@@ -50,11 +55,7 @@ class Login extends React.Component {
             <button
               type="button"
               className="submit1"
-              onClick={() => signIn(
-                this,
-                this.state.username,
-                this.state.password
-              )}
+              onClick={() => signIn(this, app)}
             >
               {" "}
               Login{" "}

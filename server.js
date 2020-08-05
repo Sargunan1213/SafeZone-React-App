@@ -23,9 +23,9 @@ const session = require("express-session");
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/js", express.static(path.join(__dirname, "/pub/js")));
-app.use(express.static(__dirname + "/build"));
+app.use(express.static(__dirname + "/client/build"));
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/build/index.html");
+  res.sendFile(__dirname + "/client/build/index.html");
 });
 
 function isError(err, res) {
@@ -40,6 +40,105 @@ function isError(err, res) {
     res.status(400).send("Bad Request");
   }
 }
+
+// Create a session cookie
+app.use(
+  session({
+    secret: "oursecret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 60000,
+      httpOnly: true,
+    },
+  })
+);
+
+/** User routes below **/
+// Set up a POST route to *create* a user of your web app (*not* a student).
+app.post("/users", (req, res) => {
+  log(req.body);
+
+  // Create a new user
+  const user = new User({
+    email: req.body.email,
+    password: req.body.password,
+  });
+
+  // Save the user
+  user.save().then(
+    (user) => {
+      res.send(user);
+    },
+    (error) => {
+      res.status(400).send(error); // 400 for bad request
+    }
+  );
+});
+/** User routes below **/
+// Set up a POST route to *create* a user of your web app (*not* a student).
+
+app.get("/Signup", (req, res) => {
+  res.send();
+});
+
+app.post("/signUpUser", (req, res) => {
+  log(req.body);
+
+  // Create a new user
+  const user = new User({
+    name: req.body.name,
+    age: req.body.age,
+    tel: req.body.tel,
+    homes: [],
+    email: req.body.email,
+    password: req.body.password,
+  });
+
+  // Save the user
+  user.save().then(
+    (user) => {
+      res.send(user);
+    },
+    (error) => {
+      res.status(400).send(error); // 400 for bad request
+    }
+  );
+});
+
+// A route to login and create a session
+app.post("/login", (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  log(email, password);
+  // Use the static method on the User model to find a user
+  // by their email and password
+  // User.findByEmailPassword(email, password)
+  //   .then((user) => {
+  //     // Add the user's id to the session cookie.
+  //     // We can check later if this exists to ensure we are logged in.
+  //     req.session.user = user._id;
+  //     req.session.email = user.email;
+  //     res.send({ currentUser: user.email });
+  //   })
+  //   .catch((error) => {
+  //     res.status(400).send();
+  //   });
+
+  User.findOne({ email: email }, (err, user) => {
+    if (err) {
+      return;
+    }
+    // test a matching password
+    user.comparePassword({ password: password }, (err, isMatch) => {
+      if (err) throw err;
+      console.log("Password123:", isMatch); // -> Password123: true
+    });
+  });
+});
+
+/*** API Routes below ************************************/
 
 app.patch("/changeprofilepic", (req, res) => {
   if (mongoose.connection.readyState != 1) {

@@ -32,21 +32,57 @@ class App extends React.Component {
             <Route exact path="/Login" render={() => <Login main={this} />} />
             <Route exact path="/Live" render={() => <Live />} />
             <Route exact path="/Donation" render={() => <DonationPage />} />
-            <Route exact path="/Posts" render={() => (<Posts />)}/>
+            <Route exact path="/Posts" render={() => <Posts />} />
             <Route exact path="/AddPost" render={() => <AddPost />} />
-            <Route exact path="/EditPostPage0" render={() => <EditPostPage id={0}/>} />
-            <Route exact path="/EditPostPage1" render={() => <EditPostPage id={1}/>} />
+            <Route
+              exact
+              path="/EditPostPage0"
+              render={() => <EditPostPage id={0} />}
+            />
+            <Route
+              exact
+              path="/EditPostPage1"
+              render={() => <EditPostPage id={1} />}
+            />
             <Route exact path="/Feedback" render={() => <Feedback />} />
             <Route exact path="/AboutUs" render={() => <AboutUs />} />
             <Route exact path="/ContactUs" render={() => <ContactUs />} />
-            <Route exact path="/userTwitterFeed" render={() => <UserTwitterFeed />}/>
-            <Route exact path="/AdminPanel" render={() => (  <AdminPanel /> )}  />
-            <Route exact path="/HomeOwnerProfilePage" render={() => (<HomeOwnerProfilePage />)} />
-            <Route exact path="/FrontlinerProfilePage" render={() => (<FrontlinerProfilePage />)}/>
-            <Route exact path="/HomeOwnerPosts" render={() => (<Posts type="homeowner" />)}/>
-            <Route exact path="/SelectPosts" render={() => (<Posts type="frontliner" />)}/>
-            <Route exact path="/EditProfileHomeowner" render={() => (<EditProfile type="homeowner"/>)}/>
-            <Route exact path="/EditProfileFrontliner" render={() => (<EditProfile type="frontliner"/>)}/>
+            <Route
+              exact
+              path="/userTwitterFeed"
+              render={() => <UserTwitterFeed />}
+            />
+            <Route exact path="/AdminPanel" render={() => <AdminPanel />} />
+            <Route
+              exact
+              path="/HomeOwnerProfilePage"
+              render={() => <HomeOwnerProfilePage />}
+            />
+            <Route
+              exact
+              path="/FrontlinerProfilePage"
+              render={() => <FrontlinerProfilePage />}
+            />
+            <Route
+              exact
+              path="/HomeOwnerPosts"
+              render={() => <Posts type="homeowner" />}
+            />
+            <Route
+              exact
+              path="/SelectPosts"
+              render={() => <Posts type="frontliner" />}
+            />
+            <Route
+              exact
+              path="/EditProfileHomeowner"
+              render={() => <EditProfile type="homeowner" />}
+            />
+            <Route
+              exact
+              path="/EditProfileFrontliner"
+              render={() => <EditProfile type="frontliner" />}
+            />
           </Switch>
           <Footer />
         </BrowserRouter>
