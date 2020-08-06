@@ -3,12 +3,10 @@ import "./styles.css";
 import { Link } from "react-router-dom";
 import NavBar from "../NavBar";
 import profileImg from "./static/favicon.ico";
-import { update } from "../../actions/action";
+import { profileChange } from "../../actions/action";
 
 class HomeOwnerProfilePage extends React.Component {
   state = {
-    // Information about particular user will be obtained from server
-
     name: "user",
     age: 34,
     password: "user",
@@ -34,7 +32,7 @@ class HomeOwnerProfilePage extends React.Component {
           <input
             type="file"
             className="homeOwnerProfile-btn"
-            onChange={(e) => update(e, this)}
+            onChange={(e) => profileChange(e, this)}
             accept="image/*"
           />
 

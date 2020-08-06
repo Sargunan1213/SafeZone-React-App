@@ -237,11 +237,24 @@ export const submitDonationForm = (event, comp) => {
 
 export const profileChange = (event, comp) => {
   // Server call to send changed profile info into the database.
+  const read = new FileReader();
+  read.onload = () => {
+    if (read.readyState === 2) {
+      comp.setState({
+        profilepic: read.result,
+      });
+    }
+  };
+  read.readAsDataURL(event.target.files[0]);
+  const pic = {
+    name = comp.state.name,
+    profilePic = event.target.files[0]
+  }
   alert("Profile information change for " + comp.state.name);
   event.preventDefault();
   const request = new Request("/changeprofilepic", {
     method: "post",
-    body: JSON.stringify(comp.state),
+    body: JSON.stringify(pic),
     headers: {
       Accept: "application/json, text/plain, */*",
       "Content-Type": "application/json",
@@ -260,14 +273,14 @@ export const profileChange = (event, comp) => {
     });
 };
 
-export const update = (event, comp) => {
-  const read = new FileReader();
-  read.onload = () => {
-    if (read.readyState === 2) {
-      comp.setState({
-        profilepic: read.result,
-      });
-    }
-  };
-  read.readAsDataURL(event.target.files[0]);
-};
+// export const update = (event, comp) => {
+//   const read = new FileReader();
+//   read.onload = () => {
+//     if (read.readyState === 2) {
+//       comp.setState({
+//         profilepic: read.result,
+//       });
+//     }
+//   };
+//   read.readAsDataURL(event.target.files[0]);
+// };

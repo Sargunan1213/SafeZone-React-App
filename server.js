@@ -160,7 +160,7 @@ app.patch("/changeprofilepic", (req, res) => {
 
   User.findOneAndUpdate(
     { name: req.body.name },
-    { $set: { "$.profile_pic": req.profile_pic } },
+    { $set: { "$.profilePic": req.profilePic } },
     { new: false }
   )
     .then((student) => {
