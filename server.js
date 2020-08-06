@@ -147,6 +147,8 @@ app.get("/users/logout", (req, res) => {
 
 /*** API Routes below ************************************/
 
+
+// What is student doing here?!
 app.patch("/changeprofilepic", (req, res) => {
   if (mongoose.connection.readyState != 1) {
     log("Issue with mongoose connection");
@@ -170,6 +172,7 @@ app.patch("/changeprofilepic", (req, res) => {
       res.status(400).send(); // bad request for changing the student.
     });
 });
+
 
 app.post("/donation", (req, res) => {
   if (mongoose.connection.readyState != 1) {
@@ -301,6 +304,57 @@ app.post("/users/:id", (req, res) => {
       isError(err, res);
     });
 });
+
+
+//Edit home to user
+app.put("/users/:id/:homeid", (req, res) => {
+  const id = req.params.id;
+  const homeid = req.params.homeid;
+
+  if (!ObjectID.isValid(id) || !ObjectID.isValid(homeid)) {
+    res.status(404).send();
+    return;
+  }
+
+  if (mongoose.connection.readyState != 1) {
+    log("Issue with mongoose connection");
+    res.status(500).send("Internal server error");
+    return;
+  }
+
+  User.findOneAndReplace(id, req.body, {new: true, useFindAndModify: false})
+    .then((user) => {
+      if (!user) {
+        res.status(404).send("Resource not found");
+      } else {
+        const home = user.homes.id(homeid);
+        if (!home) {
+          res.status(404).send("Resource not found");
+        } else {
+          user.homes.pull(homeid);
+          user
+            .save()
+            .then((user) => {
+              res.send(user);
+            })
+            .catch((err) => {
+              isError(err, res);
+            });
+        }
+      }
+    })
+
+    .catch((err) => {
+      isError(err, res);
+    });
+});
+
+
+
+
+
+
+//Delete Route
 
 app.delete("/users/:id/:homeid", (req, res) => {
   const id = req.params.id;
