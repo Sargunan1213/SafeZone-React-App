@@ -195,16 +195,18 @@ app.post("/donation", (req, res) => {
       res.send(result);
     })
     .catch((err) => {
-      if (
-        typeof err === "object" &&
-        err !== null &&
-        err.name === "MongoNetworkError"
-      ) {
-        res.status(500).send("Internal server error");
-      } else {
-        log(err);
-        res.status(400).send("Bad Request");
-      }
+      isError(err,res);
+      // I commented out the below codes as we can use the function instead.
+      // if (
+      //   typeof err === "object" &&
+      //   err !== null &&
+      //   err.name === "MongoNetworkError"
+      // ) {
+      //   res.status(500).send("Internal server error");
+      // } else {
+      //   log(err);
+      //   res.status(400).send("Bad Request");
+      // }
     });
 });
 
