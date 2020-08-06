@@ -96,6 +96,7 @@ app.post("/signUpUser", (req, res) => {
     (user) => {
       log(user);
       res.send(user);
+      return;
     },
     (error) => {
       log(error);
@@ -122,7 +123,8 @@ app.post("/login", (req, res) => {
       res.send({ currentUser: user });
     })
     .catch((error) => {
-      res.status(400).send(error);
+      res.send({ msg: "Wrong Credentials please try again." });
+      // res.status(400).send(error);
     });
 });
 

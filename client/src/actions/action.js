@@ -76,6 +76,8 @@ export const signIn = (comp, app) => {
       if (json.currentUser !== undefined) {
         console.log(json.currentUser);
         app.setState({ currentUser: json.currentUser });
+      } else if (json.msg !== null) {
+        alert(json.msg);
       }
     })
     .catch((error) => {
