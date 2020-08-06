@@ -74,7 +74,7 @@ class App extends React.Component {
         <BrowserRouter>
           {!this.state.currentUser ? <NavBar/> :<NavBar type={this.state.currentUser.type}/>}
           <Switch>
-            <Route exact path="/" render={() => <Home type={this.state.currentUser.type}/>} />
+            <Route exact path="/" render={() => <Home />} />
             <Route exact path="/Signup" render={() => <Signup />} />
             <Route exact path="/Login" render={() => <Login app={this} />} />
             <Route exact path="/Live" render={() => <Live />} />

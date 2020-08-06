@@ -65,6 +65,7 @@ const connectionChecker = (req, res, next) => {
 }
 
 const authenticate = (req, res, next) => {
+  log(req.session.user)
 	if (req.session.user) {
 		User.findById(req.session.user).then((user) => {
 			if (!user) {
@@ -303,12 +304,12 @@ app.post("/users/home", connectionChecker, authenticate, (req, res) => {
         },
       description: req.body.description,
       price: req.body.price,
-      creator: req.user._id
+      creator: req.session.user
     },
   };
 log(home)
   User.findByIdAndUpdate(
-    req.user._id,
+    req.session.user,
     { $push: home },
     { new: true, useFindAndModify: false }
   )

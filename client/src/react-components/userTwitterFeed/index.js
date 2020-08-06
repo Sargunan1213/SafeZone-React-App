@@ -5,7 +5,6 @@ import "./styles.css";
 
 import safeZone from "./static/safeZoneLogo.png";
 import tweet_img from "./static/tweet_img.png";
-import NavBar from "../NavBar";
 
 class UserTwitterFeed extends React.Component {
   state = {
