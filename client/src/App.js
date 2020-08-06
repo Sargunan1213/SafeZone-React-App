@@ -31,6 +31,42 @@ class App extends React.Component {
     currentUser: null,
   };
   render() {
+    if (
+      this.state.currentUser != null &&
+      this.state.currentUser.type === "Homeowner"
+    ) {
+      return (
+        <div>
+          <BrowserRouter>
+            <HomeOwnerProfilePage />
+          </BrowserRouter>
+        </div>
+      );
+    }
+    if (
+      this.state.currentUser != null &&
+      this.state.currentUser.type === "Customer"
+    ) {
+      return (
+        <div>
+          <BrowserRouter>
+            <FrontlinerProfilePage />
+          </BrowserRouter>
+        </div>
+      );
+    }
+    if (
+      this.state.currentUser != null &&
+      this.state.currentUser.type === "Admin"
+    ) {
+      return (
+        <div>
+          <BrowserRouter>
+            <AdminPanel />
+          </BrowserRouter>
+        </div>
+      );
+    }
     return (
       <div>
         <BrowserRouter>

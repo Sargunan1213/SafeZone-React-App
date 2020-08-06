@@ -94,6 +94,7 @@ app.post("/signUpUser", (req, res) => {
   // Save the user
   user.save().then(
     (user) => {
+      log(user);
       res.send(user);
     },
     (error) => {
@@ -147,7 +148,6 @@ app.get("/users/logout", (req, res) => {
 
 /*** API Routes below ************************************/
 
-
 // What is student doing here?!
 app.patch("/changeprofilepic", (req, res) => {
   if (mongoose.connection.readyState != 1) {
@@ -173,7 +173,6 @@ app.patch("/changeprofilepic", (req, res) => {
     });
 });
 
-
 app.post("/donation", (req, res) => {
   if (mongoose.connection.readyState != 1) {
     log("Issue with mongoose connection");
@@ -195,7 +194,7 @@ app.post("/donation", (req, res) => {
       res.send(result);
     })
     .catch((err) => {
-      isError(err,res);
+      isError(err, res);
       // I commented out the below codes as we can use the function instead.
       // if (
       //   typeof err === "object" &&
@@ -307,7 +306,6 @@ app.post("/users/:id", (req, res) => {
     });
 });
 
-
 //Edit home to user
 app.put("/users/:id/:homeid", (req, res) => {
   const id = req.params.id;
@@ -324,7 +322,7 @@ app.put("/users/:id/:homeid", (req, res) => {
     return;
   }
 
-  User.findOneAndReplace(id, req.body, {new: true, useFindAndModify: false})
+  User.findOneAndReplace(id, req.body, { new: true, useFindAndModify: false })
     .then((user) => {
       if (!user) {
         res.status(404).send("Resource not found");
@@ -350,11 +348,6 @@ app.put("/users/:id/:homeid", (req, res) => {
       isError(err, res);
     });
 });
-
-
-
-
-
 
 //Delete Route
 

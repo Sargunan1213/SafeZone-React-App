@@ -28,8 +28,8 @@ class Login extends React.Component {
   };
 
   render() {
-    const { app } = this.props.app;
-
+    const { app } = this.props;
+    console.log("app on login comp", app);
     return (
       <div className="back1">
         <NavBar type={this.state.type} />
