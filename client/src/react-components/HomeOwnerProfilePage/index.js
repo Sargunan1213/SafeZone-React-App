@@ -19,6 +19,15 @@ class HomeOwnerProfilePage extends React.Component {
   };
 
   render() {
+    const { user } = this.props;
+    this.state.name = user.name;
+    this.state.age = user.age;
+    this.state.password = user.password;
+    this.state.postId = user.postId;
+    this.state.tel = user.tel;
+    this.state.email = user.email;
+    this.state.profilepic = user.profilepic;
+    this.state.type = user.type;
     const feed = "/userTwitterFeed";
     return (
       <div>

@@ -89,6 +89,7 @@ app.post("/signUpUser", (req, res) => {
     email: req.body.email,
     password: req.body.password,
     type: req.body.usertype,
+    profilePic: "./client/build/static/media/favicon.6e1267d9.ico",
   });
 
   // Save the user

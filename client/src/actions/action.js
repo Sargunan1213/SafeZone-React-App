@@ -248,8 +248,8 @@ export const profileChange = (event, comp) => {
   read.readAsDataURL(event.target.files[0]);
   const pic = {
     name: comp.state.name,
-    profilePic: event.target.files[0]
-  }
+    profilePic: event.target.files[0],
+  };
   alert("Profile information change for " + comp.state.name);
   event.preventDefault();
   const request = new Request("/changeprofilepic", {

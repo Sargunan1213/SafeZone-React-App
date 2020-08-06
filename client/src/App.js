@@ -38,7 +38,7 @@ class App extends React.Component {
       return (
         <div>
           <BrowserRouter>
-            <HomeOwnerProfilePage />
+            <HomeOwnerProfilePage user={this.state.currentUser} />
           </BrowserRouter>
         </div>
       );
@@ -50,7 +50,7 @@ class App extends React.Component {
       return (
         <div>
           <BrowserRouter>
-            <FrontlinerProfilePage />
+            <FrontlinerProfilePage user={this.state.currentUser} />
           </BrowserRouter>
         </div>
       );
