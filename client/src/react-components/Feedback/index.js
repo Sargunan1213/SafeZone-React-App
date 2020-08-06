@@ -10,7 +10,6 @@ class Feeback extends React.Component {
   render() {
     return (
       <div className="parent">
-        <NavBar />
         <TenantFeedback />
         <WebsiteFeedback />
         <SendEmail />

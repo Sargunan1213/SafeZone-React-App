@@ -31,7 +31,6 @@ class FrontlinerProfilePage extends React.Component {
     return (
       <div>
         <div>
-          <NavBar type={this.state.type} />
           <div className="frontlinerBasicInfo">
             <img
               className="frontlinerProfilePicture"

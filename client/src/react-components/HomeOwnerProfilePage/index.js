@@ -31,7 +31,6 @@ class HomeOwnerProfilePage extends React.Component {
     const feed = "/userTwitterFeed";
     return (
       <div>
-        <NavBar type={this.state.type} />
         <div name="pic" className="homeOwnerBasicInfo">
           <img
             className="homeOwnerProfilePicture"

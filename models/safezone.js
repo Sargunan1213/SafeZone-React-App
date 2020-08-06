@@ -2,15 +2,24 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 
+const Image = new mongoose.Schema({
+  data: Buffer,
+  type: String
+})
+
 const HomeSchema = new mongoose.Schema({
   address: String,
   city: String,
   province: String,
   country: String,
   zip: String,
-  pic: String,
+  pic: Image,
   description: String,
   price: Number,
+  creator: {
+		type: mongoose.Schema.Types.ObjectId,
+		required: true
+	}
 });
 
 const UserSchema = new mongoose.Schema({

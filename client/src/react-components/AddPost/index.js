@@ -24,7 +24,6 @@ class AddPost extends React.Component {
   render() {
     return (
       <div className="addPost">
-        <NavBar type={this.state.type} />
         <h1>Add a new home Post:</h1>
         <AddPostForm
           address={this.state.address}
@@ -35,7 +34,7 @@ class AddPost extends React.Component {
           email={this.state.email}
           img={this.state.img}
           handle={(e) => handleInputChange(e, this)}
-          submit={submitForm}
+          submit={(e) => submitForm(e, this)}
         />
       </div>
     );

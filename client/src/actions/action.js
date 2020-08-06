@@ -1,3 +1,4 @@
+const log = console.log
 // A function to check if a user is logged in on the session cookie
 export const readCookie = (app) => {
   const url = "/users/check-session";
@@ -189,9 +190,27 @@ export const handleInputChange = (event, component) => {
   console.log("typing");
 };
 
-export const submitForm = (event) => {
+export const submitForm = (event, comp) => {
   // add home post details
-  // requires server call to add original house data to updated data
+  const request = new Request("http://localhost:5000/users/home", {
+    method: "post",
+    body: JSON.stringify(comp.state),
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+    },
+  });
+
+  fetch(request).then(function(res) {
+    if(res.status === 200) {
+      log("success added home")
+    }
+    else {
+      log("error fail to add home")
+    }
+  }).catch(err => {
+    console.log(err)
+  })
   alert("Details of the house were changed: ");
   event.preventDefault();
 };

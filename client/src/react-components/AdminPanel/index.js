@@ -69,8 +69,7 @@ class AdminPanel extends React.Component {
 
     return (
       <div>
-        <NavBar type={this.state.type} />
-        <div className="AdminPanel">
+          <div className="AdminPanel">
           <h1>Users</h1>
           <div className="Users">
             <h2>Homeowners</h2>

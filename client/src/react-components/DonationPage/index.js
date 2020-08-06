@@ -18,7 +18,6 @@ class DonationPage extends React.Component {
     render() {
         return (
             <div id="donation">
-                <NavBar />
                 <h1>Donate to help support frontline workers to afford a safe home</h1>
 
                 <form className="donationForm" onSubmit={(e) => submitDonationForm(e, this)}>

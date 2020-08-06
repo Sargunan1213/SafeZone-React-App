@@ -26,7 +26,6 @@ class Signup extends React.Component {
   render() {
     return (
       <div>
-        <NavBar />
         <div className="back">
           <form className="box">
             <p className="head"> SIGN UP </p>

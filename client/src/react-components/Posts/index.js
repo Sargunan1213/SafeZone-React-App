@@ -70,7 +70,6 @@ class Posts extends React.Component {
 
         return (
             <div id="homes">
-                <NavBar type={type}/>
                 {title}
                 <div className="posts">
                     { this.state.homes.map(home => (<Post key={uid(home)} homes={this.state.homes} home={home} owners={this.state.owners} comp={this} type={type}/>)) }

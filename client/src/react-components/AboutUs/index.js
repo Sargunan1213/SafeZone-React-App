@@ -9,7 +9,6 @@ class AboutUs extends React.Component {
   render() {
     return (
       <div>
-        <NavBar />
         <div className="AboutUsBody">
           <div className="container">
             <h2 className="container-h2">Purpose of the website</h2>

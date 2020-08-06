@@ -21,6 +21,7 @@ import EditPostPage from "./react-components/EditPostPage";
 import UserTwitterFeed from "./react-components/userTwitterFeed";
 import EditProfile from "./react-components/EditProfile";
 import { readCookie } from "../src/actions/action.js";
+import NavBar from "./react-components/NavBar";
 
 class App extends React.Component {
   constructor(props) {
@@ -28,50 +29,52 @@ class App extends React.Component {
     readCookie(this); // sees if a user is logged in.
   }
   state = {
-    currentUser: null,
+    currentUser: null
   };
   render() {
-    if (
-      this.state.currentUser != null &&
-      this.state.currentUser.type === "Homeowner"
-    ) {
-      return (
-        <div>
-          <BrowserRouter>
-            <HomeOwnerProfilePage user={this.state.currentUser} />
-          </BrowserRouter>
-        </div>
-      );
-    }
-    if (
-      this.state.currentUser != null &&
-      this.state.currentUser.type === "Customer"
-    ) {
-      return (
-        <div>
-          <BrowserRouter>
-            <FrontlinerProfilePage user={this.state.currentUser} />
-          </BrowserRouter>
-        </div>
-      );
-    }
-    if (
-      this.state.currentUser != null &&
-      this.state.currentUser.type === "Admin"
-    ) {
-      return (
-        <div>
-          <BrowserRouter>
-            <AdminPanel />
-          </BrowserRouter>
-        </div>
-      );
-    }
+    // if (
+    //   this.state.currentUser != null &&
+    //   this.state.currentUser.type === "Homeowner"
+    // ) {
+    //   return (
+    //     <div>
+    //       <BrowserRouter>
+    //         <HomeOwnerProfilePage user={this.state.currentUser} />
+    //       </BrowserRouter>
+    //     </div>
+    //   );
+    // }
+    // if (
+    //   this.state.currentUser != null &&
+    //   this.state.currentUser.type === "Customer"
+    // ) {
+    //   return (
+    //     <div>
+    //       <BrowserRouter>
+    //         <FrontlinerProfilePage user={this.state.currentUser} />
+    //       </BrowserRouter>
+    //     </div>
+    //   );
+    // }
+    // if (
+    //   this.state.currentUser != null &&
+    //   this.state.currentUser.type === "Admin"
+    // ) {
+    //   return (
+    //     <div>
+    //       <BrowserRouter>
+    //         <AdminPanel />
+    //       </BrowserRouter>
+    //     </div>
+    //   );
+    // }
     return (
       <div>
+
         <BrowserRouter>
+          {!this.state.currentUser ? <NavBar/> :<NavBar type={this.state.currentUser.type}/>}
           <Switch>
-            <Route exact path="/" render={() => <Home />} />
+            <Route exact path="/" render={() => <Home type={this.state.currentUser.type}/>} />
             <Route exact path="/Signup" render={() => <Signup />} />
             <Route exact path="/Login" render={() => <Login app={this} />} />
             <Route exact path="/Live" render={() => <Live />} />

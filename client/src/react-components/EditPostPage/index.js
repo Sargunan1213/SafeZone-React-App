@@ -46,7 +46,6 @@ class EditPostPage extends React.Component {
   render() {
     return (
       <div className="addPost">
-        <NavBar type="homeowner" />
         <h1>Edit your home Post:</h1>
         <AddPostForm
           address={this.state.address}

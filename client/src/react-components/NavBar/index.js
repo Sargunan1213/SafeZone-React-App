@@ -20,7 +20,7 @@ class NavBar extends React.Component {
       "Sign In": "Login",
     }
 
-    if (type === "homeowner") {
+    if (type === "Homeowner") {
       nav = {
         Home: "",
         Posts: "Posts",
@@ -30,7 +30,7 @@ class NavBar extends React.Component {
         "user": "HomeOwnerProfilePage"
       }
     }
-    else if (type === "frontliner"){
+    else if (type === "Frontliner"){
       nav = {
         Home: "",
         Posts: "SelectPosts",
@@ -38,7 +38,7 @@ class NavBar extends React.Component {
         "user2": "FrontlinerProfilePage"
       }
     }
-    else if (type === "admin"){
+    else if (type === "Admin"){
       nav = {
         Home: "",
         Posts: "Posts",

@@ -1,7 +1,7 @@
 "use strict";
 const log = console.log;
 const path = require("path");
-
+const fs = require('fs');
 const express = require("express");
 const app = express();
 
@@ -54,9 +54,35 @@ app.use(
   })
 );
 
-/** User routes below **/
-// Set up a POST route to *create* a user of your web app (*not* a student).
-app.post("/users", (req, res) => {
+const connectionChecker = (req, res, next) => {
+	if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return
+	} else {
+		next()	
+	}	
+}
+
+const authenticate = (req, res, next) => {
+	if (req.session.user) {
+		User.findById(req.session.user).then((user) => {
+			if (!user) {
+				return Promise.reject()
+			} else {
+				req.user = user
+				next()
+			}
+		}).catch((err) => {
+			res.status(401).send("Unauthorized")
+		})
+	} else {
+		res.status(401).send("Unauthorized")
+	}
+}
+
+// User routes below
+app.post("/users", connectionChecker, (req, res) => {
   log(req.body);
 
   // Create a new user
@@ -75,10 +101,8 @@ app.post("/users", (req, res) => {
     }
   );
 });
-/** User routes below **/
-// Set up a POST route to *create* a user of your web app (*not* a student).
 
-app.post("/signUpUser", (req, res) => {
+app.post("/signUpUser", connectionChecker, (req, res) => {
   // Create a new user
   console.log("request in sign up", req.body);
   const user = new User({
@@ -107,7 +131,7 @@ app.post("/signUpUser", (req, res) => {
 });
 
 // A route to login and create a session
-app.post("/login", (req, res) => {
+app.post("/login", connectionChecker, (req, res) => {
   const email = req.body.username;
   const password = req.body.password;
 
@@ -212,13 +236,7 @@ app.post("/donation", (req, res) => {
     });
 });
 
-app.post("/users", (req, res) => {
-  if (mongoose.connection.readyState != 1) {
-    log("Issue with mongoose connection");
-    res.status(500).send("Internal server error");
-    return;
-  }
-
+app.post("/users", connectionChecker, (req, res) => {
   const user = new User({
     name: req.body.name,
     age: req.body.age,
@@ -265,17 +283,10 @@ app.get("/users", (req, res) => {
 });
 
 // Add home to user
-app.post("/users/:id", (req, res) => {
-  const id = req.params.id;
+app.post("/users/home", connectionChecker, authenticate, (req, res) => {
 
-  if (!ObjectID.isValid(id)) {
+  if (!ObjectID.isValid(req.session.user)) {
     res.status(404).send();
-    return;
-  }
-
-  if (mongoose.connection.readyState != 1) {
-    log("Issue with mongoose connection");
-    res.status(500).send("Internal server error");
     return;
   }
 
@@ -286,14 +297,18 @@ app.post("/users/:id", (req, res) => {
       province: req.body.province,
       country: req.body.country,
       zip: req.body.zip,
-      pic: req.body.pic,
+      pic: { 
+        data: fs.readFileSync(req.body.pic),
+        type: "image/jpg"
+        },
       description: req.body.description,
       price: req.body.price,
+      creator: req.user._id
     },
   };
-
+log(home)
   User.findByIdAndUpdate(
-    id,
+    req.user._id,
     { $push: home },
     { new: true, useFindAndModify: false }
   )
@@ -307,7 +322,7 @@ app.post("/users/:id", (req, res) => {
     .catch((err) => {
       isError(err, res);
     });
-});
+ });
 
 //Edit home to user
 app.put("/users/:id/:homeid", (req, res) => {

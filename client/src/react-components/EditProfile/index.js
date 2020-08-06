@@ -33,7 +33,6 @@ class EditProfile extends React.Component {
         return (
             <div>
                 <div>
-                    <NavBar type={this.state.type} />
                     <div className="editInfo">
                         <h1>Edit Profile</h1>
                         <img className="profilePicture" src="favicon.ico" alt="frontlinerProfilePicture.jpg" ></img>

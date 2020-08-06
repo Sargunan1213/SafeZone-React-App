@@ -10,7 +10,7 @@ import { withRouter } from "react-router";
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.props.history.push("/login");
+    // this.props.history.push("/login");
   }
   state = {
     type: "",
@@ -32,7 +32,6 @@ class Login extends React.Component {
     console.log("app on login comp", app);
     return (
       <div className="back1">
-        <NavBar type={this.state.type} />
         <form className="box1">
           <p className="head1"> Welcome BACK! </p>
           <div className="icondiv">

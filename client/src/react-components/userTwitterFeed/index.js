@@ -18,7 +18,6 @@ class UserTwitterFeed extends React.Component {
   render() {
     return (
       <div>
-        <NavBar type="homeowner" />
         <div className="userTwitterFeed">
          Tweets
         </div>

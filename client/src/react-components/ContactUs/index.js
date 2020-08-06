@@ -11,7 +11,6 @@ class ContactUs extends React.Component {
 
     return (
       <div>
-        <NavBar />
         <div className="contact-section">
           <h1>Contact Us</h1>
           <form className="contact-form">
