@@ -9,7 +9,6 @@ class Post extends React.Component {
   
     render() {
         const {home, comp, type} = this.props;
-        const homeowner = home.homeowner;
 
         let button = "";
         if (type === "admin"){

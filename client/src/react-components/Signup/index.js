@@ -1,6 +1,5 @@
 import React from "react";
 import "./index.css";
-import NavBar from "../NavBar";
 import { signUpUser } from "../../actions/action";
 
 class Signup extends React.Component {

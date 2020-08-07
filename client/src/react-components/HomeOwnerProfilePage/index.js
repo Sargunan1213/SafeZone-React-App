@@ -1,7 +1,6 @@
 import React from "react";
 import "./styles.css";
 import { Link } from "react-router-dom";
-import NavBar from "../NavBar";
 import profileImg from "./static/favicon.ico";
 import { profileChange } from "../../actions/action";
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import './styles.css';
-import NavBar from "../NavBar";
 
 import { handleInputChange, profileChange } from "../../actions/action";
 

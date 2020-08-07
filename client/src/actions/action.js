@@ -218,16 +218,18 @@ export const submitForm = (event, comp, app) => {
   event.preventDefault();
 };
 
-export const getHomes = () => {
+export const getHomes = (app) => {
   const url = "/users/home"
   fetch(url).then(function(res) {
     if(res.status === 200) {
-      log(res.json())
       return res.json()
     }
     else {
       log("error getting homes")
     }
+  }).then(json => {
+    log(json)
+     app.setState({homes: json}) 
   }).catch(err => {
     console.log(err)
   })

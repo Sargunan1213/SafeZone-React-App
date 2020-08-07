@@ -1,7 +1,6 @@
 import React from "react";
 
 import "./styles.css";
-import NavBar from "../NavBar";
 
 class Live extends React.Component {
   render() {

@@ -27,12 +27,15 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     readCookie(this); // sees if a user is logged in.
-
-    this.state = {
-      currentUser: null,
-      homes: getHomes()
-    }
-    console.log(this.state.homes)
+    
+  }
+  state = {
+    currentUser: null,
+    homes: []
+  }
+  componentDidMount() {
+    console.log("dfsdf")
+    getHomes(this)
   }
 
   render() {

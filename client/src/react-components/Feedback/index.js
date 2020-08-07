@@ -4,7 +4,6 @@ import "./styles.css";
 import TenantFeedback from "../TenantFeedback";
 import WebsiteFeedback from "../WebsiteFeedback";
 import SendEmail from "../SendEmail";
-import NavBar from "../NavBar";
 
 class Feeback extends React.Component {
   render() {

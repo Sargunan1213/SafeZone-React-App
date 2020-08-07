@@ -2,7 +2,6 @@ import React from "react";
 
 import AddPostForm from "../AddPostForm";
 import { editPost } from "../../actions/action"
-import NavBar from "../NavBar";
 
 import { handleInputChange } from "../../actions/action";
 

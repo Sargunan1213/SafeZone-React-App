@@ -4,7 +4,6 @@ import Post from "../Post";
 import { uid } from "react-uid";
 import AdminSendMsg from "../AdminSendMsg";
 import "./styles.css";
-import NavBar from "../NavBar";
 import { removeUser } from "../../actions/action";
 
 

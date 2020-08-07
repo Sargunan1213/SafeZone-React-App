@@ -6,7 +6,6 @@ import AddPostForm from "../AddPostForm";
 
 import { handleInputChange } from "../../actions/action";
 import { submitForm } from "../../actions/action";
-import NavBar from "../NavBar";
 
 // will link it up with signed in user later
 class AddPost extends React.Component {
