@@ -33,6 +33,7 @@ class App extends React.Component {
     currentUser: null,
     homes: [],
     home: {
+      _id: "",
       address: "",
       description: "",
       price: "",

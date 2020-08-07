@@ -55,7 +55,7 @@ export const signUpUser = (comp) => {
 // A function to send a POST request with the user to be logged in
 export const signIn = (comp, app) => {
   // Create our request constructor with all the parameters we need
-  const request = new Request("http://localhost:5000/login", {
+  const request = new Request("/login", {
     method: "post",
     body: JSON.stringify(comp.state),
     headers: {
@@ -153,32 +153,56 @@ export const logout = (app) => {
     });
 };
 
-export const removeHome = (comp, homes, home) => {
+export const removeHome = (app, id) => {
   // delete home information from server
-  // requires server call
-  delete homes[homes.indexOf(home)];
-
-  comp.setState({
-    homes: homes,
+  const url = '/users/home/' + id
+  const request = new Request(url, {
+    method: "delete",
+    body: JSON.stringify(app.state.home),
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+    },
   });
+  fetch(request).then(function(res) {
+    if(res.status === 200) {
+      log("success removed home")
+    }
+    else {
+      log("error fail to remove home")
+    }
+  }).then(() => {
+    getHomes(app)
+  }).catch(err => {
+    console.log(err)
+  })
 };
 
-export const addInterestedHome = (comp, homeId) => {
-  const frontliners = comp.state.frontliners;
+export const addInterestedHome = (homeId) => {
+  const url = '/users/interest/' + homeId
 
-  // add interested home under user to server
-  // requires server call
-  alert("Interest noted");
-  frontliners["user2"].interest.push(homeId);
-
-  comp.setState({
-    frontliners: frontliners,
+  const request = new Request(url, {
+    method: "post",
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+    },
   });
+  fetch(request).then(function(res) {
+    if(res.status === 200) {
+      log("success added interested home")
+    }
+    else {
+      log("error fail to add interested home")
+    }
+  }).catch(err => {
+    console.log(err)
+  })
 };
 
 export const editPost = (event, app, id) => {
   // edit home post details
-  const url = 'http://localhost:5000/users/home/' + id
+  const url = '/users/home/' + id
   const request = new Request(url, {
     method: "put",
     body: JSON.stringify(app.state.home),
@@ -195,13 +219,11 @@ export const editPost = (event, app, id) => {
       log("error fail to edit home")
     }
   }).then(() => {
-    const allHomes = getHomes()
-
-    app.setState({homes: allHomes})
+    getHomes(app)
   }).catch(err => {
     console.log(err)
   })
-  alert("Details of the house were changed: ");
+  //alert("Details of the house were changed: ");
   event.preventDefault();
 };
 
@@ -257,7 +279,7 @@ export const submitForm = (event, comp, app) => {
 };
 
 export const getHomes = (app) => {
-  const url = "http://localhost:5000/users/home"
+  const url = "/users/home"
   fetch(url).then(function(res) {
     if(res.status === 200) {
       return res.json()
@@ -273,7 +295,7 @@ export const getHomes = (app) => {
 }
 
 export const editHome = (app, comp, id) => {
-  const url = "http://localhost:5000/users/home/" + id
+  const url = "/users/home/" + id
   fetch(url).then(function(res) {
     if(res.status === 200) {
       return res.json()

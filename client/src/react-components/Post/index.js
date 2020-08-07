@@ -12,16 +12,15 @@ class Post extends React.Component {
 
         let button = "";
         if (type === "Admin"){
-            button=<button className='del' onClick={() => removeHome(comp, home._id)}>Delete</button>;
+            button=<button className='del' onClick={() => removeHome(app, home._id)}>Delete</button>;
         }
         else if(type === "Frontliner"){
-            button=<button className='select' onClick={() => addInterestedHome(comp, home._id)}>Select</button>;
+            button=<button className='select' onClick={() => addInterestedHome(app, home._id)}>Select</button>;
         }
         else if(type === "Homeowner"){
-            button=<Link className='select' onClick={() => editHome(app, home._id)} to={{pathname: "/EditPostPage"}}>Edit</Link>;
+            button=<button className='select' onClick={() => {editHome(app, this, home._id)}}>Edit</button>;
         }
-        button=<button className='select' onClick={() => {editHome(app, this, home._id) 
-        }}>Edit</button>;
+        button=<button className='select' onClick={() => addInterestedHome(app, home._id)}>Select</button>;
         return (
             <div className="post">
                 

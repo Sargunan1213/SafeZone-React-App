@@ -26,7 +26,7 @@ class EditPostPage extends React.Component {
           email={app.state.home.email}
           img={app.state.home.img}
           handle={(e) => handleInputChangeHome(e, app)}
-          submit={(e) => editPost(e, app, this)}
+          submit={(e) => editPost(e, app, app.state.home._id)}
         />
       </div>
     );

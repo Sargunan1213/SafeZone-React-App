@@ -354,7 +354,7 @@ app.post("/users/home", connectionChecker, authenticate, (req, res) => {
   })
 });
 
-//Edit home to user
+//Edit home 
 app.put("/users/home/:homeid", connectionChecker, authenticate, (req, res) => {
   const homeid = req.params.homeid;
 
@@ -390,8 +390,40 @@ app.put("/users/home/:homeid", connectionChecker, authenticate, (req, res) => {
   })
 });
 
-//Delete Route
+//Add interested home
+app.post("/users/interest/:homeid", connectionChecker, authenticate, (req, res) => {
+  const homeid = req.params.homeid;
 
+  if (!ObjectID.isValid(req.session.user) || !ObjectID.isValid(homeid)) {
+    res.status(404).send();
+    return;
+  }
+  
+  Home.findById(homeid).then(home => {
+    if(!home){
+      res.status(404).send()
+    }
+    else{
+      const change = {homes: home}
+      User.findByIdAndUpdate(req.session.user, { $push: change }, { new: true }).then(home => {
+        if (!home) {
+          res.status(404).send()
+        }
+        else {
+          res.send(home)
+        }
+      }).catch(err => {
+        res.status(500).send()
+      })
+    }
+  }).catch(err => {
+    res.status(500).send()
+  })
+
+
+});
+
+//Delete Route
 app.delete("/users/:homeid", connectionChecker, authenticate, (req, res) => {
   const homeid = req.params.homeid;
 
