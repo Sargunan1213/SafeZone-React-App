@@ -18,7 +18,7 @@ class AddPost extends React.Component {
     phone: "",
     email: "",
     img: "",
-    type: "homeowner",
+    zip: "",
   };
 
   render() {

@@ -33,7 +33,8 @@ class Posts extends React.Component {
         homes: [
             {
               id: 0,
-              address: "4130 George Street",
+              address: "4130 George Street, Peterborough, Ontario",
+              zip: "K9H 2L1",
               city: "Peterborough",
               province: "Ontario",
               country: "Canada",

@@ -9,9 +9,9 @@ const Image = new mongoose.Schema({
 
 const HomeSchema = new mongoose.Schema({
   address: String,
-  city: String,
-  province: String,
-  country: String,
+  // city: String,
+  // province: String,
+  // country: String,
   zip: String,
   pic: String,
   description: String,

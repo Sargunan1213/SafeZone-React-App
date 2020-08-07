@@ -12,13 +12,14 @@ class AddPostForm extends React.Component {
       phone,
       email,
       img,
+      zip
     } = this.props;
 
     return (
       <div className="form">
         <form action="" onSubmit={this.props.submit}>
           <label className="lab" htmlFor="address">
-            Enter your address with postal code:
+            Enter your address:
           </label>
           <input
             className="inp"
@@ -26,6 +27,17 @@ class AddPostForm extends React.Component {
             name="address"
             value={address}
             label="address"
+            onChange={this.props.handle}
+          />
+          <label className="lab" htmlFor="zip">
+            Enter your postal code:
+          </label>
+          <input
+            className="inp"
+            type="text"
+            name="zip"
+            value={zip}
+            label="zip"
             onChange={this.props.handle}
           />
           <br />

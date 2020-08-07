@@ -295,9 +295,6 @@ app.post("/users/home", connectionChecker,  (req, res) => {
   const home = {
     homes: {
       address: req.body.address,
-      city: req.body.city,
-      province: req.body.province,
-      country: req.body.country,
       zip: req.body.zip,
       pic: 'home1.jpg',
       // pic: { 
