@@ -116,5 +116,6 @@ UserSchema.statics.findByEmailPassword = function (email, password) {
 };
 
 const User = mongoose.model("User", UserSchema);
+const Home = mongoose.model("Home", HomeSchema)
 
-module.exports = { User };
+module.exports = { User, Home };

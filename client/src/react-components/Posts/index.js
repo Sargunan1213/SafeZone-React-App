@@ -62,7 +62,7 @@ class Posts extends React.Component {
     }
     
     render() {
-        const { type } = this.props;
+        const { type, app } = this.props;
         let title = <h1>Avaliable Homes</h1>
 
         if (type === "homeowner") {

@@ -10,7 +10,7 @@ const cors = require("cors");
 const { mongoose } = require("./database/mongoose");
 mongoose.set("bufferCommands", false);
 
-const { User } = require("./models/safezone");
+const { User, Home } = require("./models/safezone");
 const { Donation } = require("./models/donation");
 
 const { ObjectID } = require("mongodb");
@@ -292,8 +292,7 @@ app.post("/users/home", connectionChecker,  (req, res) => {
     res.status(404).send();
     return;
   }
-  const home = {
-    homes: {
+  const home = new Home({
       address: req.body.address,
       zip: req.body.zip,
       pic: 'home1.jpg',
@@ -304,24 +303,28 @@ app.post("/users/home", connectionChecker,  (req, res) => {
       description: req.body.description,
       price: req.body.price,
       creator: req.session.user
-    },
-  };
-
-  User.findByIdAndUpdate(
-    req.session.user,
-    { $push: home },
-    { new: true, useFindAndModify: false }
-  )
-    .then((user) => {
-      if (!user) {
-        res.status(404).send("Resource not found");
-      } else {
-        res.send(user);
-      }
     })
-    .catch((err) => {
-      isError(err, res);
-    });
+
+  home.save().then(home => {
+    res.send(home)
+  }, err => {
+    res.status(400).send(err)
+  })
+  // User.findByIdAndUpdate(
+  //   req.session.user,
+  //   { $push: home },
+  //   { new: true, useFindAndModify: false }
+  // )
+  //   .then((user) => {
+  //     if (!user) {
+  //       res.status(404).send("Resource not found");
+  //     } else {
+  //       res.send(user);
+  //     }
+  //   })
+  //   .catch((err) => {
+  //     isError(err, res);
+  //   });
  });
 
 //Edit home to user

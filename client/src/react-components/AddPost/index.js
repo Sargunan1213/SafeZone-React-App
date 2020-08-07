@@ -22,6 +22,7 @@ class AddPost extends React.Component {
   };
 
   render() {
+    const { app } = this.props
     return (
       <div className="addPost">
         <h1>Add a new home Post:</h1>
@@ -34,7 +35,7 @@ class AddPost extends React.Component {
           email={this.state.email}
           img={this.state.img}
           handle={(e) => handleInputChange(e, this)}
-          submit={(e) => submitForm(e, this)}
+          submit={(e) => submitForm(e, this, app)}
         />
       </div>
     );

@@ -190,7 +190,7 @@ export const handleInputChange = (event, component) => {
   console.log("typing");
 };
 
-export const submitForm = (event, comp) => {
+export const submitForm = (event, comp, app) => {
   // add home post details
   const request = new Request("/users/home", {
     method: "post",
@@ -200,7 +200,6 @@ export const submitForm = (event, comp) => {
       "Content-Type": "application/json",
     },
   });
-  log(comp.state.img)
   fetch(request).then(function(res) {
     if(res.status === 200) {
       log("success added home")
@@ -214,6 +213,23 @@ export const submitForm = (event, comp) => {
   alert("Details of the house were changed: ");
   event.preventDefault();
 };
+
+export const getHomes = (comp) => {
+  const url = "/uers/home"
+  fetch(url).then(function(res) {
+    if(res.status === 200) {
+      return res.json
+    }
+    else {
+      log("error getting homes")
+    }
+  }).then(json => {
+    log(json)
+    // comp.setState({homes: json.})
+  }).catch(err => {
+    console.log(err)
+  })
+}
 
 export const removeUser = (comp, users, user) => {
   // delete user information from server

@@ -27,10 +27,13 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     readCookie(this); // sees if a user is logged in.
+
+    this.state = {
+      currentUser: null,
+      homes: null
+    }
   }
-  state = {
-    currentUser: null
-  };
+
   render() {
     // if (
     //   this.state.currentUser != null &&
@@ -79,8 +82,8 @@ class App extends React.Component {
             <Route exact path="/Login" render={() => <Login app={this} />} />
             <Route exact path="/Live" render={() => <Live />} />
             <Route exact path="/Donation" render={() => <DonationPage />} />
-            <Route exact path="/Posts" render={() => <Posts />} />
-            <Route exact path="/AddPost" render={() => <AddPost />} />
+            <Route exact path="/Posts" render={() => <Posts app={this}/>} />
+            <Route exact path="/AddPost" render={() => <AddPost app={this} />} />
             <Route
               exact
               path="/EditPostPage0"
