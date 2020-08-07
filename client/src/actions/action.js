@@ -55,7 +55,7 @@ export const signUpUser = (comp) => {
 // A function to send a POST request with the user to be logged in
 export const signIn = (comp, app) => {
   // Create our request constructor with all the parameters we need
-  const request = new Request("/login", {
+  const request = new Request("http://localhost:5000/login", {
     method: "post",
     body: JSON.stringify(comp.state),
     headers: {
@@ -89,6 +89,10 @@ export const signIn = (comp, app) => {
   comp.setState({
     type: type,
   });
+
+  if(app.state.currentUser === "Homeowner"){
+
+  }
 };
 
 // export const signIn = (comp, username, pwd) => {
@@ -172,9 +176,31 @@ export const addInterestedHome = (comp, homeId) => {
   });
 };
 
-export const editPost = (event) => {
+export const editPost = (event, app, id) => {
   // edit home post details
-  // requires server call to manipulate original data to updated data
+  const url = 'http://localhost:5000/users/home/' + id
+  const request = new Request(url, {
+    method: "put",
+    body: JSON.stringify(app.state.home),
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+    },
+  });
+  fetch(request).then(function(res) {
+    if(res.status === 200) {
+      log("success edited home")
+    }
+    else {
+      log("error fail to edit home")
+    }
+  }).then(() => {
+    const allHomes = getHomes()
+
+    app.setState({homes: allHomes})
+  }).catch(err => {
+    console.log(err)
+  })
   alert("Details of the house were changed: ");
   event.preventDefault();
 };
@@ -187,6 +213,18 @@ export const handleInputChange = (event, component) => {
   component.setState({
     [name]: value,
   });
+  console.log("typing");
+};
+
+export const handleInputChangeHome = (event, component) => {
+  const target = event.target;
+  const value = target.value;
+  const name = target.name;
+
+  let newHome = component.state.home
+  newHome[name] = value
+
+  component.setState({home: newHome});
   console.log("typing");
 };
 
@@ -219,7 +257,7 @@ export const submitForm = (event, comp, app) => {
 };
 
 export const getHomes = (app) => {
-  const url = "/users/home"
+  const url = "http://localhost:5000/users/home"
   fetch(url).then(function(res) {
     if(res.status === 200) {
       return res.json()
@@ -234,8 +272,25 @@ export const getHomes = (app) => {
   })
 }
 
-export const editHome = (app) => {
-  
+export const editHome = (app, comp, id) => {
+  const url = "http://localhost:5000/users/home/" + id
+  fetch(url).then(function(res) {
+    if(res.status === 200) {
+      return res.json()
+    }
+    else {
+      log("error getting home")
+    }
+  }).then(json => {
+
+     return app.setState({home: json}) 
+  }).then(apps =>{comp.props.history.push('/EditPostPage')
+}).catch(err => {
+    console.log(err)
+  })
+
+ 
+
 }
 
 export const removeUser = (comp, users, user) => {

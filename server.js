@@ -55,31 +55,30 @@ app.use(
 );
 
 const connectionChecker = (req, res, next) => {
-	if (mongoose.connection.readyState != 1) {
-		log('Issue with mongoose connection')
-		res.status(500).send('Internal server error')
-		return
-	} else {
-		next()	
-	}	
+  if (mongoose.connection.readyState != 1) {
+    log('Issue with mongoose connection')
+    res.status(500).send('Internal server error')
+    return
+  } else {
+    next()
+  }
 }
 
 const authenticate = (req, res, next) => {
-  log(req.session.user)
-	if (req.session.user) {
-		User.findById(req.session.user).then((user) => {
-			if (!user) {
-				return Promise.reject()
-			} else {
-				req.user = user
-				next()
-			}
-		}).catch((err) => {
-			res.status(401).send("Unauthorized")
-		})
-	} else {
-		res.status(401).send("Unauthorized")
-	}
+  if (req.session.user) {
+    User.findById(req.session.user).then((user) => {
+      if (!user) {
+        return Promise.reject()
+      } else {
+        req.user = user
+        next()
+      }
+    }).catch((err) => {
+      res.status(401).send("Unauthorized")
+    })
+  } else {
+    res.status(401).send("Unauthorized")
+  }
 }
 
 // User routes below
@@ -126,7 +125,7 @@ app.post("/signUpUser", connectionChecker, (req, res) => {
     },
     (error) => {
       log(error);
-      res.status(400).send(error); 
+      res.status(400).send(error);
     }
   );
 });
@@ -289,15 +288,43 @@ app.get("/users", (req, res) => {
 
 //Get homes
 app.get("/users/home", connectionChecker, (req, res) => {
+  if (req.session.user) {
+    Home.find({ 'creator': req.session.user }).then(homes => {
+      res.send(homes)
+    }, err => {
+      res.status(400).send(err)
+    })
+  }
+  else {
+    Home.find().then(homes => {
+      res.send(homes)
+    }, err => {
+      res.status(400).send(err)
+    })
+  }
+});
 
-  Home.find().then(homes => {
-    res.send(homes)
-  }, err => {
-    res.status(400).send(err)
-  })
- });
+app.get("/users/home/:id", connectionChecker, (req, res) => {
+  const id = req.params.id
+  if (!ObjectID.isValid(id)){
+    res.status(404).send
+  }
 
-// Add home to user
+    Home.findById(id).then(home => {
+      if(!home){
+        res.status(404).send()
+      }
+      else{
+        res.send(home)
+      }
+      
+    }, err => {
+      res.status(500).send(err)
+    })
+  
+});
+
+// Add home
 app.post("/users/home", connectionChecker, authenticate, (req, res) => {
 
   if (!ObjectID.isValid(req.session.user)) {
@@ -305,30 +332,30 @@ app.post("/users/home", connectionChecker, authenticate, (req, res) => {
     return;
   }
   const home = new Home({
-      address: req.body.address,
-      zip: req.body.zip,
-      pic: 'home1.jpg',
-      // pic: { 
-      //   data: fs.readFileSync(req.body.pic),
-      //   type: "image/jpg"
-      //   },
-      description: req.body.description,
-      price: req.body.price,
-      creator: req.session.user,
-      user: req.session.name,
-      tel: req.session.tel,
-      email: req.session.email
-    })
+    address: req.body.address,
+    zip: req.body.zip,
+    pic: 'home1.jpg',
+    // pic: { 
+    //   data: fs.readFileSync(req.body.pic),
+    //   type: "image/jpg"
+    //   },
+    description: req.body.description,
+    price: req.body.price,
+    creator: req.session.user,
+    user: req.session.name,
+    tel: req.session.tel,
+    email: req.session.email
+  })
 
   home.save().then(home => {
     res.send(home)
   }, err => {
     res.status(400).send(err)
   })
- });
+});
 
 //Edit home to user
-app.put("/users/:homeid", connectionChecker, authenticate, (req, res) => {
+app.put("/users/home/:homeid", connectionChecker, authenticate, (req, res) => {
   const homeid = req.params.homeid;
 
   if (!ObjectID.isValid(homeid)) {
@@ -351,14 +378,14 @@ app.put("/users/:homeid", connectionChecker, authenticate, (req, res) => {
     email: req.session.email
   }
 
-  Home.findByIdAndUpdate(homeid, {$set: change }, {new: true}).then(home => {
-    if(!home){
+  Home.findByIdAndUpdate(homeid, { $set: change }, { new: true }).then(home => {
+    if (!home) {
       res.status(404).send()
     }
     else {
       res.send(home)
     }
-  }).catch (err => {
+  }).catch(err => {
     res.status(500).send()
   })
 });
@@ -374,13 +401,13 @@ app.delete("/users/:homeid", connectionChecker, authenticate, (req, res) => {
   }
 
   Home.findByIdAndRemove(homeid).then(home => {
-    if(!home){
+    if (!home) {
       res.status(404).send()
     }
     else {
       res.send(home)
     }
-  }).catch (err => {
+  }).catch(err => {
     res.status(500).send()
   })
 });

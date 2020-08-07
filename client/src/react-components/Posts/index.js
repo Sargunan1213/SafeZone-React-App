@@ -2,6 +2,7 @@ import React from 'react';
 
 import Post from "../Post";
 import { uid } from 'react-uid';
+import { withRouter } from "react-router";
 
 import './styles.css';
 
@@ -65,7 +66,7 @@ class Posts extends React.Component {
         let title = <h1>Avaliable Homes</h1>
         const type = !app.state.currentUser ? "" : app.state.currentUser.type
 
-        if (type === "homeowner") {
+        if (type === "Homeowner") {
               title = <h1>Your Posts</h1>
         }
 
@@ -83,4 +84,4 @@ class Posts extends React.Component {
     }
   }
   
-  export default Posts;
+  export default withRouter(Posts);

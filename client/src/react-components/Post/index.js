@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-
+import { withRouter } from "react-router";
 import './styles.css';
 import { removeHome, addInterestedHome, editHome } from "../../actions/action";
 
@@ -11,16 +11,17 @@ class Post extends React.Component {
         const {home, comp, type, app} = this.props;
 
         let button = "";
-        if (type === "admin"){
+        if (type === "Admin"){
             button=<button className='del' onClick={() => removeHome(comp, home._id)}>Delete</button>;
         }
-        else if(type === "frontliner"){
+        else if(type === "Frontliner"){
             button=<button className='select' onClick={() => addInterestedHome(comp, home._id)}>Select</button>;
         }
-        else if(type === "homeowner"){
+        else if(type === "Homeowner"){
             button=<Link className='select' onClick={() => editHome(app, home._id)} to={{pathname: "/EditPostPage"}}>Edit</Link>;
         }
-
+        button=<button className='select' onClick={() => {editHome(app, this, home._id) 
+        }}>Edit</button>;
         return (
             <div className="post">
                 
@@ -44,4 +45,4 @@ class Post extends React.Component {
     }
   }
   
-  export default Post;
+  export default withRouter(Post);

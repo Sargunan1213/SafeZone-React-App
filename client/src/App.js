@@ -31,10 +31,19 @@ class App extends React.Component {
   }
   state = {
     currentUser: null,
-    homes: []
+    homes: [],
+    home: {
+      address: "",
+      description: "",
+      price: "",
+      username: "",
+      phone: "",
+      email: "",
+      img: "",
+      zip: ""
+    }
   }
   componentDidMount() {
-    console.log("dfsdf")
     getHomes(this)
   }
 
@@ -90,13 +99,8 @@ class App extends React.Component {
             <Route exact path="/AddPost" render={() => <AddPost app={this} />} />
             <Route
               exact
-              path="/EditPostPage0"
-              render={() => <EditPostPage id={0} />}
-            />
-            <Route
-              exact
-              path="/EditPostPage1"
-              render={() => <EditPostPage id={1} />}
+              path="/EditPostPage"
+              render={() => <EditPostPage app={this} home={this.state.home}/>}
             />
             <Route exact path="/Feedback" render={() => <Feedback />} />
             <Route exact path="/AboutUs" render={() => <AboutUs />} />
