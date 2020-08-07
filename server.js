@@ -288,11 +288,10 @@ app.get("/users", (req, res) => {
 // Add home to user
 app.post("/users/home", connectionChecker,  (req, res) => {
 
-  // if (!ObjectID.isValid(req.session.user)) {
-  //   res.status(404).send();
-  //   return;
-  // }
-log(req.session.user)
+  if (!ObjectID.isValid(req.session.user)) {
+    res.status(404).send();
+    return;
+  }
   const home = {
     homes: {
       address: req.body.address,
@@ -300,31 +299,32 @@ log(req.session.user)
       province: req.body.province,
       country: req.body.country,
       zip: req.body.zip,
+      pic: 'home1.jpg',
       // pic: { 
       //   data: fs.readFileSync(req.body.pic),
       //   type: "image/jpg"
       //   },
       description: req.body.description,
       price: req.body.price,
-      // creator: req.session.user
+      creator: req.session.user
     },
   };
-log(home)
-  // User.findByIdAndUpdate(
-  //   req.session.user,
-  //   { $push: home },
-  //   { new: true, useFindAndModify: false }
-  // )
-  //   .then((user) => {
-  //     if (!user) {
-  //       res.status(404).send("Resource not found");
-  //     } else {
-  //       res.send(user);
-  //     }
-  //   })
-  //   .catch((err) => {
-  //     isError(err, res);
-  //   });
+
+  User.findByIdAndUpdate(
+    req.session.user,
+    { $push: home },
+    { new: true, useFindAndModify: false }
+  )
+    .then((user) => {
+      if (!user) {
+        res.status(404).send("Resource not found");
+      } else {
+        res.send(user);
+      }
+    })
+    .catch((err) => {
+      isError(err, res);
+    });
  });
 
 //Edit home to user

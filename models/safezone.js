@@ -13,7 +13,7 @@ const HomeSchema = new mongoose.Schema({
   province: String,
   country: String,
   zip: String,
-  pic: Image,
+  pic: String,
   description: String,
   price: Number,
   creator: {

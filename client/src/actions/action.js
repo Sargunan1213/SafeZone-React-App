@@ -200,7 +200,7 @@ export const submitForm = (event, comp) => {
       "Content-Type": "application/json",
     },
   });
-
+  log(comp.state.img)
   fetch(request).then(function(res) {
     if(res.status === 200) {
       log("success added home")
