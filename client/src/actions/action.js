@@ -32,7 +32,7 @@ export const updateLoginForm = (loginComp, field) => {
 // Sign up a user
 
 export const signUpUser = (comp) => {
-  const request = new Request("http://localhost:5000/signUpUser", {
+  const request = new Request("/signUpUser", {
     method: "post",
     body: JSON.stringify(comp.state),
     headers: {
@@ -55,7 +55,7 @@ export const signUpUser = (comp) => {
 // A function to send a POST request with the user to be logged in
 export const signIn = (comp, app) => {
   // Create our request constructor with all the parameters we need
-  const request = new Request("http://localhost:5000/login", {
+  const request = new Request("/login", {
     method: "post",
     body: JSON.stringify(comp.state),
     headers: {
@@ -192,7 +192,7 @@ export const handleInputChange = (event, component) => {
 
 export const submitForm = (event, comp) => {
   // add home post details
-  const request = new Request("http://localhost:5000/users/home", {
+  const request = new Request("/users/home", {
     method: "post",
     body: JSON.stringify(comp.state),
     headers: {
