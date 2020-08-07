@@ -25,7 +25,8 @@ const HomeSchema = new mongoose.Schema({
     validate: {
       validator: validator.isEmail,
       message: "Not valid email",
-    },
+    }
+  },
   creator: {
 		type: mongoose.Schema.Types.ObjectId,
 		required: true
@@ -64,7 +65,6 @@ const UserSchema = new mongoose.Schema({
     },
   },
   profilePic: String,
-  homes: [HomeSchema],
   type: String,
 });
 
