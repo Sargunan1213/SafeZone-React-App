@@ -66,6 +66,7 @@ const UserSchema = new mongoose.Schema({
   },
   profilePic: String,
   type: String,
+  homes: [HomeSchema]
 });
 
 UserSchema.pre("save", function (next) {

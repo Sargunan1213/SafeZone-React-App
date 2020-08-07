@@ -86,7 +86,7 @@ class App extends React.Component {
             <Route exact path="/Login" render={() => <Login app={this} />} />
             <Route exact path="/Live" render={() => <Live />} />
             <Route exact path="/Donation" render={() => <DonationPage />} />
-            {!this.state.currentUser ? <Route exact path="/Posts" app={this} /> : <Posts app={this} type={this.state.currentUser.type}/>} />}
+            <Route exact path="/Posts" render={() => <Posts app={this}/>} />
             <Route exact path="/AddPost" render={() => <AddPost app={this} />} />
             <Route
               exact

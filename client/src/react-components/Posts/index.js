@@ -61,8 +61,9 @@ class Posts extends React.Component {
     }
     
     render() {
-        const { type, app } = this.props;
+        const { app } = this.props;
         let title = <h1>Avaliable Homes</h1>
+        const type = !app.state.currentUser ? "" : app.state.currentUser.type
 
         if (type === "homeowner") {
               title = <h1>Your Posts</h1>
