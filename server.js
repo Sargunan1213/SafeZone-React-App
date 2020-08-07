@@ -290,7 +290,7 @@ app.get("/users", (req, res) => {
 //Get homes
 app.get("/users/home", connectionChecker, (req, res) => {
 
-  home.find().then(homes => {
+  Home.find().then(homes => {
     res.send(homes)
   }, err => {
     res.status(400).send(err)
