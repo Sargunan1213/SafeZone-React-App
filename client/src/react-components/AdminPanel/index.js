@@ -18,7 +18,7 @@ class AdminPanel extends React.Component {
   }
 
   componentDidMount() {
-    getHomes(this)
+    // getHomes(this)
     getHomeowners(this)
     getFrontliners(this)
     console.log(this.state.homeowners)
@@ -56,7 +56,7 @@ class AdminPanel extends React.Component {
           </div>
           <h1>Post</h1>
           <div className="homePost">
-            {this.state.homes.map((home) => (
+            {app.state.homes.map((home) => (
               <Post
                 key={uid(home)}
                 homes={this.state.homes}

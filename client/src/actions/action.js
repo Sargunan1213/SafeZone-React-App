@@ -157,7 +157,7 @@ export const logout = (app) => {
 
 export const removeHome = (app, id) => {
   // delete home information from server
-  const url = '/users/home/' + id
+  const url = local + '/users/home/' + id
   const request = new Request(url, {
     method: "delete",
     body: JSON.stringify(app.state.home),
@@ -291,6 +291,7 @@ export const getHomes = (app) => {
     }
   }).then(json => {
      app.setState({homes: json}) 
+     console.log(app.state.homes)
   }).catch(err => {
     console.log(err)
   })

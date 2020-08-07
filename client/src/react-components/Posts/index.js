@@ -59,11 +59,12 @@ class Posts extends React.Component {
         //       homeowner: "user",
         //     },
         //   ],
-        homes: []
+        // homes: []
     }
-    componentDidMount() {
-      getHomes(this)
-    }
+    // componentDidMount() {
+    //   getHomes(this)
+    //   console.log(this.state.homes)
+    // }
     render() {
         const { app } = this.props;
         let title = <h1>Avaliable Homes</h1>
@@ -77,7 +78,7 @@ class Posts extends React.Component {
             <div id="homes">
                 {title}
                 <div className="posts">
-                    { this.state.homes.map(home => (<Post key={uid(home)}  home={home} comp={this} type={type} app={app}/>)) }
+                    { app.state.homes.map(home => (<Post key={uid(home)}  home={home} comp={this} type={type} app={app}/>)) }
                 </div>
                 {/* Retrieve google map data of addresses. Requires external server call. */}
                 <img className="standinMap" src={require("./static/standinMap.png")} alt="map.png" />
