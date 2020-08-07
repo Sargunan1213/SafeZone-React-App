@@ -256,7 +256,7 @@ export const submitForm = (event, comp, app) => {
   // add home post details
   const request = new Request("/users/home", {
     method: "post",
-    body: JSON.stringify(comp.state),
+    body: JSON.stringify(app.state.home),
     headers: {
       Accept: "application/json, text/plain, */*",
       "Content-Type": "application/json",
