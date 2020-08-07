@@ -267,13 +267,13 @@ export const submitForm = (event, comp, app) => {
     else {
       log("error fail to add home")
     }
-  }).catch(err => {
+  }).then(apps =>{  
+    const allHomes = getHomes()
+    app.setState({homes: allHomes})}).catch(err => {
     console.log(err)
   })
 
-  const allHomes = getHomes()
 
-  app.setState({homes: allHomes})
   // alert("Details of the house were changed: ");
   event.preventDefault();
 };

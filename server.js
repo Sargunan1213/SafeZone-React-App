@@ -142,10 +142,11 @@ app.post("/login", connectionChecker, (req, res) => {
     .then((user) => {
       // Add the user's id to the session cookie.
       // We can check later if this exists to ensure we are logged in.
-      req.session.user = user._id;
+      req.session.user = user._id
       req.session.name = user.name
       req.session.tel = user.tel
-      req.session.email = user.email;
+      req.session.email = user.email
+      req.session.type = user.type
 
       console.log(user);
       res.send({ currentUser: user });
@@ -288,7 +289,7 @@ app.get("/users", (req, res) => {
 
 //Get homes
 app.get("/users/home", connectionChecker, (req, res) => {
-  if (req.session.user) {
+  if (req.session.user && req.session.type === "Homeowner") {
     Home.find({ 'creator': req.session.user }).then(homes => {
       res.send(homes)
     }, err => {

@@ -23,7 +23,6 @@ class NavBar extends React.Component {
     if (type === "Homeowner") {
       nav = {
         Home: "",
-        Posts: "Posts",
         "Live Cases": "Live",
         "My Posts": "Posts",
         "Add Post": "AddPost",
