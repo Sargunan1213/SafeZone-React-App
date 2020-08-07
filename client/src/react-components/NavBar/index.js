@@ -30,7 +30,7 @@ class NavBar extends React.Component {
         "user": "HomeOwnerProfilePage"
       }
     }
-    else if (type === "Frontliner"){
+    else if (type === "Customer"){
       nav = {
         Home: "",
         Posts: "Posts",

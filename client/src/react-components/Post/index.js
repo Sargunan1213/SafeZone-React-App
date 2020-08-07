@@ -8,19 +8,19 @@ class Post extends React.Component {
     state = {};
   
     render() {
-        const {home, comp, type, app} = this.props;
+        const {home, comp, app} = this.props;
 
         let button = "";
+        const type = !app.state.currentUser ? "" : app.state.currentUser.type
         if (type === "Admin"){
             button=<button className='del' onClick={() => removeHome(app, home._id)}>Delete</button>;
         }
-        else if(type === "Frontliner"){
-            button=<button className='select' onClick={() => addInterestedHome(app, home._id)}>Select</button>;
+        else if(type === "Customer"){
+            button=<button className='select' onClick={() => addInterestedHome(home._id)}>Select</button>;
         }
         else if(type === "Homeowner"){
             button=<button className='select' onClick={() => {editHome(app, this, home._id)}}>Edit</button>;
         }
-        button=<button className='select' onClick={() => addInterestedHome(app, home._id)}>Select</button>;
         return (
             <div className="post">
                 
