@@ -25,7 +25,7 @@ class NavBar extends React.Component {
         Home: "",
         Posts: "Posts",
         "Live Cases": "Live",
-        "My Posts": "HomeOwnerPosts",
+        "My Posts": "Posts",
         "Add Post": "AddPost",
         "user": "HomeOwnerProfilePage"
       }
@@ -33,7 +33,7 @@ class NavBar extends React.Component {
     else if (type === "Frontliner"){
       nav = {
         Home: "",
-        Posts: "SelectPosts",
+        Posts: "Posts",
         "Live Cases": "Live",
         "user2": "FrontlinerProfilePage"
       }

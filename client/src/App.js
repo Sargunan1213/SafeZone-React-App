@@ -86,7 +86,7 @@ class App extends React.Component {
             <Route exact path="/Login" render={() => <Login app={this} />} />
             <Route exact path="/Live" render={() => <Live />} />
             <Route exact path="/Donation" render={() => <DonationPage />} />
-            <Route exact path="/Posts" render={() => <Posts app={this}/>} />
+            <Route exact path="/Posts" render={() => <Posts app={this} type={this.state.currentUser.type}/>} />
             <Route exact path="/AddPost" render={() => <AddPost app={this} />} />
             <Route
               exact
@@ -117,16 +117,16 @@ class App extends React.Component {
               path="/FrontlinerProfilePage"
               render={() => <FrontlinerProfilePage />}
             />
-            <Route
+            {/* <Route
               exact
               path="/HomeOwnerPosts"
-              render={() => <Posts type="homeowner" />}
+              render={() => <Posts type="homeowner" app={this}/>}
             />
             <Route
               exact
               path="/SelectPosts"
-              render={() => <Posts type="frontliner" />}
-            />
+              render={() => <Posts type="frontliner" app={this}/>}
+            /> */}
             <Route
               exact
               path="/EditProfileHomeowner"

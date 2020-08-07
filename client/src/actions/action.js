@@ -228,7 +228,6 @@ export const getHomes = (app) => {
       log("error getting homes")
     }
   }).then(json => {
-    log(json)
      app.setState({homes: json}) 
   }).catch(err => {
     console.log(err)
