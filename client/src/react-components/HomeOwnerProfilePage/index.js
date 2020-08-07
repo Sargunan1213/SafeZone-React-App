@@ -6,12 +6,12 @@ import { profileChange } from "../../actions/action";
 
 class HomeOwnerProfilePage extends React.Component {
   state = {
-    name: "user",
-    age: 34,
-    password: "user",
-    postId: [0, 1],
-    tel: "416-432-1431",
-    email: "user@user.com",
+    name: "",
+    age: 0,
+    password: "",
+    postId: [],
+    tel: "",
+    email: "",
 
     profilepic: profileImg,
     type: "homeowner",

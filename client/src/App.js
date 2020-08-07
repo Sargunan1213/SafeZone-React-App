@@ -85,6 +85,7 @@ class App extends React.Component {
     //     </div>
     //   );
     // }
+    const user = this.state.currentUser ? this.state.currentUser : {}
     return (
       <div>
 
@@ -111,16 +112,16 @@ class App extends React.Component {
               path="/userTwitterFeed"
               render={() => <UserTwitterFeed />}
             />
-            <Route exact path="/AdminPanel" render={() => <AdminPanel />} />
+            <Route exact path="/AdminPanel" render={() => <AdminPanel app={this}/>} />
             <Route
               exact
               path="/HomeOwnerProfilePage"
-              render={() => <HomeOwnerProfilePage />}
+              render={() => <HomeOwnerProfilePage user={user}/>}
             />
             <Route
               exact
               path="/FrontlinerProfilePage"
-              render={() => <FrontlinerProfilePage />}
+              render={() => <FrontlinerProfilePage user={user}/>}
             />
             {/* <Route
               exact
@@ -135,12 +136,12 @@ class App extends React.Component {
             <Route
               exact
               path="/EditProfileHomeowner"
-              render={() => <EditProfile type="homeowner" />}
+              render={() => <EditProfile type="homeowner" user={this.state.currentUser}/>}
             />
             <Route
               exact
               path="/EditProfileFrontliner"
-              render={() => <EditProfile type="frontliner" />}
+              render={() => <EditProfile type="frontliner" user={this.state.currentUser}/>}
             />
           </Switch>
           <Footer />

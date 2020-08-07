@@ -102,29 +102,29 @@ UserSchema.statics.findByPassword = function (name, password) {
   });
 };
 
-UserSchema.statics.findByEmailPassword = function (email, password) {
-  const User = this; // binds this to the User model
+// UserSchema.statics.findByEmailPassword = function (email, password) {
+//   const User = this; // binds this to the User model
 
-  // First find the user by their email
-  return User.findOne({ email: email }).then((user) => {
-    if (!user) {
-      console.log("rejected");
-      return Promise.reject(); // a rejected promise
-    }
-    // if the user exists, make sure their password is correct
-    return new Promise((resolve, reject) => {
-      bcrypt.compare(password, user.password, (err, result) => {
-        if (result) {
-          console.log("resolved");
-          resolve(user);
-        } else {
-          console.log("rejected");
-          reject();
-        }
-      });
-    });
-  });
-};
+//   // First find the user by their email
+//   return User.findOne({ email: email }).then((user) => {
+//     if (!user) {
+//       console.log("rejected");
+//       return Promise.reject(); // a rejected promise
+//     }
+//     // if the user exists, make sure their password is correct
+//     return new Promise((resolve, reject) => {
+//       bcrypt.compare(password, user.password, (err, result) => {
+//         if (result) {
+//           console.log("resolved");
+//           resolve(user);
+//         } else {
+//           console.log("rejected");
+//           reject();
+//         }
+//       });
+//     });
+//   });
+// };
 
 const User = mongoose.model("User", UserSchema);
 const Home = mongoose.model("Home", HomeSchema)

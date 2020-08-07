@@ -8,7 +8,7 @@ class Post extends React.Component {
     state = {};
   
     render() {
-        const {home, comp, app} = this.props;
+        const {home, app} = this.props;
 
         let button = "";
         const type = !app.state.currentUser ? "" : app.state.currentUser.type

@@ -1,31 +1,21 @@
 import React from 'react';
 import './styles.css';
 
-import { handleInputChange, profileChange } from "../../actions/action";
+import { handleInputChange, profileInfoChange } from "../../actions/action";
 
 class EditProfile extends React.Component {
     constructor(props) {
         super(props);
+        console.log(props)
 
         this.state = {
-            name: "user2",
-            age: 49,
-            tel: "514-123-9030",
-            email: "user2@user.com",
+            name: this.props.user.name,
+            age: this.props.user.age,
+            tel: this.props.user.tel,
+            email: this.props.user.email,
             password: "",
             type: this.props.type
         };
-
-        if (props.type === "homeowner") {
-            this.state = {
-                name: "user",
-                age: 34,
-                tel: "416-432-1431",
-                email: "user@user.com",
-                password: "",
-                type: this.props.type
-            };
-        }
     }
 
     render() {
@@ -55,7 +45,7 @@ class EditProfile extends React.Component {
                                 </label>
                             </form>
                         </div>
-                        <button className="frontlinerProfile-btn" onClick={(e) => profileChange(e,this)}>Submit Change</button>
+                        <button className="frontlinerProfile-btn" onClick={(e) => profileInfoChange(e, this, this.props.user._id)}>Submit Change</button>
                     </div>
                 </div>
             </div>

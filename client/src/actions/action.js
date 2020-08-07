@@ -1,4 +1,6 @@
 const log = console.log
+// const local = 'http://localhost:5000'
+const local = ''
 // A function to check if a user is logged in on the session cookie
 export const readCookie = (app) => {
   const url = "/users/check-session";
@@ -32,7 +34,7 @@ export const updateLoginForm = (loginComp, field) => {
 // Sign up a user
 
 export const signUpUser = (comp) => {
-  const request = new Request("/signUpUser", {
+  const request = new Request(local + "/signUpUser", {
     method: "post",
     body: JSON.stringify(comp.state),
     headers: {
@@ -55,7 +57,7 @@ export const signUpUser = (comp) => {
 // A function to send a POST request with the user to be logged in
 export const signIn = (comp, app) => {
   // Create our request constructor with all the parameters we need
-  const request = new Request("/login", {
+  const request = new Request(local+"/login", {
     method: "post",
     body: JSON.stringify(comp.state),
     headers: {
@@ -279,7 +281,7 @@ export const submitForm = (event, comp, app) => {
 };
 
 export const getHomes = (app) => {
-  const url = "/users/home"
+  const url = local + "/users/home"
   fetch(url).then(function(res) {
     if(res.status === 200) {
       return res.json()
@@ -315,18 +317,28 @@ export const editHome = (app, comp, id) => {
 
 }
 
-export const removeUser = (comp, users, user) => {
+export const removeUser = (id, comp) => {
   // delete user information from server
-  // requires server call
-  if (user === "user") {
-    alert("This user has posts, don't delete");
-    return;
-  }
-  delete users[user];
-
-  comp.setState({
-    [users]: users,
+  const url = local + '/users/' + id
+  const request = new Request(url, {
+    method: "delete",
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+    },
   });
+  fetch(request).then(function(res) {
+    if(res.status === 200) {
+      log("success removed user")
+    }
+    else {
+      log("error fail to remove user")
+    }
+    getHomeowners(comp)
+    getFrontliners(comp)
+  }).catch(err => {
+    console.log(err)
+  })
 };
 
 export const submitDonationForm = (event, comp) => {
@@ -353,6 +365,35 @@ export const submitDonationForm = (event, comp) => {
       console.log(error);
     });
 };
+
+export const profileInfoChange = (e, comp, id) => {
+  if(comp.state.password === ""){
+    alert("Enter a password")
+    return
+  }
+  
+  const url = local + '/users/' + id
+  const request1 = new Request(url, {
+    method: "put",
+    body:  JSON.stringify(comp.state),
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+    },
+  });
+
+  fetch(request1)
+    .then((res) => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+    alert("Changed")
+
+}
 
 export const profileChange = (event, comp) => {
   // Server call to send changed profile info into the database.
@@ -392,6 +433,37 @@ export const profileChange = (event, comp) => {
     });
 };
 
+export const getHomeowners = (comp) => {
+  const url = local + "/users/homeowners"
+  fetch(url).then(function(res) {
+    if(res.status === 200) {
+      return res.json()
+    }
+    else {
+      log("error getting homeowners")
+    }
+  }).then(json => {
+     comp.setState({homeowners: json}) 
+  }).catch(err => {
+    console.log(err)
+  })
+}
+
+export const getFrontliners = (comp) => {
+  const url = local + "/users/frontliners"
+  fetch(url).then(function(res) {
+    if(res.status === 200) {
+      return res.json()
+    }
+    else {
+      log("error getting homeowners")
+    }
+  }).then(json => {
+     comp.setState({frontliners: json}) 
+  }).catch(err => {
+    console.log(err)
+  })
+}
 // export const update = (event, comp) => {
 //   const read = new FileReader();
 //   read.onload = () => {

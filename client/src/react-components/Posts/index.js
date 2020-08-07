@@ -3,7 +3,7 @@ import React from 'react';
 import Post from "../Post";
 import { uid } from 'react-uid';
 import { withRouter } from "react-router";
-
+import { getHomes } from "../../actions/action.js";
 import './styles.css';
 
 class Posts extends React.Component {
@@ -59,8 +59,11 @@ class Posts extends React.Component {
         //       homeowner: "user",
         //     },
         //   ],
+        homes: []
     }
-    
+    componentDidMount() {
+      getHomes(this)
+    }
     render() {
         const { app } = this.props;
         let title = <h1>Avaliable Homes</h1>
@@ -74,7 +77,7 @@ class Posts extends React.Component {
             <div id="homes">
                 {title}
                 <div className="posts">
-                    { app.state.homes.map(home => (<Post key={uid(home)}  home={home} comp={this} type={type} app={app}/>)) }
+                    { this.state.homes.map(home => (<Post key={uid(home)}  home={home} comp={this} type={type} app={app}/>)) }
                 </div>
                 {/* Retrieve google map data of addresses. Requires external server call. */}
                 <img className="standinMap" src={require("./static/standinMap.png")} alt="map.png" />

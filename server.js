@@ -14,7 +14,6 @@ const { User, Home } = require("./models/safezone");
 const { Donation } = require("./models/donation");
 
 const { ObjectID } = require("mongodb");
-
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(cors());
@@ -132,13 +131,13 @@ app.post("/signUpUser", connectionChecker, (req, res) => {
 
 // A route to login and create a session
 app.post("/login", connectionChecker, (req, res) => {
-  const email = req.body.username;
+  const name = req.body.username;
   const password = req.body.password;
 
-  log(email, password);
+  log(name, password);
   // Use the static method on the User model to find a user
   // by their email and password
-  User.findByEmailPassword(email, password)
+  User.findByPassword(name, password)
     .then((user) => {
       // Add the user's id to the session cookie.
       // We can check later if this exists to ensure we are logged in.
@@ -287,6 +286,90 @@ app.get("/users", (req, res) => {
     });
 });
 
+app.delete("/users/:id", connectionChecker, (req, res) => {
+  const id = req.params.id
+  if (!ObjectID.isValid(id)){
+    res.status(404).send()
+  }
+
+  User.findByIdAndRemove(id)
+    .then((user) => {
+      if(!user){
+        res.status(404).send()
+      }
+      else{
+        res.send(user);
+      }
+
+    })
+    .catch((err) => {
+      log(err);
+      res.status(500).send("Internal Server Error");
+    });
+});
+
+app.put("/users/:id", connectionChecker, (req, res) => {
+  const id = req.params.id;
+
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send();
+    return;
+  }
+
+  User.findById(id).then(user => {
+    if (!user) {
+      res.status(404).send()
+    }
+    else {
+      user.password = req.body.password
+      user.save()
+      res.send(user)
+    }
+  }).catch(err => {
+    res.status(500).send()
+  })
+  const change = {
+    name: req.body.name,
+    age: req.body.age,
+    tel: req.body.tel,
+    email: req.body.email,
+    profilePic: "./static/favicon.ico"
+  }
+
+  User.findByIdAndUpdate(id, { $set: change }, { new: true }).then(user => {
+    if (!user) {
+      res.status(404).send()
+    }
+    else {
+      res.send(user)
+    }
+  }).catch(err => {
+    res.status(500).send()
+  })
+});
+
+app.get("/users/homeowners", connectionChecker, (req, res) => {
+  User.find({'type': 'Homeowner'})
+    .then((users) => {
+      res.send(users);
+    })
+    .catch((err) => {
+      log(err);
+      res.status(500).send("Internal Server Error");
+    });
+});
+
+app.get("/users/frontliners", connectionChecker, (req, res) => {
+  User.find({'type': 'Customer'})
+    .then((users) => {
+      res.send(users);
+    })
+    .catch((err) => {
+      log(err);
+      res.status(500).send("Internal Server Error");
+    });
+});
+
 //Get homes
 app.get("/users/home", connectionChecker, (req, res) => {
   if (req.session.user && req.session.type === "Homeowner") {
@@ -425,7 +508,7 @@ app.post("/users/interest/:homeid", connectionChecker, authenticate, (req, res) 
 });
 
 //Delete Route
-app.delete("/users/:homeid", connectionChecker, authenticate, (req, res) => {
+app.delete("/users/home/:homeid", connectionChecker, authenticate, (req, res) => {
   const homeid = req.params.homeid;
 
   if (!ObjectID.isValid(homeid)) {
