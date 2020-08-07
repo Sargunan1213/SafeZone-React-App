@@ -16,6 +16,16 @@ const HomeSchema = new mongoose.Schema({
   pic: String,
   description: String,
   price: Number,
+  user: String,
+  tel: String,
+  email:{
+    type: String,
+    required: true,
+    minlength: 1,
+    validate: {
+      validator: validator.isEmail,
+      message: "Not valid email",
+    },
   creator: {
 		type: mongoose.Schema.Types.ObjectId,
 		required: true

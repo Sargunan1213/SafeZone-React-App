@@ -98,7 +98,7 @@ app.post("/users", connectionChecker, (req, res) => {
       res.send(user);
     },
     (error) => {
-      res.status(400).send(error); // 400 for bad request
+      res.status(400).send(error);
     }
   );
 });
@@ -126,7 +126,7 @@ app.post("/signUpUser", connectionChecker, (req, res) => {
     },
     (error) => {
       log(error);
-      res.status(400).send(error); // 400 for bad request
+      res.status(400).send(error); 
     }
   );
 });
@@ -144,6 +144,8 @@ app.post("/login", connectionChecker, (req, res) => {
       // Add the user's id to the session cookie.
       // We can check later if this exists to ensure we are logged in.
       req.session.user = user._id;
+      req.session.anme = user.name
+      req.session.tel = user.tel
       req.session.email = user.email;
 
       console.log(user);
@@ -286,7 +288,7 @@ app.get("/users", (req, res) => {
 });
 
 // Add home to user
-app.post("/users/home", connectionChecker,  (req, res) => {
+app.post("/users/home", connectionChecker, authenticate, (req, res) => {
 
   if (!ObjectID.isValid(req.session.user)) {
     res.status(404).send();
@@ -302,7 +304,10 @@ app.post("/users/home", connectionChecker,  (req, res) => {
       //   },
       description: req.body.description,
       price: req.body.price,
-      creator: req.session.user
+      creator: req.session.user,
+      user: req.session.name,
+      tel: req.session.tel,
+      email: req.session.email
     })
 
   home.save().then(home => {
@@ -310,107 +315,64 @@ app.post("/users/home", connectionChecker,  (req, res) => {
   }, err => {
     res.status(400).send(err)
   })
-  // User.findByIdAndUpdate(
-  //   req.session.user,
-  //   { $push: home },
-  //   { new: true, useFindAndModify: false }
-  // )
-  //   .then((user) => {
-  //     if (!user) {
-  //       res.status(404).send("Resource not found");
-  //     } else {
-  //       res.send(user);
-  //     }
-  //   })
-  //   .catch((err) => {
-  //     isError(err, res);
-  //   });
  });
 
 //Edit home to user
-app.put("/users/:id/:homeid", (req, res) => {
-  const id = req.params.id;
+app.put("/users/:homeid", connectionChecker, authenticate, (req, res) => {
   const homeid = req.params.homeid;
 
-  if (!ObjectID.isValid(id) || !ObjectID.isValid(homeid)) {
+  if (!ObjectID.isValid(homeid)) {
     res.status(404).send();
     return;
   }
-
-  if (mongoose.connection.readyState != 1) {
-    log("Issue with mongoose connection");
-    res.status(500).send("Internal server error");
-    return;
+  const change = {
+    address: req.body.address,
+    zip: req.body.zip,
+    pic: 'home1.jpg',
+    // pic: { 
+    //   data: fs.readFileSync(req.body.pic),
+    //   type: "image/jpg"
+    //   },
+    description: req.body.description,
+    price: req.body.price,
+    creator: req.session.user,
+    user: req.session.name,
+    tel: req.session.tel,
+    email: req.session.email
   }
 
-  User.findOneAndReplace(id, req.body, { new: true, useFindAndModify: false })
-    .then((user) => {
-      if (!user) {
-        res.status(404).send("Resource not found");
-      } else {
-        const home = user.homes.id(homeid);
-        if (!home) {
-          res.status(404).send("Resource not found");
-        } else {
-          user.homes.pull(homeid);
-          user
-            .save()
-            .then((user) => {
-              res.send(user);
-            })
-            .catch((err) => {
-              isError(err, res);
-            });
-        }
-      }
-    })
-
-    .catch((err) => {
-      isError(err, res);
-    });
+  Home.findByIdAndUpdate(homeid, {$set: change }, {new: true}).then(home => {
+    if(!home){
+      res.status(404).send()
+    }
+    else {
+      res.send(home)
+    }
+  }).catch (err => {
+    res.status(500).send()
+  })
 });
 
 //Delete Route
 
-app.delete("/users/:id/:homeid", (req, res) => {
-  const id = req.params.id;
+app.delete("/users/:homeid", connectionChecker, authenticate, (req, res) => {
   const homeid = req.params.homeid;
 
-  if (!ObjectID.isValid(id) || !ObjectID.isValid(homeid)) {
+  if (!ObjectID.isValid(homeid)) {
     res.status(404).send();
     return;
   }
 
-  if (mongoose.connection.readyState != 1) {
-    log("Issue with mongoose connection");
-    res.status(500).send("Internal server error");
-    return;
-  }
-
-  User.findById(id)
-    .then((user) => {
-      if (!user) {
-        res.status(404).send("Resource not found");
-      } else {
-        const home = user.homes.id(homeid);
-        if (!home) {
-          res.status(404).send("Resource not found");
-        } else {
-          user.homes.pull(homeid);
-          user
-            .save()
-            .then((user) => {
-              res.send(user);
-            })
-            .catch((err) => {
-              isError(err, res);
-            });
-        }
-      }
-    })
-    .catch((err) => {
-      isError(err, res);
-    });
+  Home.findByIdAndRemove(homeid).then(home => {
+    if(!home){
+      res.status(404).send()
+    }
+    else {
+      res.send(home)
+    }
+  }).catch (err => {
+    res.status(500).send()
+  })
 });
 
 app.get("*", (req, res) => {
