@@ -145,8 +145,10 @@ app.post("/login", connectionChecker, (req, res) => {
       // We can check later if this exists to ensure we are logged in.
       req.session.user = user._id;
       req.session.email = user.email;
+
       console.log(user);
       res.send({ currentUser: user });
+      req.session.save()
     })
     .catch((error) => {
       res.send({ msg: "Wrong Credentials please try again." });
@@ -284,13 +286,13 @@ app.get("/users", (req, res) => {
 });
 
 // Add home to user
-app.post("/users/home", connectionChecker, authenticate, (req, res) => {
+app.post("/users/home", connectionChecker,  (req, res) => {
 
-  if (!ObjectID.isValid(req.session.user)) {
-    res.status(404).send();
-    return;
-  }
-
+  // if (!ObjectID.isValid(req.session.user)) {
+  //   res.status(404).send();
+  //   return;
+  // }
+log(req.session.user)
   const home = {
     homes: {
       address: req.body.address,
@@ -298,31 +300,31 @@ app.post("/users/home", connectionChecker, authenticate, (req, res) => {
       province: req.body.province,
       country: req.body.country,
       zip: req.body.zip,
-      pic: { 
-        data: fs.readFileSync(req.body.pic),
-        type: "image/jpg"
-        },
+      // pic: { 
+      //   data: fs.readFileSync(req.body.pic),
+      //   type: "image/jpg"
+      //   },
       description: req.body.description,
       price: req.body.price,
-      creator: req.session.user
+      // creator: req.session.user
     },
   };
 log(home)
-  User.findByIdAndUpdate(
-    req.session.user,
-    { $push: home },
-    { new: true, useFindAndModify: false }
-  )
-    .then((user) => {
-      if (!user) {
-        res.status(404).send("Resource not found");
-      } else {
-        res.send(user);
-      }
-    })
-    .catch((err) => {
-      isError(err, res);
-    });
+  // User.findByIdAndUpdate(
+  //   req.session.user,
+  //   { $push: home },
+  //   { new: true, useFindAndModify: false }
+  // )
+  //   .then((user) => {
+  //     if (!user) {
+  //       res.status(404).send("Resource not found");
+  //     } else {
+  //       res.send(user);
+  //     }
+  //   })
+  //   .catch((err) => {
+  //     isError(err, res);
+  //   });
  });
 
 //Edit home to user
@@ -411,6 +413,9 @@ app.delete("/users/:id/:homeid", (req, res) => {
     });
 });
 
+app.get("*", (req, res) => {
+  res.sendFile(__dirname + "/client/build/index.html");
+})
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   log(`Listening on port ${port}`);
