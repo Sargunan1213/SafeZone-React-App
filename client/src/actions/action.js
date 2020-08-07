@@ -210,22 +210,24 @@ export const submitForm = (event, comp, app) => {
   }).catch(err => {
     console.log(err)
   })
-  alert("Details of the house were changed: ");
+
+  const allHomes = getHomes()
+
+  app.setState({homes: allHomes})
+  // alert("Details of the house were changed: ");
   event.preventDefault();
 };
 
-export const getHomes = (comp) => {
-  const url = "/uers/home"
+export const getHomes = () => {
+  const url = "/users/home"
   fetch(url).then(function(res) {
     if(res.status === 200) {
-      return res.json
+      log([res.json])
+      return [res.json]
     }
     else {
       log("error getting homes")
     }
-  }).then(json => {
-    log(json)
-    // comp.setState({homes: json.})
   }).catch(err => {
     console.log(err)
   })

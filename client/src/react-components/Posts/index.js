@@ -30,7 +30,7 @@ class Posts extends React.Component {
                 interest: [],
               },
             },
-        homes: [
+        homess: [
             {
               id: 0,
               address: "4130 George Street, Peterborough, Ontario",
@@ -59,6 +59,7 @@ class Posts extends React.Component {
               homeowner: "user",
             },
           ],
+          homes:[{"_id":{"$oid":"5f2cbad0cfae320017949a4a"},"address":"4130 George Street, Peterborough, Ontario","zip":"K9H 2L1","pic":"home1.jpg","description":"1 bedroom, all inclusive (hear, hydro, water), renovated, pets ok","price":1570,"creator":{"$oid":"5f2c87158d5ce15f0cc8cace"},"tel":"416-432-3424","email":"user@user.com","user":"user","__v":0}]
     }
     
     render() {
@@ -73,7 +74,7 @@ class Posts extends React.Component {
             <div id="homes">
                 {title}
                 <div className="posts">
-                    { this.state.homes.map(home => (<Post key={uid(home)} homes={this.state.homes} home={home} owners={this.state.owners} comp={this} type={type}/>)) }
+                    { this.state.homes.map(home => (<Post key={uid(home)}  home={home} comp={this} type={type}/>)) }
                 </div>
                 {/* Retrieve google map data of addresses. Requires external server call. */}
                 <img className="standinMap" src={require("./static/standinMap.png")} alt="map.png" />

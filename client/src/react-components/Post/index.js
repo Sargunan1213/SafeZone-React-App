@@ -8,18 +8,18 @@ class Post extends React.Component {
     state = {};
   
     render() {
-        const {homes, home, owners, comp, type} = this.props;
+        const {home, comp, type} = this.props;
         const homeowner = home.homeowner;
 
         let button = "";
         if (type === "admin"){
-            button=<button className='del' onClick={() => removeHome(comp, homes, home)}>Delete</button>;
+            button=<button className='del' onClick={() => removeHome(comp, home._id)}>Delete</button>;
         }
         else if(type === "frontliner"){
-            button=<button className='select' onClick={() => addInterestedHome(comp, home["id"])}>Select</button>;
+            button=<button className='select' onClick={() => addInterestedHome(comp, home._id)}>Select</button>;
         }
         else if(type === "homeowner"){
-            button=<Link className='select' to={{pathname: "/EditPostPage" + homes.indexOf(home)}}>Edit</Link>;
+            button=<Link className='select' to={{pathname: "/EditPostPage"}}>Edit</Link>;
         }
 
         return (
@@ -34,9 +34,9 @@ class Post extends React.Component {
                     <p>{home.description}</p>
                     <p><span className="bold">Price: </span>{home.price}</p>
                     <br></br>
-                    <p><span className="bold">Poster: </span>{home.homeowner}</p>
-                    <p><span className="bold">Contact: </span>{owners[homeowner]["tel"]}</p>
-                    <p><span className="bold">Email: </span>{owners[homeowner]["email"]}</p>
+                    <p><span className="bold">Poster: </span>{home.user}</p>
+                    <p><span className="bold">Contact: </span>{home.tel}</p>
+                    <p><span className="bold">Email: </span>{home.email}</p>
                     
                 </div>
                 {button}

@@ -20,7 +20,7 @@ import DonationPage from "./react-components/DonationPage";
 import EditPostPage from "./react-components/EditPostPage";
 import UserTwitterFeed from "./react-components/userTwitterFeed";
 import EditProfile from "./react-components/EditProfile";
-import { readCookie } from "../src/actions/action.js";
+import { readCookie, getHomes } from "../src/actions/action.js";
 import NavBar from "./react-components/NavBar";
 
 class App extends React.Component {
@@ -30,8 +30,9 @@ class App extends React.Component {
 
     this.state = {
       currentUser: null,
-      homes: null
+      homes: getHomes()
     }
+    console.log(this.state.homes)
   }
 
   render() {

@@ -144,7 +144,7 @@ app.post("/login", connectionChecker, (req, res) => {
       // Add the user's id to the session cookie.
       // We can check later if this exists to ensure we are logged in.
       req.session.user = user._id;
-      req.session.anme = user.name
+      req.session.name = user.name
       req.session.tel = user.tel
       req.session.email = user.email;
 
