@@ -270,8 +270,8 @@ export const submitForm = (event, comp, app) => {
       log("error fail to add home")
     }
   }).then(apps =>{  
-    const allHomes = getHomes()
-    app.setState({homes: allHomes})}).catch(err => {
+    const allHomes = getHomes(app)
+    }).catch(err => {
     console.log(err)
   })
 
