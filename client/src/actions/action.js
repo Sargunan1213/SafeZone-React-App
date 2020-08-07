@@ -234,6 +234,10 @@ export const getHomes = (app) => {
   })
 }
 
+export const editHome = (app) => {
+  
+}
+
 export const removeUser = (comp, users, user) => {
   // delete user information from server
   // requires server call

@@ -73,7 +73,7 @@ class Posts extends React.Component {
             <div id="homes">
                 {title}
                 <div className="posts">
-                    { app.state.homes.map(home => (<Post key={uid(home)}  home={home} comp={this} type={type}/>)) }
+                    { app.state.homes.map(home => (<Post key={uid(home)}  home={home} comp={this} type={type} app={app}/>)) }
                 </div>
                 {/* Retrieve google map data of addresses. Requires external server call. */}
                 <img className="standinMap" src={require("./static/standinMap.png")} alt="map.png" />

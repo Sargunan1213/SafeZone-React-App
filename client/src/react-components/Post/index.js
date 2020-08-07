@@ -2,13 +2,13 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 import './styles.css';
-import { removeHome, addInterestedHome } from "../../actions/action";
+import { removeHome, addInterestedHome, editHome } from "../../actions/action";
 
 class Post extends React.Component {
     state = {};
   
     render() {
-        const {home, comp, type} = this.props;
+        const {home, comp, type, app} = this.props;
 
         let button = "";
         if (type === "admin"){
@@ -18,7 +18,7 @@ class Post extends React.Component {
             button=<button className='select' onClick={() => addInterestedHome(comp, home._id)}>Select</button>;
         }
         else if(type === "homeowner"){
-            button=<Link className='select' to={{pathname: "/EditPostPage"}}>Edit</Link>;
+            button=<Link className='select' onClick={() => editHome(app, home._id)} to={{pathname: "/EditPostPage"}}>Edit</Link>;
         }
 
         return (
