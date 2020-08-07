@@ -287,6 +287,16 @@ app.get("/users", (req, res) => {
     });
 });
 
+//Get homes
+app.get("/users/home", connectionChecker, (req, res) => {
+
+  home.find().then(homes => {
+    res.send(homes)
+  }, err => {
+    res.status(400).send(err)
+  })
+ });
+
 // Add home to user
 app.post("/users/home", connectionChecker, authenticate, (req, res) => {
 
