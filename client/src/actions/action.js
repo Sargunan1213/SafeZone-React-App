@@ -222,8 +222,8 @@ export const getHomes = () => {
   const url = "/users/home"
   fetch(url).then(function(res) {
     if(res.status === 200) {
-      log([res.json])
-      return [res.json]
+      log(res.json())
+      return res.json()
     }
     else {
       log("error getting homes")
