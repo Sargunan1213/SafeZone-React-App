@@ -65,42 +65,6 @@ class AddPostForm extends React.Component {
             onChange={this.props.handle}
           />
           <br />
-          <label className="lab" htmlFor="username">
-            Enter your username :
-          </label>
-          <input
-            className="inp"
-            type="text"
-            name="username"
-            value={username || ''}
-            label="username"
-            onChange={this.props.handle}
-          />
-          <br />
-          <label className="lab" htmlFor="phone">
-            Enter your phone number :
-          </label>
-          <input
-            className="inp"
-            type="text"
-            name="phone"
-            value={phone || ''}
-            label="phone"
-            onChange={this.props.handle}
-          />
-          <br />
-          <label className="lab" htmlFor="email">
-            Enter your email address:
-          </label>
-          <input
-            className="inp"
-            type="text"
-            name="email"
-            value={email || ''}
-            label="email"
-            onChange={this.props.handle}
-          />
-          <br />
           <label className="lab" htmlFor="img">
             Upload a image of your house:
           </label>

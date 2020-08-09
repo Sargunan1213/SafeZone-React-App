@@ -89,7 +89,7 @@ class Signup extends React.Component {
             {/* Send new user data to server. */}
             <button
               type="button"
-              className="submit1"
+              className="submitSignup"
               onClick={() => signUpUser(this)}
             >
               {" "}

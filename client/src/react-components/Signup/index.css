@@ -80,3 +80,14 @@
   border-radius: 3%;
   border: thin;
 }
+
+.submitSignup {
+  outline: none;
+  background: #0f1e73;
+  width: 40%;
+  height: 6vh;
+  border-radius: 2vh;
+  color: white;
+  font-size: 3vh;
+  font-style: italic;
+}

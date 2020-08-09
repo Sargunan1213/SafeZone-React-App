@@ -70,7 +70,7 @@ class HomeOwnerProfilePage extends React.Component {
             <h2>Email: {this.state.email}</h2>
           </div>
 
-          <Link to="/HomeOwnerPosts">
+          <Link to="/Posts">
             <button className="homeOwnerViewOwnPost-btn">
               View your own posts
             </button>
