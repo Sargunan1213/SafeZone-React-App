@@ -461,7 +461,7 @@ app.post("/users/home", connectionChecker, authenticate, multipartMiddleware, (r
   // 
 
   if (!ObjectID.isValid(req.session.user)) {
-    res.status(404).send();
+    res.status(404).send("User not valid");
     return;
   }
 
@@ -491,11 +491,11 @@ app.post("/users/home", connectionChecker, authenticate, multipartMiddleware, (r
 });
 
 //Edit home
-app.put("/users/home/:homeid", connectionChecker, authenticate, (req, res) => {
+app.put("/users/home/:homeid", connectionChecker, authenticate, multipartMiddleware, (req, res) => {
   const homeid = req.params.homeid;
 
   if (!ObjectID.isValid(homeid)) {
-    res.status(404).send();
+    res.status(404).send("Home not valid");
     return;
   }
 
