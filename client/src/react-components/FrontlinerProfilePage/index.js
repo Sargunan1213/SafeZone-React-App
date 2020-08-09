@@ -2,7 +2,7 @@ import React from "react";
 import "./styles.css";
 import { Link } from "react-router-dom";
 import profileImg from "./static/favicon.ico";
-// import { update } from "../../actions/action";
+import { profileChange } from "../../actions/action";
 
 class FrontlinerProfilePage extends React.Component {
   state = {
@@ -18,14 +18,14 @@ class FrontlinerProfilePage extends React.Component {
   };
 
   render() {
-    const { user } = this.props;
+    const { user, app } = this.props;
     this.state.name = user.name;
     this.state.age = user.age;
     this.state.password = user.password;
     this.state.postId = user.postId;
     this.state.tel = user.tel;
     this.state.email = user.email;
-    this.state.profilepic = user.profilepic;
+    this.state.profilepic = user.profilePic;
     this.state.type = user.type;
     return (
       <div>
@@ -36,12 +36,25 @@ class FrontlinerProfilePage extends React.Component {
               src={this.state.profilepic}
               alt="frontlinerProfilePicture.jpg"
             ></img>
-            <input
-              type="file"
-              className="homeOwnerProfile-btn"
-              // onChange={(e) => update(e, this)}
-              accept="image/*"
-            />
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                profileChange(e.target, this, app);
+              }}
+            >
+              <div>
+                <label>Image:</label>
+                <input name="image" type="file" />
+              </div>
+              <button
+                variant="contained"
+                color="primary"
+                type="submit"
+                className="frontlinerProfile-btn"
+              >
+                Upload
+            </button>
+            </form>
             <div className="frontline_general_info">
               <h2>Name: {this.state.name}</h2>
               <h2>Age: {this.state.age}</h2>

@@ -27,7 +27,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     readCookie(this); // sees if a user is logged in.
-    
+
   }
   state = {
     currentUser: null,
@@ -90,19 +90,19 @@ class App extends React.Component {
       <div>
 
         <BrowserRouter>
-          {!this.state.currentUser ? <NavBar/> :<NavBar type={this.state.currentUser.type}/>}
+          {!this.state.currentUser ? <NavBar /> : <NavBar type={this.state.currentUser.type} />}
           <Switch>
             <Route exact path="/" render={() => <Home />} />
             <Route exact path="/Signup" render={() => <Signup />} />
             <Route exact path="/Login" render={() => <Login app={this} />} />
             <Route exact path="/Live" render={() => <Live />} />
             <Route exact path="/Donation" render={() => <DonationPage />} />
-            <Route exact path="/Posts" render={() => <Posts app={this}/>} />
+            <Route exact path="/Posts" render={() => <Posts app={this} />} />
             <Route exact path="/AddPost" render={() => <AddPost app={this} />} />
             <Route
               exact
               path="/EditPostPage"
-              render={() => <EditPostPage app={this} home={this.state.home}/>}
+              render={() => <EditPostPage app={this} home={this.state.home} />}
             />
             <Route exact path="/Feedback" render={() => <Feedback />} />
             <Route exact path="/AboutUs" render={() => <AboutUs />} />
@@ -112,16 +112,16 @@ class App extends React.Component {
               path="/userTwitterFeed"
               render={() => <UserTwitterFeed />}
             />
-            <Route exact path="/AdminPanel" render={() => <AdminPanel app={this}/>} />
+            <Route exact path="/AdminPanel" render={() => <AdminPanel app={this} />} />
             <Route
               exact
               path="/HomeOwnerProfilePage"
-              render={() => <HomeOwnerProfilePage user={user} app={this}/>}
+              render={() => <HomeOwnerProfilePage user={user} app={this} />}
             />
             <Route
               exact
               path="/FrontlinerProfilePage"
-              render={() => <FrontlinerProfilePage user={user}/>}
+              render={() => <FrontlinerProfilePage user={user} app={this} />}
             />
             {/* <Route
               exact
@@ -136,12 +136,12 @@ class App extends React.Component {
             <Route
               exact
               path="/EditProfileHomeowner"
-              render={() => <EditProfile type="homeowner" user={this.state.currentUser}/>}
+              render={() => <EditProfile type="homeowner" user={this.state.currentUser} />}
             />
             <Route
               exact
               path="/EditProfileFrontliner"
-              render={() => <EditProfile type="frontliner" user={this.state.currentUser}/>}
+              render={() => <EditProfile type="frontliner" user={this.state.currentUser} />}
             />
           </Switch>
           <Footer />

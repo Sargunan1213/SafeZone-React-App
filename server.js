@@ -457,18 +457,18 @@ app.get("/users/home/:id", connectionChecker, (req, res) => {
 
 // Add home
 app.post("/users/home", connectionChecker, authenticate, (req, res) => {
+
   if (!ObjectID.isValid(req.session.user)) {
     res.status(404).send();
     return;
   }
+
+  // cloudinary.uploader.upload(req.body.img, function (result) {
+
   const home = new Home({
     address: req.body.address,
     zip: req.body.zip,
-    pic: "home1.jpg",
-    // pic: {
-    //   data: fs.readFileSync(req.body.pic),
-    //   type: "image/jpg"
-    //   },
+    pic: req.body.img,
     description: req.body.description,
     price: req.body.price,
     creator: req.session.user,
@@ -485,6 +485,8 @@ app.post("/users/home", connectionChecker, authenticate, (req, res) => {
       res.status(400).send(err);
     }
   );
+  // });
+
 });
 
 //Edit home

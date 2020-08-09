@@ -25,7 +25,7 @@ class AddPostForm extends React.Component {
             className="inp"
             type="text"
             name="address"
-            value={address ||''}
+            value={address || ''}
             label="address"
             onChange={this.props.handle}
           />
@@ -36,7 +36,7 @@ class AddPostForm extends React.Component {
             className="inp"
             type="text"
             name="zip"
-            value={zip||''}
+            value={zip || ''}
             label="zip"
             onChange={this.props.handle}
           />
@@ -48,7 +48,7 @@ class AddPostForm extends React.Component {
             className="inp"
             type="text"
             name="description"
-            value={description||''}
+            value={description || ''}
             label="description"
             onChange={this.props.handle}
           />
@@ -60,7 +60,7 @@ class AddPostForm extends React.Component {
             className="inp"
             type="text"
             name="price"
-            value={price||''}
+            value={price || ''}
             label="price"
             onChange={this.props.handle}
           />
@@ -72,7 +72,7 @@ class AddPostForm extends React.Component {
             className="inp"
             type="text"
             name="username"
-            value={username||''}
+            value={username || ''}
             label="username"
             onChange={this.props.handle}
           />
@@ -84,7 +84,7 @@ class AddPostForm extends React.Component {
             className="inp"
             type="text"
             name="phone"
-            value={phone||''}
+            value={phone || ''}
             label="phone"
             onChange={this.props.handle}
           />
@@ -96,7 +96,7 @@ class AddPostForm extends React.Component {
             className="inp"
             type="text"
             name="email"
-            value={email||''}
+            value={email || ''}
             label="email"
             onChange={this.props.handle}
           />
@@ -108,9 +108,8 @@ class AddPostForm extends React.Component {
             className="inp"
             type="file"
             name="img"
-            value={img||''}
             label="img"
-            onChange={this.props.handle}
+            onChange={this.props.handle2}
           />
           <br />
           <button type="submit" className="btn">

@@ -255,7 +255,17 @@ export const handleInputChangeHome = (event, component) => {
   component.setState({ home: newHome });
   console.log("typing");
 };
+export const handleInputChangeHomePic = (event, component) => {
+  const target = event.target;
+  const value = URL.createObjectURL(target.files[0]);
+  const name = target.name;
 
+  let newHome = component.state.home;
+  newHome[name] = value;
+
+  component.setState({ home: newHome });
+  console.log("typing");
+};
 export const submitForm = (event, comp, app) => {
   // add home post details
   const request = new Request("/users/home", {
@@ -421,9 +431,8 @@ export const profileChange = (form, page, app) => {
     .then(function (res) {
       if (res.status === 200) {
         const json1 = res.json();
-        
         return json1
-        
+
       }
     }).then(json1 => {
       log(json1)

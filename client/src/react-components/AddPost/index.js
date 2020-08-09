@@ -4,7 +4,7 @@ import "./styles.css";
 
 import AddPostForm from "../AddPostForm";
 
-import { handleInputChange, handleInputChangeHome } from "../../actions/action";
+import { handleInputChange, handleInputChangeHome, handleInputChangeHomePic } from "../../actions/action";
 import { submitForm } from "../../actions/action";
 
 // will link it up with signed in user later
@@ -37,6 +37,7 @@ class AddPost extends React.Component {
           zip={app.state.home.zip}
           handle={(e) => handleInputChangeHome(e, app)}
           submit={(e) => submitForm(e, this, app)}
+          handle2={(e) => handleInputChangeHomePic(e, app)}
         />
       </div>
     );
