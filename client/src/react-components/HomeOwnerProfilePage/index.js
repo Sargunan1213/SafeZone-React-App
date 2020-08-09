@@ -36,12 +36,32 @@ class HomeOwnerProfilePage extends React.Component {
             src={this.state.profilepic}
             alt="profilePic"
           ></img>
-          <input
+
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              profileChange(e.target, this);
+            }}
+          >
+            <div>
+              <label>Image:</label>
+              <input name="image" type="file" />
+            </div>
+            <button
+              variant="contained"
+              color="primary"
+              type="submit"
+              className="homeOwnerProfile-btn"
+            >
+              Upload
+            </button>
+          </form>
+          {/* <input
             type="file"
             className="homeOwnerProfile-btn"
-            onChange={(e) => profileChange(e, this)}
+            onChange={(e) => profileChange(e.target, this)}
             accept="image/*"
-          />
+          /> */}
 
           <div className="general_info">
             <h2>Name: {this.state.name}</h2>

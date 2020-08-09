@@ -1,6 +1,6 @@
-const log = console.log
+const log = console.log;
 // const local = 'http://localhost:5000'
-const local = ''
+const local = "";
 // A function to check if a user is logged in on the session cookie
 export const readCookie = (app) => {
   const url = "/users/check-session";
@@ -57,7 +57,7 @@ export const signUpUser = (comp) => {
 // A function to send a POST request with the user to be logged in
 export const signIn = (comp, app) => {
   // Create our request constructor with all the parameters we need
-  const request = new Request(local+"/login", {
+  const request = new Request(local + "/login", {
     method: "post",
     body: JSON.stringify(comp.state),
     headers: {
@@ -92,8 +92,7 @@ export const signIn = (comp, app) => {
     type: type,
   });
 
-  if(app.state.currentUser === "Homeowner"){
-
+  if (app.state.currentUser === "Homeowner") {
   }
 };
 
@@ -157,7 +156,7 @@ export const logout = (app) => {
 
 export const removeHome = (app, id) => {
   // delete home information from server
-  const url = local + '/users/home/' + id
+  const url = local + "/users/home/" + id;
   const request = new Request(url, {
     method: "delete",
     body: JSON.stringify(app.state.home),
@@ -166,22 +165,24 @@ export const removeHome = (app, id) => {
       "Content-Type": "application/json",
     },
   });
-  fetch(request).then(function(res) {
-    if(res.status === 200) {
-      log("success removed home")
-    }
-    else {
-      log("error fail to remove home")
-    }
-  }).then(() => {
-    getHomes(app)
-  }).catch(err => {
-    console.log(err)
-  })
+  fetch(request)
+    .then(function (res) {
+      if (res.status === 200) {
+        log("success removed home");
+      } else {
+        log("error fail to remove home");
+      }
+    })
+    .then(() => {
+      getHomes(app);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 export const addInterestedHome = (homeId) => {
-  const url = '/users/interest/' + homeId
+  const url = "/users/interest/" + homeId;
 
   const request = new Request(url, {
     method: "post",
@@ -190,21 +191,22 @@ export const addInterestedHome = (homeId) => {
       "Content-Type": "application/json",
     },
   });
-  fetch(request).then(function(res) {
-    if(res.status === 200) {
-      log("success added interested home")
-    }
-    else {
-      log("error fail to add interested home")
-    }
-  }).catch(err => {
-    console.log(err)
-  })
+  fetch(request)
+    .then(function (res) {
+      if (res.status === 200) {
+        log("success added interested home");
+      } else {
+        log("error fail to add interested home");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 export const editPost = (event, app, id) => {
   // edit home post details
-  const url = '/users/home/' + id
+  const url = "/users/home/" + id;
   const request = new Request(url, {
     method: "put",
     body: JSON.stringify(app.state.home),
@@ -213,18 +215,20 @@ export const editPost = (event, app, id) => {
       "Content-Type": "application/json",
     },
   });
-  fetch(request).then(function(res) {
-    if(res.status === 200) {
-      log("success edited home")
-    }
-    else {
-      log("error fail to edit home")
-    }
-  }).then(() => {
-    getHomes(app)
-  }).catch(err => {
-    console.log(err)
-  })
+  fetch(request)
+    .then(function (res) {
+      if (res.status === 200) {
+        log("success edited home");
+      } else {
+        log("error fail to edit home");
+      }
+    })
+    .then(() => {
+      getHomes(app);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   //alert("Details of the house were changed: ");
   event.preventDefault();
 };
@@ -245,10 +249,10 @@ export const handleInputChangeHome = (event, component) => {
   const value = target.value;
   const name = target.name;
 
-  let newHome = component.state.home
-  newHome[name] = value
+  let newHome = component.state.home;
+  newHome[name] = value;
 
-  component.setState({home: newHome});
+  component.setState({ home: newHome });
   console.log("typing");
 };
 
@@ -262,65 +266,68 @@ export const submitForm = (event, comp, app) => {
       "Content-Type": "application/json",
     },
   });
-  fetch(request).then(function(res) {
-    if(res.status === 200) {
-      log("success added home")
-    }
-    else {
-      log("error fail to add home")
-    }
-  }).then(apps =>{  
-    const allHomes = getHomes(app)
-    }).catch(err => {
-    console.log(err)
-  })
-
+  fetch(request)
+    .then(function (res) {
+      if (res.status === 200) {
+        log("success added home");
+      } else {
+        log("error fail to add home");
+      }
+    })
+    .then((apps) => {
+      const allHomes = getHomes(app);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   // alert("Details of the house were changed: ");
   event.preventDefault();
 };
 
 export const getHomes = (app) => {
-  const url = local + "/users/home"
-  fetch(url).then(function(res) {
-    if(res.status === 200) {
-      return res.json()
-    }
-    else {
-      log("error getting homes")
-    }
-  }).then(json => {
-     app.setState({homes: json}) 
-     console.log(app.state.homes)
-  }).catch(err => {
-    console.log(err)
-  })
-}
+  const url = local + "/users/home";
+  fetch(url)
+    .then(function (res) {
+      if (res.status === 200) {
+        return res.json();
+      } else {
+        log("error getting homes");
+      }
+    })
+    .then((json) => {
+      app.setState({ homes: json });
+      console.log(app.state.homes);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 export const editHome = (app, comp, id) => {
-  const url = "/users/home/" + id
-  fetch(url).then(function(res) {
-    if(res.status === 200) {
-      return res.json()
-    }
-    else {
-      log("error getting home")
-    }
-  }).then(json => {
-
-     return app.setState({home: json}) 
-  }).then(apps =>{comp.props.history.push('/EditPostPage')
-}).catch(err => {
-    console.log(err)
-  })
-
- 
-
-}
+  const url = "/users/home/" + id;
+  fetch(url)
+    .then(function (res) {
+      if (res.status === 200) {
+        return res.json();
+      } else {
+        log("error getting home");
+      }
+    })
+    .then((json) => {
+      return app.setState({ home: json });
+    })
+    .then((apps) => {
+      comp.props.history.push("/EditPostPage");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 export const removeUser = (id, comp) => {
   // delete user information from server
-  const url = local + '/users/' + id
+  const url = local + "/users/" + id;
   const request = new Request(url, {
     method: "delete",
     headers: {
@@ -328,18 +335,19 @@ export const removeUser = (id, comp) => {
       "Content-Type": "application/json",
     },
   });
-  fetch(request).then(function(res) {
-    if(res.status === 200) {
-      log("success removed user")
-    }
-    else {
-      log("error fail to remove user")
-    }
-    getHomeowners(comp)
-    getFrontliners(comp)
-  }).catch(err => {
-    console.log(err)
-  })
+  fetch(request)
+    .then(function (res) {
+      if (res.status === 200) {
+        log("success removed user");
+      } else {
+        log("error fail to remove user");
+      }
+      getHomeowners(comp);
+      getFrontliners(comp);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 export const submitDonationForm = (event, comp) => {
@@ -368,15 +376,15 @@ export const submitDonationForm = (event, comp) => {
 };
 
 export const profileInfoChange = (e, comp, id) => {
-  if(comp.state.password === ""){
-    alert("Enter a password")
-    return
+  if (comp.state.password === "") {
+    alert("Enter a password");
+    return;
   }
-  
-  const url = local + '/users/' + id
+
+  const url = local + "/users/" + id;
   const request1 = new Request(url, {
     method: "put",
-    body:  JSON.stringify(comp.state),
+    body: JSON.stringify(comp.state),
     headers: {
       Accept: "application/json, text/plain, */*",
       "Content-Type": "application/json",
@@ -392,79 +400,104 @@ export const profileInfoChange = (e, comp, id) => {
     .catch((error) => {
       console.log(error);
     });
-    alert("Changed")
+  alert("Changed");
+};
 
-}
+export const profileChange = (form, page) => {
 
-export const profileChange = (event, comp) => {
-  // Server call to send changed profile info into the database.
-  const read = new FileReader();
-  read.onload = () => {
-    if (read.readyState === 2) {
-      comp.setState({
-        profilepic: read.result,
-      });
-    }
-  };
-  read.readAsDataURL(event.target.files[0]);
-  const pic = {
-    name: comp.state.name,
-    profilePic: event.target.files[0],
-  };
-  alert("Profile information change for " + comp.state.name);
-  event.preventDefault();
-  const request = new Request("/changeprofilepic", {
+  const url = "/changeprofilepic/" + page.state.name;
+
+  const imageData = new FormData(form);
+  console.log(page.state.name);
+  // Create our request constructor with all the parameters we need
+  const request = new Request(url, {
     method: "post",
-    body: JSON.stringify(pic),
-    headers: {
-      Accept: "application/json, text/plain, */*",
-      "Content-Type": "application/json",
-    },
+    body: imageData,
   });
-
+  // console.log(request.name)
   // Send the request with fetch()
   fetch(request)
-    .then((res) => {
+    .then(function (res) {
       if (res.status === 200) {
-        return res.json();
+        const json1 = res.json();
+        page.setState({ profilepic: json1.user.profilePic });
       }
     })
     .catch((error) => {
       console.log(error);
     });
+  // Server call to send changed profile info into the database.
+  // const read = new FileReader();
+  // read.onload = () => {
+  //   if (read.readyState === 2) {
+  //     comp.setState({
+  //       profilepic: read.result,
+  //     });
+  //   }
+  // };
+  // read.readAsDataURL(event.target.files[0]);
+  // const pic = {
+  //   name: comp.state.name,
+  //   profilePic: event.target.files[0],
+  // };
+  // alert("Profile information change for " + comp.state.name);
+  // event.preventDefault();
+  // const request = new Request("/changeprofilepic", {
+  //   method: "post",
+  //   body: JSON.stringify(pic),
+  //   headers: {
+  //     Accept: "application/json, text/plain, */*",
+  //     "Content-Type": "application/json",
+  //   },
+  // });
+
+  // // Send the request with fetch()
+  // fetch(request)
+  //   .then((res) => {
+  //     if (res.status === 200) {
+  //       return res.json();
+  //     }
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
 };
 
 export const getHomeowners = (comp) => {
-  const url = local + "/users/homeowners"
-  fetch(url).then(function(res) {
-    if(res.status === 200) {
-      return res.json()
-    }
-    else {
-      log("error getting homeowners")
-    }
-  }).then(json => {
-     comp.setState({homeowners: json}) 
-  }).catch(err => {
-    console.log(err)
-  })
-}
+  const url = local + "/users/homeowners";
+  fetch(url)
+    .then(function (res) {
+      if (res.status === 200) {
+        return res.json();
+      } else {
+        log("error getting homeowners");
+      }
+    })
+    .then((json) => {
+      comp.setState({ homeowners: json });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 export const getFrontliners = (comp) => {
-  const url = local + "/users/frontliners"
-  fetch(url).then(function(res) {
-    if(res.status === 200) {
-      return res.json()
-    }
-    else {
-      log("error getting homeowners")
-    }
-  }).then(json => {
-     comp.setState({frontliners: json}) 
-  }).catch(err => {
-    console.log(err)
-  })
-}
+  const url = local + "/users/frontliners";
+  fetch(url)
+    .then(function (res) {
+      if (res.status === 200) {
+        return res.json();
+      } else {
+        log("error getting homeowners");
+      }
+    })
+    .then((json) => {
+      comp.setState({ frontliners: json });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 // export const update = (event, comp) => {
 //   const read = new FileReader();
 //   read.onload = () => {

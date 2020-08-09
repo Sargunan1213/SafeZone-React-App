@@ -1,7 +1,7 @@
 "use strict";
 const log = console.log;
 const path = require("path");
-const fs = require('fs');
+const fs = require("fs");
 const express = require("express");
 const app = express();
 
@@ -25,6 +25,15 @@ app.use("/js", express.static(path.join(__dirname, "/pub/js")));
 app.use(express.static(__dirname + "/client/build"));
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/client/build/index.html");
+});
+const multipart = require("connect-multiparty");
+const multipartMiddleware = multipart();
+
+const cloudinary = require("cloudinary");
+cloudinary.config({
+  cloud_name: "drbionfdh",
+  api_key: "442744121643477",
+  api_secret: "uIBedUL7SU-bsFkoFkb9wTTFFn4",
 });
 
 function isError(err, res) {
@@ -55,30 +64,32 @@ app.use(
 
 const connectionChecker = (req, res, next) => {
   if (mongoose.connection.readyState != 1) {
-    log('Issue with mongoose connection')
-    res.status(500).send('Internal server error')
-    return
+    log("Issue with mongoose connection");
+    res.status(500).send("Internal server error");
+    return;
   } else {
-    next()
+    next();
   }
-}
+};
 
 const authenticate = (req, res, next) => {
   if (req.session.user) {
-    User.findById(req.session.user).then((user) => {
-      if (!user) {
-        return Promise.reject()
-      } else {
-        req.user = user
-        next()
-      }
-    }).catch((err) => {
-      res.status(401).send("Unauthorized")
-    })
+    User.findById(req.session.user)
+      .then((user) => {
+        if (!user) {
+          return Promise.reject();
+        } else {
+          req.user = user;
+          next();
+        }
+      })
+      .catch((err) => {
+        res.status(401).send("Unauthorized");
+      });
   } else {
-    res.status(401).send("Unauthorized")
+    res.status(401).send("Unauthorized");
   }
-}
+};
 
 // User routes below
 app.post("/users", connectionChecker, (req, res) => {
@@ -141,15 +152,15 @@ app.post("/login", connectionChecker, (req, res) => {
     .then((user) => {
       // Add the user's id to the session cookie.
       // We can check later if this exists to ensure we are logged in.
-      req.session.user = user._id
-      req.session.name = user.name
-      req.session.tel = user.tel
-      req.session.email = user.email
-      req.session.type = user.type
+      req.session.user = user._id;
+      req.session.name = user.name;
+      req.session.tel = user.tel;
+      req.session.email = user.email;
+      req.session.type = user.type;
 
       console.log(user);
       res.send({ currentUser: user });
-      req.session.save()
+      req.session.save();
     })
     .catch((error) => {
       res.send({ msg: "Wrong Credentials please try again." });
@@ -180,29 +191,60 @@ app.get("/users/logout", (req, res) => {
 /*** API Routes below ************************************/
 
 // What is student doing here?!
-app.patch("/changeprofilepic", (req, res) => {
-  if (mongoose.connection.readyState != 1) {
-    log("Issue with mongoose connection");
-    res.status(500).send("Internal server error");
-    return;
-  }
 
-  User.findOneAndUpdate(
-    { name: req.body.name },
-    { $set: { "$.profilePic": req.profilePic } },
-    { new: false }
-  )
-    .then((student) => {
-      if (!student) {
-        res.status(404).send();
-      } else {
-        res.send(student);
-      }
-    })
-    .catch((error) => {
-      res.status(400).send(); // bad request for changing the student.
-    });
+app.get("/name", (req, res) => {
+  User.findById(id).then((user) => {
+    res.send(user)
+  })
+})
+
+app.post("/changeprofilepic/:name", multipartMiddleware, (req, res) => {
+  // Use uploader.upload API to upload image to cloudinary server.
+  cloudinary.uploader.upload(req.files.image.path, function (result) {
+    console.log(result.url);
+    console.log(req.params.name);
+    User.findOneAndUpdate(
+      { name: req.params.name },
+      { $set: { "profilePic": result.url } },
+      { new: false, useFindAndModify: false }
+    )
+      .then((user) => {
+        console.log(user)
+        if (!user) {
+          res.status(404).send();
+        } else {
+          res.send({ user });
+        }
+      })
+      .catch((error) => {
+        res.status(400).send();
+      });
+  });
 });
+
+// app.post("/changeprofilepic", (req, res) => {
+//   if (mongoose.connection.readyState != 1) {
+//     log("Issue with mongoose connection");
+//     res.status(500).send("Internal server error");
+//     return;
+//   }
+
+//   User.findOneAndUpdate(
+//     { name: req.body.name },
+//     { $set: { "$.profilePic": req.profilePic } },
+//     { new: false }
+//   )
+//     .then((student) => {
+//       if (!student) {
+//         res.status(404).send();
+//       } else {
+//         res.send(student);
+//       }
+//     })
+//     .catch((error) => {
+//       res.status(400).send(); // bad request for changing the student.
+//     });
+// });
 
 app.post("/donation", (req, res) => {
   if (mongoose.connection.readyState != 1) {
@@ -247,7 +289,7 @@ app.post("/users", connectionChecker, (req, res) => {
     password: req.body.password,
     tel: req.body.tel,
     email: req.body.email,
-    profilePic: "./static/favicon.ico",
+    profilePic: "./client/build",
   });
 
   user
@@ -287,20 +329,18 @@ app.get("/users", (req, res) => {
 });
 
 app.delete("/users/:id", connectionChecker, (req, res) => {
-  const id = req.params.id
-  if (!ObjectID.isValid(id)){
-    res.status(404).send()
+  const id = req.params.id;
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send();
   }
 
   User.findByIdAndRemove(id)
     .then((user) => {
-      if(!user){
-        res.status(404).send()
-      }
-      else{
+      if (!user) {
+        res.status(404).send();
+      } else {
         res.send(user);
       }
-
     })
     .catch((err) => {
       log(err);
@@ -316,40 +356,42 @@ app.put("/users/:id", connectionChecker, (req, res) => {
     return;
   }
 
-  User.findById(id).then(user => {
-    if (!user) {
-      res.status(404).send()
-    }
-    else {
-      user.password = req.body.password
-      user.save()
-      res.send(user)
-    }
-  }).catch(err => {
-    res.status(500).send()
-  })
+  User.findById(id)
+    .then((user) => {
+      if (!user) {
+        res.status(404).send();
+      } else {
+        user.password = req.body.password;
+        user.save();
+        res.send(user);
+      }
+    })
+    .catch((err) => {
+      res.status(500).send();
+    });
   const change = {
     name: req.body.name,
     age: req.body.age,
     tel: req.body.tel,
     email: req.body.email,
-    profilePic: "./static/favicon.ico"
-  }
+    profilePic: "./static/favicon.ico",
+  };
 
-  User.findByIdAndUpdate(id, { $set: change }, { new: true }).then(user => {
-    if (!user) {
-      res.status(404).send()
-    }
-    else {
-      res.send(user)
-    }
-  }).catch(err => {
-    res.status(500).send()
-  })
+  User.findByIdAndUpdate(id, { $set: change }, { new: true })
+    .then((user) => {
+      if (!user) {
+        res.status(404).send();
+      } else {
+        res.send(user);
+      }
+    })
+    .catch((err) => {
+      res.status(500).send();
+    });
 });
 
 app.get("/users/homeowners", connectionChecker, (req, res) => {
-  User.find({'type': 'Homeowner'})
+  User.find({ type: "Homeowner" })
     .then((users) => {
       res.send(users);
     })
@@ -360,7 +402,7 @@ app.get("/users/homeowners", connectionChecker, (req, res) => {
 });
 
 app.get("/users/frontliners", connectionChecker, (req, res) => {
-  User.find({'type': 'Customer'})
+  User.find({ type: "Customer" })
     .then((users) => {
       res.send(users);
     })
@@ -373,44 +415,48 @@ app.get("/users/frontliners", connectionChecker, (req, res) => {
 //Get homes
 app.get("/users/home", connectionChecker, (req, res) => {
   if (req.session.user && req.session.type === "Homeowner") {
-    Home.find({ 'creator': req.session.user }).then(homes => {
-      res.send(homes)
-    }, err => {
-      res.status(400).send(err)
-    })
-  }
-  else {
-    Home.find().then(homes => {
-      res.send(homes)
-    }, err => {
-      res.status(400).send(err)
-    })
+    Home.find({ creator: req.session.user }).then(
+      (homes) => {
+        res.send(homes);
+      },
+      (err) => {
+        res.status(400).send(err);
+      }
+    );
+  } else {
+    Home.find().then(
+      (homes) => {
+        res.send(homes);
+      },
+      (err) => {
+        res.status(400).send(err);
+      }
+    );
   }
 });
 
 app.get("/users/home/:id", connectionChecker, (req, res) => {
-  const id = req.params.id
-  if (!ObjectID.isValid(id)){
-    res.status(404).send
+  const id = req.params.id;
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send;
   }
 
-    Home.findById(id).then(home => {
-      if(!home){
-        res.status(404).send()
+  Home.findById(id).then(
+    (home) => {
+      if (!home) {
+        res.status(404).send();
+      } else {
+        res.send(home);
       }
-      else{
-        res.send(home)
-      }
-      
-    }, err => {
-      res.status(500).send(err)
-    })
-  
+    },
+    (err) => {
+      res.status(500).send(err);
+    }
+  );
 });
 
 // Add home
 app.post("/users/home", connectionChecker, authenticate, (req, res) => {
-
   if (!ObjectID.isValid(req.session.user)) {
     res.status(404).send();
     return;
@@ -418,8 +464,8 @@ app.post("/users/home", connectionChecker, authenticate, (req, res) => {
   const home = new Home({
     address: req.body.address,
     zip: req.body.zip,
-    pic: 'home1.jpg',
-    // pic: { 
+    pic: "home1.jpg",
+    // pic: {
     //   data: fs.readFileSync(req.body.pic),
     //   type: "image/jpg"
     //   },
@@ -428,17 +474,20 @@ app.post("/users/home", connectionChecker, authenticate, (req, res) => {
     creator: req.session.user,
     user: req.session.name,
     tel: req.session.tel,
-    email: req.session.email
-  })
+    email: req.session.email,
+  });
 
-  home.save().then(home => {
-    res.send(home)
-  }, err => {
-    res.status(400).send(err)
-  })
+  home.save().then(
+    (home) => {
+      res.send(home);
+    },
+    (err) => {
+      res.status(400).send(err);
+    }
+  );
 });
 
-//Edit home 
+//Edit home
 app.put("/users/home/:homeid", connectionChecker, authenticate, (req, res) => {
   const homeid = req.params.homeid;
 
@@ -449,8 +498,8 @@ app.put("/users/home/:homeid", connectionChecker, authenticate, (req, res) => {
   const change = {
     address: req.body.address,
     zip: req.body.zip,
-    pic: 'home1.jpg',
-    // pic: { 
+    pic: "home1.jpg",
+    // pic: {
     //   data: fs.readFileSync(req.body.pic),
     //   type: "image/jpg"
     //   },
@@ -459,78 +508,94 @@ app.put("/users/home/:homeid", connectionChecker, authenticate, (req, res) => {
     creator: req.session.user,
     user: req.session.name,
     tel: req.session.tel,
-    email: req.session.email
-  }
+    email: req.session.email,
+  };
 
-  Home.findByIdAndUpdate(homeid, { $set: change }, { new: true }).then(home => {
-    if (!home) {
-      res.status(404).send()
-    }
-    else {
-      res.send(home)
-    }
-  }).catch(err => {
-    res.status(500).send()
-  })
+  Home.findByIdAndUpdate(homeid, { $set: change }, { new: true })
+    .then((home) => {
+      if (!home) {
+        res.status(404).send();
+      } else {
+        res.send(home);
+      }
+    })
+    .catch((err) => {
+      res.status(500).send();
+    });
 });
 
 //Add interested home
-app.post("/users/interest/:homeid", connectionChecker, authenticate, (req, res) => {
-  const homeid = req.params.homeid;
+app.post(
+  "/users/interest/:homeid",
+  connectionChecker,
+  authenticate,
+  (req, res) => {
+    const homeid = req.params.homeid;
 
-  if (!ObjectID.isValid(req.session.user) || !ObjectID.isValid(homeid)) {
-    res.status(404).send();
-    return;
-  }
-  
-  Home.findById(homeid).then(home => {
-    if(!home){
-      res.status(404).send()
+    if (!ObjectID.isValid(req.session.user) || !ObjectID.isValid(homeid)) {
+      res.status(404).send();
+      return;
     }
-    else{
-      const change = {homes: home}
-      User.findByIdAndUpdate(req.session.user, { $push: change }, { new: true }).then(home => {
+
+    Home.findById(homeid)
+      .then((home) => {
         if (!home) {
-          res.status(404).send()
+          res.status(404).send();
+        } else {
+          const change = { homes: home };
+          User.findByIdAndUpdate(
+            req.session.user,
+            { $push: change },
+            { new: true }
+          )
+            .then((home) => {
+              if (!home) {
+                res.status(404).send();
+              } else {
+                res.send(home);
+              }
+            })
+            .catch((err) => {
+              res.status(500).send();
+            });
         }
-        else {
-          res.send(home)
-        }
-      }).catch(err => {
-        res.status(500).send()
       })
-    }
-  }).catch(err => {
-    res.status(500).send()
-  })
-
-
-});
+      .catch((err) => {
+        res.status(500).send();
+      });
+  }
+);
 
 //Delete Route
-app.delete("/users/home/:homeid", connectionChecker, authenticate, (req, res) => {
-  const homeid = req.params.homeid;
+app.delete(
+  "/users/home/:homeid",
+  connectionChecker,
+  authenticate,
+  (req, res) => {
+    const homeid = req.params.homeid;
 
-  if (!ObjectID.isValid(homeid)) {
-    res.status(404).send();
-    return;
+    if (!ObjectID.isValid(homeid)) {
+      res.status(404).send();
+      return;
+    }
+
+    Home.findByIdAndRemove(homeid)
+      .then((home) => {
+        if (!home) {
+          res.status(404).send();
+        } else {
+          res.send(home);
+        }
+      })
+      .catch((err) => {
+        res.status(500).send();
+      });
   }
-
-  Home.findByIdAndRemove(homeid).then(home => {
-    if (!home) {
-      res.status(404).send()
-    }
-    else {
-      res.send(home)
-    }
-  }).catch(err => {
-    res.status(500).send()
-  })
-});
+);
 
 app.get("*", (req, res) => {
   res.sendFile(__dirname + "/client/build/index.html");
-})
+});
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   log(`Listening on port ${port}`);
