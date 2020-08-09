@@ -206,7 +206,7 @@ app.post("/changeprofilepic/:name", multipartMiddleware, (req, res) => {
     User.findOneAndUpdate(
       { name: req.params.name },
       { $set: { "profilePic": result.url } },
-      { new: false, useFindAndModify: false }
+      { new: true, useFindAndModify: false }
     )
       .then((user) => {
         console.log(user)

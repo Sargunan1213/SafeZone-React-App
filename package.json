@@ -4,14 +4,16 @@
   "description": "Our project provides a platform to help reducing the spread of the virus by providing a place for homeowners to post quarantined rooms for the frontline workers to potenitially move into. This way, frontline workers can potentially reduce travel distance to work and avoid living in close proximity to members who are vulnerable or at risk. In addition, all users can check out the recent updates and number of covid-19 patients on our website. They can also communicate with us by using the contact us button in the bottom. There are four different types of users namely, homeowners, front-line workers, visitors (people who are not signed in) and lastly the admin. Details and explaination for our pages/feature for each users can be found below.",
   "main": "server.js",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cloudinary": "^1.22.0",
+    "connect-multiparty": "^2.2.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "mongodb": "^3.5.9",
     "mongoose": "^5.9.25",
-    "body-parser": "^1.19.0",
-    "validator": "^13.1.1",
-    "bcryptjs": "^2.4.3"
+    "validator": "^13.1.1"
   },
   "devDependencies": {},
   "scripts": {

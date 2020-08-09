@@ -1,6 +1,6 @@
 const log = console.log;
-// const local = 'http://localhost:5000'
-const local = "";
+const local = 'http://localhost:5000'
+// const local = "";
 // A function to check if a user is logged in on the session cookie
 export const readCookie = (app) => {
   const url = "/users/check-session";
@@ -403,9 +403,9 @@ export const profileInfoChange = (e, comp, id) => {
   alert("Changed");
 };
 
-export const profileChange = (form, page) => {
+export const profileChange = (form, page, app) => {
 
-  const url = "/changeprofilepic/" + page.state.name;
+  const url = local + "/changeprofilepic/" + page.state.name;
 
   const imageData = new FormData(form);
   console.log(page.state.name);
@@ -414,14 +414,20 @@ export const profileChange = (form, page) => {
     method: "post",
     body: imageData,
   });
+  log(imageData)
   // console.log(request.name)
   // Send the request with fetch()
   fetch(request)
     .then(function (res) {
       if (res.status === 200) {
         const json1 = res.json();
-        page.setState({ profilepic: json1.user.profilePic });
+        
+        return json1
+        
       }
+    }).then(json1 => {
+      log(json1)
+      app.setState({ currentUser: json1.user });
     })
     .catch((error) => {
       console.log(error);

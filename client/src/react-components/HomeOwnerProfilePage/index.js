@@ -18,7 +18,7 @@ class HomeOwnerProfilePage extends React.Component {
   };
 
   render() {
-    const { user } = this.props;
+    const { user, app } = this.props;
     this.state.name = user.name;
     this.state.age = user.age;
     this.state.password = user.password;
@@ -40,7 +40,7 @@ class HomeOwnerProfilePage extends React.Component {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              profileChange(e.target, this);
+              profileChange(e.target, this, app);
             }}
           >
             <div>

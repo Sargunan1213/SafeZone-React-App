@@ -116,7 +116,7 @@ class App extends React.Component {
             <Route
               exact
               path="/HomeOwnerProfilePage"
-              render={() => <HomeOwnerProfilePage user={user}/>}
+              render={() => <HomeOwnerProfilePage user={user} app={this}/>}
             />
             <Route
               exact
