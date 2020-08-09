@@ -211,7 +211,7 @@ export const editPost = (event, app, id) => {
   const form = new FormData(event.target);
 
   const request = new Request(local + url , {
-    method: "post",
+    method: "put",
     body: form,
   });
 
