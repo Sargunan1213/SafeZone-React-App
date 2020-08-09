@@ -27,7 +27,7 @@ class Post extends React.Component {
                 <h2>{home.address}</h2>
 
                 <h3>{home.zip}</h3>
-                <img className="pic" src={require("./static/" + home.pic)} alt="house.jpg" />
+                <img className="pic" src={home.pic} alt="house.jpg" />
                 <div className="desc">
                     <h3>Description:</h3>
                     <p>{home.description}</p>
