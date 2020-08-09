@@ -25,7 +25,7 @@ class HomeOwnerProfilePage extends React.Component {
     this.state.postId = user.postId;
     this.state.tel = user.tel;
     this.state.email = user.email;
-    this.state.profilepic = user.profilepic;
+    this.state.profilepic = user.profilePic;
     this.state.type = user.type;
     const feed = "/userTwitterFeed";
     return (
