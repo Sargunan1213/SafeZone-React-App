@@ -277,9 +277,9 @@ export const submitForm = (event, comp, app) => {
   }
   console.log("hi")
   console.log(form)
-  const request = new Request("/users/home", {
+  const request = new Request(local + "/users/home", {
     method: "post",
-    body: JSON.stringify(data),
+    body: form,
     // headers: {
     //   Accept: "application/json, text/plain, */*",
     //   "Content-Type": "application/json",

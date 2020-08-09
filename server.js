@@ -456,21 +456,22 @@ app.get("/users/home/:id", connectionChecker, (req, res) => {
 });
 
 // Add home
-app.post("/users/home", connectionChecker, authenticate, (req, res) => {
+app.post("/users/home", connectionChecker, authenticate, multipartMiddleware, (req, res) => {
 
-  // if (!ObjectID.isValid(req.session.user)) {
-  //   res.status(404).send();
-  //   return;
-  // }
+  // 
+
+  if (!ObjectID.isValid(req.session.user)) {
+    res.status(404).send();
+    return;
+  }
 
   cloudinary.uploader.upload(req.files.image.path, function (result) {
-
     const home = new Home({
-      address: req.body.home.address,
-      zip: req.body.home.zip,
+      address: req.body.address,
+      zip: req.body.zip,
       pic: result.url,
-      description: req.body.home.description,
-      price: req.body.home.price,
+      description: req.body.description,
+      price: req.body.price,
       creator: req.session.user,
       user: req.session.name,
       tel: req.session.tel,
