@@ -107,9 +107,8 @@ class AddPostForm extends React.Component {
           <input
             className="inp"
             type="file"
-            name="img"
+            name="image"
             label="img"
-            onChange={this.props.handle2}
           />
           <br />
           <button type="submit" className="btn">

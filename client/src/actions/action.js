@@ -257,7 +257,7 @@ export const handleInputChangeHome = (event, component) => {
 };
 export const handleInputChangeHomePic = (event, component) => {
   const target = event.target;
-  const value = URL.createObjectURL(target.files[0]);
+  const value = target.files[0];
   const name = target.name;
 
   let newHome = component.state.home;
@@ -266,15 +266,24 @@ export const handleInputChangeHomePic = (event, component) => {
   component.setState({ home: newHome });
   console.log("typing");
 };
+
 export const submitForm = (event, comp, app) => {
   // add home post details
+  event.preventDefault();
+  const form = new FormData(event.target);
+  const data = {
+    details: form,
+    home: app.state.home
+  }
+  console.log("hi")
+  console.log(form)
   const request = new Request("/users/home", {
     method: "post",
-    body: JSON.stringify(app.state.home),
-    headers: {
-      Accept: "application/json, text/plain, */*",
-      "Content-Type": "application/json",
-    },
+    body: JSON.stringify(data),
+    // headers: {
+    //   Accept: "application/json, text/plain, */*",
+    //   "Content-Type": "application/json",
+    // },
   });
   fetch(request)
     .then(function (res) {
