@@ -207,14 +207,14 @@ export const addInterestedHome = (homeId) => {
 export const editPost = (event, app, id) => {
   // edit home post details
   const url = "/users/home/" + id;
-  const request = new Request(url, {
-    method: "put",
-    body: JSON.stringify(app.state.home),
-    headers: {
-      Accept: "application/json, text/plain, */*",
-      "Content-Type": "application/json",
-    },
+
+  const form = new FormData(event.target);
+
+  const request = new Request(local + url , {
+    method: "post",
+    body: form,
   });
+
   fetch(request)
     .then(function (res) {
       if (res.status === 200) {
@@ -271,19 +271,10 @@ export const submitForm = (event, comp, app) => {
   // add home post details
   event.preventDefault();
   const form = new FormData(event.target);
-  const data = {
-    details: form,
-    home: app.state.home
-  }
-  console.log("hi")
-  console.log(form)
+
   const request = new Request(local + "/users/home", {
     method: "post",
     body: form,
-    // headers: {
-    //   Accept: "application/json, text/plain, */*",
-    //   "Content-Type": "application/json",
-    // },
   });
   fetch(request)
     .then(function (res) {

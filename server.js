@@ -498,14 +498,12 @@ app.put("/users/home/:homeid", connectionChecker, authenticate, (req, res) => {
     res.status(404).send();
     return;
   }
+
+  cloudinary.uploader.upload(req.files.image.path, function (result) {
   const change = {
     address: req.body.address,
     zip: req.body.zip,
-    pic: "home1.jpg",
-    // pic: {
-    //   data: fs.readFileSync(req.body.pic),
-    //   type: "image/jpg"
-    //   },
+    pic: result.url,
     description: req.body.description,
     price: req.body.price,
     creator: req.session.user,
@@ -525,6 +523,7 @@ app.put("/users/home/:homeid", connectionChecker, authenticate, (req, res) => {
     .catch((err) => {
       res.status(500).send();
     });
+  });
 });
 
 //Add interested home
