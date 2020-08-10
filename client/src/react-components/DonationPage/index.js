@@ -1,7 +1,8 @@
 import React from "react";
 
 import './styles.css';
-
+import { ProgressBar } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { handleInputChange, submitDonationForm } from "../../actions/action";
 
 class DonationPage extends React.Component {
@@ -95,8 +96,10 @@ class DonationPage extends React.Component {
                     </div>
 
                     <button type="submit" className="submitBtn">Submit</button>
-
                 </form>
+                <div className="bar">
+                    <ProgressBar animated now={this.state.donationAmount / 100} />
+                </div>
             </div>
         );
     }
