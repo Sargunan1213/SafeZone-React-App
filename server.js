@@ -12,7 +12,7 @@ mongoose.set("bufferCommands", false);
 
 const { User, Home } = require("./models/safezone");
 const { Donation } = require("./models/donation");
-
+const { Tweeter }  = require("./models/tweeter");
 const { ObjectID } = require("mongodb");
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
@@ -222,29 +222,7 @@ app.post("/changeprofilepic/:name", multipartMiddleware, (req, res) => {
   });
 });
 
-// app.post("/changeprofilepic", (req, res) => {
-//   if (mongoose.connection.readyState != 1) {
-//     log("Issue with mongoose connection");
-//     res.status(500).send("Internal server error");
-//     return;
-//   }
 
-//   User.findOneAndUpdate(
-//     { name: req.body.name },
-//     { $set: { "$.profilePic": req.profilePic } },
-//     { new: false }
-//   )
-//     .then((student) => {
-//       if (!student) {
-//         res.status(404).send();
-//       } else {
-//         res.send(student);
-//       }
-//     })
-//     .catch((error) => {
-//       res.status(400).send(); // bad request for changing the student.
-//     });
-// });
 
 app.post("/donation", (req, res) => {
   if (mongoose.connection.readyState != 1) {
@@ -268,17 +246,6 @@ app.post("/donation", (req, res) => {
     })
     .catch((err) => {
       isError(err, res);
-      // I commented out the below codes as we can use the function instead.
-      // if (
-      //   typeof err === "object" &&
-      //   err !== null &&
-      //   err.name === "MongoNetworkError"
-      // ) {
-      //   res.status(500).send("Internal server error");
-      // } else {
-      //   log(err);
-      //   res.status(400).send("Bad Request");
-      // }
     });
 });
 
@@ -458,8 +425,6 @@ app.get("/users/home/:id", connectionChecker, (req, res) => {
 // Add home
 app.post("/users/home", connectionChecker, authenticate, multipartMiddleware, (req, res) => {
 
-  // 
-
   if (!ObjectID.isValid(req.session.user)) {
     res.status(404).send("User not valid");
     return;
@@ -594,6 +559,9 @@ app.delete(
       });
   }
 );
+
+
+
 
 app.get("*", (req, res) => {
   res.sendFile(__dirname + "/client/build/index.html");
