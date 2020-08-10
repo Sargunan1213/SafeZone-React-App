@@ -561,6 +561,26 @@ app.delete(
 );
 
 
+//Tweeter page post route
+app.post("/userTwitterFeed", (req, res) => {
+  if (mongoose.connection.readyState != 1) {
+    log("Issue with mongoose connection");
+    res.status(500).send("Internal server error");
+    return;
+  }
+  const tweeter = new Tweeter({
+    image: req.body.image,
+    twitterMsgs: req.body.twitterMsgs
+    
+  });
+  tweeter.save().then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      isError(err, res);
+    });
+});
+
 
 
 app.get("*", (req, res) => {
