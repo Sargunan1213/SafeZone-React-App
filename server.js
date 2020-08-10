@@ -570,8 +570,7 @@ app.post("/userTwitterFeed", (req, res) => {
   }
   const tweeter = new Tweeter({
     image: req.body.image,
-    twitterMsgs: req.body.twitterMsgs
-    
+    twitterMsgs: req.body.twitterMsgs    
   });
   tweeter.save().then((result) => {
       res.send(result);
@@ -580,6 +579,31 @@ app.post("/userTwitterFeed", (req, res) => {
       isError(err, res);
     });
 });
+
+
+//Tweeter page delete route
+app.delete("/userTwitterFeed/:tweeterid", connectionChecker, authenticate, (req, res) => {
+    const tweeterid = req.params.tweeterid;
+
+    if (!ObjectID.isValid(tweeterid)) {
+      res.status(404).send();
+      return;
+    }
+
+    Tweeter.findByIdAndRemove(tweeterid)
+      .then((tweeter) => {
+        if (!tweeter) {
+          res.status(404).send();
+        } else {
+          res.send(tweeter);
+        }
+      })
+      .catch((err) => {
+        res.status(500).send();
+      });
+  }
+);
+
 
 
 
