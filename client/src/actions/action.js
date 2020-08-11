@@ -96,48 +96,6 @@ export const signIn = (comp, app) => {
   }
 };
 
-// export const signIn = (comp, username, pwd) => {
-//   const url = "http://localhost:5000/homeowner";
-
-//   fetch(url)
-//     .then((res) => {
-//       if (res.status === 200) {
-//         return res.json();
-//       } else {
-//         alert("Could not get homeowners");
-//       }
-//     })
-//     .then((json) => {
-//       console.log(json);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-//   let currentUser = "";
-//   let type = comp.state.type;
-
-//   // Get names and password from server
-//   // Requires server call
-//   if (username === "user" && pwd === "user") {
-//     currentUser = username;
-//     type = "homeowner";
-//   } else if (username === "user2" && pwd === "user2") {
-//     currentUser = username;
-//     type = "frontliner";
-//   } else if (username === "admin" && pwd === "admin") {
-//     currentUser = username;
-//     type = "admin";
-//   }
-
-//   if (!currentUser) {
-//     return;
-//   }
-
-//   comp.setState({
-//     type: type,
-//   });
-// };
-
 // A function to send a GET request to logout the current user
 export const logout = (app) => {
   const url = "/users/logout";
@@ -210,7 +168,7 @@ export const editPost = (event, app, id) => {
 
   const form = new FormData(event.target);
 
-  const request = new Request(local + url , {
+  const request = new Request(local + url, {
     method: "put",
     body: form,
   });
@@ -414,7 +372,6 @@ export const profileInfoChange = (e, comp, id) => {
 };
 
 export const profileChange = (form, page, app) => {
-
   const url = local + "/changeprofilepic/" + page.state.name;
 
   const imageData = new FormData(form);
@@ -424,18 +381,18 @@ export const profileChange = (form, page, app) => {
     method: "post",
     body: imageData,
   });
-  log(imageData)
+  log(imageData);
   // console.log(request.name)
   // Send the request with fetch()
   fetch(request)
     .then(function (res) {
       if (res.status === 200) {
         const json1 = res.json();
-        return json1
-
+        return json1;
       }
-    }).then(json1 => {
-      log(json1)
+    })
+    .then((json1) => {
+      log(json1);
       app.setState({ currentUser: json1.user });
     })
     .catch((error) => {

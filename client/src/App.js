@@ -41,6 +41,8 @@ class App extends React.Component {
       email: "",
       img: "",
       zip: "",
+      lat: "",
+      lng: "",
     },
   };
   componentDidMount() {

@@ -12,7 +12,7 @@ mongoose.set("bufferCommands", false);
 
 const { User, Home } = require("./models/safezone");
 const { Donation } = require("./models/donation");
-const { Tweeter }  = require("./models/tweeter");
+const { Tweeter } = require("./models/tweeter");
 const { ObjectID } = require("mongodb");
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
@@ -194,9 +194,9 @@ app.get("/users/logout", (req, res) => {
 
 app.get("/name", (req, res) => {
   User.findById(id).then((user) => {
-    res.send(user)
-  })
-})
+    res.send(user);
+  });
+});
 
 app.post("/changeprofilepic/:name", multipartMiddleware, (req, res) => {
   // Use uploader.upload API to upload image to cloudinary server.
@@ -205,11 +205,11 @@ app.post("/changeprofilepic/:name", multipartMiddleware, (req, res) => {
     console.log(req.params.name);
     User.findOneAndUpdate(
       { name: req.params.name },
-      { $set: { "profilePic": result.url } },
+      { $set: { profilePic: result.url } },
       { new: true, useFindAndModify: false }
     )
       .then((user) => {
-        console.log(user)
+        console.log(user);
         if (!user) {
           res.status(404).send();
         } else {
@@ -221,8 +221,6 @@ app.post("/changeprofilepic/:name", multipartMiddleware, (req, res) => {
       });
   });
 });
-
-
 
 app.post("/donation", (req, res) => {
   if (mongoose.connection.readyState != 1) {
@@ -423,73 +421,85 @@ app.get("/users/home/:id", connectionChecker, (req, res) => {
 });
 
 // Add home
-app.post("/users/home", connectionChecker, authenticate, multipartMiddleware, (req, res) => {
+app.post(
+  "/users/home",
+  connectionChecker,
+  authenticate,
+  multipartMiddleware,
+  (req, res) => {
+    if (!ObjectID.isValid(req.session.user)) {
+      res.status(404).send("User not valid");
+      return;
+    }
+    console.log(req.body);
+    cloudinary.uploader.upload(req.files.image.path, function (result) {
+      const home = new Home({
+        address: req.body.address,
+        zip: req.body.zip,
+        pic: result.url,
+        description: req.body.description,
+        price: req.body.price,
+        lat: req.body.lat,
+        lng: req.body.lng,
+        creator: req.session.user,
+        user: req.session.name,
+        tel: req.session.tel,
+        email: req.session.email,
+      });
 
-  if (!ObjectID.isValid(req.session.user)) {
-    res.status(404).send("User not valid");
-    return;
-  }
-
-  cloudinary.uploader.upload(req.files.image.path, function (result) {
-    const home = new Home({
-      address: req.body.address,
-      zip: req.body.zip,
-      pic: result.url,
-      description: req.body.description,
-      price: req.body.price,
-      creator: req.session.user,
-      user: req.session.name,
-      tel: req.session.tel,
-      email: req.session.email,
+      home.save().then(
+        (home) => {
+          res.send(home);
+        },
+        (err) => {
+          res.status(400).send(err);
+        }
+      );
     });
-
-    home.save().then(
-      (home) => {
-        res.send(home);
-      },
-      (err) => {
-        res.status(400).send(err);
-      }
-    );
-  });
-
-});
+  }
+);
 
 //Edit home
-app.put("/users/home/:homeid", connectionChecker, authenticate, multipartMiddleware, (req, res) => {
-  const homeid = req.params.homeid;
+app.put(
+  "/users/home/:homeid",
+  connectionChecker,
+  authenticate,
+  multipartMiddleware,
+  (req, res) => {
+    const homeid = req.params.homeid;
 
-  if (!ObjectID.isValid(homeid)) {
-    res.status(404).send("Home not valid");
-    return;
-  }
+    if (!ObjectID.isValid(homeid)) {
+      res.status(404).send("Home not valid");
+      return;
+    }
 
-  cloudinary.uploader.upload(req.files.image.path, function (result) {
-  const change = {
-    address: req.body.address,
-    zip: req.body.zip,
-    pic: result.url,
-    description: req.body.description,
-    price: req.body.price,
-    creator: req.session.user,
-    user: req.session.name,
-    tel: req.session.tel,
-    email: req.session.email,
-  };
+    cloudinary.uploader.upload(req.files.image.path, function (result) {
+      const change = {
+        address: req.body.address,
+        zip: req.body.zip,
+        pic: result.url,
+        description: req.body.description,
+        price: req.body.price,
+        creator: req.session.user,
+        user: req.session.name,
+        tel: req.session.tel,
+        email: req.session.email,
+      };
 
-  Home.findByIdAndUpdate(homeid, { $set: change }, { new: true })
-    .then((home) => {
-      if (!home) {
-        res.status(404).send();
-      } else {
-        res.send(home);
-      }
-    })
-    .catch((err) => {
-      res.status(500).send();
+      Home.findByIdAndUpdate(homeid, { $set: change }, { new: true })
+        .then((home) => {
+          if (!home) {
+            res.status(404).send();
+          } else {
+            res.send(home);
+          }
+        })
+        .catch((err) => {
+          res.status(500).send();
+        });
     });
-  });
-});
+  }
+);
 
 //Add interested home
 app.post(
@@ -560,7 +570,6 @@ app.delete(
   }
 );
 
-
 //Tweeter page post route
 app.post("/userTwitterFeed", (req, res) => {
   if (mongoose.connection.readyState != 1) {
@@ -570,9 +579,11 @@ app.post("/userTwitterFeed", (req, res) => {
   }
   const tweeter = new Tweeter({
     image: req.body.image,
-    twitterMsgs: req.body.twitterMsgs    
+    twitterMsgs: req.body.twitterMsgs,
   });
-  tweeter.save().then((result) => {
+  tweeter
+    .save()
+    .then((result) => {
       res.send(result);
     })
     .catch((err) => {
@@ -580,9 +591,12 @@ app.post("/userTwitterFeed", (req, res) => {
     });
 });
 
-
 //Tweeter page delete route
-app.delete("/userTwitterFeed/:tweeterid", connectionChecker, authenticate, (req, res) => {
+app.delete(
+  "/userTwitterFeed/:tweeterid",
+  connectionChecker,
+  authenticate,
+  (req, res) => {
     const tweeterid = req.params.tweeterid;
 
     if (!ObjectID.isValid(tweeterid)) {
@@ -603,9 +617,6 @@ app.delete("/userTwitterFeed/:tweeterid", connectionChecker, authenticate, (req,
       });
   }
 );
-
-
-
 
 app.get("*", (req, res) => {
   res.sendFile(__dirname + "/client/build/index.html");

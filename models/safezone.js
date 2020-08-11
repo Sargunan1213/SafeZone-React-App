@@ -4,8 +4,8 @@ const bcrypt = require("bcryptjs");
 
 const Image = new mongoose.Schema({
   data: Buffer,
-  type: String
-})
+  type: String,
+});
 
 const HomeSchema = new mongoose.Schema({
   address: String,
@@ -15,19 +15,21 @@ const HomeSchema = new mongoose.Schema({
   price: Number,
   user: String,
   tel: String,
-  email:{
+  lat: Number,
+  lng: Number,
+  email: {
     type: String,
     required: true,
     minlength: 1,
     validate: {
       validator: validator.isEmail,
       message: "Not valid email",
-    }
+    },
   },
   creator: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: true
-	}
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
 });
 
 const UserSchema = new mongoose.Schema({
@@ -63,7 +65,7 @@ const UserSchema = new mongoose.Schema({
   },
   profilePic: String,
   type: String,
-  homes: [HomeSchema]
+  homes: [HomeSchema],
 });
 
 UserSchema.pre("save", function (next) {
@@ -99,9 +101,7 @@ UserSchema.statics.findByPassword = function (name, password) {
   });
 };
 
-
-
 const User = mongoose.model("User", UserSchema);
-const Home = mongoose.model("Home", HomeSchema)
+const Home = mongoose.model("Home", HomeSchema);
 
 module.exports = { User, Home };

@@ -12,7 +12,9 @@ class AddPostForm extends React.Component {
       phone,
       email,
       img,
-      zip
+      zip,
+      lat,
+      lng,
     } = this.props;
 
     return (
@@ -25,7 +27,7 @@ class AddPostForm extends React.Component {
             className="inp"
             type="text"
             name="address"
-            value={address || ''}
+            value={address || ""}
             label="address"
             onChange={this.props.handle}
           />
@@ -36,7 +38,7 @@ class AddPostForm extends React.Component {
             className="inp"
             type="text"
             name="zip"
-            value={zip || ''}
+            value={zip || ""}
             label="zip"
             onChange={this.props.handle}
           />
@@ -48,7 +50,7 @@ class AddPostForm extends React.Component {
             className="inp"
             type="text"
             name="description"
-            value={description || ''}
+            value={description || ""}
             label="description"
             onChange={this.props.handle}
           />
@@ -60,20 +62,39 @@ class AddPostForm extends React.Component {
             className="inp"
             type="text"
             name="price"
-            value={price || ''}
+            value={price || ""}
             label="price"
+            onChange={this.props.handle}
+          />
+          <br />
+          <label className="lab" htmlFor="lat">
+            Enter the latitude:
+          </label>
+          <input
+            className="inp"
+            type="text"
+            name="lat"
+            value={lat || ""}
+            label="lat"
+            onChange={this.props.handle}
+          />
+          <br />
+          <label className="lab" htmlFor="lng">
+            Enter the longitude:
+          </label>
+          <input
+            className="inp"
+            type="text"
+            name="lng"
+            value={lng || ""}
+            label="lng"
             onChange={this.props.handle}
           />
           <br />
           <label className="lab" htmlFor="img">
             Upload a image of your house:
           </label>
-          <input
-            className="inp"
-            type="file"
-            name="image"
-            label="img"
-          />
+          <input className="inp" type="file" name="image" label="img" />
           <br />
           <button type="submit" className="btn">
             Submit
