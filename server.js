@@ -429,6 +429,7 @@ app.post(
   (req, res) => {
     if (!ObjectID.isValid(req.session.user)) {
       res.status(404).send("User not valid");
+      console.log("hererer ere user not valid");
       return;
     }
     console.log(req.body);

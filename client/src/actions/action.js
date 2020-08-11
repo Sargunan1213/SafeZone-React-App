@@ -1,6 +1,6 @@
 const log = console.log;
-// const local = 'http://localhost:5000'
-const local = "";
+const local = "http://localhost:5000";
+// const local = "";
 // A function to check if a user is logged in on the session cookie
 export const readCookie = (app) => {
   const url = "/users/check-session";
@@ -227,6 +227,7 @@ export const handleInputChangeHomePic = (event, component) => {
 
 export const submitForm = (event, comp, app) => {
   // add home post details
+  console.log(app);
   event.preventDefault();
   const form = new FormData(event.target);
 
@@ -234,6 +235,7 @@ export const submitForm = (event, comp, app) => {
     method: "post",
     body: form,
   });
+  console.log("HERE", request);
   fetch(request)
     .then(function (res) {
       if (res.status === 200) {
