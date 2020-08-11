@@ -4,6 +4,7 @@ import { uid } from "react-uid";
 import logo from "./static/safeZoneLogo.png";
 import "./styles.css";
 import profileImg1 from './static/profile.png';
+import {logout} from '../../actions/action'
 
 
 class NavBar extends React.Component {
@@ -52,7 +53,7 @@ class NavBar extends React.Component {
     
     if (!("Sign In" in nav)) {
       link = (
-        <Link className="signout" to={'/'}>
+        <Link className="signout" onClick={() => logout(this.props.app)} to={'/'}>
           Sign out
         </Link>
       );

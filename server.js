@@ -590,6 +590,25 @@ app.post(
   }
 );
 
+app.get("/users/interest", connectionChecker, authenticateFrontliner, (req, res) => {
+  if (!ObjectID.isValid(req.session.user)) {
+    res.status(404).send();
+    return;
+  }
+  User.findById(req.session.user)
+  .then((user) => {
+    if (!user) {
+      res.status(404).send();
+    } else {
+      res.send(user.homes)
+    }
+  })
+  .catch((err) => {
+    res.status(401).send("Unauthorized");
+  });
+
+});
+
 //Delete Route
 app.delete(
   "/users/home/:homeid",

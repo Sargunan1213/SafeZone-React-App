@@ -1,6 +1,7 @@
 import React from "react";
 import "./index.css";
 import { signUpUser } from "../../actions/action";
+import { withRouter } from "react-router";
 
 class Signup extends React.Component {
   state = {
@@ -102,4 +103,4 @@ class Signup extends React.Component {
   }
 }
 
-export default Signup;
+export default withRouter(Signup);

@@ -1,28 +1,33 @@
 import React from "react";
 import "./styles.css";
 import { Link } from "react-router-dom";
+import { uid } from "react-uid";
 import profileImg from "./static/favicon.ico";
-import { profileChange } from "../../actions/action";
+import { profileChange, getInterestedHome } from "../../actions/action";
+import Post from "../Post";
 
 class FrontlinerProfilePage extends React.Component {
   state = {
-    name: "user",
-    age: 34,
-    password: "user",
-    postId: [0, 1],
-    tel: "416-432-1431",
-    email: "user@user.com",
+    name: "",
+    age: 0,
+    password: "r",
+    homes: [],
+    tel: "",
+    email: "",
 
     profilepic: profileImg,
     type: "homeowner",
   };
 
+  componentDidMount() {
+    getInterestedHome(this);
+  }
   render() {
     const { user, app } = this.props;
     this.state.name = user.name;
     this.state.age = user.age;
     this.state.password = user.password;
-    this.state.postId = user.postId;
+    this.state.postId = this.state.homes;
     this.state.tel = user.tel;
     this.state.email = user.email;
     this.state.profilepic = user.profilePic;
@@ -64,6 +69,15 @@ class FrontlinerProfilePage extends React.Component {
             <Link to="/EditProfileFrontliner">
               <button className="homeOwnerViewOwnPost-btn">Edit Profile</button>
             </Link>
+
+            {this.state.homes.map((home) => (
+            <Post
+              key={uid(home)}
+              home={home}
+              comp={this}
+              app={app}
+            />
+          ))}
           </div>
         </div>
       </div>

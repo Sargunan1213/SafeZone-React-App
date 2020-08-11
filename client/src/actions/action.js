@@ -48,7 +48,7 @@ export const signUpUser = (comp) => {
       if (res.status === 200) {
         return res.json();
       }
-    })
+    }).then(()=> comp.props.history.push('/Login'))
     .catch((error) => {
       console.log(error);
     });
@@ -82,7 +82,7 @@ export const signIn = (comp, app) => {
       } else if (json.msg !== null) {
         alert(json.msg);
       }
-    })
+    }).then(()=> comp.props.history.push('/'))
     .catch((error) => {
       console.log(error);
     });
@@ -99,6 +99,7 @@ export const signIn = (comp, app) => {
 // A function to send a GET request to logout the current user
 export const logout = (app) => {
   const url = "/users/logout";
+  log("gere")
 
   fetch(url)
     .then((res) => {
@@ -106,7 +107,7 @@ export const logout = (app) => {
         currentUser: null,
         message: { type: "", body: "" },
       });
-    })
+    }).then(()=> app.props.history.push('/'))
     .catch((error) => {
       console.log(error);
     });
@@ -162,6 +163,25 @@ export const addInterestedHome = (homeId) => {
     });
 };
 
+export const getInterestedHome = (comp) => {
+  const url = "/users/interest"
+
+  fetch(url)
+    .then(function (res) {
+      if (res.status === 200) {
+        return res.json();
+      } else {
+        log("error getting homes");
+      }
+    })
+    .then((json) => {
+      comp.setState({ homes: json });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 export const editPost = (event, app, id) => {
   // edit home post details
   const url = "/users/home/" + id;
@@ -183,6 +203,7 @@ export const editPost = (event, app, id) => {
     })
     .then(() => {
       getHomes(app);
+      alert("Home info has changed")
     })
     .catch((err) => {
       console.log(err);
