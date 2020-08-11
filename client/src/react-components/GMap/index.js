@@ -5,9 +5,10 @@ import {
   withScriptjs,
   withGoogleMap,
   Marker,
+  InfoWindow,
 } from "react-google-maps";
 import "./styles.css";
-import { uid } from "react-uid";
+import { uid, UID } from "react-uid";
 
 class GMap extends React.Component {
   state = {};
@@ -18,7 +19,7 @@ class GMap extends React.Component {
     const OurMap = withScriptjs(
       withGoogleMap(() => (
         <GoogleMap
-          defaultZoom={13}
+          defaultZoom={11}
           defaultCenter={{
             lat: 43.6532,
             lng: -79.3832,
@@ -29,12 +30,23 @@ class GMap extends React.Component {
           {/*Marker*/}
 
           {homes.map((home) => (
-            <Marker
-              position={{
-                lat: home.lat,
-                lng: home.lng,
-              }}
-            />
+            <div>
+              <Marker
+                key={uid(home)}
+                position={{
+                  lat: home.lat,
+                  lng: home.lng,
+                }}
+              />
+              {/* <InfoWindow
+                // key={uid(home)}
+                onClose={() => {}}
+                position={{
+                  lat: home.lat + 0.002,
+                  lng: home.lng,
+                }}
+              ></InfoWindow> */}
+            </div>
           ))}
         </GoogleMap>
       ))
