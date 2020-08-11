@@ -7,20 +7,39 @@ import {
   Marker,
 } from "react-google-maps";
 import "./styles.css";
-
-function Map() {
-  return (
-    <GoogleMap defaultZoom={13} defaultCenter={{ lat: 43.6532, lng: -79.3832 }}>
-      {/* Add markers here */}
-    </GoogleMap>
-  );
-}
-const OurMap = withScriptjs(withGoogleMap(Map));
+import { uid } from "react-uid";
 
 class GMap extends React.Component {
   state = {};
 
   render() {
+    const homes = this.props.houses;
+    console.log(homes);
+    const OurMap = withScriptjs(
+      withGoogleMap(() => (
+        <GoogleMap
+          defaultZoom={13}
+          defaultCenter={{
+            lat: 43.6532,
+            lng: -79.3832,
+          }}
+        >
+          {/* InfoWindow on top of marker */}
+
+          {/*Marker*/}
+
+          {homes.map((home) => (
+            <Marker
+              position={{
+                lat: home.lat,
+                lng: home.lng,
+              }}
+            />
+          ))}
+        </GoogleMap>
+      ))
+    );
+
     return (
       <div className="top">
         <OurMap
