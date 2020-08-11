@@ -91,6 +91,63 @@ const authenticate = (req, res, next) => {
   }
 };
 
+const authenticateHomeowner = (req, res, next) => {
+  if (req.session.user) {
+    User.findById(req.session.user)
+      .then((user) => {
+        if (!user || user.type !== "Homeowner") {
+          return Promise.reject();
+        } else {
+          req.user = user;
+          next();
+        }
+      })
+      .catch((err) => {
+        res.status(401).send("Unauthorized, log in as homeowner");
+      });
+  } else {
+    res.status(401).send("Unauthorized");
+  }
+};
+
+const authenticateFrontliner = (req, res, next) => {
+  if (req.session.user) {
+    User.findById(req.session.user)
+      .then((user) => {
+        if (!user|| user.type !== "Customer") {
+          return Promise.reject();
+        } else {
+          req.user = user;
+          next();
+        }
+      })
+      .catch((err) => {
+        res.status(401).send("Unauthorized, log in as frontliner");
+      });
+  } else {
+    res.status(401).send("Unauthorized");
+  }
+};
+
+const authenticateAdmin = (req, res, next) => {
+  if (req.session.user) {
+    User.findById(req.session.user)
+      .then((user) => {
+        if (!user|| user.type !== "Admin") {
+          return Promise.reject();
+        } else {
+          req.user = user;
+          next();
+        }
+      })
+      .catch((err) => {
+        res.status(401).send("Unauthorized, log in as admin");
+      });
+  } else {
+    res.status(401).send("Unauthorized");
+  }
+};
+
 // User routes below
 app.post("/users", connectionChecker, (req, res) => {
   log(req.body);
@@ -198,7 +255,7 @@ app.get("/name", (req, res) => {
   });
 });
 
-app.post("/changeprofilepic/:name", multipartMiddleware, (req, res) => {
+app.post("/changeprofilepic/:name", connectionChecker, authenticate, multipartMiddleware, (req, res) => {
   // Use uploader.upload API to upload image to cloudinary server.
   cloudinary.uploader.upload(req.files.image.path, function (result) {
     console.log(result.url);
@@ -222,12 +279,7 @@ app.post("/changeprofilepic/:name", multipartMiddleware, (req, res) => {
   });
 });
 
-app.post("/donation", (req, res) => {
-  if (mongoose.connection.readyState != 1) {
-    log("Issue with mongoose connection");
-    res.status(500).send("Internal server error");
-    return;
-  }
+app.post("/donation", connectionChecker, (req, res) => {
   const donation = new Donation({
     donationAmount: req.body.donationAmount,
     cardNumber: req.body.cardNumber,
@@ -276,13 +328,7 @@ app.post("/users", connectionChecker, (req, res) => {
     });
 });
 
-app.get("/users", (req, res) => {
-  if (mongoose.connection.readyState != 1) {
-    log("Issue with mongoose connection");
-    res.status(500).send("Internal server error");
-    return;
-  }
-
+app.get("/users", connectionChecker, (req, res) => {
   User.find()
     .then((user) => {
       res.send(user);
@@ -293,7 +339,7 @@ app.get("/users", (req, res) => {
     });
 });
 
-app.delete("/users/:id", connectionChecker, (req, res) => {
+app.delete("/users/:id", connectionChecker, authenticateAdmin, (req, res) => {
   const id = req.params.id;
   if (!ObjectID.isValid(id)) {
     res.status(404).send();
@@ -313,49 +359,49 @@ app.delete("/users/:id", connectionChecker, (req, res) => {
     });
 });
 
-app.put("/users/:id", connectionChecker, (req, res) => {
-  const id = req.params.id;
+// app.put("/users/:id", connectionChecker, (req, res) => {
+//   const id = req.params.id;
 
-  if (!ObjectID.isValid(id)) {
-    res.status(404).send();
-    return;
-  }
+//   if (!ObjectID.isValid(id)) {
+//     res.status(404).send();
+//     return;
+//   }
 
-  User.findById(id)
-    .then((user) => {
-      if (!user) {
-        res.status(404).send();
-      } else {
-        user.password = req.body.password;
-        user.save();
-        res.send(user);
-      }
-    })
-    .catch((err) => {
-      res.status(500).send();
-    });
-  const change = {
-    name: req.body.name,
-    age: req.body.age,
-    tel: req.body.tel,
-    email: req.body.email,
-    profilePic: "./static/favicon.ico",
-  };
+//   User.findById(id)
+//     .then((user) => {
+//       if (!user) {
+//         res.status(404).send();
+//       } else {
+//         user.password = req.body.password;
+//         user.save();
+//         res.send(user);
+//       }
+//     })
+//     .catch((err) => {
+//       res.status(500).send();
+//     });
+//   const change = {
+//     name: req.body.name,
+//     age: req.body.age,
+//     tel: req.body.tel,
+//     email: req.body.email,
+//     profilePic: "./static/favicon.ico",
+//   };
 
-  User.findByIdAndUpdate(id, { $set: change }, { new: true })
-    .then((user) => {
-      if (!user) {
-        res.status(404).send();
-      } else {
-        res.send(user);
-      }
-    })
-    .catch((err) => {
-      res.status(500).send();
-    });
-});
+//   User.findByIdAndUpdate(id, { $set: change }, { new: true })
+//     .then((user) => {
+//       if (!user) {
+//         res.status(404).send();
+//       } else {
+//         res.send(user);
+//       }
+//     })
+//     .catch((err) => {
+//       res.status(500).send();
+//     });
+// });
 
-app.get("/users/homeowners", connectionChecker, (req, res) => {
+app.get("/users/homeowners", connectionChecker, authenticateAdmin, (req, res) => {
   User.find({ type: "Homeowner" })
     .then((users) => {
       res.send(users);
@@ -366,7 +412,7 @@ app.get("/users/homeowners", connectionChecker, (req, res) => {
     });
 });
 
-app.get("/users/frontliners", connectionChecker, (req, res) => {
+app.get("/users/frontliners", connectionChecker, authenticateAdmin, (req, res) => {
   User.find({ type: "Customer" })
     .then((users) => {
       res.send(users);
@@ -424,7 +470,7 @@ app.get("/users/home/:id", connectionChecker, (req, res) => {
 app.post(
   "/users/home",
   connectionChecker,
-  authenticate,
+  authenticateHomeowner,
   multipartMiddleware,
   (req, res) => {
     if (!ObjectID.isValid(req.session.user)) {
@@ -464,7 +510,7 @@ app.post(
 app.put(
   "/users/home/:homeid",
   connectionChecker,
-  authenticate,
+  authenticateHomeowner,
   multipartMiddleware,
   (req, res) => {
     const homeid = req.params.homeid;
@@ -506,7 +552,7 @@ app.put(
 app.post(
   "/users/interest/:homeid",
   connectionChecker,
-  authenticate,
+  authenticateFrontliner,
   (req, res) => {
     const homeid = req.params.homeid;
 
@@ -548,7 +594,7 @@ app.post(
 app.delete(
   "/users/home/:homeid",
   connectionChecker,
-  authenticate,
+  authenticateAdmin,
   (req, res) => {
     const homeid = req.params.homeid;
 
