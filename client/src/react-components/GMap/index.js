@@ -8,12 +8,17 @@ import {
   InfoWindow,
 } from "react-google-maps";
 import "./styles.css";
-import { uid, UID } from "react-uid";
+import { uid } from "react-uid";
 
 class GMap extends React.Component {
-  state = {};
+  state = { home: "" };
+
+  ShowWindow = (h) => {
+    this.setState({ home: h });
+  };
 
   render() {
+    console.log(this.state);
     const homes = this.props.houses;
     console.log(homes);
     const OurMap = withScriptjs(
@@ -37,17 +42,21 @@ class GMap extends React.Component {
                   lat: home.lat,
                   lng: home.lng,
                 }}
+                onClick={() => this.ShowWindow(home)}
               />
-              {/* <InfoWindow
-                // key={uid(home)}
-                onClose={() => {}}
-                position={{
-                  lat: home.lat + 0.002,
-                  lng: home.lng,
-                }}
-              ></InfoWindow> */}
             </div>
           ))}
+
+          {this.state.home && (
+            <InfoWindow
+              position={{
+                lat: this.state.home.lat + 0.005,
+                lng: this.state.home.lng,
+              }}
+            >
+              <div>{this.state.home.description}</div>
+            </InfoWindow>
+          )}
         </GoogleMap>
       ))
     );
