@@ -123,7 +123,7 @@ Step 3: Run $ npm start
   * Destory seesion
   * Expected output: Nothing
 * POST /changeprofilepic/:name
-  * Change the profile picture of a user, requires authentication (being logged in) and connect-multiparty
+  * Change the profile picture of a user, requires authentication (being logged in/cookie) and connect-multiparty
   * Log in as user or user2, click on name in navbar, choose an image file using 'Choose file', then click 'Upload'
   * Expects input: a FormData object with image
   * Expected output: the changed user document
@@ -142,19 +142,19 @@ Step 3: Run $ npm start
   ```
   * Expected output: newly added donation document
 * DELETE /users/:id
-  * Delete a user from the database, requires authentication (logged in as Admin)
+  * Delete a user from the database, requires authentication/cookie (logged in as Admin)
   * Expected output: the deleted user document
 * GET /users/homeowners
-  * Get all homeowners, requires to be logged in as Admin
+  * Get all homeowners, requires to be logged in as Admin/cookie
   * Expected output: all users where type: "Homeowner"
 * GET /users/frontliners
   * Get all frontliners
   * Expected output: all users where type: "Customer"
 * GET /users/home
-  * Get all homes if not logged in, get all user's home if logged in as homeowner
+  * Get all homes if not logged in, get all user's home if logged in as homeowner (needs cookie)
 * POST /users/home
   * Add a new home to the Home database
-  * Requires to be logged in as a homeowner, requires connect-multiparty and FormData
+  * Requires to be logged in as a homeowner/cookie, requires connect-multiparty and FormData
   * Expects input (as FormData):
   ```
   {
@@ -187,7 +187,7 @@ Step 3: Run $ npm start
   ```
 * PUT /users/home/:homeid
   * Edit a home in the Home database
-  * Requires to be logged in as a homeowner, requires connect-multiparty and FormData
+  * Requires to be logged in as a homeowner/cookie, requires connect-multiparty and FormData
   * Expects input (as FormData):
   ```
   {
@@ -220,7 +220,7 @@ Step 3: Run $ npm start
   ```
 * POST /users/interest/:homeid
   * Add interested home to user
-  * Requires to be logged in as a frontliner
+  * Requires to be logged in as a frontliner/cookie
   * Expected output: document of user in which interested home was added to
    ```
   {
@@ -235,7 +235,7 @@ Step 3: Run $ npm start
   }
   ```
 * GET /users/interest
-  * Get all interested homes of logged user, requires to be logged in as frontliner
+  * Get all interested homes of logged user/cookie, requires to be logged in as frontliner
   * Expected output: All interested homes of logged user
 * DELETE /users/home/:homeid
   * Delete a home from the Home database, requires authentication (logged in as Admin)
