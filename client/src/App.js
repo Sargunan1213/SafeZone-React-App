@@ -3,6 +3,7 @@ import React from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import "./App.css";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import AboutUs from "./react-components/AboutUs";
 import ContactUs from "./react-components/ContactUs";
 import Home from "./react-components/Home";
@@ -57,19 +58,19 @@ class App extends React.Component {
           {!this.state.currentUser ? (
             <NavBar />
           ) : (
-            <NavBar type={this.state.currentUser.type} app={this}/>
-          )}
+              <NavBar type={this.state.currentUser.type} app={this} />
+            )}
           <Switch>
             <Route exact path="/" render={() => <Home />} />
             <Route exact path="/Signup" render={() => <Signup />} />
             <Route exact path="/Login" render={() => <Login app={this} />} />
             <Route exact path="/Live" render={() => <Live />} />
-            <Route exact path="/Donation" render={() => <DonationPage homes={this.state.homes}/>} />
-          <Route exact path="/Posts" render={() => <Posts app={this} />} />
+            <Route exact path="/Donation" render={() => <DonationPage homes={this.state.homes} />} />
+            <Route exact path="/Posts" render={() => <Posts app={this} />} />
             <Route
               exact
               path="/AddPost"
-              render={() => this.state.currentUser ? (<AddPost app={this}/>) : (<Login app={this} />) }
+              render={() => this.state.currentUser ? (<AddPost app={this} />) : (<Login app={this} />)}
             />
             <Route
               exact
