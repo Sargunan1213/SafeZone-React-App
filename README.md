@@ -1,5 +1,7 @@
 # team07
 
+Deployed App: https://peaceful-bayou-44052.herokuapp.com/
+
 ## BACKGROUND:
 Our project provides a platform to help reducing the spread of the virus by providing a place for homeowners to post quarantined rooms for the frontline workers to potenitially move into. This way, frontline workers can potentially reduce travel distance to work and avoid living in close proximity to members who are vulnerable or at risk. In addition, all users can check out the recent updates and number of covid-19 patients on our website. They can also communicate with us by using the contact us button in the bottom. There are four different types of users namely, homeowners, front-line workers, visitors (people who are not signed in) and lastly the admin. Details and explaination for our pages/feature for each users can be found below.
 
@@ -65,4 +67,205 @@ Step 1:  Clone the code from above.
 Step 2: Run $ npm install
 
 Step 3: Run $ npm start
+  
+## Overview of Routes in Express Server
+
+* POST /signUpUser
+  * Add a user in the user table
+  * Expects input:
+  ```
+  {
+    "name": <name>
+    "age": <age>
+    "contactNumber": <phone number>
+    "email": <email>
+    "password": <password>
+    "usertype": <Homeowner/Customer/Admin>
+  }   
+  ```
+   * Expects output: the newly added user
+  ```
+  {
+    "name": <name>
+    "age": <age>
+    "tel": <phone number>
+    "homes": []
+    "email": <email>
+    "password": <password>
+    "type": <Homeowner/Customer/Admin>
+    "profilePic": <a cloudinary link>
+  }   
+  ```
+* POST /login
+  * Login with name/password and create a session
+  * Expects input:
+  ```
+  {
+  "username": <username>
+  "password": <password>
+  }
+  ```
+  * Expected output: 
+  ```
+  {
+  "currentUser": <the found user document>
+  }
+  ```
+* GET /users/check-session
+  * Check if there is a session
+  * Expected output (if there is a session): 
+  ```
+  {
+  "currentUser": <the found user document>
+  }
+  ```
+* GET /users/logout
+  * Destory seesion
+  * Expected output: Nothing
+* POST /changeprofilepic/:name
+  * Change the profile picture of a user, requires authentication (being logged in) and connect-multiparty
+  * Log in as user or user2, click on name in navbar, choose an image file using 'Choose file', then click 'Upload'
+  * Expects input: a FormData object with image
+  * Expected output: the changed user document
+* POST /donation
+  * Add a new donation to the database
+  * Expects input:
+  ```
+  {
+  "donationAmount": <donationAmount>
+  "cardNumber": <cardNumber>
+  "cvc": <cvc>
+  "cardExpiry": <cardExpiry>
+  "cardNumber": <cardNumber>
+  "donateTo": <donateTo>
+  }
+  ```
+  * Expected output: newly added donation document
+* DELETE /users/:id
+  * Delete a user from the database, requires authentication (logged in as Admin)
+  * Expected output: the deleted user document
+* GET /users/homeowners
+  * Get all homeowners, requires to be logged in as Admin
+  * Expected output: all users where type: "Homeowner"
+* GET /users/frontliners
+  * Get all frontliners
+  * Expected output: all users where type: "Customer"
+* GET /users/home
+  * Get all homes if not logged in, get all user's home if logged in as homeowner
+* POST /users/home
+  * Add a new home to the Home database
+  * Requires to be logged in as a homeowner, requires connect-multiparty and FormData
+  * Expects input (as FormData):
+  ```
+  {
+  "address": <address>
+  "zip": <zip>
+  "cvc": <cvc>
+  "description": <description>
+  "price": <price>
+  "lat": <lat>
+  "lng": <lng>
+  "url" <image url>
+  }
+  ```
+  * Expected output: newly added home
+   ```
+  {
+  "address": <address>
+  "zip": <zip>
+  "cvc": <cvc>
+  "description": <description>
+  "price": <price>
+  "lat": <lat>
+  "lng": <lng>
+  "pic" <image cloudinary url>
+  "user": <name of logged in homeowner>
+  "tel": <phone number of logged in homeowner>
+  "email": <email of logged in homeowner>
+  "creator": <ObjectID of logged in homeowner>
+  }
+  ```
+* PUT /users/home/:homeid
+  * Edit a home in the Home database
+  * Requires to be logged in as a homeowner, requires connect-multiparty and FormData
+  * Expects input (as FormData):
+  ```
+  {
+  "address": <address>
+  "zip": <zip>
+  "cvc": <cvc>
+  "description": <description>
+  "price": <price>
+  "lat": <lat>
+  "lng": <lng>
+  "url" <image url>
+  }
+  ```
+  * Expected output: newly added home
+   ```
+  {
+  "address": <address>
+  "zip": <zip>
+  "cvc": <cvc>
+  "description": <description>
+  "price": <price>
+  "lat": <lat>
+  "lng": <lng>
+  "pic" <image cloudinary url>
+  "user": <name of logged in homeowner>
+  "tel": <phone number of logged in homeowner>
+  "email": <email of logged in homeowner>
+  "creator": <ObjectID of logged in homeowner>
+  }
+  ```
+* POST /users/interest/:homeid
+  * Add interested home to user
+  * Requires to be logged in as a frontliner
+  * Expected output: document of user in which interested home was added to
+   ```
+  {
+    "name": <name>
+    "age": <age>
+    "tel": <phone number>
+    "homes": [...<newly added home>]
+    "email": <email>
+    "password": <password>
+    "type": <Homeowner/Customer/Admin>
+    "profilePic": <a cloudinary link>
+  }
+  ```
+* GET /users/interest
+  * Get all interested homes of logged user, requires to be logged in as frontliner
+  * Expected output: All interested homes of logged user
+* DELETE /users/home/:homeid
+  * Delete a home from the Home database, requires authentication (logged in as Admin)
+  * Expected output: the deleted home document
+  ```
+  {
+  "address": <address>
+  "zip": <zip>
+  "cvc": <cvc>
+  "description": <description>
+  "price": <price>
+  "lat": <lat>
+  "lng": <lng>
+  "pic" <image cloudinary url>
+  "user": <name of logged in homeowner>
+  "tel": <phone number of logged in homeowner>
+  "email": <email of logged in homeowner>
+  "creator": <ObjectID of logged in homeowner>
+  }
+  ```
+* POST /userTwitterFeed
+  * Create a new tweet, requires FormData and connect-multiparty
+  * Expects input (as FormData):
+  ```
+  "image": <path to image>
+  "twitterMsgs": <message>
+  }
+  ```
+  * Expected output: the newly added twitter msg
+* DELETE /userTwitterFeed/:tweeterid
+  * Delete a tweet, requires to be logged in 
+  * Expected output: the newly deleted twitter msg
   
