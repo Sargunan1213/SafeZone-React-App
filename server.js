@@ -13,7 +13,7 @@ mongoose.set("bufferCommands", false);
 const { User, Home } = require("./models/safezone");
 const { Donation } = require("./models/donation");
 const { Tweeter } = require("./models/tweeter");
-const { Feedback } = require("./models/feedback");
+// const { Feedback } = require("./models/feedback");
 
 const { ObjectID } = require("mongodb");
 const bodyParser = require("body-parser");
@@ -151,25 +151,25 @@ const authenticateAdmin = (req, res, next) => {
 };
 
 // User routes below
-app.post("/users", connectionChecker, (req, res) => {
-  log(req.body);
+// app.post("/users", connectionChecker, (req, res) => {
+//   log(req.body);
 
-  // Create a new user
-  const user = new User({
-    email: req.body.email,
-    password: req.body.password,
-  });
+//   // Create a new user
+//   const user = new User({
+//     email: req.body.email,
+//     password: req.body.password,
+//   });
 
-  // Save the user
-  user.save().then(
-    (user) => {
-      res.send(user);
-    },
-    (error) => {
-      res.status(400).send(error);
-    }
-  );
-});
+//   // Save the user
+//   user.save().then(
+//     (user) => {
+//       res.send(user);
+//     },
+//     (error) => {
+//       res.status(400).send(error);
+//     }
+//   );
+// });
 
 app.post("/signUpUser", connectionChecker, (req, res) => {
   // Create a new user
@@ -251,11 +251,11 @@ app.get("/users/logout", (req, res) => {
 
 // What is student doing here?!
 
-app.get("/name", (req, res) => {
-  User.findById(id).then((user) => {
-    res.send(user);
-  });
-});
+// app.get("/name", (req, res) => {
+//   User.findById(id).then((user) => {
+//     res.send(user);
+//   });
+// });
 
 app.post("/changeprofilepic/:name", connectionChecker, authenticate, multipartMiddleware, (req, res) => {
   // Use uploader.upload API to upload image to cloudinary server.
@@ -287,7 +287,7 @@ app.post("/donation", connectionChecker, (req, res) => {
     cardNumber: req.body.cardNumber,
     cardExpiry: req.body.cardExpiry,
     cvc: req.body.cvc,
-    donationType: req.body.cardNumber,
+    donationType: req.body.donateTo,
     donateTo: req.body.donateTo,
   });
 
@@ -301,45 +301,45 @@ app.post("/donation", connectionChecker, (req, res) => {
     });
 });
 
-app.post("/users", connectionChecker, (req, res) => {
-  const user = new User({
-    name: req.body.name,
-    age: req.body.age,
-    password: req.body.password,
-    tel: req.body.tel,
-    email: req.body.email,
-    profilePic: "./client/build",
-  });
+// app.post("/users", connectionChecker, (req, res) => {
+//   const user = new User({
+//     name: req.body.name,
+//     age: req.body.age,
+//     password: req.body.password,
+//     tel: req.body.tel,
+//     email: req.body.email,
+//     profilePic: "./client/build",
+//   });
 
-  user
-    .save()
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      if (
-        typeof err === "object" &&
-        err !== null &&
-        err.name === "MongoNetworkError"
-      ) {
-        res.status(500).send("Internal server error");
-      } else {
-        log(err);
-        res.status(400).send("Bad Request");
-      }
-    });
-});
+//   user
+//     .save()
+//     .then((result) => {
+//       res.send(result);
+//     })
+//     .catch((err) => {
+//       if (
+//         typeof err === "object" &&
+//         err !== null &&
+//         err.name === "MongoNetworkError"
+//       ) {
+//         res.status(500).send("Internal server error");
+//       } else {
+//         log(err);
+//         res.status(400).send("Bad Request");
+//       }
+//     });
+// });
 
-app.get("/users", connectionChecker, (req, res) => {
-  User.find()
-    .then((user) => {
-      res.send(user);
-    })
-    .catch((err) => {
-      log(err);
-      res.status(500).send("Internal Server Error");
-    });
-});
+// app.get("/users", connectionChecker, (req, res) => {
+//   User.find()
+//     .then((user) => {
+//       res.send(user);
+//     })
+//     .catch((err) => {
+//       log(err);
+//       res.status(500).send("Internal Server Error");
+//     });
+// });
 
 app.delete("/users/:id", connectionChecker, authenticateAdmin, (req, res) => {
   const id = req.params.id;
@@ -414,7 +414,7 @@ app.get("/users/homeowners", connectionChecker, authenticateAdmin, (req, res) =>
     });
 });
 
-app.get("/users/frontliners", connectionChecker, authenticateAdmin, (req, res) => {
+app.get("/users/frontliners", connectionChecker, (req, res) => {
   User.find({ type: "Customer" })
     .then((users) => {
       res.send(users);
@@ -448,25 +448,25 @@ app.get("/users/home", connectionChecker, (req, res) => {
   }
 });
 
-app.get("/users/home/:id", connectionChecker, (req, res) => {
-  const id = req.params.id;
-  if (!ObjectID.isValid(id)) {
-    res.status(404).send;
-  }
+// app.get("/users/home/:id", connectionChecker, (req, res) => {
+//   const id = req.params.id;
+//   if (!ObjectID.isValid(id)) {
+//     res.status(404).send;
+//   }
 
-  Home.findById(id).then(
-    (home) => {
-      if (!home) {
-        res.status(404).send();
-      } else {
-        res.send(home);
-      }
-    },
-    (err) => {
-      res.status(500).send(err);
-    }
-  );
-});
+//   Home.findById(id).then(
+//     (home) => {
+//       if (!home) {
+//         res.status(404).send();
+//       } else {
+//         res.send(home);
+//       }
+//     },
+//     (err) => {
+//       res.status(500).send(err);
+//     }
+//   );
+// });
 
 // Add home
 app.post(

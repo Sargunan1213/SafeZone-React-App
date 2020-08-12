@@ -3,7 +3,7 @@ import React from "react";
 import "./styles.css";
 // import { ProgressBar } from "react-bootstrap";
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import { handleInputChange, submitDonationForm } from "../../actions/action";
+import { handleInputChange, submitDonationForm, getFrontliners } from "../../actions/action";
 
 class DonationPage extends React.Component {
   state = {
@@ -13,9 +13,15 @@ class DonationPage extends React.Component {
     cvc: "",
     donationType: "oneTime",
     donateTo: "General",
+    frontliners: []
   };
+  componentDidMount() {
+    getFrontliners(this)
+  }
 
   render() {
+    const { homes } = this.props
+    console.log(homes)
     return (
       <div id="donation">
         <h1>Donate to help support frontline workers to afford a safe home</h1>
@@ -55,9 +61,12 @@ class DonationPage extends React.Component {
               onChange={(e) => handleInputChange(e, this)}
             >
               <option value="General">General</option>
-              <option value="user2">user2</option>
-              <option value="user2">Home 1 - by user</option>
-              <option value="user2">Home 2 - by user</option>
+              {homes.map((home) => (
+                <option value={home._id}>{home.address} - by {home.user}</option>
+              ))}
+              {this.state.frontliners.map((user) => (
+                <option value={user._id}>{user.name}</option>
+              ))}
             </select>
             <p>
               Donate to a specific user or home posting, or donate to the
