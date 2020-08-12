@@ -93,6 +93,25 @@ const authenticate = (req, res, next) => {
   }
 };
 
+const authenticateDelete = (req, res, next) => {
+  if (req.session.user) {
+    User.findById(req.session.user)
+      .then((user) => {
+        if (!user || user.type === "Customer") {
+          return Promise.reject();
+        } else {
+          req.user = user;
+          next();
+        }
+      })
+      .catch((err) => {
+        res.status(401).send("Unauthorized");
+      });
+  } else {
+    res.status(401).send("Unauthorized");
+  }
+};
+
 const authenticateHomeowner = (req, res, next) => {
   if (req.session.user) {
     User.findById(req.session.user)
@@ -615,7 +634,7 @@ app.get("/users/interest", connectionChecker, authenticateFrontliner, (req, res)
 app.delete(
   "/users/home/:homeid",
   connectionChecker,
-  authenticateAdmin,
+  authenticateDelete,
   (req, res) => {
     const homeid = req.params.homeid;
 

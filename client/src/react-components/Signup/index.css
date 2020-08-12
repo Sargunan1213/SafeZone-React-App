@@ -30,6 +30,8 @@
   padding-top: 3%;
   /* box-shadow: 10px 10px 5px grey; */
   text-align: center;
+  border: 3px solid grey;
+  box-shadow: 10px 10px 5px grey;
 }
 
 .box2 {
@@ -46,7 +48,7 @@
 }
 
 .back {
-  background-color: rgb(49, 48, 48);
+  /* background-color: rgb(49, 48, 48); */
   padding: 2%;
 }
 
@@ -64,7 +66,8 @@
   margin-left: auto;
   font-weight: 800;
   font-size: 400%;
-  background: linear-gradient(45deg, #f12711, #f5af19);
+  /* background: linear-gradient(45deg, #f12711, #f5af19); */
+  background: rgba(7, 5, 129, 0.829);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

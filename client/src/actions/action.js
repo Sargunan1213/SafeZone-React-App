@@ -1,6 +1,6 @@
 const log = console.log;
-// const local = "http://localhost:5000";
-const local = "";
+const local = "http://localhost:5000";
+// const local = "";s
 // A function to check if a user is logged in on the session cookie
 export const readCookie = (app) => {
   const url = "/users/check-session";

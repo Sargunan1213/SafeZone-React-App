@@ -2,6 +2,7 @@ import React from "react";
 
 import "./styles.css";
 import { ProgressBar } from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { handleInputChange, submitDonationForm, getFrontliners } from "../../actions/action";
 
 class DonationPage extends React.Component {

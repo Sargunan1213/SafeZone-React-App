@@ -1,11 +1,13 @@
 .post {
-    margin: 1% 2% 5% 10%;
+    margin: 1% 2% 5% 5%;
     border: 2px solid rgb(186, 206, 196);
     background-color: rgba(238, 238, 238, 0.233);
     color: rgb(78, 70, 70);
-    min-height: 330px;
-    min-width: 70%;
+    min-height: 420px;
+    width: 43%;
     padding: 1%;
+    float: left;
+    /* overflow: scroll; */
 }
 
 .pic{

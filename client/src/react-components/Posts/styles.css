@@ -1,11 +1,12 @@
 #homes {
     overflow: auto;
+    display: block;
 }
 
 .posts{
     /* min-height: 650px; */
-    min-width: 50%;
-    float: left;
+    min-width: 95%;
+    display: inline-block;
 }
 
 #homes h1{
@@ -14,7 +15,7 @@
     width: 30%;
 }
 
-.standinMap {
-    width: 48%;
-    border: solid gray;
+.map {
+    /* width: 95%; */
+    margin-left: 5%;
 }
