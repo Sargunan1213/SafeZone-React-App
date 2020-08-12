@@ -13,6 +13,8 @@ mongoose.set("bufferCommands", false);
 const { User, Home } = require("./models/safezone");
 const { Donation } = require("./models/donation");
 const { Tweeter } = require("./models/tweeter");
+const { Feedback } = require("./models/feedback");
+
 const { ObjectID } = require("mongodb");
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
