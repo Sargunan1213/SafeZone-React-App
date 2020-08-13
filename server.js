@@ -658,7 +658,7 @@ app.delete(
 );
 
 //Tweeter page post route
-app.post("/userTwitterFeed", (req, res) => {
+app.post("/users/userTwitterFeed", (req, res) => {
   if (mongoose.connection.readyState != 1) {
     log("Issue with mongoose connection");
     res.status(500).send("Internal server error");
@@ -680,7 +680,7 @@ app.post("/userTwitterFeed", (req, res) => {
 
 //Tweeter page delete route
 app.delete(
-  "/userTwitterFeed/:tweeterid",
+  "/users/userTwitterFeed/:tweeterid",
   connectionChecker,
   authenticate,
   (req, res) => {
