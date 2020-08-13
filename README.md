@@ -69,6 +69,7 @@ Step 2: Run $ npm install
 Step 3: Run $ npm start
   
 ## Overview of Routes in Express Server
+* If testing on Postman you will need to install the Google Chrome Postman Interceptor, enable cookie interceptor in Postman, and add the domain of the App to the interceptor
 
 * POST /signUpUser
   * Add a user in the user table
@@ -97,7 +98,7 @@ Step 3: Run $ npm start
   }   
   ```
 * POST /login
-  * Login with name/password and create a session
+  * Login with name/password and create a session, expires after five minutes
   * Expects input:
   ```
   {
@@ -116,7 +117,7 @@ Step 3: Run $ npm start
   * Expected output (if there is a session): 
   ```
   {
-  "currentUser": <the found user document>
+  "currentUser": <the found user _id>
   }
   ```
 * GET /users/logout
@@ -124,19 +125,18 @@ Step 3: Run $ npm start
   * Expected output: Nothing
 * POST /changeprofilepic/:name
   * Change the profile picture of a user, requires authentication (being logged in/cookie) and connect-multiparty
-  * Log in as user or user2, click on name in navbar, choose an image file using 'Choose file', then click 'Upload'
-  * Expects input: a FormData object with image
+  * Expects input (in postman in body -> form-data): Key: "image", Value: <choose an image>
   * Expected output: the changed user document
 * POST /donation
   * Add a new donation to the database
   * Expects input:
   ```
   {
-  "donationAmount": <donationAmount>
-  "cardNumber": <cardNumber>
-  "cvc": <cvc>
+  "donationAmount": <donationAmount> (number)
+  "cardNumber": <cardNumber> (number)
+  "cvc": <cvc> (number)
   "cardExpiry": <cardExpiry>
-  "cardNumber": <cardNumber>
+  "donationType": <donationType>
   "donateTo": <donateTo>
   }
   ```
@@ -155,7 +155,7 @@ Step 3: Run $ npm start
 * POST /users/home
   * Add a new home to the Home database
   * Requires to be logged in as a homeowner/cookie, requires connect-multiparty and FormData
-  * Expects input (as FormData):
+  * Expects input (as form-data):
   ```
   {
   "address": <address>
@@ -165,7 +165,7 @@ Step 3: Run $ npm start
   "price": <price>
   "lat": <lat>
   "lng": <lng>
-  "url" <image url>
+  "image" <image url>
   }
   ```
   * Expected output: newly added home
@@ -198,7 +198,7 @@ Step 3: Run $ npm start
   "price": <price>
   "lat": <lat>
   "lng": <lng>
-  "url" <image url>
+  "image" <image url>
   }
   ```
   * Expected output: newly added home
