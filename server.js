@@ -380,7 +380,7 @@ app.delete("/users/:id", connectionChecker, authenticateAdmin, (req, res) => {
     });
 });
 
-app.put("/users/:id", connectionChecker, (req, res) => {
+app.put("/users/:id", connectionChecker, authenticate, (req, res) => {
   const id = req.params.id;
 
   if (!ObjectID.isValid(id)) {
@@ -388,19 +388,19 @@ app.put("/users/:id", connectionChecker, (req, res) => {
     return;
   }
 
-  User.findById(id)
-    .then((user) => {
-      if (!user) {
-        res.status(404).send();
-      } else {
-        user.password = req.body.password;
-        user.save();
-        // res.send(user);
-      }
-    })
-    .catch((err) => {
-      res.status(500).send();
-    });
+  // User.findById(id)
+  //   .then((user) => {
+  //     if (!user) {
+  //       res.status(404).send();
+  //     } else {
+  //       user.password = req.body.password;
+  //       user.save();
+  //       // res.send(user);
+  //     }
+  //   })
+  //   .catch((err) => {
+  //     res.status(500).send();
+  //   });
   const change = {
     name: req.body.name,
     age: req.body.age,
@@ -408,11 +408,13 @@ app.put("/users/:id", connectionChecker, (req, res) => {
     email: req.body.email,
   };
 
-  User.findByIdAndUpdate(id, { $set: change }, { new: true })
+  User.findByIdAndUpdate(id, { $set: change }, { new: true, useFindAndModify: false })
     .then((user) => {
       if (!user) {
         res.status(404).send();
       } else {
+        user.password = req.body.password;
+        user.save();
         res.send(user);
       }
     })

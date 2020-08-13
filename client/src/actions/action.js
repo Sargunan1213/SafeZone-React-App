@@ -407,19 +407,21 @@ export const profileInfoChange = (e, comp, id, app) => {
   });
 
   fetch(request1)
-    .then((res) => {
+    .then(function (res) {
       if (res.status === 200) {
-        return res.json();
+        const json1 = res.json();
+        return json1;
       }
     })
     .then((json1) => {
-      log(json1)
-      app.setState({ currentUser: json1.user });
+      log(json1);
+      app.setState({ currentUser: json1 });
+      alert("Profile info changed")
     })
     .catch((error) => {
       console.log(error);
     });
-  alert("Changed");
+
 };
 
 export const profileChange = (form, page, app) => {
@@ -432,8 +434,6 @@ export const profileChange = (form, page, app) => {
     method: "post",
     body: imageData,
   });
-  log(imageData);
-  // console.log(request.name)
   // Send the request with fetch()
   fetch(request)
     .then(function (res) {
