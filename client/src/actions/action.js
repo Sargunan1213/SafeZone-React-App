@@ -140,6 +140,32 @@ export const removeHome = (app, id) => {
     });
 };
 
+//Admin message
+export const msg = (msgId) => {
+  const url = "/users/AdminPanel/" + msgId;
+
+  const request = new Request(url, {
+    method: "post",
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+    },
+  });
+  fetch(request)
+    .then(function (res) {
+      if (res.status === 200) {
+        log("success broadcasted message");
+      } else {
+        log("error fail to broadcast message");
+      }
+    })
+    .catch((err) => {
+      log(err);
+    });
+};
+
+
+
 export const addInterestedHome = (homeId) => {
   const url = "/users/interest/" + homeId;
 
