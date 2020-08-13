@@ -144,6 +144,19 @@ Step 3: Run $ npm start
 * DELETE /users/:id
   * Delete a user from the database, requires authentication/cookie (logged in as Admin)
   * Expected output: the deleted user document
+* PUT /users/:id
+  * Change profile information of a user
+  * Expected input:
+   ```
+  {
+    "name": <name>
+    "age": <age>
+    "tel": <phone number>
+    "email": <email>
+    "password": <password>
+  }   
+  ```
+  * Expected output: <the changed user document>
 * GET /users/homeowners
   * Get all homeowners, requires to be logged in as Admin/cookie
   * Expected output: all users where type: "Homeowner"
@@ -151,7 +164,9 @@ Step 3: Run $ npm start
   * Get all frontliners
   * Expected output: all users where type: "Customer"
 * GET /users/home
-  * Get all homes if not logged in, get all user's home if logged in as homeowner (needs cookie)
+  * Expected to get all homes if not logged in, get all user's home if logged in as homeowner (needs cookie)
+* GET /users/home/:id
+  * Expected to get home with id
 * POST /users/home
   * Add a new home to the Home database
   * Requires to be logged in as a homeowner/cookie, requires connect-multiparty and FormData
