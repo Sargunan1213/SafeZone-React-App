@@ -58,7 +58,7 @@ class App extends React.Component {
           {!this.state.currentUser ? (
             <NavBar />
           ) : (
-              <NavBar type={this.state.currentUser.type} user={this.state.currentUser} />
+              <NavBar type={this.state.currentUser.type} user={this.state.currentUser} app={this}/>
             )}
           <Switch>
             <Route exact path="/" render={() => <Home />} />

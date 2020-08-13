@@ -395,7 +395,7 @@ app.put("/users/:id", connectionChecker, (req, res) => {
       } else {
         user.password = req.body.password;
         user.save();
-        res.send(user);
+        // res.send(user);
       }
     })
     .catch((err) => {
