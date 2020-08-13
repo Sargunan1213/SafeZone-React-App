@@ -380,47 +380,46 @@ app.delete("/users/:id", connectionChecker, authenticateAdmin, (req, res) => {
     });
 });
 
-// app.put("/users/:id", connectionChecker, (req, res) => {
-//   const id = req.params.id;
+app.put("/users/:id", connectionChecker, (req, res) => {
+  const id = req.params.id;
 
-//   if (!ObjectID.isValid(id)) {
-//     res.status(404).send();
-//     return;
-//   }
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send();
+    return;
+  }
 
-//   User.findById(id)
-//     .then((user) => {
-//       if (!user) {
-//         res.status(404).send();
-//       } else {
-//         user.password = req.body.password;
-//         user.save();
-//         res.send(user);
-//       }
-//     })
-//     .catch((err) => {
-//       res.status(500).send();
-//     });
-//   const change = {
-//     name: req.body.name,
-//     age: req.body.age,
-//     tel: req.body.tel,
-//     email: req.body.email,
-//     profilePic: "./static/favicon.ico",
-//   };
+  User.findById(id)
+    .then((user) => {
+      if (!user) {
+        res.status(404).send();
+      } else {
+        user.password = req.body.password;
+        user.save();
+        res.send(user);
+      }
+    })
+    .catch((err) => {
+      res.status(500).send();
+    });
+  const change = {
+    name: req.body.name,
+    age: req.body.age,
+    tel: req.body.tel,
+    email: req.body.email,
+  };
 
-//   User.findByIdAndUpdate(id, { $set: change }, { new: true })
-//     .then((user) => {
-//       if (!user) {
-//         res.status(404).send();
-//       } else {
-//         res.send(user);
-//       }
-//     })
-//     .catch((err) => {
-//       res.status(500).send();
-//     });
-// });
+  User.findByIdAndUpdate(id, { $set: change }, { new: true })
+    .then((user) => {
+      if (!user) {
+        res.status(404).send();
+      } else {
+        res.send(user);
+      }
+    })
+    .catch((err) => {
+      res.status(500).send();
+    });
+});
 
 app.get("/users/homeowners", connectionChecker, authenticateAdmin, (req, res) => {
   User.find({ type: "Homeowner" })
@@ -467,25 +466,25 @@ app.get("/users/home", connectionChecker, (req, res) => {
   }
 });
 
-// app.get("/users/home/:id", connectionChecker, (req, res) => {
-//   const id = req.params.id;
-//   if (!ObjectID.isValid(id)) {
-//     res.status(404).send;
-//   }
+app.get("/users/home/:id", connectionChecker, (req, res) => {
+  const id = req.params.id;
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send;
+  }
 
-//   Home.findById(id).then(
-//     (home) => {
-//       if (!home) {
-//         res.status(404).send();
-//       } else {
-//         res.send(home);
-//       }
-//     },
-//     (err) => {
-//       res.status(500).send(err);
-//     }
-//   );
-// });
+  Home.findById(id).then(
+    (home) => {
+      if (!home) {
+        res.status(404).send();
+      } else {
+        res.send(home);
+      }
+    },
+    (err) => {
+      res.status(500).send(err);
+    }
+  );
+});
 
 // Add home
 app.post(
@@ -548,6 +547,8 @@ app.put(
         pic: result.url,
         description: req.body.description,
         price: req.body.price,
+        lat: req.body.lat,
+        lng: req.body.lng,
         creator: req.session.user,
         user: req.session.name,
         tel: req.session.tel,

@@ -23,6 +23,8 @@ class EditPostPage extends React.Component {
           username={app.state.home.user}
           phone={app.state.home.tel}
           price={app.state.home.price}
+          lat={app.state.home.lat}
+          lng={app.state.home.lng}
           email={app.state.home.email}
           img={app.state.home.img}
           handle={(e) => handleInputChangeHome(e, app)}

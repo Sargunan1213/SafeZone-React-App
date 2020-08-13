@@ -322,7 +322,7 @@ export const getHomes = (app) => {
 };
 
 export const editHome = (app, comp, id) => {
-  const url = "/users/home/" + id;
+  const url = local + "/users/home/" + id;
   fetch(url)
     .then(function (res) {
       if (res.status === 200) {
