@@ -201,7 +201,7 @@ app.post("/signUpUser", connectionChecker, (req, res) => {
     email: req.body.email,
     password: req.body.password,
     type: req.body.usertype,
-    profilePic: "./client/build/static/media/favicon.6e1267d9.ico",
+    profilePic: "http://res.cloudinary.com/drbionfdh/image/upload/v1597125645/crwe0pjqnqaizt0mn5qi.ico",
   });
 
   // Save the user

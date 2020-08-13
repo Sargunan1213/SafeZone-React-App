@@ -8,14 +8,14 @@ import Post from "../Post";
 
 class FrontlinerProfilePage extends React.Component {
   state = {
-    name: "",
-    age: 0,
-    password: "r",
-    homes: [],
-    tel: "",
-    email: "",
+    name: this.props.user.name,
+    age: this.props.user.age,
+    password: this.props.user.password,
+    homes: this.props.user.homes,
+    tel: this.props.user.tel,
+    email: this.props.user.email,
 
-    profilepic: profileImg,
+    profilepic: this.props.user.profilePic,
     type: "homeowner",
   };
 
@@ -24,14 +24,14 @@ class FrontlinerProfilePage extends React.Component {
   }
   render() {
     const { user, app } = this.props;
-    this.state.name = user.name;
-    this.state.age = user.age;
-    this.state.password = user.password;
-    this.state.postId = this.state.homes;
-    this.state.tel = user.tel;
-    this.state.email = user.email;
-    this.state.profilepic = user.profilePic;
-    this.state.type = user.type;
+    // this.state.name = user.name;
+    // this.state.age = user.age;
+    // this.state.password = user.password;
+    // this.state.postId = this.state.homes;
+    // this.state.tel = user.tel;
+    // this.state.email = user.email;
+    // this.state.profilepic = user.profilePic;
+    // this.state.type = user.type;
     return (
       <div>
         <div>

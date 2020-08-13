@@ -6,48 +6,42 @@ import { profileChange } from "../../actions/action";
 
 class HomeOwnerProfilePage extends React.Component {
   state = {
-    name: "",
-    age: 0,
-    password: "",
+    name: this.props.user.name,
+    age: this.props.user.age,
+    password: this.props.user.password,
     postId: [],
-    tel: "",
-    email: "",
+    tel: this.props.user.tel,
+    email: this.props.user.email,
 
-    profilepic: profileImg,
-    type: "homeowner",
+    profilepic: this.props.user.profilepic,
+    type: "Homeowner",
   };
 
   render() {
     const { user, app } = this.props;
-    this.state.name = user.name;
-    this.state.age = user.age;
-    this.state.password = user.password;
-    this.state.postId = user.postId;
-    this.state.tel = user.tel;
-    this.state.email = user.email;
-    this.state.profilepic = user.profilePic;
-    this.state.type = user.type;
+    // this.state.name = user.name;
+    // this.state.age = user.age;
+    // this.state.password = user.password;
+    // this.state.postId = user.postId;
+    // this.state.tel = user.tel;
+    // this.state.email = user.email;
+    // this.state.profilepic = user.profilePic;
+    // this.state.type = user.type;
     const feed = "/userTwitterFeed";
     return (
       <div>
         <div name="pic" className="homeOwnerBasicInfo">
-          {this.state.profilepic.includes('http') ? 
+          {user.profilePic.includes('http') ? 
           <img
             className="homeOwnerProfilePicture"
-            src={this.state.profilepic}
+            src={user.profilePic}
             alt="profilePic"
           ></img> : 
           <img
             className="homeOwnerProfilePicture"
-            src={require(this.state.profilepic)}
+            src={require(user.profilePic)}
             alt="profilePic"
           ></img>}
-          
-          <img
-            className="homeOwnerProfilePicture"
-            src={this.state.profilepic}
-            alt="profilePic"
-          ></img>
 
           <form
             onSubmit={(e) => {
