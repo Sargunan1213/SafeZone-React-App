@@ -13,7 +13,7 @@ class NavBar extends React.Component {
       user: this.props.user
     };
 
-   opts = (type, user) => {
+   opts = (type, user, app) => {
     let nav = {
       Home: "",
       Posts: "Posts",
@@ -54,7 +54,7 @@ class NavBar extends React.Component {
     
     if (!("Sign In" in nav)) {
       link = (
-        <Link className="signout" onClick={() => logout(this.props.app)} to={'/'}>
+        <Link className="signout" onClick={() => logout(app)} to={'/'}>
           Sign out
         </Link>
       );
@@ -70,7 +70,7 @@ class NavBar extends React.Component {
   }
 
   render() {
-    const [nav, link, img] = this.opts(this.props.type, this.props.user);
+    const [nav, link, img] = this.opts(this.props.type, this.props.user, this.props.app);
 
     return (
       <div id="bar">
