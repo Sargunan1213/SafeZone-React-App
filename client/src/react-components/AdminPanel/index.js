@@ -5,7 +5,7 @@ import { uid } from "react-uid";
 import AdminSendMsg from "../AdminSendMsg";
 import "./styles.css";
 import { removeUser } from "../../actions/action";
-import { getHomes,getHomeowners, getFrontliners } from "../../actions/action.js";
+import { getHomeowners, getFrontliners } from "../../actions/action.js";
 
 
 class AdminPanel extends React.Component {
@@ -24,7 +24,6 @@ class AdminPanel extends React.Component {
     console.log(this.state.homeowners)
   }
   render() {
-    const frontlineOwner = this.state.frontliners.user2;
     const {app} = this.props;
     return (
       <div>
