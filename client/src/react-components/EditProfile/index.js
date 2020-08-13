@@ -45,7 +45,7 @@ class EditProfile extends React.Component {
                                 </label>
                             </form>
                         </div>
-                        <button className="frontlinerProfile-btn" onClick={(e) => profileInfoChange(e, this, this.props.user._id)}>Submit Change</button>
+                        <button className="frontlinerProfile-btn" onClick={(e) => profileInfoChange(e, this, this.props.user._id, this.props.app)}>Submit Change</button>
                     </div>
                 </div>
             </div>

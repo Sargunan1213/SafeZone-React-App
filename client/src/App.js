@@ -105,14 +105,14 @@ class App extends React.Component {
               exact
               path="/EditProfileHomeowner"
               render={() => (
-                this.state.currentUser ? (<EditProfile type="homeowner" user={this.state.currentUser} />) : (<Login app={this} />)
+                this.state.currentUser ? (<EditProfile type="homeowner" user={this.state.currentUser} app={this}/>) : (<Login app={this} />)
               )}
             />
             <Route
               exact
               path="/EditProfileFrontliner"
               render={() => (
-                this.state.currentUser ? (<EditProfile type="frontliner" user={this.state.currentUser} />) : (<Login app={this} />)
+                this.state.currentUser ? (<EditProfile type="frontliner" user={this.state.currentUser}  app={this}/>) : (<Login app={this} />)
               )}
             />
           </Switch>

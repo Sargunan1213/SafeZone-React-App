@@ -1,6 +1,6 @@
 const log = console.log;
-// const local = "http://localhost:5000";
-const local = "";
+const local = "http://localhost:5000";
+// const local = "";
 // A function to check if a user is logged in on the session cookie
 export const readCookie = (app) => {
   const url = "/users/check-session";
@@ -282,7 +282,6 @@ export const submitForm = (event, comp, app) => {
     method: "post",
     body: form,
   });
-  console.log("HERE", request);
   fetch(request)
     .then(function (res) {
       if (res.status === 200) {
@@ -314,7 +313,6 @@ export const getHomes = (app) => {
     })
     .then((json) => {
       app.setState({ homes: json });
-      console.log(app.state.homes);
     })
     .catch((err) => {
       console.log(err);
@@ -392,7 +390,7 @@ export const submitDonationForm = (event, comp) => {
     });
 };
 
-export const profileInfoChange = (e, comp, id) => {
+export const profileInfoChange = (e, comp, id, app) => {
   if (comp.state.password === "") {
     alert("Enter a password");
     return;
@@ -413,6 +411,10 @@ export const profileInfoChange = (e, comp, id) => {
       if (res.status === 200) {
         return res.json();
       }
+    })
+    .then((json1) => {
+      log(json1)
+      app.setState({ currentUser: json1.user });
     })
     .catch((error) => {
       console.log(error);

@@ -70,10 +70,10 @@ class HomeOwnerProfilePage extends React.Component {
           /> */}
 
           <div className="general_info">
-            <h2>Name: {this.state.name}</h2>
-            <h2>Age: {this.state.age}</h2>
-            <h2>Contact: {this.state.tel}</h2>
-            <h2>Email: {this.state.email}</h2>
+            <h2>Name: {user.name}</h2>
+            <h2>Age: {user.age}</h2>
+            <h2>Contact: {user.tel}</h2>
+            <h2>Email: {user.email}</h2>
           </div>
 
           <Link to="/Posts">

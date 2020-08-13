@@ -67,16 +67,16 @@ class FrontlinerProfilePage extends React.Component {
             </button>
             </form>
             <div className="frontline_general_info">
-              <h2>Name: {this.state.name}</h2>
-              <h2>Age: {this.state.age}</h2>
-              <h2>Contact: {this.state.tel}</h2>
-              <h2>Email: {this.state.email}</h2>
+              <h2>Name: {user.name}</h2>
+              <h2>Age: {user.age}</h2>
+              <h2>Contact: {user.tel}</h2>
+              <h2>Email: user.email}</h2>
             </div>
             <Link to="/EditProfileFrontliner">
               <button className="homeOwnerViewOwnPost-btn">Edit Profile</button>
             </Link>
 
-            {this.state.homes.map((home) => (
+            {user.homes.map((home) => (
             <Post
               key={uid(home)}
               home={home}
