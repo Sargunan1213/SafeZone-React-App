@@ -36,18 +36,24 @@ class FrontlinerProfilePage extends React.Component {
       <div>
         <div>
           <div className="frontlinerBasicInfo">
-            <img
-              className="frontlinerProfilePicture"
-              src={this.state.profilepic}
-              alt="frontlinerProfilePicture.jpg"
-            ></img>
+          {this.state.profilepic.includes('http') ? 
+          <img
+            className="homeOwnerProfilePicture"
+            src={this.state.profilepic}
+            alt="profilePic"
+          ></img> : 
+          <img
+            className="homeOwnerProfilePicture"
+            src={require(this.state.profilepic)}
+            alt="profilePic"
+          ></img>}
             <form
               onSubmit={(e) => {
                 e.preventDefault();
                 profileChange(e.target, this, app);
               }}
             >
-              <div>
+              <div className="chooseImg">
                 <label>Image:</label>
                 <input name="image" type="file" />
               </div>

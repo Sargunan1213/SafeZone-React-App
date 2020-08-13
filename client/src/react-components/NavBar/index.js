@@ -9,10 +9,11 @@ import {logout} from '../../actions/action'
 
 class NavBar extends React.Component {
     state = {
-      type: this.props.type
+      type: this.props.type,
+      user: this.props.user
     };
 
-   opts = (type) => {
+   opts = (type, user) => {
     let nav = {
       Home: "",
       Posts: "Posts",
@@ -27,7 +28,7 @@ class NavBar extends React.Component {
         "Live Cases": "Live",
         "My Posts": "Posts",
         "Add Post": "AddPost",
-        "user": "HomeOwnerProfilePage"
+        [user.name]: "HomeOwnerProfilePage"
       }
     }
     else if (type === "Customer"){
@@ -35,7 +36,7 @@ class NavBar extends React.Component {
         Home: "",
         Posts: "Posts",
         "Live Cases": "Live",
-        "user2": "FrontlinerProfilePage"
+        [user.name]: "FrontlinerProfilePage"
       }
     }
     else if (type === "Admin"){
@@ -44,7 +45,7 @@ class NavBar extends React.Component {
         Posts: "Posts",
         "Live Cases": "Live",
         "Admin Panel": "AdminPanel",
-        "admin": ""
+        [user.name]: ""
       }
     }
 
@@ -68,7 +69,7 @@ class NavBar extends React.Component {
   }
 
   render() {
-    const [nav, link, img] = this.opts(this.props.type);
+    const [nav, link, img] = this.opts(this.props.type, this.props.user);
 
     return (
       <div id="bar">

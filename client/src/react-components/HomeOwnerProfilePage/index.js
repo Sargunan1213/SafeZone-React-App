@@ -31,6 +31,18 @@ class HomeOwnerProfilePage extends React.Component {
     return (
       <div>
         <div name="pic" className="homeOwnerBasicInfo">
+          {this.state.profilepic.includes('http') ? 
+          <img
+            className="homeOwnerProfilePicture"
+            src={this.state.profilepic}
+            alt="profilePic"
+          ></img> : 
+          <img
+            className="homeOwnerProfilePicture"
+            src={require(this.state.profilepic)}
+            alt="profilePic"
+          ></img>}
+          
           <img
             className="homeOwnerProfilePicture"
             src={this.state.profilepic}
@@ -43,7 +55,7 @@ class HomeOwnerProfilePage extends React.Component {
               profileChange(e.target, this, app);
             }}
           >
-            <div>
+            <div className="chooseImg">
               <label>Image:</label>
               <input name="image" type="file" />
             </div>

@@ -40,3 +40,10 @@
     line-height: 45px;
     color: #fff;
 }
+
+.chooseImg {
+    margin: auto;
+    color: white;
+    width: 12%;
+    text-align: center;
+  }
