@@ -703,7 +703,7 @@ app.post(
     cloudinary.uploader.upload(req.files.image.path, function (result) {
       const tweeter = new Tweeter({
         image: result.url,
-        twitterMsgs: req.body.twitterMsgs,
+        twitterMsgs: req.body.msg,
       });
 
       tweeter
@@ -714,6 +714,7 @@ app.post(
         .catch((err) => {
           isError(err, res);
         });
+
     });
   }
 );
