@@ -141,11 +141,11 @@ Step 3: Run $ npm start
   }
   ```
   * Expected output: newly added donation document
-* DELETE /users/:id
+* DELETE /users/
   * Delete a user from the database, requires authentication/cookie (logged in as Admin)
   * Expected output: the deleted user document
 * PUT /users/:id
-  * Change profile information of a user
+  * Change profile information of a user, required to be logged in
   * Expected input:
    ```
   {
