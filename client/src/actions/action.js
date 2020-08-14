@@ -1,6 +1,6 @@
 const log = console.log;
-const local = "http://localhost:5000";
-// const local = "";
+// const local = "http://localhost:5000";
+const local = "";
 // A function to check if a user is logged in on the session cookie
 export const readCookie = (app) => {
   const url = "/users/check-session";
@@ -157,6 +157,25 @@ export const removeHome = (app, id) => {
       console.log(err);
     });
 };
+
+export const getTweets = (comp) => {
+  const url = "/users/userTwitterFeed";
+
+  fetch(url)
+    .then(function (res) {
+      if (res.status === 200) {
+        return res.json();
+      } else {
+        log("error gettingtweets");
+      }
+    })
+    .then((json) => {
+      comp.setState({ twitterMsgs: json });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
 //Admin message
 export const msg = (event) => {

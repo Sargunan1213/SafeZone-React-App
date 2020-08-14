@@ -6,14 +6,19 @@ import "./styles.css";
 import safeZone from "./static/safeZoneLogo.png";
 import tweet_img from "./static/tweet_img.png";
 
+import { getTweets } from "../../actions/action";
+
 class UserTwitterFeed extends React.Component {
   state = {
     // Messages will be obtained from server
     twitterMsgs: [
-      "We had a great time building the front-end of this application. Learnt a lot of new things.",
-      "Admin will post message to all the users abbout updates on the platform and new feature these will be reflected here.",
     ],
   };
+
+  componentDidMount() {
+    getTweets(this);
+  }
+
   render() {
     return (
       <div>
