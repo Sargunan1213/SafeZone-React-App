@@ -156,7 +156,7 @@ Step 3: Run $ npm start
     "password": <password>
   }   
   ```
-  * Expected output: <the changed user document>
+  * Expected output: the updated user document
 * GET /users/homeowners
   * Get all homeowners, requires to be logged in as Admin/cookie
   * Expected output: all users where type: "Homeowner"
@@ -175,12 +175,11 @@ Step 3: Run $ npm start
   {
   "address": <address>
   "zip": <zip>
-  "cvc": <cvc>
   "description": <description>
-  "price": <price>
-  "lat": <lat>
-  "lng": <lng>
-  "image" <image url>
+  "price": <price> (number)
+  "lat": <lat> (number)
+  "lng": <lng> (number)
+  "image" <an image>
   }
   ```
   * Expected output: newly added home
@@ -188,7 +187,6 @@ Step 3: Run $ npm start
   {
   "address": <address>
   "zip": <zip>
-  "cvc": <cvc>
   "description": <description>
   "price": <price>
   "lat": <lat>
@@ -208,7 +206,6 @@ Step 3: Run $ npm start
   {
   "address": <address>
   "zip": <zip>
-  "cvc": <cvc>
   "description": <description>
   "price": <price>
   "lat": <lat>
@@ -221,7 +218,6 @@ Step 3: Run $ npm start
   {
   "address": <address>
   "zip": <zip>
-  "cvc": <cvc>
   "description": <description>
   "price": <price>
   "lat": <lat>
