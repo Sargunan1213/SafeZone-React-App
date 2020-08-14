@@ -169,27 +169,6 @@ const authenticateAdmin = (req, res, next) => {
   }
 };
 
-// User routes below
-// app.post("/users", connectionChecker, (req, res) => {
-//   log(req.body);
-
-//   // Create a new user
-//   const user = new User({
-//     email: req.body.email,
-//     password: req.body.password,
-//   });
-
-//   // Save the user
-//   user.save().then(
-//     (user) => {
-//       res.send(user);
-//     },
-//     (error) => {
-//       res.status(400).send(error);
-//     }
-//   );
-// });
-
 app.post("/signUpUser", connectionChecker, (req, res) => {
   // Create a new user
   console.log("request in sign up", req.body);
@@ -714,7 +693,6 @@ app.post(
         .catch((err) => {
           isError(err, res);
         });
-
     });
   }
 );

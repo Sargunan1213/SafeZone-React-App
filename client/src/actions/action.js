@@ -175,7 +175,7 @@ export const getTweets = (comp) => {
     .catch((err) => {
       console.log(err);
     });
-}
+};
 
 //Admin message
 export const msg = (event) => {
