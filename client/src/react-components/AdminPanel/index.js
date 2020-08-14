@@ -19,7 +19,7 @@ class AdminPanel extends React.Component {
 
   componentDidMount() {
     // getHomes(this)
-    getHomeowners(this)
+    // getHomeowners(this)
     getFrontliners(this)
     console.log(this.state.homeowners)
   }

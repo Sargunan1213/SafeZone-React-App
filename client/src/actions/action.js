@@ -159,17 +159,20 @@ export const removeHome = (app, id) => {
 };
 
 export const getTweets = (comp) => {
-  const url = "/users/userTwitterFeed";
+  const url = local + "/users/userTwitterFeed";
 
   fetch(url)
     .then(function (res) {
       if (res.status === 200) {
-        return res.json();
+        const json = res.json();
+        log(json)
+        return json
       } else {
-        log("error gettingtweets");
+        log("error getting tweets");
       }
     })
     .then((json) => {
+      log(json)
       comp.setState({ twitterMsgs: json });
     })
     .catch((err) => {

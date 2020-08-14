@@ -112,11 +112,7 @@ class App extends React.Component {
               exact
               path="/userTwitterFeed"
               render={() =>
-                this.state.currentUser ? (
-                  <UserTwitterFeed />
-                ) : (
-                  <Login app={this} />
-                )
+                  <UserTwitterFeed />        
               }
             />
             <Route
