@@ -260,7 +260,15 @@ export const editPost = (event, app, id) => {
   fetch(request)
     .then(function (res) {
       if (res.status === 200) {
-        log("success edited home");
+        app.setState({
+          visible: true,
+          msg: "Your post was successfully edited!",
+        });
+        setTimeout(() => {
+          app.setState({
+            visible: false,
+          });
+        }, 3000);
       } else {
         log("error fail to edit home");
       }
@@ -329,7 +337,12 @@ export const submitForm = (event, comp, app) => {
   fetch(request)
     .then(function (res) {
       if (res.status === 200) {
-        log("success added home");
+        app.setState({ visible: true, msg: "Successfully added your home!" });
+        setTimeout(() => {
+          app.setState({
+            visible: false,
+          });
+        }, 3000);
       } else {
         log("error fail to add home");
       }
@@ -396,7 +409,12 @@ export const removeUser = (id, comp) => {
   fetch(request)
     .then(function (res) {
       if (res.status === 200) {
-        log("success removed user");
+        app.setState({ visible: true, msg: "Successfully removed user!" });
+        setTimeout(() => {
+          app.setState({
+            visible: false,
+          });
+        }, 3000);
       } else {
         log("error fail to remove user");
       }
