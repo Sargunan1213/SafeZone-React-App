@@ -26,7 +26,7 @@ class AdminSendMsg extends React.Component {
     return (
       <div className="msg">
         <h1>Send a message to all the users:</h1>
-        <form action="" onSubmit={this.submitForm}>
+        <form action="" onSubmit={(e) => msg(e)}>
           <textarea
             name="msg"
             id=""
@@ -42,7 +42,7 @@ class AdminSendMsg extends React.Component {
             <input name="image" type="file" />
           </div>
 
-          <button type="submit" className="btn" onClick={msg}>
+          <button type="submit" className="btn">
             Broadcast Message!
           </button>
 
