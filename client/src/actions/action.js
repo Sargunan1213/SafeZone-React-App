@@ -409,9 +409,9 @@ export const removeUser = (id, comp) => {
   fetch(request)
     .then(function (res) {
       if (res.status === 200) {
-        app.setState({ visible: true, msg: "Successfully removed user!" });
+        comp.setState({ visible: true, msg: "Successfully removed user!" });
         setTimeout(() => {
-          app.setState({
+          comp.setState({
             visible: false,
           });
         }, 3000);
