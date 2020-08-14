@@ -83,9 +83,9 @@ UserSchema.pre("save", function (next) {
   }
 });
 
-UserSchema.statics.findByPassword = function (name, password) {
+UserSchema.statics.findByPassword = function (username, password) {
   const User = this;
-  return User.findOne({ name: name }).then((user) => {
+  return User.findOne({ username: username }).then((user) => {
     if (!user) {
       return Promise.reject();
     }

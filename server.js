@@ -135,7 +135,7 @@ const authenticateFrontliner = (req, res, next) => {
   if (req.session.user) {
     User.findById(req.session.user)
       .then((user) => {
-        if (!user|| user.type !== "Customer") {
+        if (!user || user.type !== "Customer") {
           return Promise.reject();
         } else {
           req.user = user;
@@ -154,7 +154,7 @@ const authenticateAdmin = (req, res, next) => {
   if (req.session.user) {
     User.findById(req.session.user)
       .then((user) => {
-        if (!user|| user.type !== "Admin") {
+        if (!user || user.type !== "Admin") {
           return Promise.reject();
         } else {
           req.user = user;
@@ -195,13 +195,15 @@ app.post("/signUpUser", connectionChecker, (req, res) => {
   console.log("request in sign up", req.body);
   const user = new User({
     name: req.body.name,
+    username: req.body.username,
     age: req.body.age,
     tel: req.body.contactNumber,
     homes: [],
     email: req.body.email,
     password: req.body.password,
     type: req.body.usertype,
-    profilePic: "http://res.cloudinary.com/drbionfdh/image/upload/v1597125645/crwe0pjqnqaizt0mn5qi.ico",
+    profilePic:
+      "http://res.cloudinary.com/drbionfdh/image/upload/v1597125645/crwe0pjqnqaizt0mn5qi.ico",
   });
 
   // Save the user
@@ -220,13 +222,13 @@ app.post("/signUpUser", connectionChecker, (req, res) => {
 
 // A route to login and create a session
 app.post("/login", connectionChecker, (req, res) => {
-  const name = req.body.username;
+  const username = req.body.username;
   const password = req.body.password;
 
-  log(name, password);
+  log(username, password);
   // Use the static method on the User model to find a user
   // by their email and password
-  User.findByPassword(name, password)
+  User.findByPassword(username, password)
     .then((user) => {
       // Add the user's id to the session cookie.
       // We can check later if this exists to ensure we are logged in.
@@ -276,29 +278,35 @@ app.get("/users/logout", (req, res) => {
 //   });
 // });
 
-app.post("/changeprofilepic/:name", connectionChecker, authenticate, multipartMiddleware, (req, res) => {
-  // Use uploader.upload API to upload image to cloudinary server.
-  cloudinary.uploader.upload(req.files.image.path, function (result) {
-    console.log(result.url);
-    console.log(req.params.name);
-    User.findOneAndUpdate(
-      { name: req.params.name },
-      { $set: { profilePic: result.url } },
-      { new: true, useFindAndModify: false }
-    )
-      .then((user) => {
-        console.log(user);
-        if (!user) {
-          res.status(404).send();
-        } else {
-          res.send({ user });
-        }
-      })
-      .catch((error) => {
-        res.status(400).send();
-      });
-  });
-});
+app.post(
+  "/changeprofilepic/:name",
+  connectionChecker,
+  authenticate,
+  multipartMiddleware,
+  (req, res) => {
+    // Use uploader.upload API to upload image to cloudinary server.
+    cloudinary.uploader.upload(req.files.image.path, function (result) {
+      console.log(result.url);
+      console.log(req.params.name);
+      User.findOneAndUpdate(
+        { name: req.params.name },
+        { $set: { profilePic: result.url } },
+        { new: true, useFindAndModify: false }
+      )
+        .then((user) => {
+          console.log(user);
+          if (!user) {
+            res.status(404).send();
+          } else {
+            res.send({ user });
+          }
+        })
+        .catch((error) => {
+          res.status(400).send();
+        });
+    });
+  }
+);
 
 app.post("/donation", connectionChecker, (req, res) => {
   const donation = new Donation({
@@ -408,7 +416,11 @@ app.put("/users/:id", connectionChecker, authenticate, (req, res) => {
     email: req.body.email,
   };
 
-  User.findByIdAndUpdate(id, { $set: change }, { new: true, useFindAndModify: false })
+  User.findByIdAndUpdate(
+    id,
+    { $set: change },
+    { new: true, useFindAndModify: false }
+  )
     .then((user) => {
       if (!user) {
         res.status(404).send();
@@ -423,16 +435,21 @@ app.put("/users/:id", connectionChecker, authenticate, (req, res) => {
     });
 });
 
-app.get("/users/homeowners", connectionChecker, authenticateAdmin, (req, res) => {
-  User.find({ type: "Homeowner" })
-    .then((users) => {
-      res.send(users);
-    })
-    .catch((err) => {
-      log(err);
-      res.status(500).send("Internal Server Error");
-    });
-});
+app.get(
+  "/users/homeowners",
+  connectionChecker,
+  authenticateAdmin,
+  (req, res) => {
+    User.find({ type: "Homeowner" })
+      .then((users) => {
+        res.send(users);
+      })
+      .catch((err) => {
+        log(err);
+        res.status(500).send("Internal Server Error");
+      });
+  }
+);
 
 app.get("/users/frontliners", connectionChecker, (req, res) => {
   User.find({ type: "Customer" })
@@ -614,24 +631,28 @@ app.post(
   }
 );
 
-app.get("/users/interest", connectionChecker, authenticateFrontliner, (req, res) => {
-  if (!ObjectID.isValid(req.session.user)) {
-    res.status(404).send();
-    return;
-  }
-  User.findById(req.session.user)
-  .then((user) => {
-    if (!user) {
+app.get(
+  "/users/interest",
+  connectionChecker,
+  authenticateFrontliner,
+  (req, res) => {
+    if (!ObjectID.isValid(req.session.user)) {
       res.status(404).send();
-    } else {
-      res.send(user.homes)
+      return;
     }
-  })
-  .catch((err) => {
-    res.status(401).send("Unauthorized");
-  });
-
-});
+    User.findById(req.session.user)
+      .then((user) => {
+        if (!user) {
+          res.status(404).send();
+        } else {
+          res.send(user.homes);
+        }
+      })
+      .catch((err) => {
+        res.status(401).send("Unauthorized");
+      });
+  }
+);
 
 //Delete Route
 app.delete(
@@ -673,25 +694,29 @@ app.get("/users/userTwitterFeed", connectionChecker, (req, res) => {
 });
 
 //Tweeter page post route
-app.post("/users/userTwitterFeed", connectionChecker, authenticateAdmin, multipartMiddleware, (req, res) => {
+app.post(
+  "/users/userTwitterFeed",
+  connectionChecker,
+  authenticateAdmin,
+  multipartMiddleware,
+  (req, res) => {
+    cloudinary.uploader.upload(req.files.image.path, function (result) {
+      const tweeter = new Tweeter({
+        image: result.url,
+        twitterMsgs: req.body.twitterMsgs,
+      });
 
-  cloudinary.uploader.upload(req.files.image.path, function (result) {
-    const tweeter = new Tweeter({
-      image: result.url,
-      twitterMsgs: req.body.twitterMsgs,
+      tweeter
+        .save()
+        .then((result) => {
+          res.send(result);
+        })
+        .catch((err) => {
+          isError(err, res);
+        });
     });
-    
-    tweeter
-    .save()
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      isError(err, res);
-    });
-  });
-
-});
+  }
+);
 
 //Tweeter page delete route
 app.delete(
