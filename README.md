@@ -267,7 +267,7 @@ Step 3: Run $ npm start
   "creator": <ObjectID of logged in homeowner>
   }
   ```
-* POST /userTwitterFeed
+* POST /users/userTwitterFeed
   * Create a new tweet, requires FormData and connect-multiparty
   * Expects input (as FormData):
   ```
@@ -276,7 +276,6 @@ Step 3: Run $ npm start
   }
   ```
   * Expected output: the newly added twitter msg
-* DELETE /userTwitterFeed/:tweeterid
-  * Delete a tweet, requires to be logged in 
-  * Expected output: the newly deleted twitter msg
-  
+* GET /users/userTwitterFeed
+  * Get all tweeter messages
+  * Expected output: all tweets
