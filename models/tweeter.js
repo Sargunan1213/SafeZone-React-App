@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 
 const TweeterSchema = new mongoose.Schema({
     image: String,
-    twitterMsgs: [{
+    twitterMsgs: {
         type: String,
         required: true,
         minlength: 1,
-    }]
+    }
 
 })
 

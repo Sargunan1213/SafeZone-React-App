@@ -179,6 +179,7 @@ export const getTweets = (comp) => {
 
 //Admin message
 export const msg = (event) => {
+  event.preventDefault();
   const url = "/users/userTwitterFeed";
 
   const form = new FormData(event.target);
