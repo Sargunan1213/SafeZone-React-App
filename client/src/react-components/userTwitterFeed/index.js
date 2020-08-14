@@ -47,11 +47,11 @@ class UserTwitterFeed extends React.Component {
                 <div className="content">
                   <h3>SAFEZONE @SF</h3>
 
-                  <Msg key={uid(msg)} msg={msg} />
+                  <Msg key={uid(msg)} msg={msg.twitterMsgs} />
 
                   <img
                     className="contentPicture"
-                    src={tweet_img}
+                    src={msg.image}
                     alt="house"
                   />
                 </div>
