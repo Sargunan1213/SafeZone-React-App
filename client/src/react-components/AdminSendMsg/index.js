@@ -1,6 +1,8 @@
 import React from "react";
 import "./styles.css";
 
+import {msg}  from "../../actions/action.js";
+
 class AdminSendMsg extends React.Component {
   state = {
     msg: "",
@@ -35,7 +37,12 @@ class AdminSendMsg extends React.Component {
           ></textarea>
           <br />
 
-          <button type="submit" className="btn">
+          <div className="chooseImg">
+            <label>Image:</label>
+            <input name="image" type="file" />
+          </div>
+
+          <button type="submit" className="btn" onClick={msg}>
             Broadcast Message!
           </button>
 

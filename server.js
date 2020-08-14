@@ -660,18 +660,28 @@ app.delete(
   }
 );
 
+//Tweeter page get route
+app.get("/users/userTwitterFeed", connectionChecker, (req, res) => {
+  Tweeter.find().then(
+    (tweets) => {
+      res.send(tweets);
+    },
+    (err) => {
+      res.status(400).send(err);
+    }
+  );
+});
+
 //Tweeter page post route
-app.post("/users/userTwitterFeed", (req, res) => {
-  if (mongoose.connection.readyState != 1) {
-    log("Issue with mongoose connection");
-    res.status(500).send("Internal server error");
-    return;
-  }
-  const tweeter = new Tweeter({
-    image: req.body.image,
-    twitterMsgs: req.body.twitterMsgs,
-  });
-  tweeter
+app.post("/users/userTwitterFeed", connectionChecker, authenticateAdmin, multipartMiddleware, (req, res) => {
+
+  cloudinary.uploader.upload(req.files.image.path, function (result) {
+    const tweeter = new Tweeter({
+      image: result.url,
+      twitterMsgs: req.body.twitterMsgs,
+    });
+    
+    tweeter
     .save()
     .then((result) => {
       res.send(result);
@@ -679,6 +689,8 @@ app.post("/users/userTwitterFeed", (req, res) => {
     .catch((err) => {
       isError(err, res);
     });
+  });
+
 });
 
 //Tweeter page delete route

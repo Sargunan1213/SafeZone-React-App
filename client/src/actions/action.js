@@ -1,6 +1,6 @@
 const log = console.log;
-// const local = "http://localhost:5000";
-const local = "";
+const local = "http://localhost:5000";
+// const local = "";
 // A function to check if a user is logged in on the session cookie
 export const readCookie = (app) => {
   const url = "/users/check-session";
@@ -159,20 +159,19 @@ export const removeHome = (app, id) => {
 };
 
 //Admin message
-export const msg = (msgId) => {
-  const url = "/users/AdminPanel/" + msgId;
+export const msg = (event) => {
+  const url = "/users/userTwitterFeed";
 
-  const request = new Request(url, {
+  const form = new FormData(event.target);
+
+  const request = new Request(local + url, {
     method: "post",
-    headers: {
-      Accept: "application/json, text/plain, */*",
-      "Content-Type": "application/json",
-    },
+    body: form,
   });
   fetch(request)
     .then(function (res) {
       if (res.status === 200) {
-        log("success broadcasted message");
+        alert("success broadcasted message");
       } else {
         log("error fail to broadcast message");
       }

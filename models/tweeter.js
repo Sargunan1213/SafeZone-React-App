@@ -1,10 +1,7 @@
 const mongoose = require("mongoose");
 
 const TweeterSchema = new mongoose.Schema({
-    image: [{
-        type: Buffer,
-        data: String
-    }],
+    image: String,
     twitterMsgs: [{
         type: String,
         required: true,
