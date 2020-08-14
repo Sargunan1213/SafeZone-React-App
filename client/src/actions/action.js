@@ -48,7 +48,8 @@ export const signUpUser = (comp) => {
       if (res.status === 200) {
         return res.json();
       }
-    }).then(()=> comp.props.history.push('/Login'))
+    })
+    .then(() => comp.props.history.push("/Login"))
     .catch((error) => {
       console.log(error);
     });
@@ -66,8 +67,6 @@ export const signIn = (comp, app) => {
     },
   });
 
-  console.log(request);
-
   // Send the request with fetch()
   fetch(request)
     .then((res) => {
@@ -76,13 +75,26 @@ export const signIn = (comp, app) => {
       }
     })
     .then((json) => {
-      if (json.currentUser !== undefined) {
+      if (json && json.currentUser !== undefined) {
         console.log(json.currentUser);
         app.setState({ currentUser: json.currentUser });
+        app.setState({ visible: true, msg: "Successfully logged in WELCOME!" });
+        setTimeout(() => {
+          app.setState({
+            visible: false,
+          });
+        }, 3000);
       } else if (json.msg !== null) {
-        alert(json.msg);
+        app.setState({
+          visible: true,
+          msg: "Wrong Credentials please try Again",
+        });
+        setTimeout(() => {
+          app.setState({ visible: false });
+        }, 3000);
       }
-    }).then(()=> comp.props.history.push('/'))
+    })
+    .then(() => comp.props.history.push("/"))
     .catch((error) => {
       console.log(error);
     });
@@ -99,7 +111,7 @@ export const signIn = (comp, app) => {
 // A function to send a GET request to logout the current user
 export const logout = (app) => {
   const url = "/users/logout";
-  log("gere")
+  log("gere");
 
   fetch(url)
     .then((res) => {
@@ -107,7 +119,8 @@ export const logout = (app) => {
         currentUser: null,
         message: { type: "", body: "" },
       });
-    }).then(()=> app.props.history.push('/'))
+    })
+    .then(() => app.props.history.push("/"))
     .catch((error) => {
       console.log(error);
     });
@@ -127,7 +140,12 @@ export const removeHome = (app, id) => {
   fetch(request)
     .then(function (res) {
       if (res.status === 200) {
-        log("success removed home");
+        app.setState({ visible: true, msg: "Home removed successfully" });
+        setTimeout(() => {
+          app.setState({
+            visible: false,
+          });
+        }, 3000);
       } else {
         log("error fail to remove home");
       }
@@ -164,8 +182,6 @@ export const msg = (msgId) => {
     });
 };
 
-
-
 export const addInterestedHome = (homeId) => {
   const url = "/users/interest/" + homeId;
 
@@ -190,7 +206,7 @@ export const addInterestedHome = (homeId) => {
 };
 
 export const getInterestedHome = (comp) => {
-  const url = "/users/interest"
+  const url = "/users/interest";
 
   fetch(url)
     .then(function (res) {
@@ -229,12 +245,18 @@ export const editPost = (event, app, id) => {
     })
     .then(() => {
       getHomes(app);
-      alert("Home info has changed")
+      app.setState({
+        visible: true,
+        msg: "Home info has changed",
+      });
+      setTimeout(() => {
+        app.setState({ visible: false });
+      }, 3000);
     })
     .catch((err) => {
       console.log(err);
     });
-  //alert("Details of the house were changed: ");
+
   event.preventDefault();
 };
 
@@ -297,7 +319,6 @@ export const submitForm = (event, comp, app) => {
       console.log(err);
     });
 
-  // alert("Details of the house were changed: ");
   event.preventDefault();
 };
 
@@ -365,9 +386,16 @@ export const removeUser = (id, comp) => {
     });
 };
 
-export const submitDonationForm = (event, comp) => {
+export const submitDonationForm = (app, event, comp) => {
   // Server call to send this donation data from form into the database.
-  alert("Thanks you for your donation of $" + comp.state.donationAmount);
+  app.setState({
+    visible: true,
+    msg: "Thanks you for your donation of $" + comp.state.donationAmount,
+  });
+  setTimeout(() => {
+    app.setState({ visible: false });
+  }, 3000);
+
   event.preventDefault();
   const request = new Request("/donation", {
     method: "post",
@@ -392,7 +420,13 @@ export const submitDonationForm = (event, comp) => {
 
 export const profileInfoChange = (e, comp, id, app) => {
   if (comp.state.password === "") {
-    alert("Enter a password");
+    app.setState({
+      visible: true,
+      msg: "Enter a password",
+    });
+    setTimeout(() => {
+      app.setState({ visible: false });
+    }, 3000);
     return;
   }
 
@@ -416,12 +450,17 @@ export const profileInfoChange = (e, comp, id, app) => {
     .then((json1) => {
       log(json1);
       app.setState({ currentUser: json1 });
-      alert("Profile info changed")
+      app.setState({
+        visible: true,
+        msg: "Profile info changed",
+      });
+      setTimeout(() => {
+        app.setState({ visible: false });
+      }, 3000);
     })
     .catch((error) => {
       console.log(error);
     });
-
 };
 
 export const profileChange = (form, page, app) => {
@@ -449,41 +488,6 @@ export const profileChange = (form, page, app) => {
     .catch((error) => {
       console.log(error);
     });
-  // Server call to send changed profile info into the database.
-  // const read = new FileReader();
-  // read.onload = () => {
-  //   if (read.readyState === 2) {
-  //     comp.setState({
-  //       profilepic: read.result,
-  //     });
-  //   }
-  // };
-  // read.readAsDataURL(event.target.files[0]);
-  // const pic = {
-  //   name: comp.state.name,
-  //   profilePic: event.target.files[0],
-  // };
-  // alert("Profile information change for " + comp.state.name);
-  // event.preventDefault();
-  // const request = new Request("/changeprofilepic", {
-  //   method: "post",
-  //   body: JSON.stringify(pic),
-  //   headers: {
-  //     Accept: "application/json, text/plain, */*",
-  //     "Content-Type": "application/json",
-  //   },
-  // });
-
-  // // Send the request with fetch()
-  // fetch(request)
-  //   .then((res) => {
-  //     if (res.status === 200) {
-  //       return res.json();
-  //     }
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
 };
 
 export const getHomeowners = (comp) => {
@@ -521,14 +525,3 @@ export const getFrontliners = (comp) => {
       console.log(err);
     });
 };
-// export const update = (event, comp) => {
-//   const read = new FileReader();
-//   read.onload = () => {
-//     if (read.readyState === 2) {
-//       comp.setState({
-//         profilepic: read.result,
-//       });
-//     }
-//   };
-//   read.readAsDataURL(event.target.files[0]);
-// };

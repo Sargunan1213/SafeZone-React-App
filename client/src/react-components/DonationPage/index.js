@@ -2,8 +2,12 @@ import React from "react";
 
 import "./styles.css";
 import { ProgressBar } from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { handleInputChange, submitDonationForm, getFrontliners } from "../../actions/action";
+import "bootstrap/dist/css/bootstrap.min.css";
+import {
+  handleInputChange,
+  submitDonationForm,
+  getFrontliners,
+} from "../../actions/action";
 
 class DonationPage extends React.Component {
   state = {
@@ -13,22 +17,22 @@ class DonationPage extends React.Component {
     cvc: "",
     donationType: "oneTime",
     donateTo: "General",
-    frontliners: []
+    frontliners: [],
   };
   componentDidMount() {
-    getFrontliners(this)
+    getFrontliners(this);
   }
 
   render() {
-    const { homes } = this.props
-    console.log(homes)
+    const { app, homes } = this.props;
+    console.log(homes);
     return (
       <div id="donation">
         <h1>Donate to help support frontline workers to afford a safe home</h1>
 
         <form
           className="donationForm"
-          onSubmit={(e) => submitDonationForm(e, this)}
+          onSubmit={(e) => submitDonationForm(app, e, this)}
         >
           <div className="donationType">
             <h2>Donation Type</h2>
@@ -62,7 +66,9 @@ class DonationPage extends React.Component {
             >
               <option value="General">General</option>
               {homes.map((home) => (
-                <option value={home._id}>{home.address} - by {home.user}</option>
+                <option value={home._id}>
+                  {home.address} - by {home.user}
+                </option>
               ))}
               {this.state.frontliners.map((user) => (
                 <option value={user._id}>{user.name}</option>

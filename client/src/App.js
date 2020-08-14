@@ -1,9 +1,10 @@
 import React from "react";
 
 import { Route, Switch, BrowserRouter } from "react-router-dom";
+import { Alert } from "reactstrap";
 import "./App.css";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import AboutUs from "./react-components/AboutUs";
 import ContactUs from "./react-components/ContactUs";
 import Home from "./react-components/Home";
@@ -31,6 +32,8 @@ class App extends React.Component {
   }
   state = {
     currentUser: null,
+    visible: false,
+    msg: "",
     homes: [],
     home: {
       _id: "",
@@ -54,28 +57,53 @@ class App extends React.Component {
     const user = this.state.currentUser ? this.state.currentUser : {};
     return (
       <div>
+        <Alert color="primary" isOpen={this.state.visible}>
+          {this.state.msg}
+        </Alert>
         <BrowserRouter>
           {!this.state.currentUser ? (
             <NavBar />
           ) : (
-              <NavBar type={this.state.currentUser.type} user={this.state.currentUser} app={this}/>
-            )}
+            <NavBar
+              type={this.state.currentUser.type}
+              user={this.state.currentUser}
+              app={this}
+            />
+          )}
           <Switch>
             <Route exact path="/" render={() => <Home />} />
             <Route exact path="/Signup" render={() => <Signup />} />
             <Route exact path="/Login" render={() => <Login app={this} />} />
             <Route exact path="/Live" render={() => <Live />} />
-            <Route exact path="/Donation" render={() => <DonationPage homes={this.state.homes} />} />
+            <Route
+              exact
+              path="/Donation"
+              render={() => (
+                <DonationPage app={this} homes={this.state.homes} />
+              )}
+            />
             <Route exact path="/Posts" render={() => <Posts app={this} />} />
             <Route
               exact
               path="/AddPost"
-              render={() => this.state.currentUser ? (<AddPost app={this} />) : (<Login app={this} />)}
+              render={() =>
+                this.state.currentUser ? (
+                  <AddPost app={this} />
+                ) : (
+                  <Login app={this} />
+                )
+              }
             />
             <Route
               exact
               path="/EditPostPage"
-              render={() => this.state.currentUser ? (<EditPostPage app={this} home={this.state.home} />) : (<Login app={this} />)}
+              render={() =>
+                this.state.currentUser ? (
+                  <EditPostPage app={this} home={this.state.home} />
+                ) : (
+                  <Login app={this} />
+                )
+              }
             />
             <Route exact path="/Feedback" render={() => <Feedback />} />
             <Route exact path="/AboutUs" render={() => <AboutUs />} />
@@ -83,37 +111,69 @@ class App extends React.Component {
             <Route
               exact
               path="/userTwitterFeed"
-              render={() => this.state.currentUser ? (<UserTwitterFeed />) : (<Login app={this} />)}
+              render={() =>
+                this.state.currentUser ? (
+                  <UserTwitterFeed />
+                ) : (
+                  <Login app={this} />
+                )
+              }
             />
             <Route
               exact
               path="/AdminPanel"
-              render={() => this.state.currentUser ? (<AdminPanel app={this} />) : (<Login app={this} />)}
+              render={() =>
+                this.state.currentUser ? (
+                  <AdminPanel app={this} />
+                ) : (
+                  <Login app={this} />
+                )
+              }
             />
             <Route
               exact
               path="/HomeOwnerProfilePage"
-              render={() => this.state.currentUser ? (<HomeOwnerProfilePage user={user} app={this} />) : (<Login app={this} />)}
+              render={() =>
+                this.state.currentUser ? (
+                  <HomeOwnerProfilePage user={user} app={this} />
+                ) : (
+                  <Login app={this} />
+                )
+              }
             />
             <Route
               exact
               path="/FrontlinerProfilePage"
-              render={() => this.state.currentUser ? (<FrontlinerProfilePage user={user} app={this} />) : (<Login app={this} />)}
+              render={() =>
+                this.state.currentUser ? (
+                  <FrontlinerProfilePage user={user} app={this} />
+                ) : (
+                  <Login app={this} />
+                )
+              }
             />
 
             <Route
               exact
               path="/EditProfileHomeowner"
-              render={() => (
-                this.state.currentUser ? (<EditProfile type="homeowner" user={user} app={this}/>) : (<Login app={this} />)
-              )}
+              render={() =>
+                this.state.currentUser ? (
+                  <EditProfile type="homeowner" user={user} app={this} />
+                ) : (
+                  <Login app={this} />
+                )
+              }
             />
             <Route
               exact
               path="/EditProfileFrontliner"
-              render={() => (
-                this.state.currentUser ? (<EditProfile type="frontliner" user={user}  app={this}/>) : (<Login app={this} />)
-              )}
+              render={() =>
+                this.state.currentUser ? (
+                  <EditProfile type="frontliner" user={user} app={this} />
+                ) : (
+                  <Login app={this} />
+                )
+              }
             />
           </Switch>
           <Footer />
