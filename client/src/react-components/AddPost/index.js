@@ -14,6 +14,7 @@ import { submitForm } from "../../actions/action";
 // will link it up with signed in user later
 class AddPost extends React.Component {
   state = {
+    _id: "",
     address: "",
     description: "",
     price: "",
@@ -25,7 +26,9 @@ class AddPost extends React.Component {
     lat: "",
     lng: "",
   };
-
+  componentDidMount() {
+    this.props.app.setState({home: this.state});
+  }
   render() {
     const { app } = this.props;
 

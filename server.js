@@ -306,7 +306,7 @@ app.post("/donation", connectionChecker, (req, res) => {
     cardNumber: req.body.cardNumber,
     cardExpiry: req.body.cardExpiry,
     cvc: req.body.cvc,
-    donationType: req.body.donateTo,
+    donationType: req.body.donationType,
     donateTo: req.body.donateTo,
   });
 

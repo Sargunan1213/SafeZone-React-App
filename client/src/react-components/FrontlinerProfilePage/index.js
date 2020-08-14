@@ -36,15 +36,15 @@ class FrontlinerProfilePage extends React.Component {
       <div>
         <div>
           <div className="frontlinerBasicInfo">
-          {this.state.profilepic.includes('http') ? 
+          {user.profilePic.includes('http') ? 
           <img
             className="homeOwnerProfilePicture"
-            src={this.state.profilepic}
+            src={user.profilePic}
             alt="profilePic"
           ></img> : 
           <img
             className="homeOwnerProfilePicture"
-            src={require(this.state.profilepic)}
+            src={require(user.profilePic)}
             alt="profilePic"
           ></img>}
             <form
