@@ -29,7 +29,7 @@ Our application can be easily installed by following the succeeding steps.  We h
   #### username: user
   #### Password: user
   * My Posts (in the navigation bar) - view your own posts
-    * Click 'Edit' to edit your post
+    * Click 'Edit' to edit your post, Click 'Delete' to delete your post
   * Add Post (in the navigation bar) - add a new post to rent out
   * 'user' or the profile icon (in the navigation bar) - view profile page
     * Change profile image
