@@ -25,8 +25,6 @@ Our application can be easily installed by following the succeeding steps.  We h
     * About Us - page explaining our goal and purpose
     * Contact Us - write to contact us about our site
     
-### Login Credentials
-  * Please note that the session will expire after five minutes
 ### Login credentials for homeowner (regular user):
   #### username: user
   #### Password: user
@@ -63,7 +61,7 @@ The admin will be provided with an admin panel which provides him the ability to
   
 ## Overview of Routes in Express Server
 * If testing on Postman you will need to install the Google Chrome Postman Interceptor, enable cookie interceptor in Postman, and add the domain of the App to the interceptor
-* Please note that the session will expire after five minutes
+* Please note that the session will expire after ten minutes
 
 * POST /signUpUser
   * Add a user in the user table
