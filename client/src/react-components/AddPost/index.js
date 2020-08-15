@@ -5,7 +5,6 @@ import "./styles.css";
 import AddPostForm from "../AddPostForm";
 
 import {
-  handleInputChange,
   handleInputChangeHome,
   handleInputChangeHomePic,
 } from "../../actions/action";

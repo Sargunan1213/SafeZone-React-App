@@ -57,7 +57,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      expires: 60000 * 5,
+      expires: 60000 * 10,
       httpOnly: true,
     },
   })
@@ -298,46 +298,6 @@ app.post("/donation", connectionChecker, (req, res) => {
     });
 });
 
-// app.post("/users", connectionChecker, (req, res) => {
-//   const user = new User({
-//     name: req.body.name,
-//     age: req.body.age,
-//     password: req.body.password,
-//     tel: req.body.tel,
-//     email: req.body.email,
-//     profilePic: "./client/build",
-//   });
-
-//   user
-//     .save()
-//     .then((result) => {
-//       res.send(result);
-//     })
-//     .catch((err) => {
-//       if (
-//         typeof err === "object" &&
-//         err !== null &&
-//         err.name === "MongoNetworkError"
-//       ) {
-//         res.status(500).send("Internal server error");
-//       } else {
-//         log(err);
-//         res.status(400).send("Bad Request");
-//       }
-//     });
-// });
-
-// app.get("/users", connectionChecker, (req, res) => {
-//   User.find()
-//     .then((user) => {
-//       res.send(user);
-//     })
-//     .catch((err) => {
-//       log(err);
-//       res.status(500).send("Internal Server Error");
-//     });
-// });
-
 app.delete("/users/:id", connectionChecker, authenticateAdmin, (req, res) => {
   const id = req.params.id;
   if (!ObjectID.isValid(id)) {
@@ -366,19 +326,6 @@ app.put("/users/:id", connectionChecker, authenticate, (req, res) => {
     return;
   }
 
-  // User.findById(id)
-  //   .then((user) => {
-  //     if (!user) {
-  //       res.status(404).send();
-  //     } else {
-  //       user.password = req.body.password;
-  //       user.save();
-  //       // res.send(user);
-  //     }
-  //   })
-  //   .catch((err) => {
-  //     res.status(500).send();
-  //   });
   const change = {
     name: req.body.name,
     age: req.body.age,

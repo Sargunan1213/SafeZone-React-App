@@ -74,7 +74,6 @@ export const signIn = (comp, app) => {
     })
     .then((json) => {
       if (json && json.currentUser !== undefined) {
-        console.log(json.currentUser);
         app.setState({ currentUser: json.currentUser });
         app.setState({ visible: true, msg: "Successfully logged in WELCOME!" });
         setTimeout(() => {
@@ -109,7 +108,6 @@ export const signIn = (comp, app) => {
 // A function to logout the current user
 export const logout = (app) => {
   const url = "/users/logout";
-  log("gere");
 
   fetch(url)
     .then((res) => {
@@ -164,14 +162,12 @@ export const getTweets = (comp) => {
     .then(function (res) {
       if (res.status === 200) {
         const json = res.json();
-        log(json)
         return json
       } else {
         log("error getting tweets");
       }
     })
     .then((json) => {
-      log(json)
       comp.setState({ twitterMsgs: json });
     })
     .catch((err) => {
@@ -306,7 +302,6 @@ export const handleInputChange = (event, component) => {
   component.setState({
     [name]: value,
   });
-  console.log("typing");
 };
 
 //function that handles change while entering values to inputs to home
@@ -319,7 +314,6 @@ export const handleInputChangeHome = (event, component) => {
   newHome[name] = value;
 
   component.setState({ home: newHome });
-  console.log("typing");
 };
 //function that handles change while entering values to picture in home
 export const handleInputChangeHomePic = (event, component) => {
@@ -331,12 +325,10 @@ export const handleInputChangeHomePic = (event, component) => {
   newHome[name] = value;
 
   component.setState({ home: newHome });
-  console.log("typing");
 };
 
 //function that adds home details
 export const submitForm = (event, comp, app) => {
-  console.log(app);
   event.preventDefault();
   const form = new FormData(event.target);
 
@@ -358,7 +350,7 @@ export const submitForm = (event, comp, app) => {
       }
     })
     .then((apps) => {
-      const allHomes = getHomes(app);
+      getHomes(app);
     })
     .catch((err) => {
       console.log(err);
@@ -499,7 +491,6 @@ export const profileInfoChange = (e, comp, id, app) => {
       }
     })
     .then((json1) => {
-      log(json1);
       app.setState({ currentUser: json1 });
       app.setState({
         visible: true,
@@ -519,7 +510,6 @@ export const profileChange = (form, page, app) => {
   const url = local + "/changeprofilepic/" + page.state.name;
 
   const imageData = new FormData(form);
-  console.log(page.state.name);
   const request = new Request(url, {
     method: "post",
     body: imageData,
@@ -532,7 +522,6 @@ export const profileChange = (form, page, app) => {
       }
     })
     .then((json1) => {
-      log(json1);
       app.setState({ currentUser: json1.user });
     })
     .catch((error) => {

@@ -1,7 +1,6 @@
 import React from "react";
 import "./styles.css";
 import { Link } from "react-router-dom";
-import profileImg from "./static/favicon.ico";
 import { profileChange } from "../../actions/action";
 
 class HomeOwnerProfilePage extends React.Component {
@@ -23,18 +22,11 @@ class HomeOwnerProfilePage extends React.Component {
     return (
       <div>
         <div name="pic" className="homeOwnerBasicInfo">
-          {user.profilePic.includes('http') ?
             <img
               className="homeOwnerProfilePicture"
               src={user.profilePic}
               alt="profilePic"
-            ></img> :
-            <img
-              className="homeOwnerProfilePicture"
-              src={require(user.profilePic)}
-              alt="profilePic"
-            ></img>}
-
+            ></img> 
           <form
             onSubmit={(e) => {
               e.preventDefault();

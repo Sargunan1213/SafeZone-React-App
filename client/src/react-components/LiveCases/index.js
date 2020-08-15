@@ -13,6 +13,7 @@ class Live extends React.Component {
           marginheight="0"
           marginwidth="0"
           frameborder="0"
+          title="live"
         ></iframe>
       </div>
     );

@@ -6,9 +6,6 @@ import { editPost } from "../../actions/action"
 import { handleInputChangeHome } from "../../actions/action";
 
 class EditPostPage extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const { app } = this.props;

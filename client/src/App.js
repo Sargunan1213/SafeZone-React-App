@@ -22,14 +22,10 @@ import DonationPage from "./react-components/DonationPage";
 import EditPostPage from "./react-components/EditPostPage";
 import UserTwitterFeed from "./react-components/userTwitterFeed";
 import EditProfile from "./react-components/EditProfile";
-import { readCookie, getHomes } from "../src/actions/action.js";
+import { getHomes } from "../src/actions/action.js";
 import NavBar from "./react-components/NavBar";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    readCookie(this); // sees if a user is logged in.
-  }
   state = {
     currentUser: null,
     visible: false,

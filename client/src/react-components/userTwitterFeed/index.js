@@ -4,8 +4,6 @@ import Msg from "../Msg";
 import "./styles.css";
 
 import safeZone from "./static/safeZoneLogo.png";
-import tweet_img from "./static/tweet_img.png";
-
 import { getTweets } from "../../actions/action";
 
 class UserTwitterFeed extends React.Component {
