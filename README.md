@@ -24,7 +24,9 @@ Our application can be easily installed by following the succeeding steps.  We h
   * Footer
     * About Us - page explaining our goal and purpose
     * Contact Us - write to contact us about our site
-
+    
+### Login Credentials
+  * Please note that the session will expire after five minutes
 ### Login credentials for homeowner (regular user):
   #### username: user
   #### Password: user
@@ -61,6 +63,7 @@ The admin will be provided with an admin panel which provides him the ability to
   
 ## Overview of Routes in Express Server
 * If testing on Postman you will need to install the Google Chrome Postman Interceptor, enable cookie interceptor in Postman, and add the domain of the App to the interceptor
+* Please note that the session will expire after five minutes
 
 * POST /signUpUser
   * Add a user in the user table
@@ -68,9 +71,10 @@ The admin will be provided with an admin panel which provides him the ability to
   ```
   {
     "name": <name>
-    "age": <age>
+    "username": <username>
+    "age": <age> (number)
     "contactNumber": <phone number>
-    "email": <email>
+    "email": <email> (needs to be valid email)
     "password": <password>
     "usertype": <Homeowner/Customer/Admin>
   }   
@@ -78,12 +82,14 @@ The admin will be provided with an admin panel which provides him the ability to
    * Expects output: the newly added user
   ```
   {
+    "_id": <id>
     "name": <name>
+    "username": <username>
     "age": <age>
     "tel": <phone number>
     "homes": []
     "email": <email>
-    "password": <password>
+    "password": <password> (encrypted)
     "type": <Homeowner/Customer/Admin>
     "profilePic": <a cloudinary link>
   }   
@@ -132,7 +138,7 @@ The admin will be provided with an admin panel which provides him the ability to
   }
   ```
   * Expected output: newly added donation document
-* DELETE /users/
+* DELETE /users/:id
   * Delete a user from the database, requires authentication/cookie (logged in as Admin)
   * Expected output: the deleted user document
 * PUT /users/:id
@@ -176,6 +182,7 @@ The admin will be provided with an admin panel which provides him the ability to
   * Expected output: newly added home
    ```
   {
+  "_id": <id>
   "address": <address>
   "zip": <zip>
   "description": <description>
@@ -204,9 +211,10 @@ The admin will be provided with an admin panel which provides him the ability to
   "image" <image url>
   }
   ```
-  * Expected output: newly added home
+  * Expected output: newly edited home
    ```
   {
+   "_id": <id>
   "address": <address>
   "zip": <zip>
   "description": <description>
@@ -244,6 +252,7 @@ The admin will be provided with an admin panel which provides him the ability to
   * Expected output: the deleted home document
   ```
   {
+  "_id": <id>
   "address": <address>
   "zip": <zip>
   "cvc": <cvc>
@@ -262,6 +271,7 @@ The admin will be provided with an admin panel which provides him the ability to
   * Create a new tweet, requires FormData and connect-multiparty, requires to be logged in as admin
   * Expects input (as FormData):
   ```
+  {
   "image": <an image>
   "msg": <message>
   }
