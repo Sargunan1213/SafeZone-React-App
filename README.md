@@ -271,6 +271,7 @@ The admin will be provided with an admin panel which provides him the ability to
   * Create a new tweet, requires FormData and connect-multiparty, requires to be logged in as admin
   * Expects input (as FormData):
   ```
+  {
   "image": <an image>
   "msg": <message>
   }
