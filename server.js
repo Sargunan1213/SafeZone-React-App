@@ -170,7 +170,6 @@ const authenticateAdmin = (req, res, next) => {
 
 app.post("/signUpUser", connectionChecker, (req, res) => {
   // Create a new user
-  console.log("request in sign up", req.body);
   const user = new User({
     name: req.body.name,
     username: req.body.username,
@@ -203,7 +202,6 @@ app.post("/login", connectionChecker, (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  log(username, password);
   // Use the static method on the User model to find a user
   // by their email and password
   User.findByPassword(username, password)
@@ -216,7 +214,6 @@ app.post("/login", connectionChecker, (req, res) => {
       req.session.email = user.email;
       req.session.type = user.type;
 
-      console.log(user);
       res.send({ currentUser: user });
       req.session.save();
     })
@@ -256,15 +253,12 @@ app.post(
   (req, res) => {
     // Use uploader.upload API to upload image to cloudinary server.
     cloudinary.uploader.upload(req.files.image.path, function (result) {
-      console.log(result.url);
-      console.log(req.params.name);
       User.findOneAndUpdate(
         { name: req.params.name },
         { $set: { profilePic: result.url } },
         { new: true, useFindAndModify: false }
       )
         .then((user) => {
-          console.log(user);
           if (!user) {
             res.status(404).send();
           } else {
@@ -434,7 +428,6 @@ app.post(
       console.log("hererer ere user not valid");
       return;
     }
-    console.log(req.body);
     cloudinary.uploader.upload(req.files.image.path, function (result) {
       const home = new Home({
         address: req.body.address,
