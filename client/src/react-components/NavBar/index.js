@@ -58,8 +58,15 @@ class NavBar extends React.Component {
           Sign out
         </Link>
       );
+      let profilePage = ""
+      if (this.props.type === "Customer"){
+        profilePage = "/FrontlinerProfilePage"
+      }
+      else if (this.props.type === "Homeowner"){
+        profilePage = "/HomeOwnerProfilePage"
+      }
       img = (
-        <Link to={((this.props.type === "frontliner") ? "frontlinerProfilePage" : "/HomeOwnerProfilePage")}>
+        <Link to={profilePage}>
           {/* <img className="profile-img" src={require(user.profilePic)} alt="profile.png" /> */}
           {user.profilePic.includes('http') ? <img className="profile-img" src={user.profilePic} alt="profile.png" /> : <img className="profile-img" src={require(user.profilePic)} alt="profile.png" />}
         </Link>
