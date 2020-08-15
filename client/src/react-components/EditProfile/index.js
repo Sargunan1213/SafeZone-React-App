@@ -6,7 +6,6 @@ import { handleInputChange, profileInfoChange } from "../../actions/action";
 class EditProfile extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props)
 
         this.state = {
             name: this.props.user.name,

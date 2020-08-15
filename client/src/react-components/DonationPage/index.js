@@ -25,7 +25,6 @@ class DonationPage extends React.Component {
 
   render() {
     const { app, homes } = this.props;
-    console.log(homes);
     return (
       <div id="donation">
         <h1>Donate to help support frontline workers to afford a safe home</h1>
