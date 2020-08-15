@@ -48,8 +48,15 @@ export const signUpUser = (comp) => {
       if (res.status === 200) {
         return res.json();
       }
+      else {
+        alert("Please enter valid data")
+        return false
+      }
     })
-    .then(() => comp.props.history.push("/Login"))
+    .then((json) => {
+      if(json)
+      comp.props.history.push("/Login")
+    })
     .catch((error) => {
       console.log(error);
     });
@@ -272,6 +279,7 @@ export const editPost = (event, app, id) => {
           });
         }, 3000);
       } else {
+        alert("Please enter valid data")
         log("error fail to edit home");
       }
     })
@@ -345,6 +353,7 @@ export const submitForm = (event, comp, app) => {
           });
         }, 3000);
       } else {
+        alert("Please enter valid data")
         log("error fail to add home");
       }
     })
@@ -385,7 +394,8 @@ export const editHome = (app, comp, id) => {
       if (res.status === 200) {
         return res.json();
       } else {
-        log("error getting home");
+        alert("Please enter valid data")
+        log("error editting home");
       }
     })
     .then((json) => {
@@ -453,6 +463,9 @@ export const submitDonationForm = (app, event, comp) => {
       if (res.status === 200) {
         return res.json();
       }
+      else {
+        alert("Please enter valid data")
+      }
     })
     .catch((error) => {
       console.log(error);
@@ -488,6 +501,9 @@ export const profileInfoChange = (e, comp, id, app) => {
         const json1 = res.json();
         return json1;
       }
+      else {
+        alert("Please enter valid data")
+      }
     })
     .then((json1) => {
       app.setState({ currentUser: json1 });
@@ -518,6 +534,9 @@ export const profileChange = (form, page, app) => {
       if (res.status === 200) {
         const json1 = res.json();
         return json1;
+      }
+      else{
+        alert("Please enter valid data")
       }
     })
     .then((json1) => {
