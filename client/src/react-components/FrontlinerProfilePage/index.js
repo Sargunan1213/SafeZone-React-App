@@ -16,10 +16,11 @@ class FrontlinerProfilePage extends React.Component {
     email: this.props.user.email,
     profilepic: this.props.user.profilePic,
     type: "homeowner",
+    homes: []
   };
 
   componentDidMount() {
-    getInterestedHome(this.props.app);
+    getInterestedHome(this);
   }
   render() {
     const { user, app } = this.props;
@@ -67,7 +68,7 @@ class FrontlinerProfilePage extends React.Component {
               <button className="homeOwnerViewOwnPost-btn">Edit Profile</button>
             </Link>
 
-            {user.homes.map((home) => (
+            {this.state.homes.map((home) => (
               <Post
                 key={uid(home)}
                 home={home}
