@@ -204,7 +204,7 @@ export const msg = (event) => {
 };
 
 //function allowing adding of interested home to user
-export const addInterestedHome = (homeId) => {
+export const addInterestedHome = (homeId, app) => {
   const url = "/users/interest/" + homeId;
 
   const request = new Request(url, {
@@ -217,7 +217,13 @@ export const addInterestedHome = (homeId) => {
   fetch(request)
     .then(function (res) {
       if (res.status === 200) {
-        log("success added interested home");
+        app.setState({
+          visible: true,
+          msg: "Interested home noted",
+        });
+        setTimeout(() => {
+          app.setState({ visible: false });
+        }, 3000);
       } else {
         log("error fail to add interested home");
       }

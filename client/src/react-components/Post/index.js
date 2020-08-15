@@ -16,7 +16,7 @@ class Post extends React.Component {
             button = <button className='del' onClick={() => removeHome(app, home._id)}>Delete</button>;
         }
         else if (type === "Customer") {
-            button = <button className='select' onClick={() => addInterestedHome(home._id)}>Select</button>;
+            button = <button className='select' onClick={() => addInterestedHome(home._id, app)}>Select</button>;
         }
         else if (type === "Homeowner") {
             button2 = <button className='del' onClick={() => removeHome(app, home._id)}>Delete</button>;
