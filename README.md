@@ -52,21 +52,12 @@ Our application can be easily installed by following the succeeding steps.  We h
  #### Password: admin
   * Admin Panel (in the navigation bar)
     * View all users and posts - delete button to delete
-    * Broadcast message (twitter feed)
+    * Broadcast message, type in message and select a picture then click broadcast (twitter feed)
 
 <!-- ## USE:
 Once logged in, the user can add a post for renting out his place by clicking on the Add Post button from the navbar. He can also see his posts by clicking on the My posts button from the navbar. Clicking on the user button will enable him to see his profile info and select a profile photo.
 A front line user will be able to view current postings and update his profile page but will not be able to add posts or delete posts.
 The admin will be provided with an admin panel which provides him the ability to delete posts, users and also a platform to message all users. -->
-
-
-
-## Setup(for running locally on <http://localhost:3000)>
-Step 1:  Clone the code from above.
-
-Step 2: Run $ npm install
-
-Step 3: Run $ npm start
   
 ## Overview of Routes in Express Server
 * If testing on Postman you will need to install the Google Chrome Postman Interceptor, enable cookie interceptor in Postman, and add the domain of the App to the interceptor
@@ -267,16 +258,15 @@ Step 3: Run $ npm start
   "creator": <ObjectID of logged in homeowner>
   }
   ```
-* POST /userTwitterFeed
-  * Create a new tweet, requires FormData and connect-multiparty
+* POST /users/userTwitterFeed
+  * Create a new tweet, requires FormData and connect-multiparty, requires to be logged in as admin
   * Expects input (as FormData):
   ```
-  "image": <path to image>
-  "twitterMsgs": <message>
+  "image": <an image>
+  "msg": <message>
   }
   ```
   * Expected output: the newly added twitter msg
-* DELETE /userTwitterFeed/:tweeterid
-  * Delete a tweet, requires to be logged in 
-  * Expected output: the newly deleted twitter msg
-  
+* GET /users/userTwitterFeed
+  * Get all tweeter messages
+  * Expected output: all tweets

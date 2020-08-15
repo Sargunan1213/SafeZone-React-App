@@ -13,7 +13,6 @@ mongoose.set("bufferCommands", false);
 const { User, Home } = require("./models/safezone");
 const { Donation } = require("./models/donation");
 const { Tweeter } = require("./models/tweeter");
-// const { Feedback } = require("./models/feedback");
 
 const { ObjectID } = require("mongodb");
 const bodyParser = require("body-parser");
@@ -248,14 +247,6 @@ app.get("/users/logout", (req, res) => {
 });
 
 /*** API Routes below ************************************/
-
-// What is student doing here?!
-
-// app.get("/name", (req, res) => {
-//   User.findById(id).then((user) => {
-//     res.send(user);
-//   });
-// });
 
 app.post(
   "/changeprofilepic/:name",
@@ -501,7 +492,7 @@ app.post(
       const home = new Home({
         address: req.body.address,
         zip: req.body.zip,
-        pic: result.url,
+        pic: result.url || "http://res.cloudinary.com/drbionfdh/image/upload/v1597125645/crwe0pjqnqaizt0mn5qi.ico",
         description: req.body.description,
         price: req.body.price,
         lat: req.body.lat,
@@ -542,7 +533,7 @@ app.put(
       const change = {
         address: req.body.address,
         zip: req.body.zip,
-        pic: result.url,
+        pic: result.url || "http://res.cloudinary.com/drbionfdh/image/upload/v1597125645/crwe0pjqnqaizt0mn5qi.ico",
         description: req.body.description,
         price: req.body.price,
         lat: req.body.lat,
@@ -681,7 +672,7 @@ app.post(
   (req, res) => {
     cloudinary.uploader.upload(req.files.image.path, function (result) {
       const tweeter = new Tweeter({
-        image: result.url,
+        image: result.url || "http://res.cloudinary.com/drbionfdh/image/upload/v1597125645/crwe0pjqnqaizt0mn5qi.ico",
         twitterMsgs: req.body.msg,
       });
 

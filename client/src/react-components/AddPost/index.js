@@ -11,7 +11,6 @@ import {
 } from "../../actions/action";
 import { submitForm } from "../../actions/action";
 
-// will link it up with signed in user later
 class AddPost extends React.Component {
   state = {
     _id: "",
@@ -27,7 +26,7 @@ class AddPost extends React.Component {
     lng: "",
   };
   componentDidMount() {
-    this.props.app.setState({home: this.state});
+    this.props.app.setState({ home: this.state });
   }
   render() {
     const { app } = this.props;

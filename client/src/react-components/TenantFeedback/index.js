@@ -15,7 +15,6 @@ class TenantFeedback extends React.Component {
   };
 
   submitForm = (event) => {
-    // Server call to enter this form data about review into the server.
     alert("Tenant review was submitted!");
     event.preventDefault();
   };
@@ -35,7 +34,6 @@ class TenantFeedback extends React.Component {
             label="name"
             onChange={this.handleInputChange}
           />
-          {/* May change it later to redirectiono to current users post page so that he can select from his current posts. */}
           <label className="lab" htmlFor="address">
             Enter property Address:
           </label>

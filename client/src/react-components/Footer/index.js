@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./styles.css";
 // Used the Font-Awesome library for facebook and gmail fonts.
-// https://fontawesome.com/
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons";

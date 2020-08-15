@@ -3,17 +3,16 @@ import { Link } from "react-router-dom";
 import { uid } from "react-uid";
 import logo from "./static/safeZoneLogo.png";
 import "./styles.css";
-import profileImg1 from './static/profile.png';
-import {logout} from '../../actions/action'
+import { logout } from '../../actions/action'
 
 
 class NavBar extends React.Component {
-    state = {
-      type: this.props.type,
-      user: this.props.user
-    };
+  state = {
+    type: this.props.type,
+    user: this.props.user
+  };
 
-   opts = (type, user, app) => {
+  opts = (type, user, app) => {
     let nav = {
       Home: "",
       Posts: "Posts",
@@ -31,7 +30,7 @@ class NavBar extends React.Component {
         [user.name]: "HomeOwnerProfilePage"
       }
     }
-    else if (type === "Customer"){
+    else if (type === "Customer") {
       nav = {
         Home: "",
         Posts: "Posts",
@@ -39,7 +38,7 @@ class NavBar extends React.Component {
         [user.name]: "FrontlinerProfilePage"
       }
     }
-    else if (type === "Admin"){
+    else if (type === "Admin") {
       nav = {
         Home: "",
         Posts: "Posts",
@@ -51,7 +50,7 @@ class NavBar extends React.Component {
 
     let link = "";
     let img = "";
-    
+
     if (!("Sign In" in nav)) {
       link = (
         <Link className="signout" onClick={() => logout(app)} to={'/'}>
@@ -87,7 +86,7 @@ class NavBar extends React.Component {
         {img}
         <div id="navOptions">
           {Object.keys(nav).map((opt) => (
-            <Link key={uid(opt)} to={ "/" + nav[opt] }>
+            <Link key={uid(opt)} to={"/" + nav[opt]}>
               {opt}
             </Link>
           ))}

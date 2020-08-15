@@ -10,7 +10,6 @@ import { getHomeowners, getFrontliners } from "../../actions/action.js";
 
 class AdminPanel extends React.Component {
   state = {
-    // Information about users and home details will get obtained from server
     homeowners: [],
     frontliners: [],
     homes: [],
@@ -18,16 +17,15 @@ class AdminPanel extends React.Component {
   }
 
   componentDidMount() {
-    // getHomes(this)
-    // getHomeowners(this)
+    getHomeowners(this)
     getFrontliners(this)
     console.log(this.state.homeowners)
   }
   render() {
-    const {app} = this.props;
+    const { app } = this.props;
     return (
       <div>
-          <div className="AdminPanel">
+        <div className="AdminPanel">
           <h1>Users</h1>
           <div className="Users">
             <h2>Homeowners</h2>
@@ -48,7 +46,6 @@ class AdminPanel extends React.Component {
                 <h3>Age: {user["age"]}</h3>
                 <h3>Contact: {user["tel"]}</h3>
                 <h3>Email: {user["email"]}</h3>
-                {/* <h3>Interested homes ids: {user["homes"].address}</h3> */}
                 <button className='delete' onClick={() => removeUser(user._id, this)}>Delete</button>
               </div>))
             }

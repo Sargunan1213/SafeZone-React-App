@@ -1,7 +1,6 @@
 import React from "react";
 
 import "./style.css";
-// Later create a proper component so that so many imports are not required
 import Feature from "./Feature";
 import feature1 from "./static/feature1.png";
 import feature2 from "./static/feature2.jpg";

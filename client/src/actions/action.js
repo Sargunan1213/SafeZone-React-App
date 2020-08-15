@@ -1,6 +1,7 @@
 const log = console.log;
 // const local = "http://localhost:5000";
 const local = "";
+
 // A function to check if a user is logged in on the session cookie
 export const readCookie = (app) => {
   const url = "/users/check-session";
@@ -32,7 +33,6 @@ export const updateLoginForm = (loginComp, field) => {
 };
 
 // Sign up a user
-
 export const signUpUser = (comp) => {
   const request = new Request(local + "/signUpUser", {
     method: "post",
@@ -57,7 +57,6 @@ export const signUpUser = (comp) => {
 
 // A function to send a POST request with the user to be logged in
 export const signIn = (comp, app) => {
-  // Create our request constructor with all the parameters we need
   const request = new Request(local + "/login", {
     method: "post",
     body: JSON.stringify(comp.state),
@@ -67,7 +66,6 @@ export const signIn = (comp, app) => {
     },
   });
 
-  // Send the request with fetch()
   fetch(request)
     .then((res) => {
       if (res.status === 200) {
@@ -108,7 +106,7 @@ export const signIn = (comp, app) => {
   }
 };
 
-// A function to send a GET request to logout the current user
+// A function to logout the current user
 export const logout = (app) => {
   const url = "/users/logout";
   log("gere");
@@ -126,8 +124,8 @@ export const logout = (app) => {
     });
 };
 
+//function to delete home information from server
 export const removeHome = (app, id) => {
-  // delete home information from server
   const url = local + "/users/home/" + id;
   const request = new Request(url, {
     method: "delete",
@@ -158,6 +156,7 @@ export const removeHome = (app, id) => {
     });
 };
 
+//function that interacts with server to get tweets
 export const getTweets = (comp) => {
   const url = local + "/users/userTwitterFeed";
 
@@ -180,7 +179,7 @@ export const getTweets = (comp) => {
     });
 };
 
-//Admin message
+//function allowing admin to send message
 export const msg = (event) => {
   event.preventDefault();
   const url = "/users/userTwitterFeed";
@@ -204,6 +203,7 @@ export const msg = (event) => {
     });
 };
 
+//function allowing adding of interested home to user
 export const addInterestedHome = (homeId) => {
   const url = "/users/interest/" + homeId;
 
@@ -227,6 +227,7 @@ export const addInterestedHome = (homeId) => {
     });
 };
 
+// function to get interested homes of user
 export const getInterestedHome = (comp) => {
   const url = "/users/interest";
 
@@ -246,8 +247,8 @@ export const getInterestedHome = (comp) => {
     });
 };
 
+//function to edit home post
 export const editPost = (event, app, id) => {
-  // edit home post details
   const url = "/users/home/" + id;
 
   const form = new FormData(event.target);
@@ -290,6 +291,7 @@ export const editPost = (event, app, id) => {
   event.preventDefault();
 };
 
+//function that handles change while entering values to inputs
 export const handleInputChange = (event, component) => {
   const target = event.target;
   const value = target.value;
@@ -301,6 +303,7 @@ export const handleInputChange = (event, component) => {
   console.log("typing");
 };
 
+//function that handles change while entering values to inputs to home
 export const handleInputChangeHome = (event, component) => {
   const target = event.target;
   const value = target.value;
@@ -312,6 +315,7 @@ export const handleInputChangeHome = (event, component) => {
   component.setState({ home: newHome });
   console.log("typing");
 };
+//function that handles change while entering values to picture in home
 export const handleInputChangeHomePic = (event, component) => {
   const target = event.target;
   const value = target.files[0];
@@ -324,8 +328,8 @@ export const handleInputChangeHomePic = (event, component) => {
   console.log("typing");
 };
 
+//function that adds home details
 export const submitForm = (event, comp, app) => {
-  // add home post details
   console.log(app);
   event.preventDefault();
   const form = new FormData(event.target);
@@ -357,6 +361,7 @@ export const submitForm = (event, comp, app) => {
   event.preventDefault();
 };
 
+//function to get all homes
 export const getHomes = (app) => {
   const url = local + "/users/home";
   fetch(url)
@@ -375,6 +380,7 @@ export const getHomes = (app) => {
     });
 };
 
+// function to edit a home
 export const editHome = (app, comp, id) => {
   const url = local + "/users/home/" + id;
   fetch(url)
@@ -396,6 +402,7 @@ export const editHome = (app, comp, id) => {
     });
 };
 
+//function to remove user
 export const removeUser = (id, comp) => {
   // delete user information from server
   const url = local + "/users/" + id;
@@ -425,9 +432,8 @@ export const removeUser = (id, comp) => {
       console.log(err);
     });
 };
-
+// Server call to send this donation data from form into the database.
 export const submitDonationForm = (app, event, comp) => {
-  // Server call to send this donation data from form into the database.
   app.setState({
     visible: true,
     msg: "Thanks you for your donation of $" + comp.state.donationAmount,
@@ -445,8 +451,6 @@ export const submitDonationForm = (app, event, comp) => {
       "Content-Type": "application/json",
     },
   });
-
-  // Send the request with fetch()
   fetch(request)
     .then((res) => {
       if (res.status === 200) {
@@ -458,6 +462,7 @@ export const submitDonationForm = (app, event, comp) => {
     });
 };
 
+// function to change profile information
 export const profileInfoChange = (e, comp, id, app) => {
   if (comp.state.password === "") {
     app.setState({
@@ -503,17 +508,16 @@ export const profileInfoChange = (e, comp, id, app) => {
     });
 };
 
+// function to change profile picture
 export const profileChange = (form, page, app) => {
   const url = local + "/changeprofilepic/" + page.state.name;
 
   const imageData = new FormData(form);
   console.log(page.state.name);
-  // Create our request constructor with all the parameters we need
   const request = new Request(url, {
     method: "post",
     body: imageData,
   });
-  // Send the request with fetch()
   fetch(request)
     .then(function (res) {
       if (res.status === 200) {
@@ -530,6 +534,7 @@ export const profileChange = (form, page, app) => {
     });
 };
 
+// function to get all homeowners
 export const getHomeowners = (comp) => {
   const url = local + "/users/homeowners";
   fetch(url)
@@ -548,6 +553,7 @@ export const getHomeowners = (comp) => {
     });
 };
 
+// function to get all frontline workers
 export const getFrontliners = (comp) => {
   const url = local + "/users/frontliners";
   fetch(url)

@@ -14,7 +14,6 @@ class FrontlinerProfilePage extends React.Component {
     homes: this.props.user.homes,
     tel: this.props.user.tel,
     email: this.props.user.email,
-
     profilepic: this.props.user.profilePic,
     type: "homeowner",
   };
@@ -24,29 +23,21 @@ class FrontlinerProfilePage extends React.Component {
   }
   render() {
     const { user, app } = this.props;
-    // this.state.name = user.name;
-    // this.state.age = user.age;
-    // this.state.password = user.password;
-    // this.state.postId = this.state.homes;
-    // this.state.tel = user.tel;
-    // this.state.email = user.email;
-    // this.state.profilepic = user.profilePic;
-    // this.state.type = user.type;
     return (
       <div>
         <div>
           <div className="frontlinerBasicInfo">
-          {user.profilePic.includes('http') ? 
-          <img
-            className="homeOwnerProfilePicture"
-            src={user.profilePic}
-            alt="profilePic"
-          ></img> : 
-          <img
-            className="homeOwnerProfilePicture"
-            src={require(user.profilePic)}
-            alt="profilePic"
-          ></img>}
+            {user.profilePic.includes('http') ?
+              <img
+                className="homeOwnerProfilePicture"
+                src={user.profilePic}
+                alt="profilePic"
+              ></img> :
+              <img
+                className="homeOwnerProfilePicture"
+                src={require(user.profilePic)}
+                alt="profilePic"
+              ></img>}
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -77,13 +68,13 @@ class FrontlinerProfilePage extends React.Component {
             </Link>
 
             {user.homes.map((home) => (
-            <Post
-              key={uid(home)}
-              home={home}
-              comp={this}
-              app={app}
-            />
-          ))}
+              <Post
+                key={uid(home)}
+                home={home}
+                comp={this}
+                app={app}
+              />
+            ))}
           </div>
         </div>
       </div>
