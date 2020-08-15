@@ -68,9 +68,10 @@ The admin will be provided with an admin panel which provides him the ability to
   ```
   {
     "name": <name>
-    "age": <age>
+    "username": <username>
+    "age": <age> (number)
     "contactNumber": <phone number>
-    "email": <email>
+    "email": <email> (needs to be valid email)
     "password": <password>
     "usertype": <Homeowner/Customer/Admin>
   }   
@@ -78,12 +79,14 @@ The admin will be provided with an admin panel which provides him the ability to
    * Expects output: the newly added user
   ```
   {
+    "_id": <id>
     "name": <name>
+    "username": <username>
     "age": <age>
     "tel": <phone number>
     "homes": []
     "email": <email>
-    "password": <password>
+    "password": <password> (encrypted)
     "type": <Homeowner/Customer/Admin>
     "profilePic": <a cloudinary link>
   }   
@@ -132,7 +135,7 @@ The admin will be provided with an admin panel which provides him the ability to
   }
   ```
   * Expected output: newly added donation document
-* DELETE /users/
+* DELETE /users/:id
   * Delete a user from the database, requires authentication/cookie (logged in as Admin)
   * Expected output: the deleted user document
 * PUT /users/:id
@@ -176,6 +179,7 @@ The admin will be provided with an admin panel which provides him the ability to
   * Expected output: newly added home
    ```
   {
+  "_id": <id>
   "address": <address>
   "zip": <zip>
   "description": <description>
@@ -204,9 +208,10 @@ The admin will be provided with an admin panel which provides him the ability to
   "image" <image url>
   }
   ```
-  * Expected output: newly added home
+  * Expected output: newly edited home
    ```
   {
+   "_id": <id>
   "address": <address>
   "zip": <zip>
   "description": <description>
@@ -244,6 +249,7 @@ The admin will be provided with an admin panel which provides him the ability to
   * Expected output: the deleted home document
   ```
   {
+  "_id": <id>
   "address": <address>
   "zip": <zip>
   "cvc": <cvc>
