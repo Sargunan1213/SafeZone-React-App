@@ -27,7 +27,6 @@ class Login extends React.Component {
 
   render() {
     const { app } = this.props;
-    console.log("app on login comp", app);
     return (
       <div className="back1">
         <form className="box1">

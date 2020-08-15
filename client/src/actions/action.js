@@ -116,7 +116,6 @@ export const logout = (app) => {
         message: { type: "", body: "" },
       });
     })
-    .then(() => app.props.history.push("/"))
     .catch((error) => {
       console.log(error);
     });

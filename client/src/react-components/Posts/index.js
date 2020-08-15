@@ -41,28 +41,6 @@ class Posts extends React.Component {
             />
           ))}
         </div>
-
-
-
-        {/* <GMap
-          houses={[
-            {
-              lat: 43.6532,
-              lng: -79.3832,
-              description: "absbdfklsadlfbsfklasdnf fnklsad nflaksdn f",
-            },
-            {
-              lat: 43.6832,
-              lng: -79.3332,
-              description: "absbdfklsadlfbsfklasdnf fnklsad nflaksdn f",
-            },
-            {
-              lat: 43.5932,
-              lng: -79.3532,
-              description: "absbdfklsadlfbsfklasdnf fnklsad nflaksdn f",
-            },
-          ]}
-        /> */}
       </div>
     );
   }

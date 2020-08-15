@@ -18,9 +18,7 @@ class GMap extends React.Component {
   };
 
   render() {
-    console.log(this.state);
     const homes = this.props.houses;
-    console.log(homes);
     const OurMap = withScriptjs(
       withGoogleMap(() => (
         <GoogleMap
