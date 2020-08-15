@@ -65,7 +65,7 @@ class AdminPanel extends React.Component {
             ))}
           </div>
 
-          <AdminSendMsg />
+          <AdminSendMsg app={app}/>
         </div>
       </div>
     );

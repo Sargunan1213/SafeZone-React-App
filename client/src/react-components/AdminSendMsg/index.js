@@ -22,10 +22,11 @@ class AdminSendMsg extends React.Component {
     });
   };
   render() {
+    const {app} = this.props
     return (
       <div className="msg">
         <h1>Send a message to all the users:</h1>
-        <form action="" onSubmit={(e) => msg(e)}>
+        <form action="" onSubmit={(e) => msg(e, app)}>
           <textarea
             name="msg"
             id=""

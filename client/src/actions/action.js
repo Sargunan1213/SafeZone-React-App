@@ -33,7 +33,7 @@ export const updateLoginForm = (loginComp, field) => {
 };
 
 // Sign up a user
-export const signUpUser = (comp) => {
+export const signUpUser = (comp, app) => {
   const request = new Request(local + "/signUpUser", {
     method: "post",
     body: JSON.stringify(comp.state),
@@ -49,7 +49,12 @@ export const signUpUser = (comp) => {
         return res.json();
       }
       else {
-        alert("Please enter valid data")
+        app.setState({ visible: true, msg: "Please enter valid data", color: "danger" });
+        setTimeout(() => {
+          app.setState({
+            visible: false,
+          });
+        }, 3000);
         return false
       }
     })
@@ -82,7 +87,7 @@ export const signIn = (comp, app) => {
     .then((json) => {
       if (json && json.currentUser !== undefined) {
         app.setState({ currentUser: json.currentUser });
-        app.setState({ visible: true, msg: "Successfully logged in WELCOME!" });
+        app.setState({ visible: true, msg: "Successfully logged in WELCOME!", color: "primary" });
         setTimeout(() => {
           app.setState({
             visible: false,
@@ -91,7 +96,7 @@ export const signIn = (comp, app) => {
       } else if (json.msg !== null) {
         app.setState({
           visible: true,
-          msg: "Wrong Credentials please try Again",
+          msg: "Wrong Credentials please try Again", color: "danger"
         });
         setTimeout(() => {
           app.setState({ visible: false });
@@ -142,7 +147,7 @@ export const removeHome = (app, id) => {
   fetch(request)
     .then(function (res) {
       if (res.status === 200) {
-        app.setState({ visible: true, msg: "Home removed successfully" });
+        app.setState({ visible: true, msg: "Home removed successfully", color: "primary" });
         setTimeout(() => {
           app.setState({
             visible: false,
@@ -182,7 +187,7 @@ export const getTweets = (comp) => {
 };
 
 //function allowing admin to send message
-export const msg = (event) => {
+export const msg = (event, app) => {
   event.preventDefault();
   const url = "/users/userTwitterFeed";
 
@@ -195,7 +200,12 @@ export const msg = (event) => {
   fetch(request)
     .then(function (res) {
       if (res.status === 200) {
-        alert("success broadcasted message");
+        app.setState({ visible: true, msg: "Successfully broadcasted message", color: "primary" });
+        setTimeout(() => {
+          app.setState({
+            visible: false,
+          });
+        }, 3000);
       } else {
         log("error fail to broadcast message");
       }
@@ -221,7 +231,8 @@ export const addInterestedHome = (homeId, app) => {
       if (res.status === 200) {
         app.setState({
           visible: true,
-          msg: "Interested home noted",
+          msg: "Interested home noted", 
+          color: "primary"
         });
         setTimeout(() => {
           app.setState({ visible: false });
@@ -279,7 +290,12 @@ export const editPost = (event, app, id) => {
           });
         }, 3000);
       } else {
-        alert("Please enter valid data")
+        app.setState({ visible: true, msg: "Please enter valid data", color: "danger" });
+        setTimeout(() => {
+          app.setState({
+            visible: false,
+          });
+        }, 3000);
         log("error fail to edit home");
       }
     })
@@ -288,6 +304,7 @@ export const editPost = (event, app, id) => {
       app.setState({
         visible: true,
         msg: "Home info has changed",
+        color: "primary"
       });
       setTimeout(() => {
         app.setState({ visible: false });
@@ -346,14 +363,19 @@ export const submitForm = (event, comp, app) => {
   fetch(request)
     .then(function (res) {
       if (res.status === 200) {
-        app.setState({ visible: true, msg: "Successfully added your home!" });
+        app.setState({ visible: true, msg: "Successfully added your home!", color: "primary" });
         setTimeout(() => {
           app.setState({
             visible: false,
           });
         }, 3000);
       } else {
-        alert("Please enter valid data")
+        app.setState({ visible: true, msg: "Please enter valid data", color: "danger" });
+        setTimeout(() => {
+          app.setState({
+            visible: false,
+          });
+        }, 3000);
         log("error fail to add home");
       }
     })
@@ -394,7 +416,12 @@ export const editHome = (app, comp, id) => {
       if (res.status === 200) {
         return res.json();
       } else {
-        alert("Please enter valid data")
+        app.setState({ visible: true, msg: "Please enter valid data", color: "danger" });
+        setTimeout(() => {
+          app.setState({
+            visible: false,
+          });
+        }, 3000);
         log("error editting home");
       }
     })
@@ -423,7 +450,7 @@ export const removeUser = (id, comp) => {
   fetch(request)
     .then(function (res) {
       if (res.status === 200) {
-        comp.setState({ visible: true, msg: "Successfully removed user!" });
+        comp.setState({ visible: true, msg: "Successfully removed user!", color: "primary" });
         setTimeout(() => {
           comp.setState({
             visible: false,
@@ -443,7 +470,7 @@ export const removeUser = (id, comp) => {
 export const submitDonationForm = (app, event, comp) => {
   app.setState({
     visible: true,
-    msg: "Thanks you for your donation of $" + comp.state.donationAmount,
+    msg: "Thanks you for your donation of $" + comp.state.donationAmount, color: "primary"
   });
   setTimeout(() => {
     app.setState({ visible: false });
@@ -464,7 +491,12 @@ export const submitDonationForm = (app, event, comp) => {
         return res.json();
       }
       else {
-        alert("Please enter valid data")
+        app.setState({ visible: true, msg: "Please enter valid data", color: "danger" });
+        setTimeout(() => {
+          app.setState({
+            visible: false,
+          });
+        }, 3000);
       }
     })
     .catch((error) => {
@@ -477,7 +509,8 @@ export const profileInfoChange = (e, comp, id, app) => {
   if (comp.state.password === "") {
     app.setState({
       visible: true,
-      msg: "Enter a password",
+      msg: "Enter a password"
+      , color: "primary"
     });
     setTimeout(() => {
       app.setState({ visible: false });
@@ -502,14 +535,20 @@ export const profileInfoChange = (e, comp, id, app) => {
         return json1;
       }
       else {
-        alert("Please enter valid data")
+        app.setState({ visible: true, msg: "Please enter valid data", color: "danger" });
+        setTimeout(() => {
+          app.setState({
+            visible: false,
+          });
+        }, 3000);
       }
     })
     .then((json1) => {
       app.setState({ currentUser: json1 });
       app.setState({
         visible: true,
-        msg: "Profile info changed",
+        msg: "Profile info changed", 
+        color: "primary"
       });
       setTimeout(() => {
         app.setState({ visible: false });
@@ -536,7 +575,12 @@ export const profileChange = (form, page, app) => {
         return json1;
       }
       else{
-        alert("Please enter valid data")
+        app.setState({ visible: true, msg: "Please enter valid data", color: "danger" });
+        setTimeout(() => {
+          app.setState({
+            visible: false,
+          });
+        }, 3000);
       }
     })
     .then((json1) => {

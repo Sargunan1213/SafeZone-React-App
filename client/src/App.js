@@ -30,6 +30,7 @@ class App extends React.Component {
     currentUser: null,
     visible: false,
     msg: "",
+    color: "primary",
     homes: [],
     home: {
       _id: "",
@@ -53,7 +54,7 @@ class App extends React.Component {
     const user = this.state.currentUser ? this.state.currentUser : {};
     return (
       <div>
-        <Alert color="primary" isOpen={this.state.visible}>
+        <Alert color={this.state.color} isOpen={this.state.visible}>
           {this.state.msg}
         </Alert>
         <BrowserRouter>
@@ -68,7 +69,7 @@ class App extends React.Component {
           )}
           <Switch>
             <Route exact path="/" render={() => <Home />} />
-            <Route exact path="/Signup" render={() => <Signup />} />
+            <Route exact path="/Signup" render={() => <Signup app={this}/>} />
             <Route exact path="/Login" render={() => <Login app={this} />} />
             <Route exact path="/Live" render={() => <Live />} />
             <Route

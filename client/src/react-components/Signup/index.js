@@ -24,6 +24,7 @@ class Signup extends React.Component {
   };
 
   render() {
+    const {app} = this.props
     return (
       <div>
         <div className="back">
@@ -89,7 +90,7 @@ class Signup extends React.Component {
             <button
               type="button"
               className="submitSignup"
-              onClick={() => signUpUser(this)}
+              onClick={() => signUpUser(this, app)}
             >
               {" "}
               Sign Up{" "}
