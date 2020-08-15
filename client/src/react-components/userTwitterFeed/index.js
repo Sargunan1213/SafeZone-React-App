@@ -24,17 +24,6 @@ class UserTwitterFeed extends React.Component {
         </div>
         <div id="timeline">
           <div className="tweets">
-            <div className="tweet">
-              <div className="iconContainer">
-                <img className="icon" src={safeZone} alt="logo" />
-              </div>
-
-              <div className="content">
-                <h3>SAFEZONE @SF</h3>
-                <span>Hope you have great day at SF!</span>
-                <span>#SF #GreatDay</span>
-              </div>
-            </div>
             {this.state.twitterMsgs.map((msg, i) => (
               <div key={i} className="tweet">
                 <div className="iconContainer">
