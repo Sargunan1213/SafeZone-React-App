@@ -10,7 +10,6 @@ import { getTweets } from "../../actions/action";
 
 class UserTwitterFeed extends React.Component {
   state = {
-    // Messages will be obtained from server
     twitterMsgs: [
     ],
   };
@@ -23,7 +22,7 @@ class UserTwitterFeed extends React.Component {
     return (
       <div>
         <div className="userTwitterFeed">
-         Tweets
+          Tweets
         </div>
         <div id="timeline">
           <div className="tweets">

@@ -19,29 +19,21 @@ class HomeOwnerProfilePage extends React.Component {
 
   render() {
     const { user, app } = this.props;
-    // this.state.name = user.name;
-    // this.state.age = user.age;
-    // this.state.password = user.password;
-    // this.state.postId = user.postId;
-    // this.state.tel = user.tel;
-    // this.state.email = user.email;
-    // this.state.profilepic = user.profilePic;
-    // this.state.type = user.type;
     const feed = "/userTwitterFeed";
     return (
       <div>
         <div name="pic" className="homeOwnerBasicInfo">
-          {user.profilePic.includes('http') ? 
-          <img
-            className="homeOwnerProfilePicture"
-            src={user.profilePic}
-            alt="profilePic"
-          ></img> : 
-          <img
-            className="homeOwnerProfilePicture"
-            src={require(user.profilePic)}
-            alt="profilePic"
-          ></img>}
+          {user.profilePic.includes('http') ?
+            <img
+              className="homeOwnerProfilePicture"
+              src={user.profilePic}
+              alt="profilePic"
+            ></img> :
+            <img
+              className="homeOwnerProfilePicture"
+              src={require(user.profilePic)}
+              alt="profilePic"
+            ></img>}
 
           <form
             onSubmit={(e) => {
@@ -62,12 +54,6 @@ class HomeOwnerProfilePage extends React.Component {
               Upload
             </button>
           </form>
-          {/* <input
-            type="file"
-            className="homeOwnerProfile-btn"
-            onChange={(e) => profileChange(e.target, this)}
-            accept="image/*"
-          /> */}
 
           <div className="general_info">
             <h2>Name: {user.name}</h2>

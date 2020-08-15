@@ -13,7 +13,6 @@ mongoose.set("bufferCommands", false);
 const { User, Home } = require("./models/safezone");
 const { Donation } = require("./models/donation");
 const { Tweeter } = require("./models/tweeter");
-// const { Feedback } = require("./models/feedback");
 
 const { ObjectID } = require("mongodb");
 const bodyParser = require("body-parser");
@@ -248,14 +247,6 @@ app.get("/users/logout", (req, res) => {
 });
 
 /*** API Routes below ************************************/
-
-// What is student doing here?!
-
-// app.get("/name", (req, res) => {
-//   User.findById(id).then((user) => {
-//     res.send(user);
-//   });
-// });
 
 app.post(
   "/changeprofilepic/:name",

@@ -7,7 +7,6 @@ class SendEmail extends React.Component {
     review: "",
   };
   submitForm = (event) => {
-    // Server call to enter this form data about feedback into the server.
     alert("Email sent! ");
     event.preventDefault();
   };

@@ -3,7 +3,7 @@ import React from "react";
 import AddPostForm from "../AddPostForm";
 import { editPost } from "../../actions/action"
 
-import { handleInputChange, handleInputChangeHome } from "../../actions/action";
+import { handleInputChangeHome } from "../../actions/action";
 
 class EditPostPage extends React.Component {
   constructor(props) {

@@ -29,7 +29,7 @@ class Posts extends React.Component {
       <div id="homes">
         {title}
         <div class="map"><GMap houses={app.state.homes} /></div>
-        
+
         <div className="posts">
           {app.state.homes.map((home) => (
             <Post
@@ -42,9 +42,8 @@ class Posts extends React.Component {
           ))}
         </div>
 
-        {/* Retrieve google map data of addresses. Requires external server call. */}
 
-        
+
         {/* <GMap
           houses={[
             {

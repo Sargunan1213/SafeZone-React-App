@@ -5,7 +5,6 @@ import Question from "../Question";
 
 class WebsiteFeedback extends React.Component {
   submitForm = (event) => {
-    // Server call to enter this form data of each question into the database.
     alert("Thanks you for your review! ");
     event.preventDefault();
   };
