@@ -136,6 +136,17 @@ The admin will be provided with an admin panel which provides him the ability to
   }
   ```
   * Expected output: newly added donation document
+   ```
+  {
+  "_id": <id>
+  "donationAmount": <donationAmount> (number)
+  "cardNumber": <cardNumber> (number)
+  "cvc": <cvc> (number)
+  "cardExpiry": <cardExpiry>
+  "donationType": <donationType>
+  "donateTo": <donateTo> ("General" or the id of the chosen user/home)
+  }
+  ```
 * DELETE /users/:id
   * Delete a user from the database, requires authentication/cookie (logged in as Admin)
   * Expected output: the deleted user document
