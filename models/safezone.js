@@ -8,15 +8,39 @@ const Image = new mongoose.Schema({
 });
 
 const HomeSchema = new mongoose.Schema({
-  address: String,
-  zip: String,
+  address: {
+    type: String,
+    required: true,
+    minlength: 1,
+  },
+  zip: {
+    type: String,
+    required: true,
+    minlength: 1,
+  },
   pic: String,
-  description: String,
-  price: Number,
+  description: {
+    type: String,
+    required: true,
+    minlength: 1,
+  },
+  price: {
+    type: Number,
+    required: true,
+    minlength: 1,
+  },
   user: String,
   tel: String,
-  lat: Number,
-  lng: Number,
+  lat: {
+    type: Number,
+    required: true,
+    minlength: 1,
+  },
+  lng: {
+    type: Number,
+    required: true,
+    minlength: 1,
+  },
   email: {
     type: String,
     required: true,

@@ -207,7 +207,12 @@ export const msg = (event, app) => {
           });
         }, 3000);
       } else {
-        log("error fail to broadcast message");
+        app.setState({ visible: true, msg: "Failure, enter valid info", color: "danger" });
+        setTimeout(() => {
+          app.setState({
+            visible: false,
+          });
+        }, 3000);
       }
     })
     .catch((err) => {
