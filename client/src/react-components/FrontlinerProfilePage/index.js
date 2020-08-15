@@ -62,7 +62,7 @@ class FrontlinerProfilePage extends React.Component {
               <h2>Name: {user.name}</h2>
               <h2>Age: {user.age}</h2>
               <h2>Contact: {user.tel}</h2>
-              <h2>Email: user.email</h2>
+              <h2>Email: {user.email}</h2>
             </div>
             <Link to="/EditProfileFrontliner">
               <button className="homeOwnerViewOwnPost-btn">Edit Profile</button>
