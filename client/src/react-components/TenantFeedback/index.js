@@ -11,7 +11,6 @@ class TenantFeedback extends React.Component {
     this.setState({
       [name]: value,
     });
-    console.log("typing");
   };
 
   submitForm = (event) => {
