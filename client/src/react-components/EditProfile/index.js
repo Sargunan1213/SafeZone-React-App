@@ -30,17 +30,17 @@ class EditProfile extends React.Component {
                                     <input className="profileInput" name="name" type="text" value={this.state.name} onChange={(e) => handleInputChange(e, this)} />
                                 </label>
                                 <label>Age:
-                                    <input className="profileInput" name="age" type="text" value={this.state.age} onChange={(e) => handleInputChange(e, this)} />
+                                    <input className="profileInput" name="age" type="number" value={this.state.age} onChange={(e) => handleInputChange(e, this)} />
                                 </label>
                                 <label>Contact:
                                     <input className="profileInput" name="tel" type="text" value={this.state.tel} onChange={(e) => handleInputChange(e, this)} />
                                 </label>
                                 <br></br>
                                 <label>Email:
-                                    <input className="profileInput" name="email" type="text" value={this.state.email} onChange={(e) => handleInputChange(e, this)} />
+                                    <input className="profileInput" name="email" type="email" value={this.state.email} onChange={(e) => handleInputChange(e, this)} />
                                 </label>
                                 <label>Password:
-                                    <input className="profileInput" name="password" type="text" value={this.state.password} onChange={(e) => handleInputChange(e, this)} />
+                                    <input className="profileInput" name="password" type="password" value={this.state.password} onChange={(e) => handleInputChange(e, this)} />
                                 </label>
                             </form>
                         </div>

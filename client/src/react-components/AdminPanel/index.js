@@ -5,7 +5,7 @@ import { uid } from "react-uid";
 import AdminSendMsg from "../AdminSendMsg";
 import "./styles.css";
 import { removeUser, getHomes } from "../../actions/action";
-import { getHomes, getHomeowners, getFrontliners } from "../../actions/action.js";
+import { getHomeowners, getFrontliners } from "../../actions/action.js";
 
 
 class AdminPanel extends React.Component {
