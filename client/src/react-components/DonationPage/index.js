@@ -29,6 +29,9 @@ class DonationPage extends React.Component {
     return (
       <div id="donation">
         <h1>Donate to help support frontline workers to afford a safe home</h1>
+        <div className="bar">
+          <ProgressBar animated now={this.state.donationAmount / 100} />
+        </div>
 
         <form
           className="donationForm"
@@ -123,9 +126,6 @@ class DonationPage extends React.Component {
             Submit
           </button>
         </form>
-        <div className="bar">
-          <ProgressBar animated now={this.state.donationAmount / 100} />
-        </div>
       </div>
     );
   }
