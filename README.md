@@ -20,7 +20,7 @@ Our application can be easily installed by following the succeeding steps.  We h
     * Make a Donation - donate to help out frontline workers to rent out a place to live in (may select to donate to particular user or post, or just to general fund)
     * Live Cases - view updated statistics about COVID-19 cases
     * Twitter Feed - our own feed containing news and announcement about COVID-19 or our webapp
-    * Give Feedback - review our webapp or a tentant
+    * Give Feedback - review our webapp or a tentant (sends review to a fake email)
   * Footer
     * About Us - page explaining our goal and purpose
     * Contact Us - write to contact us about our site
