@@ -54,9 +54,12 @@ class App extends React.Component {
     const user = this.state.currentUser ? this.state.currentUser : {};
     return (
       <div>
+        <div className="alert-div">
         <Alert color={this.state.color} isOpen={this.state.visible}>
           {this.state.msg}
         </Alert>
+        </div>
+
         <BrowserRouter>
           {!this.state.currentUser ? (
             <NavBar />
