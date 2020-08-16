@@ -93,7 +93,7 @@ The admin will be provided with an admin panel which provides him the ability to
   }   
   ```
 * POST /login
-  * Login with name/password and create a session, expires after five minutes
+  * Login with name/password and create a session, expires after ten minutes
   * Expects input:
   ```
   {
@@ -116,11 +116,11 @@ The admin will be provided with an admin panel which provides him the ability to
   }
   ```
 * GET /users/logout
-  * Destory seesion
+  * Destory session
   * Expected output: Nothing
 * POST /changeprofilepic/:name
   * Change the profile picture of a user, requires authentication (being logged in/cookie) and connect-multiparty
-  * Expects input (in postman in body -> form-data): Key: "image", Value: <choose an image>
+  * Expects input (in postman in body -> form-data): Key: "image", Value: an image
   * Expected output: the changed user document
 * POST /donation
   * Add a new donation to the database
@@ -172,7 +172,7 @@ The admin will be provided with an admin panel which provides him the ability to
 * GET /users/home
   * Expected to get all homes if not logged in, get all user's home if logged in as homeowner (needs cookie)
 * GET /users/home/:id
-  * Expected to get home with id
+  * Expected to get home document with id
 * POST /users/home
   * Add a new home to the Home database
   * Requires to be logged in as a homeowner/cookie, requires connect-multiparty and FormData
