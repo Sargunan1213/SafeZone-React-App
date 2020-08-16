@@ -41,7 +41,7 @@ Our application can be easily installed by following the succeeding steps.  We h
 ### Login credentials for front-line worker (regular user):
  #### username: user2
  #### Password: user2
-  * Posts (in the navigation bar) - view avaliable posts and click 'Select' to mark your interest
+  * Posts (in the navigation bar) - view avaliable posts and click 'Select' to mark your interest (posts will appear in profile page)
   * 'user2' or the profile icon (in the navigation bar) - view profile
     * Change profile image
     * Edit profile
