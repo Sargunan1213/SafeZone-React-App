@@ -40,6 +40,8 @@
 .alert-div {
   padding: 0px;
   position: fixed;
-  top: 0px;
-  width: 100%;
+  top: 10%;
+  left:25%; 
+  min-width: 50%;
+  text-align: center;
 }
