@@ -285,7 +285,7 @@ The admin will be provided with an admin panel which provides him the ability to
   "msg": <message>
   }
   ```
-  * Expected output: the newly added twitter msg
+  * Expected output: the newly added twitter message
 * GET /users/userTwitterFeed
   * Get all tweeter messages
   * Expected output: all tweets
